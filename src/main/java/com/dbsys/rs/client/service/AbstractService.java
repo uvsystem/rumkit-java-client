@@ -10,12 +10,21 @@ import com.dbsys.rs.lib.entity.Unit;
 import com.sun.xml.internal.messaging.saaj.util.Base64;
 import java.util.Map;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author Deddy Christoper Kakunsi
  */
 public abstract class AbstractService {
+    protected final RestTemplate restTemplate;
+    protected final String host;
+
+    public AbstractService() {
+        super();
+        this.restTemplate = new RestTemplate();
+        this.host = "http://192.168.0.106:8080/rumkit";
+    }
     
     protected HttpHeaders getHeaders() {
         String username = TokenHolder.getUsername();

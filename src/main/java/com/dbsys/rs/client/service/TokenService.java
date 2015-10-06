@@ -16,12 +16,9 @@ import org.springframework.web.client.RestTemplate;
  * @author Bramwell Kasaedja
  */
 public class TokenService extends AbstractService {
-    private final RestTemplate restTemplate;
-    private final String host = "http://192.168.0.106:8080/rumkit";
     
     public TokenService(){
         super();
-        restTemplate = new RestTemplate();
     }
     
     public Token create(Credential credential) throws ServiceException  {
