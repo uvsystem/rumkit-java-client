@@ -30,6 +30,9 @@ public class admin extends javax.swing.JFrame {
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
+        
+        String nama = TokenHolder.getNamaOperator() ;
+        lbl_status.setText(nama);
         }
 
     /**
@@ -204,6 +207,7 @@ public class admin extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         btn_tambah_op = new javax.swing.JButton();
         btn_clear_op = new javax.swing.JButton();
+        lbl_status = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(12345);
@@ -951,6 +955,9 @@ public class admin extends javax.swing.JFrame {
 
         getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 40));
 
+        lbl_status.setText("status");
+        getContentPane().add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 680, 140, 20));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1153,6 +1160,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lbl_status;
     private javax.swing.JPanel pnl_barang;
     private javax.swing.JPanel pnl_menu;
     private javax.swing.JPanel pnl_op;
