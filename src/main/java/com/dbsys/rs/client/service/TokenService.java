@@ -5,11 +5,10 @@ import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Token;
-import java.util.Map;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -22,14 +21,17 @@ public class TokenService extends AbstractService {
     }
     
     public Token create(Credential credential) throws ServiceException  {
-	EntityRestMessage<Token> message;
-	message = restTemplate.postForObject("{host}/token", credential, EntityRestMessage.class, host);
-                
-        if (message.getTipe().equals(Type.ERROR)) {
+        HttpEntity<Credential> entity = new HttpEntity<>(credential);
+        
+        ResponseEntity<EntityRestMessage<Token>> response;
+        response = restTemplate.exchange("{host}/token", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Token>>(){}, 
+                host);
+
+        EntityRestMessage<Token> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException("Login Gagal");
-        } else {
-            return createToken((Map<String, Object>) message.getModel());
-        }
+        return message.getModel();
     }
     
     public void lock(Token token) throws ServiceException {
