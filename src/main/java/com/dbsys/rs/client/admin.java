@@ -1,20 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client;
 
-import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JComponent;
-
+import com.dbsys.rs.connector.TokenHolder;
 
 /**
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
  */
 public class admin extends javax.swing.JFrame {
     
@@ -31,7 +21,7 @@ public class admin extends javax.swing.JFrame {
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
         
-        String nama = TokenHolder.getNamaOperator() ;
+        String nama = TokenHolder.getNamaOperator();
         lbl_status.setText(nama);
         }
 
