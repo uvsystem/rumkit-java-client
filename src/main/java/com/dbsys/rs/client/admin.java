@@ -1,15 +1,26 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.tableModel.OperatorTableModel;
+import com.dbsys.rs.client.tableModel.UnitTableModel;
+import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.UnitService;
+import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Unit;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Bramwell Kasaedja
  */
 public class admin extends javax.swing.JFrame {
-    
+    private Unit unit;
+    private Operator operator;
 
     /**
      * Creates new form admin
@@ -27,6 +38,10 @@ public class admin extends javax.swing.JFrame {
         //lbl_status.setText(nama);
         }
 
+    public void setUnitForOperator(Unit unit){
+        this.unit = unit;
+        txt_admin_operator_unit.setText(unit.getNama());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +51,24 @@ public class admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnl_op = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbl_op = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        txt_op_nama = new javax.swing.JTextField();
+        txt_op_uname = new javax.swing.JTextField();
+        txt_op_pass = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        txt_admin_operator_unit = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        cb_admin_operator_role = new javax.swing.JComboBox();
+        jPanel11 = new javax.swing.JPanel();
+        btn_tambah_op = new javax.swing.JButton();
+        btn_clear_op = new javax.swing.JButton();
         pnl_unit = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -48,7 +81,7 @@ public class admin extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         cb_unit_tipe = new javax.swing.JComboBox();
         jPanel9 = new javax.swing.JPanel();
-        btn_tambah_unit = new javax.swing.JButton();
+        btn_simpan_unit = new javax.swing.JButton();
         btn_clear_unit = new javax.swing.JButton();
         pnl_pegawai = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
@@ -178,22 +211,6 @@ public class admin extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btn_rekam_edit = new javax.swing.JButton();
         btn_rekam_tambah = new javax.swing.JButton();
-        pnl_op = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        tbl_op = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        txt_op_id = new javax.swing.JTextField();
-        txt_op_nama = new javax.swing.JTextField();
-        txt_op_uname = new javax.swing.JTextField();
-        txt_op_pass = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        btn_tambah_op = new javax.swing.JButton();
-        btn_clear_op = new javax.swing.JButton();
         pnl_menu = new javax.swing.JPanel();
         btn_barang = new javax.swing.JButton();
         btn_unit = new javax.swing.JButton();
@@ -208,6 +225,90 @@ public class admin extends javax.swing.JFrame {
         setName("ADMIN"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnl_op.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_op.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("OPERATOR");
+        pnl_op.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
+
+        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbl_op.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_opMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tbl_op);
+
+        pnl_op.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 140, -1));
+        jPanel10.add(txt_op_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
+        jPanel10.add(txt_op_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 160, -1));
+
+        jLabel49.setText("NAMA");
+        jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jLabel50.setText("USERNAME");
+        jPanel10.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 15, -1, -1));
+
+        jLabel51.setText("PASSWORD");
+        jPanel10.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_admin_operator_unitMouseClicked(evt);
+            }
+        });
+        jPanel10.add(txt_admin_operator_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, -1));
+
+        jLabel27.setText("UNIT");
+        jPanel10.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        jLabel31.setText("ROLE");
+        jPanel10.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+
+        cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
+        jPanel10.add(cb_admin_operator_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 120, 20));
+
+        pnl_op.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_op.setText("SIMPAN");
+        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_tambah_op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambah_opActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+
+        btn_clear_op.setText("X FIELDS");
+        btn_clear_op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clear_opActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
+
+        pnl_op.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
+
+        getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_unit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_unit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -227,48 +328,85 @@ public class admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_unit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_unitMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbl_unit);
 
         pnl_unit.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setLayout(null);
-        jPanel8.add(txt_unit_nama);
-        txt_unit_nama.setBounds(60, 10, 140, 20);
-        jPanel8.add(txt_unit_bobot);
-        txt_unit_bobot.setBounds(270, 10, 100, 20);
 
         jLabel29.setText("NAMA");
-        jPanel8.add(jLabel29);
-        jLabel29.setBounds(10, 10, 29, 14);
 
         jLabel30.setText("BOBOT");
-        jPanel8.add(jLabel30);
-        jLabel30.setBounds(218, 13, 34, 14);
 
         jLabel52.setText("TIPE");
-        jPanel8.add(jLabel52);
-        jLabel52.setBounds(400, 10, 22, 14);
 
-        cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "Loket Pendaftaran", "Loket Pembayaran", "Poliklinik", "Ruang Perawatan", "Farmasi", "Unit Lain" }));
-        jPanel8.add(cb_unit_tipe);
-        cb_unit_tipe.setBounds(450, 10, 114, 20);
+        cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "LOKET_PENDAFTARAN", "LOKET_PEMBAYARAN", "POLIKLINIK", "RUANG_PERAWATAN", "FARMASI", "UNIT_LAIN" }));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel29)
+                .addGap(11, 11, 11)
+                .addComponent(txt_unit_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jLabel30)
+                .addGap(6, 6, 6)
+                .addComponent(txt_unit_bobot, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel52)
+                .addGap(8, 8, 8)
+                .addComponent(cb_unit_tipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel29))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txt_unit_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel30))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txt_unit_bobot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel52))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cb_unit_tipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pnl_unit.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 80));
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_tambah_unit.setText("+ UNIT");
-        btn_tambah_unit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_tambah_unit.addActionListener(new java.awt.event.ActionListener() {
+        btn_simpan_unit.setText("SIMPAN");
+        btn_simpan_unit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_simpan_unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambah_unitActionPerformed(evt);
+                btn_simpan_unitActionPerformed(evt);
             }
         });
-        jPanel9.add(btn_tambah_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+        jPanel9.add(btn_simpan_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
 
         btn_clear_unit.setText("X FIELDS");
+        btn_clear_unit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clear_unitActionPerformed(evt);
+            }
+        });
         jPanel9.add(btn_clear_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
 
         pnl_unit.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 700, 60));
@@ -855,63 +993,6 @@ public class admin extends javax.swing.JFrame {
 
         getContentPane().add(pnl_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
-        pnl_op.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_op.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("OPERATOR");
-        pnl_op.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
-
-        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane9.setViewportView(tbl_op);
-
-        pnl_op.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel10.add(txt_op_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, -1));
-        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 140, -1));
-        jPanel10.add(txt_op_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
-        jPanel10.add(txt_op_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 160, -1));
-
-        jLabel31.setText("ID");
-        jPanel10.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
-
-        jLabel49.setText("NAMA");
-        jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-
-        jLabel50.setText("USERNAME");
-        jPanel10.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 15, -1, -1));
-
-        jLabel51.setText("PASSWORD");
-        jPanel10.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
-
-        pnl_op.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_op.setText("+ TINDAKAN");
-        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
-
-        btn_clear_op.setText("X FIELDS");
-        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
-
-        pnl_op.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
-
-        getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
-
         pnl_menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1013,12 +1094,14 @@ pnl_tindakan.setVisible(true);
     }//GEN-LAST:event_btn_tindakanActionPerformed
 
     private void btn_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_unitActionPerformed
-pnl_tindakan.setVisible(false);
+tabelUnit();
+        pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(true);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
+        
     }//GEN-LAST:event_btn_unitActionPerformed
 
     private void btn_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_opActionPerformed
@@ -1028,17 +1111,111 @@ pnl_tindakan.setVisible(false);
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(true);
+        tabelOperator();
     }//GEN-LAST:event_btn_opActionPerformed
 
-    private void btn_tambah_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_unitActionPerformed
+    public void tabelUnit(){
+        UnitService unitservice = new UnitService();
+        unitservice.setHost("http://192.168.43.223:8080");
+        try {
+            List<Unit> listUnit = unitservice.getAll();
+            UnitTableModel model = new UnitTableModel(listUnit);
+            tbl_unit.setModel(model);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    public void tabelOperator(){
+        OperatorService operatorService = new OperatorService();
+        operatorService.setHost("http://192.168.43.223:8080");
+        try {
+            List<Operator> listOperator = operatorService.getAll();
+            OperatorTableModel model = new OperatorTableModel(listOperator);
+            tbl_op.setModel(model);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }      
+    }
+    private void btn_simpan_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_unitActionPerformed
         UnitService unitservice = new UnitService();
         unitservice.setHost("http://192.168.43.223:8080");
         
-        Unit unit = new Unit();
+        if (unit==null)
+            unit = new Unit();
         unit.setBobot(Float.valueOf(txt_unit_bobot.getText()));
         unit.setNama(txt_unit_nama.getText());
+        String tipe = (String)cb_unit_tipe.getSelectedItem();
+        unit.setTipe(Unit.Type.valueOf(tipe));
+      
+        try {
+            unitservice.simpan(unit);
+            tabelUnit();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_simpan_unitActionPerformed
+
+    private void tbl_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_unitMouseClicked
+        int row = tbl_unit.getSelectedRow();
+        UnitTableModel model = (UnitTableModel)tbl_unit.getModel();
+        unit = model.getUnit(row);
+        txt_unit_nama.setText(unit.getNama());
+        txt_unit_bobot.setText(unit.getBobot().toString());
+        cb_unit_tipe.setSelectedItem(unit.getTipe().toString());
+    }//GEN-LAST:event_tbl_unitMouseClicked
+
+    private void btn_tambah_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_opActionPerformed
+        OperatorService operatorService = new OperatorService();
+        operatorService.setHost("http://192.168.43.223:8080");
         
-    }//GEN-LAST:event_btn_tambah_unitActionPerformed
+        if (operator==null)
+            operator = new Operator();
+        operator.setNama(txt_op_nama.getText());
+        operator.setUsername(txt_op_uname.getText());
+        operator.setPassword(txt_op_pass.getText());
+        operator.setUnit(unit);
+        String role = (String)cb_admin_operator_role.getSelectedItem();
+        operator.setRole(Role.valueOf(role));
+        try {
+            operatorService.simpan(operator);
+            tabelOperator();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }        
+    }//GEN-LAST:event_btn_tambah_opActionPerformed
+
+    private void tbl_opMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_opMouseClicked
+        int row = tbl_op.getSelectedRow();
+        OperatorTableModel model = (OperatorTableModel)tbl_op.getModel();
+        operator = model.getOperator(row);
+        txt_op_nama.setText(operator.getNama());
+        txt_op_uname.setText(operator.getUsername());
+        txt_op_pass.setText(operator.getPassword());
+        txt_admin_operator_unit.setText(operator.getNamaUnit());
+        cb_admin_operator_role.setSelectedItem(operator.getRole().toString());
+    }//GEN-LAST:event_tbl_opMouseClicked
+
+    private void btn_clear_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_opActionPerformed
+        txt_op_nama.setText("");
+        txt_op_uname.setText("");
+        txt_op_pass.setText("");
+        txt_admin_operator_unit.setText("");
+        cb_admin_operator_role.setSelectedItem("-Pilih-");
+        operator = null;
+    }//GEN-LAST:event_btn_clear_opActionPerformed
+
+    private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
+formCari cari = new formCari(this,Unit.class);
+        cari.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
+
+    private void btn_clear_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_unitActionPerformed
+        txt_unit_nama.setText("");
+        txt_unit_bobot.setText("");
+        cb_unit_tipe.setSelectedItem("-Pilih-");
+        operator = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_clear_unitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1091,15 +1268,16 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JButton btn_rekam;
     private javax.swing.JButton btn_rekam_edit;
     private javax.swing.JButton btn_rekam_tambah;
+    private javax.swing.JButton btn_simpan_unit;
     private javax.swing.JButton btn_tambah_adm;
     private javax.swing.JButton btn_tambah_apoteker;
     private javax.swing.JButton btn_tambah_barang;
     private javax.swing.JButton btn_tambah_dokter;
     private javax.swing.JButton btn_tambah_op;
     private javax.swing.JButton btn_tambah_perawat;
-    private javax.swing.JButton btn_tambah_unit;
     private javax.swing.JButton btn_tindakan;
     private javax.swing.JButton btn_unit;
+    private javax.swing.JComboBox cb_admin_operator_role;
     private javax.swing.JComboBox cb_barang_satuan;
     private javax.swing.JComboBox cb_rekam_agama;
     private javax.swing.JComboBox cb_rekam_gol;
@@ -1124,6 +1302,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1208,6 +1387,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JTextField txt_adm_id;
     private javax.swing.JTextField txt_adm_nama;
     private javax.swing.JTextField txt_adm_nip;
+    private javax.swing.JTextField txt_admin_operator_unit;
     private javax.swing.JTextField txt_admin_tindakan_id;
     private javax.swing.JTextField txt_admin_tindakan_kategori;
     private javax.swing.JTextField txt_admin_tindakan_keterangan;
@@ -1226,7 +1406,6 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JTextField txt_dokter_id;
     private javax.swing.JTextField txt_dokter_nama;
     private javax.swing.JTextField txt_dokter_nip;
-    private javax.swing.JTextField txt_op_id;
     private javax.swing.JTextField txt_op_nama;
     private javax.swing.JTextField txt_op_pass;
     private javax.swing.JTextField txt_op_uname;
