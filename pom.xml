@@ -34,7 +34,13 @@
         <dependency>
             <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-connector</artifactId>
-            <version>0.1.8-SNAPSHOT</version>
+            <version>0.2.6-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dbsys.rs</groupId>
+            <artifactId>rumkit-library</artifactId>
+            <version>0.3.14-SNAPSHOT</version>
         </dependency>
         
         <dependency>

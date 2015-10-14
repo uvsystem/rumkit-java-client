@@ -4,7 +4,10 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.Credential;
+import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Token;
+import com.dbsys.rs.lib.entity.Unit;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,41 +33,39 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btn_login_ok = new javax.swing.JButton();
-        btn_login_x = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txt_login_uname = new javax.swing.JTextField();
         txt_login_pass = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        btn_login_ok = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("USER LOGIN");
         setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel1.setText("USERNAME");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+        getContentPane().add(txt_login_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 25, 110, -1));
+        getContentPane().add(txt_login_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 110, -1));
 
-        btn_login_ok.setText("LOGIN");
+        jLabel2.setText("PASSWORD");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
+
+        btn_login_ok.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ronald\\Documents\\GitHub\\rumkit-java-client\\src\\Image\\Button Login.png")); // NOI18N
+        btn_login_ok.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btn_login_ok.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btn_login_ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_login_okActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_login_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        getContentPane().add(btn_login_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
 
-        btn_login_x.setText("BATAL");
-        jPanel1.add(btn_login_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        jLabel1.setText("USERNAME");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 12, -1, -1));
-
-        jLabel2.setText("PASSWORD");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 42, -1, -1));
-        jPanel1.add(txt_login_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 110, -1));
-        jPanel1.add(txt_login_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 120));
+        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ronald\\Documents\\GitHub\\rumkit-java-client\\src\\Image\\Login Form.jpg")); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -73,18 +74,23 @@ public class login extends javax.swing.JFrame {
         Credential credential = new Credential();
         String username = txt_login_uname.getText();
         String pass = String.valueOf(txt_login_pass.getPassword());
-        
+
         credential.setUsername(username);
         credential.setPassword(pass);
-        
+
         TokenService tokenservice = new TokenService();
+        tokenservice.setHost("http://192.168.43.223:8080");
         
         Token token;
         try {
-            token = tokenservice.create(credential);   
+            token = tokenservice.create(credential);
             TokenHolder.token = token;
+            if(token.getRole().equals(Role.ADMIN)){
+                new admin().setVisible(true);
+            }else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)){
+                new Pendaftaran().setVisible(true);
+            }
             
-            new admin().setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -123,11 +129,10 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btn_login_ok;
-    private javax.swing.JButton btn_login_x;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txt_login_pass;
     private javax.swing.JTextField txt_login_uname;
     // End of variables declaration//GEN-END:variables

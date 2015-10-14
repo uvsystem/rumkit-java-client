@@ -1,6 +1,8 @@
 package com.dbsys.rs.client;
 
 import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.service.UnitService;
+import com.dbsys.rs.lib.entity.Unit;
 
 /**
  *
@@ -21,8 +23,8 @@ public class admin extends javax.swing.JFrame {
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
         
-        String nama = TokenHolder.getNamaOperator();
-        lbl_status.setText(nama);
+        //String nama = TokenHolder.getNamaOperator();
+        //lbl_status.setText(nama);
         }
 
     /**
@@ -34,91 +36,17 @@ public class admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_barang = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_barang = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txt_barang_id = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txt_barang_kode = new javax.swing.JTextField();
-        txt_barang_nama = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_barang_jumlah = new javax.swing.JTextField();
-        cb_barang_satuan = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txt_barang_harga = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txt_barang_ket = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        btn_tambah_barang = new javax.swing.JButton();
-        btn_edit_barang = new javax.swing.JButton();
-        btn_clear_barang = new javax.swing.JButton();
-        pnl_menu = new javax.swing.JPanel();
-        btn_barang = new javax.swing.JButton();
-        btn_unit = new javax.swing.JButton();
-        btn_rekam = new javax.swing.JButton();
-        btn_pegawai = new javax.swing.JButton();
-        btn_op = new javax.swing.JButton();
-        btn_tindakan = new javax.swing.JButton();
-        pnl_rekam = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txt_rekam_id = new javax.swing.JTextField();
-        txt_rekam_kode = new javax.swing.JTextField();
-        txt_rekam_nik = new javax.swing.JTextField();
-        txt_rekam_nama = new javax.swing.JTextField();
-        cb_rekam_kelamin = new javax.swing.JComboBox();
-        cb_rekam_gol = new javax.swing.JComboBox();
-        cb_rekam_agama = new javax.swing.JComboBox();
-        txt_rekam_telp = new javax.swing.JTextField();
-        txt_rekam_tl = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_rekam = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        btn_rekam_edit = new javax.swing.JButton();
-        btn_rekam_tambah = new javax.swing.JButton();
-        pnl_tindakan = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbl_tindakan = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        txt_tindakan_id = new javax.swing.JTextField();
-        txt_tindakan_kode = new javax.swing.JTextField();
-        txt_tindakan_nama = new javax.swing.JTextField();
-        txt_tindakan_tarif = new javax.swing.JTextField();
-        txt_tindakan_keterangan = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        btn_tambah_tindakan = new javax.swing.JButton();
-        btn_clear_tindakan = new javax.swing.JButton();
         pnl_unit = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_unit = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
-        txt_unit_id = new javax.swing.JTextField();
         txt_unit_nama = new javax.swing.JTextField();
         txt_unit_bobot = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        cb_unit_tipe = new javax.swing.JComboBox();
         jPanel9 = new javax.swing.JPanel();
         btn_tambah_unit = new javax.swing.JButton();
         btn_clear_unit = new javax.swing.JButton();
@@ -181,6 +109,75 @@ public class admin extends javax.swing.JFrame {
         btn_tambah_adm = new javax.swing.JButton();
         btn_clear_adm = new javax.swing.JButton();
         jLabel45 = new javax.swing.JLabel();
+        pnl_tindakan = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_admin_tindakan = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        txt_admin_tindakan_id = new javax.swing.JTextField();
+        txt_admin_tindakan_kode = new javax.swing.JTextField();
+        txt_admin_tindakan_nama = new javax.swing.JTextField();
+        txt_admin_tindakan_tarif = new javax.swing.JTextField();
+        txt_admin_tindakan_keterangan = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        txt_admin_tindakan_kategori = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        btn_admin_tambah_tindakan = new javax.swing.JButton();
+        btn_admin_clear_tindakan = new javax.swing.JButton();
+        pnl_barang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_barang = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_barang_id = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txt_barang_kode = new javax.swing.JTextField();
+        txt_barang_nama = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_barang_jumlah = new javax.swing.JTextField();
+        cb_barang_satuan = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_barang_harga = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_barang_ket = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        btn_tambah_barang = new javax.swing.JButton();
+        btn_edit_barang = new javax.swing.JButton();
+        btn_clear_barang = new javax.swing.JButton();
+        pnl_rekam = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txt_rekam_id = new javax.swing.JTextField();
+        txt_rekam_kode = new javax.swing.JTextField();
+        txt_rekam_nik = new javax.swing.JTextField();
+        txt_rekam_nama = new javax.swing.JTextField();
+        cb_rekam_kelamin = new javax.swing.JComboBox();
+        cb_rekam_gol = new javax.swing.JComboBox();
+        cb_rekam_agama = new javax.swing.JComboBox();
+        txt_rekam_telp = new javax.swing.JTextField();
+        txt_rekam_tl = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_rekam = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        btn_rekam_edit = new javax.swing.JButton();
+        btn_rekam_tambah = new javax.swing.JButton();
         pnl_op = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -197,6 +194,13 @@ public class admin extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         btn_tambah_op = new javax.swing.JButton();
         btn_clear_op = new javax.swing.JButton();
+        pnl_menu = new javax.swing.JPanel();
+        btn_barang = new javax.swing.JButton();
+        btn_unit = new javax.swing.JButton();
+        btn_rekam = new javax.swing.JButton();
+        btn_pegawai = new javax.swing.JButton();
+        btn_op = new javax.swing.JButton();
+        btn_tindakan = new javax.swing.JButton();
         lbl_status = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -204,6 +208,485 @@ public class admin extends javax.swing.JFrame {
         setName("ADMIN"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnl_unit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_unit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("UNIT");
+        pnl_unit.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
+
+        tbl_unit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tbl_unit);
+
+        pnl_unit.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel8.setLayout(null);
+        jPanel8.add(txt_unit_nama);
+        txt_unit_nama.setBounds(60, 10, 140, 20);
+        jPanel8.add(txt_unit_bobot);
+        txt_unit_bobot.setBounds(270, 10, 100, 20);
+
+        jLabel29.setText("NAMA");
+        jPanel8.add(jLabel29);
+        jLabel29.setBounds(10, 10, 29, 14);
+
+        jLabel30.setText("BOBOT");
+        jPanel8.add(jLabel30);
+        jLabel30.setBounds(218, 13, 34, 14);
+
+        jLabel52.setText("TIPE");
+        jPanel8.add(jLabel52);
+        jLabel52.setBounds(400, 10, 22, 14);
+
+        cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "Loket Pendaftaran", "Loket Pembayaran", "Poliklinik", "Ruang Perawatan", "Farmasi", "Unit Lain" }));
+        jPanel8.add(cb_unit_tipe);
+        cb_unit_tipe.setBounds(450, 10, 114, 20);
+
+        pnl_unit.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 80));
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_unit.setText("+ UNIT");
+        btn_tambah_unit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_tambah_unit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambah_unitActionPerformed(evt);
+            }
+        });
+        jPanel9.add(btn_tambah_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+
+        btn_clear_unit.setText("X FIELDS");
+        jPanel9.add(btn_clear_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
+
+        pnl_unit.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 700, 60));
+
+        getContentPane().add(pnl_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
+
+        pnl_pegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("PEGAWAI");
+        jLabel25.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnl_pegawai.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
+
+        tab_dokter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_dokter.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(tbl_dokter);
+
+        tab_dokter.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 300));
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_dokter.setText("+ DATA");
+        jPanel14.add(btn_tambah_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+
+        btn_clear_dokter.setText("X Field");
+        jPanel14.add(btn_clear_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
+
+        tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 100, 110));
+
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("DOKTER");
+        tab_dokter.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
+
+        jPanel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel46.setText("ID");
+
+        jLabel47.setText("NIP");
+
+        jLabel48.setText("NAMA");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_dokter_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addComponent(jLabel46)
+                            .addGap(24, 24, 24)
+                            .addComponent(txt_dokter_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addComponent(jLabel47)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_dokter_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_dokter_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel46))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_dokter_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_dokter_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        tab_dokter.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 570, 110));
+
+        tab_pane.addTab("DOKTER", tab_dokter);
+
+        tab_perawat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_perawat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tbl_perawat);
+
+        tab_perawat.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 300));
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel33.setText("ID");
+
+        jLabel34.setText("NIP");
+
+        jLabel35.setText("NAMA");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_perawat_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLabel33)
+                            .addGap(24, 24, 24)
+                            .addComponent(txt_perawat_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLabel34)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_perawat_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_perawat_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_perawat_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_perawat_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        tab_perawat.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 570, 110));
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_perawat.setText("+ DATA");
+        jPanel16.add(btn_tambah_perawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+
+        btn_clear_perawat.setText("X Field");
+        jPanel16.add(btn_clear_perawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
+
+        tab_perawat.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 100, 110));
+
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel43.setText("PERAWAT");
+        tab_perawat.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
+
+        tab_pane.addTab("PERAWAT", tab_perawat);
+
+        tab_apoteker.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_apoteker.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(tbl_apoteker);
+
+        tab_apoteker.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 300));
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel36.setText("ID");
+
+        jLabel37.setText("NIP");
+
+        jLabel38.setText("NAMA");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_apoteker_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel17Layout.createSequentialGroup()
+                            .addComponent(jLabel36)
+                            .addGap(24, 24, 24)
+                            .addComponent(txt_apoteker_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel17Layout.createSequentialGroup()
+                            .addComponent(jLabel37)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_apoteker_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_apoteker_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_apoteker_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_apoteker_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        tab_apoteker.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 570, 110));
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_apoteker.setText("+ DATA");
+        jPanel18.add(btn_tambah_apoteker, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+
+        btn_clear_apoteker.setText("X Field");
+        jPanel18.add(btn_clear_apoteker, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
+
+        tab_apoteker.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 100, 110));
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel44.setText("APOTEKER");
+        tab_apoteker.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
+
+        tab_pane.addTab("APOTEKER", tab_apoteker);
+
+        tab_administrasi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_adm.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(tbl_adm);
+
+        tab_administrasi.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 300));
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel39.setText("ID");
+
+        jLabel40.setText("NIP");
+
+        jLabel41.setText("NAMA");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_adm_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel19Layout.createSequentialGroup()
+                            .addComponent(jLabel39)
+                            .addGap(24, 24, 24)
+                            .addComponent(txt_adm_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel19Layout.createSequentialGroup()
+                            .addComponent(jLabel40)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_adm_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_adm_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_adm_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel40))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_adm_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel41))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        tab_administrasi.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 570, 110));
+
+        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_adm.setText("+ DATA");
+        jPanel20.add(btn_tambah_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+
+        btn_clear_adm.setText("X Field");
+        jPanel20.add(btn_clear_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
+
+        tab_administrasi.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 100, 110));
+
+        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel45.setText("ADMINISTRASI");
+        tab_administrasi.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
+
+        tab_pane.addTab("ADMINSTRASI", tab_administrasi);
+
+        pnl_pegawai.add(tab_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 490));
+
+        getContentPane().add(pnl_pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 720, 540));
+
+        pnl_tindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_tindakan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("TINDAKAN");
+        pnl_tindakan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
+
+        tbl_admin_tindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tbl_admin_tindakan);
+
+        pnl_tindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.add(txt_admin_tindakan_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, -1));
+        jPanel6.add(txt_admin_tindakan_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 50, -1));
+        jPanel6.add(txt_admin_tindakan_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 140, -1));
+        jPanel6.add(txt_admin_tindakan_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
+        jPanel6.add(txt_admin_tindakan_keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 160, -1));
+
+        jLabel20.setText("ID");
+        jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
+
+        jLabel21.setText("KODE");
+        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, -1, -1));
+
+        jLabel22.setText("NAMA");
+        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 73, -1, -1));
+
+        jLabel23.setText("TARIF");
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 15, -1, -1));
+
+        jLabel24.setText("KETERANGAN");
+        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        jLabel32.setText("KATEGORI");
+        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
+        jPanel6.add(txt_admin_tindakan_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 140, -1));
+
+        pnl_tindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_admin_tambah_tindakan.setText("+ TINDAKAN");
+        btn_admin_tambah_tindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel7.add(btn_admin_tambah_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+
+        btn_admin_clear_tindakan.setText("X FIELDS");
+        jPanel7.add(btn_admin_clear_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
+
+        pnl_tindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
+
+        getContentPane().add(pnl_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_barang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_barang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -286,61 +769,7 @@ public class admin extends javax.swing.JFrame {
 
         pnl_barang.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 700, 60));
 
-        getContentPane().add(pnl_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, 40));
-
-        pnl_menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_barang.setText("BARANG"); // NOI18N
-        btn_barang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_barangActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 130, 51));
-        btn_barang.getAccessibleContext().setAccessibleName("BHP");
-
-        btn_unit.setText("UNIT");
-        btn_unit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_unitActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 130, 51));
-
-        btn_rekam.setText("REKAM MEDIK");
-        btn_rekam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_rekamActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 130, 51));
-
-        btn_pegawai.setLabel("PEGAWAI");
-        btn_pegawai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_pegawaiActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 130, 51));
-
-        btn_op.setText("OPERATOR");
-        btn_op.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_opActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 130, 51));
-
-        btn_tindakan.setText("TINDAKAN");
-        btn_tindakan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tindakanActionPerformed(evt);
-            }
-        });
-        pnl_menu.add(btn_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 130, 51));
-
-        getContentPane().add(pnl_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 590));
+        getContentPane().add(pnl_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_rekam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_rekam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -424,469 +853,7 @@ public class admin extends javax.swing.JFrame {
 
         pnl_rekam.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 700, 60));
 
-        getContentPane().add(pnl_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, 40));
-
-        pnl_tindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_tindakan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("TINDAKAN");
-        pnl_tindakan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
-
-        tbl_tindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(tbl_tindakan);
-
-        pnl_tindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(txt_tindakan_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, -1));
-        jPanel6.add(txt_tindakan_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 50, -1));
-        jPanel6.add(txt_tindakan_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 140, -1));
-        jPanel6.add(txt_tindakan_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
-        jPanel6.add(txt_tindakan_keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 160, -1));
-
-        jLabel20.setText("ID");
-        jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
-
-        jLabel21.setText("KODE");
-        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, -1, -1));
-
-        jLabel22.setText("NAMA");
-        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 73, -1, -1));
-
-        jLabel23.setText("TARIF");
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 15, -1, -1));
-
-        jLabel24.setText("KETERANGAN");
-        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
-
-        pnl_tindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_tindakan.setText("+ TINDAKAN");
-        btn_tambah_tindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel7.add(btn_tambah_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
-
-        btn_clear_tindakan.setText("X FIELDS");
-        jPanel7.add(btn_clear_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
-
-        pnl_tindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
-
-        getContentPane().add(pnl_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, 40));
-
-        pnl_unit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_unit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("UNIT");
-        pnl_unit.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
-
-        tbl_unit.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(tbl_unit);
-
-        pnl_unit.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel8.add(txt_unit_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, -1));
-        jPanel8.add(txt_unit_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 140, -1));
-        jPanel8.add(txt_unit_bobot, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 100, -1));
-
-        jLabel27.setText("ID");
-        jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
-
-        jLabel29.setText("NAMA");
-        jPanel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-
-        jLabel30.setText("BOBOT");
-        jPanel8.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        pnl_unit.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_unit.setText("+ UNIT");
-        btn_tambah_unit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel9.add(btn_tambah_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
-
-        btn_clear_unit.setText("X FIELDS");
-        jPanel9.add(btn_clear_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
-
-        pnl_unit.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
-
-        getContentPane().add(pnl_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, 40));
-
-        pnl_pegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("PEGAWAI");
-        jLabel25.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnl_pegawai.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
-
-        tab_dokter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tbl_dokter.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(tbl_dokter);
-
-        tab_dokter.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 350));
-
-        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_dokter.setText("+ DATA");
-        jPanel14.add(btn_tambah_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
-
-        btn_clear_dokter.setText("X Field");
-        jPanel14.add(btn_clear_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
-
-        tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 100, 110));
-
-        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel42.setText("DOKTER");
-        tab_dokter.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
-
-        jPanel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel46.setText("ID");
-
-        jLabel47.setText("NIP");
-
-        jLabel48.setText("NAMA");
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_dokter_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel21Layout.createSequentialGroup()
-                            .addComponent(jLabel46)
-                            .addGap(24, 24, 24)
-                            .addComponent(txt_dokter_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel21Layout.createSequentialGroup()
-                            .addComponent(jLabel47)
-                            .addGap(18, 18, 18)
-                            .addComponent(txt_dokter_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_dokter_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_dokter_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel47))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_dokter_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        tab_dokter.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 570, 110));
-
-        tab_pane.addTab("DOKTER", tab_dokter);
-
-        tab_perawat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tbl_perawat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(tbl_perawat);
-
-        tab_perawat.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 350));
-
-        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel33.setText("ID");
-
-        jLabel34.setText("NIP");
-
-        jLabel35.setText("NAMA");
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_perawat_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel15Layout.createSequentialGroup()
-                            .addComponent(jLabel33)
-                            .addGap(24, 24, 24)
-                            .addComponent(txt_perawat_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel15Layout.createSequentialGroup()
-                            .addComponent(jLabel34)
-                            .addGap(18, 18, 18)
-                            .addComponent(txt_perawat_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_perawat_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_perawat_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel34))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_perawat_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        tab_perawat.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 570, 110));
-
-        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_perawat.setText("+ DATA");
-        jPanel16.add(btn_tambah_perawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
-
-        btn_clear_perawat.setText("X Field");
-        jPanel16.add(btn_clear_perawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
-
-        tab_perawat.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 100, 110));
-
-        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel43.setText("PERAWAT");
-        tab_perawat.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
-
-        tab_pane.addTab("PERAWAT", tab_perawat);
-
-        tab_apoteker.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tbl_apoteker.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane7.setViewportView(tbl_apoteker);
-
-        tab_apoteker.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 350));
-
-        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel36.setText("ID");
-
-        jLabel37.setText("NIP");
-
-        jLabel38.setText("NAMA");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_apoteker_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel17Layout.createSequentialGroup()
-                            .addComponent(jLabel36)
-                            .addGap(24, 24, 24)
-                            .addComponent(txt_apoteker_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel17Layout.createSequentialGroup()
-                            .addComponent(jLabel37)
-                            .addGap(18, 18, 18)
-                            .addComponent(txt_apoteker_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_apoteker_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_apoteker_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_apoteker_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        tab_apoteker.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 570, 110));
-
-        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_apoteker.setText("+ DATA");
-        jPanel18.add(btn_tambah_apoteker, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
-
-        btn_clear_apoteker.setText("X Field");
-        jPanel18.add(btn_clear_apoteker, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
-
-        tab_apoteker.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 100, 110));
-
-        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel44.setText("APOTEKER");
-        tab_apoteker.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
-
-        tab_pane.addTab("APOTEKER", tab_apoteker);
-
-        tab_administrasi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tbl_adm.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane8.setViewportView(tbl_adm);
-
-        tab_administrasi.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 350));
-
-        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel39.setText("ID");
-
-        jLabel40.setText("NIP");
-
-        jLabel41.setText("NAMA");
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_adm_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel19Layout.createSequentialGroup()
-                            .addComponent(jLabel39)
-                            .addGap(24, 24, 24)
-                            .addComponent(txt_adm_id, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel19Layout.createSequentialGroup()
-                            .addComponent(jLabel40)
-                            .addGap(18, 18, 18)
-                            .addComponent(txt_adm_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_adm_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_adm_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel40))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_adm_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        tab_administrasi.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 570, 110));
-
-        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_adm.setText("+ DATA");
-        jPanel20.add(btn_tambah_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
-
-        btn_clear_adm.setText("X Field");
-        jPanel20.add(btn_clear_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 40));
-
-        tab_administrasi.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 100, 110));
-
-        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel45.setText("ADMINISTRASI");
-        tab_administrasi.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, -1));
-
-        tab_pane.addTab("ADMINSTRASI", tab_administrasi);
-
-        pnl_pegawai.add(tab_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 540));
-
-        getContentPane().add(pnl_pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 720, 40));
+        getContentPane().add(pnl_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_op.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_op.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -943,10 +910,64 @@ public class admin extends javax.swing.JFrame {
 
         pnl_op.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
 
-        getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 40));
+        getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
+
+        pnl_menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_barang.setText("BARANG"); // NOI18N
+        btn_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_barangActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 130, 51));
+        btn_barang.getAccessibleContext().setAccessibleName("BHP");
+
+        btn_unit.setText("UNIT");
+        btn_unit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_unitActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 130, 51));
+
+        btn_rekam.setText("REKAM MEDIK");
+        btn_rekam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_rekamActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 130, 51));
+
+        btn_pegawai.setLabel("PEGAWAI");
+        btn_pegawai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pegawaiActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 130, 51));
+
+        btn_op.setText("OPERATOR");
+        btn_op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_opActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 130, 51));
+
+        btn_tindakan.setText("TINDAKAN");
+        btn_tindakan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tindakanActionPerformed(evt);
+            }
+        });
+        pnl_menu.add(btn_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 130, 51));
+
+        getContentPane().add(pnl_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 180, 540));
 
         lbl_status.setText("status");
-        getContentPane().add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 680, 140, 20));
+        getContentPane().add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1009,6 +1030,16 @@ pnl_tindakan.setVisible(false);
         pnl_op.setVisible(true);
     }//GEN-LAST:event_btn_opActionPerformed
 
+    private void btn_tambah_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_unitActionPerformed
+        UnitService unitservice = new UnitService();
+        unitservice.setHost("http://192.168.43.223:8080");
+        
+        Unit unit = new Unit();
+        unit.setBobot(Float.valueOf(txt_unit_bobot.getText()));
+        unit.setNama(txt_unit_nama.getText());
+        
+    }//GEN-LAST:event_btn_tambah_unitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1044,6 +1075,8 @@ pnl_tindakan.setVisible(false);
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_admin_clear_tindakan;
+    private javax.swing.JButton btn_admin_tambah_tindakan;
     private javax.swing.JButton btn_barang;
     private javax.swing.JButton btn_clear_adm;
     private javax.swing.JButton btn_clear_apoteker;
@@ -1051,7 +1084,6 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JButton btn_clear_dokter;
     private javax.swing.JButton btn_clear_op;
     private javax.swing.JButton btn_clear_perawat;
-    private javax.swing.JButton btn_clear_tindakan;
     private javax.swing.JButton btn_clear_unit;
     private javax.swing.JButton btn_edit_barang;
     private javax.swing.JButton btn_op;
@@ -1065,7 +1097,6 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JButton btn_tambah_dokter;
     private javax.swing.JButton btn_tambah_op;
     private javax.swing.JButton btn_tambah_perawat;
-    private javax.swing.JButton btn_tambah_tindakan;
     private javax.swing.JButton btn_tambah_unit;
     private javax.swing.JButton btn_tindakan;
     private javax.swing.JButton btn_unit;
@@ -1073,6 +1104,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JComboBox cb_rekam_agama;
     private javax.swing.JComboBox cb_rekam_gol;
     private javax.swing.JComboBox cb_rekam_kelamin;
+    private javax.swing.JComboBox cb_unit_tipe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1092,12 +1124,12 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -1119,6 +1151,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1164,17 +1197,23 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JTabbedPane tab_pane;
     private javax.swing.JPanel tab_perawat;
     private javax.swing.JTable tbl_adm;
+    private javax.swing.JTable tbl_admin_tindakan;
     private javax.swing.JTable tbl_apoteker;
     private javax.swing.JTable tbl_barang;
     private javax.swing.JTable tbl_dokter;
     private javax.swing.JTable tbl_op;
     private javax.swing.JTable tbl_perawat;
     private javax.swing.JTable tbl_rekam;
-    private javax.swing.JTable tbl_tindakan;
     private javax.swing.JTable tbl_unit;
     private javax.swing.JTextField txt_adm_id;
     private javax.swing.JTextField txt_adm_nama;
     private javax.swing.JTextField txt_adm_nip;
+    private javax.swing.JTextField txt_admin_tindakan_id;
+    private javax.swing.JTextField txt_admin_tindakan_kategori;
+    private javax.swing.JTextField txt_admin_tindakan_keterangan;
+    private javax.swing.JTextField txt_admin_tindakan_kode;
+    private javax.swing.JTextField txt_admin_tindakan_nama;
+    private javax.swing.JTextField txt_admin_tindakan_tarif;
     private javax.swing.JTextField txt_apoteker_id;
     private javax.swing.JTextField txt_apoteker_nama;
     private javax.swing.JTextField txt_apoteker_nip;
@@ -1200,13 +1239,7 @@ pnl_tindakan.setVisible(false);
     private javax.swing.JTextField txt_rekam_nik;
     private javax.swing.JTextField txt_rekam_telp;
     private javax.swing.JTextField txt_rekam_tl;
-    private javax.swing.JTextField txt_tindakan_id;
-    private javax.swing.JTextField txt_tindakan_keterangan;
-    private javax.swing.JTextField txt_tindakan_kode;
-    private javax.swing.JTextField txt_tindakan_nama;
-    private javax.swing.JTextField txt_tindakan_tarif;
     private javax.swing.JTextField txt_unit_bobot;
-    private javax.swing.JTextField txt_unit_id;
     private javax.swing.JTextField txt_unit_nama;
     // End of variables declaration//GEN-END:variables
 }
