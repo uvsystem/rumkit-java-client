@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class formCari extends javax.swing.JFrame {
+public class FrameCari extends javax.swing.JFrame {
     private final JFrame frame;
     private final Class<?> cls;
     
@@ -26,7 +26,7 @@ public class formCari extends javax.swing.JFrame {
      * @param frame frame yang memanggil formCari.
      * @param cls class sebagai pembeda fungsi cari.
      */
-    public formCari(JFrame frame, Class<?> cls) {
+    public FrameCari(JFrame frame, Class<?> cls) {
         initComponents();
         this.frame=frame;
         this.cls=cls;
@@ -145,7 +145,7 @@ public class formCari extends javax.swing.JFrame {
         UnitTableModel model = (UnitTableModel)tbl_cari.getModel();
         Unit unit = model.getUnit(row);
 
-        ((admin)frame).setUnitForOperator(unit);
+        ((FrameAdmin)frame).setUnitForOperator(unit);
     }
    
     public final void tabelUnit(){

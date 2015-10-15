@@ -594,9 +594,6 @@
     </Container>
     <Component class="javax.swing.JLabel" name="Image">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Ronald\Documents\GitHub\rumkit-java-client\src\Image\Pendaftaran_Bg.jpg"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="jLabel14"/>
       </Properties>
       <Constraints>

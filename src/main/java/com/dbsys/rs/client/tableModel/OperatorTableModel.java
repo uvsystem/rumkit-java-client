@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Operator;
@@ -11,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
  */
 public class OperatorTableModel extends DefaultTableModel {
     private List<Operator> listOperator;
@@ -54,7 +49,7 @@ public class OperatorTableModel extends DefaultTableModel {
             case 2:return operator.getPassword();
             case 3:return operator.getNamaUnit();
             case 4:return operator.getRole();
-            default: return"";
+            default: return "";
         }
     }
     public Operator getOperator(int row){

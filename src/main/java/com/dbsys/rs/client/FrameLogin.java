@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public class login extends javax.swing.JFrame {
+public class FrameLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public login() {
+    public FrameLogin() {
         initComponents();
         
     }
@@ -53,7 +53,6 @@ public class login extends javax.swing.JFrame {
         jLabel2.setText("PASSWORD");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
 
-        btn_login_ok.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ronald\\Documents\\GitHub\\rumkit-java-client\\src\\Image\\Button Login.png")); // NOI18N
         btn_login_ok.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_login_ok.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btn_login_ok.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +61,6 @@ public class login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_login_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
-
-        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ronald\\Documents\\GitHub\\rumkit-java-client\\src\\Image\\Login Form.jpg")); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
 
         pack();
@@ -85,9 +82,9 @@ public class login extends javax.swing.JFrame {
             TokenHolder.token = token;
 
             if(token.getRole().equals(Role.ADMIN)){
-                new admin().setVisible(true);
+                new FrameAdmin().setVisible(true);
             }else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)){
-                new Pendaftaran().setVisible(true);
+                new FramePendaftaran().setVisible(true);
             }
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -111,8 +108,9 @@ public class login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -121,7 +119,7 @@ public class login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new login().setVisible(true);
+                new FrameLogin().setVisible(true);
             }
         });
     }

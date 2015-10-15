@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Unit;
@@ -11,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
  */
 public class UnitTableModel extends DefaultTableModel {
     private List<Unit> listUnit;
@@ -28,7 +23,7 @@ public class UnitTableModel extends DefaultTableModel {
     
     @Override
     public int getRowCount(){
-        if (listUnit==null)
+        if (listUnit == null)
             return 0;
         return listUnit.size();
     }
@@ -48,7 +43,7 @@ public class UnitTableModel extends DefaultTableModel {
         switch(column){
             case 0:return unit.getNama();
             case 1:return unit.getTipe();
-            default: return"";
+            default: return "";
         }
     }
     public Unit getUnit(int row){

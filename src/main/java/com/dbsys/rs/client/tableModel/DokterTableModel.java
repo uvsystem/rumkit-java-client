@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Dokter;
@@ -11,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
  */
 public class DokterTableModel extends DefaultTableModel {
     private List<Dokter> listDokter;
@@ -62,7 +57,7 @@ public class DokterTableModel extends DefaultTableModel {
             case 6:return dokter.getDarah();
             case 7:return dokter.getAgama();
             case 8:return dokter.getTelepon();
-            default: return"";
+            default: return "";
         }
     }
     public Dokter getDokter(int row){

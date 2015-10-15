@@ -4,12 +4,12 @@ package com.dbsys.rs.client;
  *
  * @author Bramwell Kasaedja
  */
-public class pilihPelaksana extends javax.swing.JFrame {
+public class FramePoliklinik extends javax.swing.JFrame {
 
     /**
-     * Creates new form pilihPelaksana
+     * Creates new form Poliklinik
      */
-    public pilihPelaksana() {
+    public FramePoliklinik() {
         initComponents();
     }
 
@@ -28,11 +28,11 @@ public class pilihPelaksana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();

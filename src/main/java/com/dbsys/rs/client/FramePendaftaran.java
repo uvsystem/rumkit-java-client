@@ -1,24 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client;
 
 import java.awt.Color;
 
 /**
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
  */
-public class Pendaftaran extends javax.swing.JFrame {
+public class FramePendaftaran extends javax.swing.JFrame {
 
     /**
      * Creates new form Pendaftaran
      */
-    public Pendaftaran() {
+    public FramePendaftaran() {
         initComponents();
-       }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -319,7 +314,7 @@ public class Pendaftaran extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
         jComboBox1.setBorder(null);
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(120, 40, 100, 20);
+        jComboBox1.setBounds(120, 40, 100, 18);
 
         jTextField2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(jTextField2);
@@ -361,7 +356,6 @@ public class Pendaftaran extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 405, 740, 65));
 
-        Image.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ronald\\Documents\\GitHub\\rumkit-java-client\\src\\Image\\Pendaftaran_Bg.jpg")); // NOI18N
         Image.setText("jLabel14");
         getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 500));
 
@@ -375,41 +369,6 @@ public class Pendaftaran extends javax.swing.JFrame {
     private void txt_daftar_kodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_daftar_kodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_daftar_kodeActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pendaftaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pendaftaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pendaftaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pendaftaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pendaftaran().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;

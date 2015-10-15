@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public class admin extends javax.swing.JFrame {
+public class FrameAdmin extends javax.swing.JFrame {
     private Unit unit;
     private Operator operator;
 
     /**
      * Creates new form admin
      */
-    public admin() {
+    public FrameAdmin() {
         initComponents();
         pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
@@ -1257,7 +1257,7 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clear_opActionPerformed
 
     private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
-        formCari cari = new formCari(this,Unit.class);
+        FrameCari cari = new FrameCari(this,Unit.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
 
