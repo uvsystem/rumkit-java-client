@@ -14,13 +14,16 @@ import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.PekerjaService;
 import com.dbsys.rs.connector.service.PerawatService;
 import com.dbsys.rs.connector.service.UnitService;
+import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Apoteker;
 import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Pekerja;
+import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
+import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -31,6 +34,7 @@ import javax.swing.JOptionPane;
 public class FrameAdmin extends javax.swing.JFrame {
     private Unit unit;
     private Operator operator;
+    private Dokter dokter;
 
     /**
      * Creates new form admin
@@ -84,13 +88,13 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
-        tbl_dokter_kode = new javax.swing.JTextField();
+        txt_dokter_kode = new javax.swing.JTextField();
         txt_dokter_nik = new javax.swing.JTextField();
         txt_dokter_lahir = new javax.swing.JTextField();
         txt_dokter_telepon = new javax.swing.JTextField();
         cb_dokter_kelamin = new javax.swing.JComboBox();
-        cb_dokter_darah = new javax.swing.JComboBox();
-        cb_dokter_agama = new javax.swing.JComboBox();
+        txt_dokter_darah = new javax.swing.JTextField();
+        txt_dokter_agama = new javax.swing.JTextField();
         tab_perawat = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_perawat = new javax.swing.JTable();
@@ -276,6 +280,11 @@ public class FrameAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_dokter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_dokterMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tbl_dokter);
 
         tab_dokter.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 680, 250));
@@ -284,9 +293,19 @@ public class FrameAdmin extends javax.swing.JFrame {
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_simpan_dokter.setText("SIMPAN");
+        btn_simpan_dokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpan_dokterActionPerformed(evt);
+            }
+        });
         jPanel14.add(btn_simpan_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 80, 40));
 
         btn_clear_dokter.setText("X Field");
+        btn_clear_dokter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clear_dokterMouseClicked(evt);
+            }
+        });
         jPanel14.add(btn_clear_dokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
 
         tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 680, 60));
@@ -337,8 +356,8 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel59.setText("TELEPON");
         jPanel21.add(jLabel59);
         jLabel59.setBounds(500, 70, 44, 14);
-        jPanel21.add(tbl_dokter_kode);
-        tbl_dokter_kode.setBounds(49, 65, 176, 20);
+        jPanel21.add(txt_dokter_kode);
+        txt_dokter_kode.setBounds(49, 65, 176, 20);
         jPanel21.add(txt_dokter_nik);
         txt_dokter_nik.setBounds(310, 10, 150, 20);
         jPanel21.add(txt_dokter_lahir);
@@ -346,17 +365,13 @@ public class FrameAdmin extends javax.swing.JFrame {
         jPanel21.add(txt_dokter_telepon);
         txt_dokter_telepon.setBounds(560, 70, 90, 20);
 
-        cb_dokter_kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_dokter_kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
         jPanel21.add(cb_dokter_kelamin);
         cb_dokter_kelamin.setBounds(310, 40, 110, 20);
-
-        cb_dokter_darah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel21.add(cb_dokter_darah);
-        cb_dokter_darah.setBounds(560, 10, 56, 20);
-
-        cb_dokter_agama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel21.add(cb_dokter_agama);
-        cb_dokter_agama.setBounds(560, 40, 80, 20);
+        jPanel21.add(txt_dokter_darah);
+        txt_dokter_darah.setBounds(560, 10, 90, 20);
+        jPanel21.add(txt_dokter_agama);
+        txt_dokter_agama.setBounds(560, 40, 90, 20);
 
         tab_dokter.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 680, 110));
 
@@ -1301,7 +1316,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-        
     }//GEN-LAST:event_tab_paneMouseClicked
 
     private void loadDokter() throws ServiceException {
@@ -1338,6 +1352,62 @@ public class FrameAdmin extends javax.swing.JFrame {
         PekerjaTableModel tableModel = new PekerjaTableModel(listDokter);
         tbl_adm.setModel(tableModel);
     }
+
+    private void btn_simpan_dokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_dokterActionPerformed
+        if (dokter == null)
+            dokter = new Dokter();
+        
+        dokter.setNip(txt_dokter_nip.getText());
+        dokter.setNama(txt_dokter_nama.getText());
+        dokter.setNik(txt_dokter_nik.getText());
+        String tglLahir = txt_dokter_lahir.getText();
+        dokter.setTanggalLahir(DateUtil.getDate(tglLahir));
+        dokter.setTelepon(txt_dokter_telepon.getText());
+        dokter.setAgama(txt_dokter_agama.getText());
+        dokter.setDarah(txt_dokter_darah.getText());
+        String kelamin = (String)cb_dokter_kelamin.getSelectedItem();
+        dokter.setKelamin(Kelamin.valueOf(kelamin));
+        dokter.setSpesialisasi(null);
+        
+        DokterService dokterService = DokterService.getInstance();
+
+        try {
+            dokterService.simpan(dokter);
+            loadDokter();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_simpan_dokterActionPerformed
+
+    private void tbl_dokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dokterMouseClicked
+        int row = tbl_dokter.getSelectedRow();
+
+        DokterTableModel model = (DokterTableModel)tbl_dokter.getModel();
+        dokter = model.getDokter(row);
+        
+        txt_dokter_kode.setText(dokter.getKode());
+        txt_dokter_nip.setText(dokter.getNip());
+        txt_dokter_nama.setText(dokter.getNama());
+        txt_dokter_nik.setText(dokter.getNik());
+        txt_dokter_lahir.setText(dokter.getTanggalLahir().toString());
+        txt_dokter_telepon.setText(dokter.getTelepon());
+        txt_dokter_agama.setText(dokter.getAgama());
+        txt_dokter_darah.setText(dokter.getDarah());
+        cb_dokter_kelamin.setSelectedItem(dokter.getKelamin().toString());
+    }//GEN-LAST:event_tbl_dokterMouseClicked
+
+    private void btn_clear_dokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clear_dokterMouseClicked
+        dokter = null;
+        
+        txt_dokter_nip.setText("");
+        txt_dokter_nama.setText("");
+        txt_dokter_nik.setText("");
+        txt_dokter_lahir.setText("");
+        txt_dokter_telepon.setText("");
+        txt_dokter_agama.setText("");
+        txt_dokter_darah.setText("");
+        cb_dokter_kelamin.setSelectedIndex(0);
+    }//GEN-LAST:event_btn_clear_dokterMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_admin_clear_tindakan;
@@ -1367,8 +1437,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btn_unit;
     private javax.swing.JComboBox cb_admin_operator_role;
     private javax.swing.JComboBox cb_barang_satuan;
-    private javax.swing.JComboBox cb_dokter_agama;
-    private javax.swing.JComboBox cb_dokter_darah;
     private javax.swing.JComboBox cb_dokter_kelamin;
     private javax.swing.JComboBox cb_rekam_agama;
     private javax.swing.JComboBox cb_rekam_gol;
@@ -1477,7 +1545,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTable tbl_apoteker;
     private javax.swing.JTable tbl_barang;
     private javax.swing.JTable tbl_dokter;
-    private javax.swing.JTextField tbl_dokter_kode;
     private javax.swing.JTable tbl_op;
     private javax.swing.JTable tbl_perawat;
     private javax.swing.JTable tbl_rekam;
@@ -1501,6 +1568,9 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txt_barang_ket;
     private javax.swing.JTextField txt_barang_kode;
     private javax.swing.JTextField txt_barang_nama;
+    private javax.swing.JTextField txt_dokter_agama;
+    private javax.swing.JTextField txt_dokter_darah;
+    private javax.swing.JTextField txt_dokter_kode;
     private javax.swing.JTextField txt_dokter_lahir;
     private javax.swing.JTextField txt_dokter_nama;
     private javax.swing.JTextField txt_dokter_nik;
