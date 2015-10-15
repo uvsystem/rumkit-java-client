@@ -1,6 +1,6 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.lib.entity.Pekerja;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -8,24 +8,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Bramwell Kasaedja
  */
-public class DokterTableModel extends DefaultTableModel {
-    private List<Dokter> listDokter;
+public class PekerjaTableModel extends DefaultTableModel {
+    private List<Pekerja> list;
     
-    public DokterTableModel(List<Dokter> list){
+    public PekerjaTableModel(List<Pekerja> list){
         super();
-        listDokter = list;
+        this.list = list;
     }
     
     @Override
     public int getColumnCount(){
-        return 4;
+        return 3;
     }
     
     @Override
     public int getRowCount(){
-        if (listDokter == null)
+        if (list == null)
             return 0;
-        return listDokter.size();
+        return list.size();
     }
     
     @Override
@@ -34,23 +34,22 @@ public class DokterTableModel extends DefaultTableModel {
             case 0:return "NAMA";
             case 1:return "NIP";
             case 2:return "KODE";
-            case 3:return "SPESIALISASI";
             default: return "";
         }
     }
     
     @Override
     public Object getValueAt(int row, int column){
-        Dokter dokter = getDokter(row);
+        Pekerja pekerja = getPekerja(row);
         switch(column){
-            case 0:return dokter.getNama();
-            case 1:return dokter.getNip();
-            case 2:return dokter.getKode();
-            case 3:return dokter.getSpesialisasi();
+            case 0:return pekerja.getNama();
+            case 1:return pekerja.getNip();
+            case 2:return pekerja.getKode();
             default: return "";
         }
     }
-    public Dokter getDokter(int row){
-        return listDokter.get(row);
+    
+    public Pekerja getPekerja(int row){
+        return list.get(row);
     }
 }

@@ -1,16 +1,25 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.tableModel.ApotekerTableModel;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
+import com.dbsys.rs.client.tableModel.PekerjaTableModel;
+import com.dbsys.rs.client.tableModel.PerawatTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.service.ApotekerService;
 import com.dbsys.rs.connector.service.DokterService;
 import com.dbsys.rs.connector.service.OperatorService;
+import com.dbsys.rs.connector.service.PekerjaService;
+import com.dbsys.rs.connector.service.PerawatService;
 import com.dbsys.rs.connector.service.UnitService;
+import com.dbsys.rs.lib.entity.Apoteker;
 import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
+import com.dbsys.rs.lib.entity.Pekerja;
+import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -247,6 +256,12 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel25.setText("PEGAWAI");
         jLabel25.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         pnl_pegawai.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
+
+        tab_pane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tab_paneMouseClicked(evt);
+            }
+        });
 
         tab_dokter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1242,7 +1257,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         txt_op_nama.setText(operator.getNama());
         txt_op_uname.setText(operator.getUsername());
         txt_op_pass.setText(operator.getPassword());
-        txt_admin_operator_unit.setText(operator.getNamaUnit());
+        txt_admin_operator_unit.setText(operator.getUnit().getNama());
         cb_admin_operator_role.setSelectedItem(operator.getRole().toString());
     }//GEN-LAST:event_tbl_opMouseClicked
 
@@ -1268,6 +1283,62 @@ public class FrameAdmin extends javax.swing.JFrame {
         operator = null;
     }//GEN-LAST:event_btn_clear_unitActionPerformed
 
+    private void tab_paneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_paneMouseClicked
+        int selectedIndex = tab_pane.getSelectedIndex();
+
+        try {
+            switch(selectedIndex) {
+                case 0: loadDokter();
+                    break;
+                case 1: loadPerawat();
+                    break;
+                case 2: loadApoteker();
+                    break;
+                case 3: loadPekerja();
+                    break;
+                default: break;
+            }
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_tab_paneMouseClicked
+
+    private void loadDokter() throws ServiceException {
+        DokterService dokterService = DokterService.getInstance();
+        
+        List<Dokter> listDokter = dokterService.getAll();
+        DokterTableModel tableModel = new DokterTableModel(listDokter);
+        tbl_dokter.setModel(tableModel);
+    }
+    
+    private void loadPerawat() throws ServiceException {
+        PerawatService perawatService = PerawatService.getInstance();
+        
+        List<Perawat> listPerawat = perawatService.getAll();
+        PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
+        tbl_perawat.setModel(tableModel);
+    }
+    
+    private void loadApoteker() throws ServiceException {
+        ApotekerService apotekerService = ApotekerService.getInstance();
+        
+        List<Apoteker> listApoteker = apotekerService.getAll();
+        ApotekerTableModel tableModel = new ApotekerTableModel(listApoteker );
+        tbl_apoteker.setModel(tableModel);
+    }
+    
+    /*
+     * Pekerja sama dengan Administrasi
+     */
+    private void loadPekerja() throws ServiceException {
+        PekerjaService pekerjaService = PekerjaService.getInstance();
+        
+        List<Pekerja> listDokter = pekerjaService.getAll();
+        PekerjaTableModel tableModel = new PekerjaTableModel(listDokter);
+        tbl_adm.setModel(tableModel);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_admin_clear_tindakan;
     private javax.swing.JButton btn_admin_tambah_tindakan;

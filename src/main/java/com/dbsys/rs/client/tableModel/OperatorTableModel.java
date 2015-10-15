@@ -47,7 +47,7 @@ public class OperatorTableModel extends DefaultTableModel {
             case 0:return operator.getNama();
             case 1:return operator.getUsername();
             case 2:return operator.getPassword();
-            case 3:return operator.getNamaUnit();
+            case 3:return operator.getUnit().getNama();
             case 4:return operator.getRole();
             default: return "";
         }

@@ -40,7 +40,7 @@
         <dependency>
             <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-library</artifactId>
-            <version>0.3.14-SNAPSHOT</version>
+            <version>0.3.17-SNAPSHOT</version>
         </dependency>
         
         <dependency>
