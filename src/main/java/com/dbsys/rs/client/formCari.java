@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client;
 
 import com.dbsys.rs.client.tableModel.UnitTableModel;
@@ -14,14 +9,22 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * Frame untuk melakukan pencarian data. Dapat digunakan untuk semua data.<br />
+ * Untuk membedakan pencarian kelas menggunakan {@code cls} pada constructor dan {@code frame} pemanggil,
+ * supaya setelah pencarian berhasil akan kembali ke frame pemanggil tersebut.
  *
- * @author Ronald
+ * @author Bramwell Kasaedja
+ * @author Deddy Christoper Kakunsi
  */
 public class formCari extends javax.swing.JFrame {
-    private JFrame frame;
-    private Class<?> cls;
+    private final JFrame frame;
+    private final Class<?> cls;
+    
     /**
      * Creates new form formCari
+     * 
+     * @param frame frame yang memanggil formCari.
+     * @param cls class sebagai pembeda fungsi cari.
      */
     public formCari(JFrame frame, Class<?> cls) {
         initComponents();
@@ -133,19 +136,21 @@ public class formCari extends javax.swing.JFrame {
         if(cls.equals(Unit.class)){
             pilihUnit();
         }
+
         this.dispose();
     }//GEN-LAST:event_btn_cari_pilihActionPerformed
  
-   private void pilihUnit(){
-       int row = tbl_cari.getSelectedRow();
+    private void pilihUnit(){
+        int row = tbl_cari.getSelectedRow();
         UnitTableModel model = (UnitTableModel)tbl_cari.getModel();
         Unit unit = model.getUnit(row);
+
         ((admin)frame).setUnitForOperator(unit);
-   }
-    
-  public final void tabelUnit(){
-        UnitService unitservice = new UnitService();
-        unitservice.setHost("http://192.168.43.223:8080");
+    }
+   
+    public final void tabelUnit(){
+        UnitService unitservice = UnitService.getInstance("http://localhost:8080");
+ 
         try {
             List<Unit> listUnit = unitservice.getAll();
             UnitTableModel model = new UnitTableModel(listUnit);
@@ -154,6 +159,7 @@ public class formCari extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cari_ok;
     private javax.swing.JButton btn_cari_pilih;

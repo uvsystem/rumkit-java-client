@@ -13,8 +13,6 @@ import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,14 +35,15 @@ public class admin extends javax.swing.JFrame {
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
         
-        //String nama = TokenHolder.getNamaOperator();
-        //lbl_status.setText(nama);
-        }
+        String nama = TokenHolder.getNamaOperator();
+        lbl_status.setText(nama);
+    }
 
     public void setUnitForOperator(Unit unit){
         this.unit = unit;
         txt_admin_operator_unit.setText(unit.getNama());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1084,7 +1083,7 @@ public class admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_barangActionPerformed
-pnl_tindakan.setVisible(false);
+        pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(true);
         pnl_rekam.setVisible(false);
@@ -1097,7 +1096,7 @@ pnl_tindakan.setVisible(false);
     }//GEN-LAST:event_btn_clear_barangActionPerformed
 
     private void btn_rekamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rekamActionPerformed
-pnl_tindakan.setVisible(false);
+        pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(true);
@@ -1106,17 +1105,18 @@ pnl_tindakan.setVisible(false);
     }//GEN-LAST:event_btn_rekamActionPerformed
 
     private void btn_pegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pegawaiActionPerformed
-pnl_tindakan.setVisible(false);
+        pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(true);
         pnl_op.setVisible(false);
+        
         tabelDokter();
     }//GEN-LAST:event_btn_pegawaiActionPerformed
 
     private void btn_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tindakanActionPerformed
-pnl_tindakan.setVisible(true);
+        pnl_tindakan.setVisible(true);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(false);
@@ -1125,7 +1125,6 @@ pnl_tindakan.setVisible(true);
     }//GEN-LAST:event_btn_tindakanActionPerformed
 
     private void btn_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_unitActionPerformed
-tabelUnit();
         pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(true);
         pnl_barang.setVisible(false);
@@ -1133,21 +1132,23 @@ tabelUnit();
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
         
+        tabelUnit();
     }//GEN-LAST:event_btn_unitActionPerformed
 
     private void btn_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_opActionPerformed
-pnl_tindakan.setVisible(false);
+        pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(true);
+        
         tabelOperator();
     }//GEN-LAST:event_btn_opActionPerformed
 
     public void tabelUnit(){
-        UnitService unitservice = new UnitService();
-        unitservice.setHost("http://192.168.43.223:8080");
+        UnitService unitservice = UnitService.getInstance("http://localhost:8080");
+
         try {
             List<Unit> listUnit = unitservice.getAll();
             UnitTableModel model = new UnitTableModel(listUnit);
@@ -1158,8 +1159,8 @@ pnl_tindakan.setVisible(false);
     }
     
     public void tabelOperator(){
-        OperatorService operatorService = new OperatorService();
-        operatorService.setHost("http://192.168.43.223:8080");
+        OperatorService operatorService = OperatorService.getInstance("http://localhost:8080");
+
         try {
             List<Operator> listOperator = operatorService.getAll();
             OperatorTableModel model = new OperatorTableModel(listOperator);
@@ -1169,10 +1170,9 @@ pnl_tindakan.setVisible(false);
         }      
     }
     
-    
     public void tabelDokter(){
-        DokterService dokterService = new DokterService();
-        dokterService.setHost("http://192.168.43.223:8080");
+        DokterService dokterService = DokterService.getInstance("http://localhost:8080");
+
         try {
             List<Dokter> listDokter = dokterService.getAll();
             DokterTableModel model = new DokterTableModel(listDokter);
@@ -1183,15 +1183,15 @@ pnl_tindakan.setVisible(false);
     }
     
     private void btn_simpan_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_unitActionPerformed
-        UnitService unitservice = new UnitService();
-        unitservice.setHost("http://192.168.43.223:8080");
+        UnitService unitservice = UnitService.getInstance("http://localhost:8080");
         
         if (unit==null)
             unit = new Unit();
-        unit.setBobot(Float.valueOf(txt_unit_bobot.getText()));
-        unit.setNama(txt_unit_nama.getText());
+
         String tipe = (String)cb_unit_tipe.getSelectedItem();
         unit.setTipe(Unit.Type.valueOf(tipe));
+        unit.setBobot(Float.valueOf(txt_unit_bobot.getText()));
+        unit.setNama(txt_unit_nama.getText());
       
         try {
             unitservice.simpan(unit);
@@ -1203,25 +1203,28 @@ pnl_tindakan.setVisible(false);
 
     private void tbl_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_unitMouseClicked
         int row = tbl_unit.getSelectedRow();
+        
         UnitTableModel model = (UnitTableModel)tbl_unit.getModel();
         unit = model.getUnit(row);
+        
         txt_unit_nama.setText(unit.getNama());
         txt_unit_bobot.setText(unit.getBobot().toString());
         cb_unit_tipe.setSelectedItem(unit.getTipe().toString());
     }//GEN-LAST:event_tbl_unitMouseClicked
 
     private void btn_tambah_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_opActionPerformed
-        OperatorService operatorService = new OperatorService();
-        operatorService.setHost("http://192.168.43.223:8080");
+        OperatorService operatorService = OperatorService.getInstance("http://localhost:8080");
         
         if (operator==null)
             operator = new Operator();
+
+        String role = (String)cb_admin_operator_role.getSelectedItem();
+        operator.setRole(Role.valueOf(role));
         operator.setNama(txt_op_nama.getText());
         operator.setUsername(txt_op_uname.getText());
         operator.setPassword(txt_op_pass.getText());
         operator.setUnit(unit);
-        String role = (String)cb_admin_operator_role.getSelectedItem();
-        operator.setRole(Role.valueOf(role));
+
         try {
             operatorService.simpan(operator);
             tabelOperator();
@@ -1232,8 +1235,10 @@ pnl_tindakan.setVisible(false);
 
     private void tbl_opMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_opMouseClicked
         int row = tbl_op.getSelectedRow();
+
         OperatorTableModel model = (OperatorTableModel)tbl_op.getModel();
         operator = model.getOperator(row);
+        
         txt_op_nama.setText(operator.getNama());
         txt_op_uname.setText(operator.getUsername());
         txt_op_pass.setText(operator.getPassword());
@@ -1247,54 +1252,21 @@ pnl_tindakan.setVisible(false);
         txt_op_pass.setText("");
         txt_admin_operator_unit.setText("");
         cb_admin_operator_role.setSelectedItem("-Pilih-");
+
         operator = null;
     }//GEN-LAST:event_btn_clear_opActionPerformed
 
     private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
-formCari cari = new formCari(this,Unit.class);
-        cari.setVisible(true);        // TODO add your handling code here:
+        formCari cari = new formCari(this,Unit.class);
+        cari.setVisible(true);
     }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
 
     private void btn_clear_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_unitActionPerformed
         txt_unit_nama.setText("");
         txt_unit_bobot.setText("");
         cb_unit_tipe.setSelectedItem("-Pilih-");
-        operator = null;        // TODO add your handling code here:
+        operator = null;
     }//GEN-LAST:event_btn_clear_unitActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-                
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-                new admin().setVisible(true);
-            }
-        });
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_admin_clear_tindakan;

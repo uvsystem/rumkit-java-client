@@ -4,7 +4,6 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.Credential;
-import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Token;
 import com.dbsys.rs.lib.entity.Unit;
@@ -78,19 +77,18 @@ public class login extends javax.swing.JFrame {
         credential.setUsername(username);
         credential.setPassword(pass);
 
-        TokenService tokenservice = new TokenService();
-        tokenservice.setHost("http://192.168.43.223:8080");
+        TokenService tokenservice = TokenService.getInstance("http://localhost:8080");
         
         Token token;
         try {
             token = tokenservice.create(credential);
             TokenHolder.token = token;
+
             if(token.getRole().equals(Role.ADMIN)){
                 new admin().setVisible(true);
             }else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)){
                 new Pendaftaran().setVisible(true);
             }
-            
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
