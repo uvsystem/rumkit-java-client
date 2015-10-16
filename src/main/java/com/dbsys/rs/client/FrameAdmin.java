@@ -23,8 +23,9 @@ import com.dbsys.rs.lib.entity.Pekerja;
 import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
-import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,31 +33,405 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  */
 public class FrameAdmin extends javax.swing.JFrame {
-    private Unit unit;
-    private Operator operator;
-    private Dokter dokter;
+    private final UnitEventController unitEventController;
+    private final OperatorEventController operatorEventController;
+    private final DokterEventController dokterEventController;
+    private final PerawatEventController perawatEventController;
+    private final ApotekerEventController apotekerEventController;
+    private final PekerjaEventController pekerjaEventController;
 
     /**
      * Creates new form admin
      */
     public FrameAdmin() {
         initComponents();
+        
         pnl_tindakan.setVisible(false);
         pnl_unit.setVisible(false);
         pnl_barang.setVisible(false);
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
+
+        unitEventController = new UnitEventController();
+        operatorEventController = new OperatorEventController();
+        dokterEventController = new DokterEventController();
+        perawatEventController = new PerawatEventController();
+        apotekerEventController = new ApotekerEventController();
+        pekerjaEventController = new PekerjaEventController();
         
         String nama = TokenHolder.getNamaOperator();
         lbl_status.setText(nama);
     }
 
     public void setUnitForOperator(Unit unit){
-        this.unit = unit;
+        unitEventController.setModel(unit);
         txt_admin_operator_unit.setText(unit.getNama());
     }
+    
+    private class UnitEventController implements EventController<Unit> {
+        private final UnitService unitservice = UnitService.getInstance(host);
+        private Unit model;
 
+        @Override
+        public Unit getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Unit t) {
+            this.model = t;
+        }
+        
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new Unit();
+
+            String tipe = (String)cb_unit_tipe.getSelectedItem();
+            model.setTipe(Unit.Type.valueOf(tipe));
+            model.setBobot(Float.valueOf(txt_unit_bobot.getText()));
+            model.setNama(txt_unit_nama.getText());
+
+            unitservice.simpan(model);
+            onLoad();
+        }
+
+        @Override
+        public void onTableClick() {
+            int row = tbl_unit.getSelectedRow();
+
+            UnitTableModel tableModel = (UnitTableModel)tbl_unit.getModel();
+            model = tableModel.getUnit(row);
+
+            txt_unit_nama.setText(model.getNama());
+            txt_unit_bobot.setText(model.getBobot().toString());
+            cb_unit_tipe.setSelectedItem(model.getTipe().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            txt_unit_nama.setText("");
+            txt_unit_bobot.setText("");
+            cb_unit_tipe.setSelectedItem("-Pilih-");
+            
+            model = null;
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            pnl_tindakan.setVisible(false);
+            pnl_unit.setVisible(true);
+            pnl_barang.setVisible(false);
+            pnl_rekam.setVisible(false);
+            pnl_pegawai.setVisible(false);
+            pnl_op.setVisible(false);
+
+            List<Unit> listUnit = unitservice.getAll();
+            UnitTableModel tableModel = new UnitTableModel(listUnit);
+            tbl_unit.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+
+    private class OperatorEventController implements EventController<Operator> {
+        private final OperatorService operatorService = OperatorService.getInstance(host);
+        private Operator model;
+
+        @Override
+        public Operator getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Operator t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new Operator();
+
+            String role = (String)cb_admin_operator_role.getSelectedItem();
+            model.setRole(Role.valueOf(role));
+            model.setNama(txt_op_nama.getText());
+            model.setUsername(txt_op_uname.getText());
+            model.setPassword(txt_op_pass.getText());
+            model.setUnit(unitEventController.getModel());
+
+            operatorService.simpan(model);
+            onLoad();
+        }
+
+        @Override
+        public void onTableClick() {
+            int row = tbl_op.getSelectedRow();
+
+            OperatorTableModel tableModel = (OperatorTableModel)tbl_op.getModel();
+            model = tableModel.getOperator(row);
+
+            txt_op_nama.setText(model.getNama());
+            txt_op_uname.setText(model.getUsername());
+            txt_op_pass.setText(model.getPassword());
+            txt_admin_operator_unit.setText(model.getUnit().getNama());
+            cb_admin_operator_role.setSelectedItem(model.getRole().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            txt_op_nama.setText("");
+            txt_op_uname.setText("");
+            txt_op_pass.setText("");
+            txt_admin_operator_unit.setText("");
+            cb_admin_operator_role.setSelectedItem("-Pilih-");
+
+            model = null;
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            pnl_tindakan.setVisible(false);
+            pnl_unit.setVisible(false);
+            pnl_barang.setVisible(false);
+            pnl_rekam.setVisible(false);
+            pnl_pegawai.setVisible(false);
+            pnl_op.setVisible(true);
+
+            List<Operator> listOperator = operatorService.getAll();
+            OperatorTableModel tableModel = new OperatorTableModel(listOperator);
+            tbl_op.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class DokterEventController implements EventController<Dokter> {
+        private final DokterService dokterService = DokterService.getInstance(host);
+        private Dokter model;
+
+        @Override
+        public Dokter getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Dokter t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new Dokter();
+
+            model.setNip(txt_dokter_nip.getText());
+            model.setNama(txt_dokter_nama.getText());
+            model.setNik(txt_dokter_nik.getText());
+            String tglLahir = txt_dokter_lahir.getText();
+            model.setTanggalLahir(DateUtil.getDate(tglLahir));
+            model.setTelepon(txt_dokter_telepon.getText());
+            model.setAgama(txt_dokter_agama.getText());
+            model.setDarah(txt_dokter_darah.getText());
+            String kelamin = (String)cb_dokter_kelamin.getSelectedItem();
+            model.setKelamin(Kelamin.valueOf(kelamin));
+            model.setSpesialisasi(null);
+
+            dokterService.simpan(model);
+            onLoad();
+        }
+
+        @Override
+        public void onTableClick() {
+            int row = tbl_dokter.getSelectedRow();
+
+            DokterTableModel tableModel = (DokterTableModel)tbl_dokter.getModel();
+            model = tableModel.getDokter(row);
+
+            txt_dokter_kode.setText(model.getKode());
+            txt_dokter_nip.setText(model.getNip());
+            txt_dokter_nama.setText(model.getNama());
+            txt_dokter_nik.setText(model.getNik());
+            txt_dokter_lahir.setText(model.getTanggalLahir().toString());
+            txt_dokter_telepon.setText(model.getTelepon());
+            txt_dokter_agama.setText(model.getAgama());
+            txt_dokter_darah.setText(model.getDarah());
+            cb_dokter_kelamin.setSelectedItem(model.getKelamin().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            model = null;
+
+            txt_dokter_nip.setText("");
+            txt_dokter_nama.setText("");
+            txt_dokter_nik.setText("");
+            txt_dokter_lahir.setText("");
+            txt_dokter_telepon.setText("");
+            txt_dokter_agama.setText("");
+            txt_dokter_darah.setText("");
+            cb_dokter_kelamin.setSelectedIndex(0);
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            pnl_tindakan.setVisible(false);
+            pnl_unit.setVisible(false);
+            pnl_barang.setVisible(false);
+            pnl_rekam.setVisible(false);
+            pnl_pegawai.setVisible(true);
+            pnl_op.setVisible(false);
+
+            List<Dokter> listDokter = dokterService.getAll();
+            DokterTableModel tableModel = new DokterTableModel(listDokter);
+            tbl_dokter.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class PerawatEventController implements EventController<Perawat> {
+        private final PerawatService perawatService = PerawatService.getInstance(host);
+        private Perawat model;
+
+        @Override
+        public Perawat getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Perawat t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onTableClick() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onCleanForm() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            List<Perawat> listPerawat = perawatService.getAll();
+            PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
+            tbl_perawat.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class ApotekerEventController implements EventController<Apoteker> {
+        private final ApotekerService apotekerService = ApotekerService.getInstance(host);
+        private Apoteker model;
+        
+        @Override
+        public Apoteker getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Apoteker t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onCleanForm() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            List<Apoteker> listApoteker = apotekerService.getAll();
+            ApotekerTableModel tableModel = new ApotekerTableModel(listApoteker );
+            tbl_apoteker.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    private class PekerjaEventController implements EventController<Pekerja> {
+        private final PekerjaService pekerjaService = PekerjaService.getInstance(host);
+        private Pekerja model;
+
+        @Override
+        public Pekerja getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Pekerja t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onCleanForm() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            List<Pekerja> listDokter = pekerjaService.getAll();
+            PekerjaTableModel tableModel = new PekerjaTableModel(listDokter);
+            tbl_adm.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1135,14 +1510,11 @@ public class FrameAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_rekamActionPerformed
 
     private void btn_pegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pegawaiActionPerformed
-        pnl_tindakan.setVisible(false);
-        pnl_unit.setVisible(false);
-        pnl_barang.setVisible(false);
-        pnl_rekam.setVisible(false);
-        pnl_pegawai.setVisible(true);
-        pnl_op.setVisible(false);
-        
-        tabelDokter();
+        try {
+            dokterEventController.onLoad();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btn_pegawaiActionPerformed
 
     private void btn_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tindakanActionPerformed
@@ -1155,135 +1527,47 @@ public class FrameAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tindakanActionPerformed
 
     private void btn_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_unitActionPerformed
-        pnl_tindakan.setVisible(false);
-        pnl_unit.setVisible(true);
-        pnl_barang.setVisible(false);
-        pnl_rekam.setVisible(false);
-        pnl_pegawai.setVisible(false);
-        pnl_op.setVisible(false);
-        
-        tabelUnit();
-    }//GEN-LAST:event_btn_unitActionPerformed
-
-    private void btn_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_opActionPerformed
-        pnl_tindakan.setVisible(false);
-        pnl_unit.setVisible(false);
-        pnl_barang.setVisible(false);
-        pnl_rekam.setVisible(false);
-        pnl_pegawai.setVisible(false);
-        pnl_op.setVisible(true);
-        
-        tabelOperator();
-    }//GEN-LAST:event_btn_opActionPerformed
-
-    public void tabelUnit(){
-        UnitService unitservice = UnitService.getInstance("http://localhost:8080");
-
         try {
-            List<Unit> listUnit = unitservice.getAll();
-            UnitTableModel model = new UnitTableModel(listUnit);
-            tbl_unit.setModel(model);
+            unitEventController.onLoad();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }
-    
-    public void tabelOperator(){
-        OperatorService operatorService = OperatorService.getInstance("http://localhost:8080");
+    }//GEN-LAST:event_btn_unitActionPerformed
 
+    private void btn_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_opActionPerformed
         try {
-            List<Operator> listOperator = operatorService.getAll();
-            OperatorTableModel model = new OperatorTableModel(listOperator);
-            tbl_op.setModel(model);
+            operatorEventController.onLoad();
         } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }      
-    }
-    
-    public void tabelDokter(){
-        DokterService dokterService = DokterService.getInstance("http://localhost:8080");
-
-        try {
-            List<Dokter> listDokter = dokterService.getAll();
-            DokterTableModel model = new DokterTableModel(listDokter);
-            tbl_dokter.setModel(model);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }      
-    }
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_opActionPerformed
     
     private void btn_simpan_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_unitActionPerformed
-        UnitService unitservice = UnitService.getInstance("http://localhost:8080");
-        
-        if (unit==null)
-            unit = new Unit();
-
-        String tipe = (String)cb_unit_tipe.getSelectedItem();
-        unit.setTipe(Unit.Type.valueOf(tipe));
-        unit.setBobot(Float.valueOf(txt_unit_bobot.getText()));
-        unit.setNama(txt_unit_nama.getText());
-      
         try {
-            unitservice.simpan(unit);
-            tabelUnit();
+            unitEventController.onSave();
         } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            Logger.getLogger(FrameAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_simpan_unitActionPerformed
 
     private void tbl_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_unitMouseClicked
-        int row = tbl_unit.getSelectedRow();
-        
-        UnitTableModel model = (UnitTableModel)tbl_unit.getModel();
-        unit = model.getUnit(row);
-        
-        txt_unit_nama.setText(unit.getNama());
-        txt_unit_bobot.setText(unit.getBobot().toString());
-        cb_unit_tipe.setSelectedItem(unit.getTipe().toString());
+        unitEventController.onTableClick();
     }//GEN-LAST:event_tbl_unitMouseClicked
 
     private void btn_tambah_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_opActionPerformed
-        OperatorService operatorService = OperatorService.getInstance("http://localhost:8080");
-        
-        if (operator==null)
-            operator = new Operator();
-
-        String role = (String)cb_admin_operator_role.getSelectedItem();
-        operator.setRole(Role.valueOf(role));
-        operator.setNama(txt_op_nama.getText());
-        operator.setUsername(txt_op_uname.getText());
-        operator.setPassword(txt_op_pass.getText());
-        operator.setUnit(unit);
-
         try {
-            operatorService.simpan(operator);
-            tabelOperator();
+            operatorEventController.onSave();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        }        
+        }
     }//GEN-LAST:event_btn_tambah_opActionPerformed
 
     private void tbl_opMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_opMouseClicked
-        int row = tbl_op.getSelectedRow();
-
-        OperatorTableModel model = (OperatorTableModel)tbl_op.getModel();
-        operator = model.getOperator(row);
-        
-        txt_op_nama.setText(operator.getNama());
-        txt_op_uname.setText(operator.getUsername());
-        txt_op_pass.setText(operator.getPassword());
-        txt_admin_operator_unit.setText(operator.getUnit().getNama());
-        cb_admin_operator_role.setSelectedItem(operator.getRole().toString());
+        operatorEventController.onTableClick();
     }//GEN-LAST:event_tbl_opMouseClicked
 
     private void btn_clear_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_opActionPerformed
-        txt_op_nama.setText("");
-        txt_op_uname.setText("");
-        txt_op_pass.setText("");
-        txt_admin_operator_unit.setText("");
-        cb_admin_operator_role.setSelectedItem("-Pilih-");
-
-        operator = null;
+        operatorEventController.onCleanForm();
     }//GEN-LAST:event_btn_clear_opActionPerformed
 
     private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
@@ -1292,10 +1576,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
 
     private void btn_clear_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_unitActionPerformed
-        txt_unit_nama.setText("");
-        txt_unit_bobot.setText("");
-        cb_unit_tipe.setSelectedItem("-Pilih-");
-        operator = null;
+        unitEventController.onCleanForm();
     }//GEN-LAST:event_btn_clear_unitActionPerformed
 
     private void tab_paneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_paneMouseClicked
@@ -1303,13 +1584,13 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         try {
             switch(selectedIndex) {
-                case 0: loadDokter();
+                case 0: dokterEventController.onLoad();
                     break;
-                case 1: loadPerawat();
+                case 1: perawatEventController.onLoad();
                     break;
-                case 2: loadApoteker();
+                case 2: apotekerEventController.onLoad();
                     break;
-                case 3: loadPekerja();
+                case 3: pekerjaEventController.onLoad();
                     break;
                 default: break;
             }
@@ -1317,96 +1598,21 @@ public class FrameAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_tab_paneMouseClicked
-
-    private void loadDokter() throws ServiceException {
-        DokterService dokterService = DokterService.getInstance();
-        
-        List<Dokter> listDokter = dokterService.getAll();
-        DokterTableModel tableModel = new DokterTableModel(listDokter);
-        tbl_dokter.setModel(tableModel);
-    }
     
-    private void loadPerawat() throws ServiceException {
-        PerawatService perawatService = PerawatService.getInstance();
-        
-        List<Perawat> listPerawat = perawatService.getAll();
-        PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
-        tbl_perawat.setModel(tableModel);
-    }
-    
-    private void loadApoteker() throws ServiceException {
-        ApotekerService apotekerService = ApotekerService.getInstance();
-        
-        List<Apoteker> listApoteker = apotekerService.getAll();
-        ApotekerTableModel tableModel = new ApotekerTableModel(listApoteker );
-        tbl_apoteker.setModel(tableModel);
-    }
-    
-    /*
-     * Pekerja sama dengan Administrasi
-     */
-    private void loadPekerja() throws ServiceException {
-        PekerjaService pekerjaService = PekerjaService.getInstance();
-        
-        List<Pekerja> listDokter = pekerjaService.getAll();
-        PekerjaTableModel tableModel = new PekerjaTableModel(listDokter);
-        tbl_adm.setModel(tableModel);
-    }
-
     private void btn_simpan_dokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_dokterActionPerformed
-        if (dokter == null)
-            dokter = new Dokter();
-        
-        dokter.setNip(txt_dokter_nip.getText());
-        dokter.setNama(txt_dokter_nama.getText());
-        dokter.setNik(txt_dokter_nik.getText());
-        String tglLahir = txt_dokter_lahir.getText();
-        dokter.setTanggalLahir(DateUtil.getDate(tglLahir));
-        dokter.setTelepon(txt_dokter_telepon.getText());
-        dokter.setAgama(txt_dokter_agama.getText());
-        dokter.setDarah(txt_dokter_darah.getText());
-        String kelamin = (String)cb_dokter_kelamin.getSelectedItem();
-        dokter.setKelamin(Kelamin.valueOf(kelamin));
-        dokter.setSpesialisasi(null);
-        
-        DokterService dokterService = DokterService.getInstance();
-
         try {
-            dokterService.simpan(dokter);
-            loadDokter();
+            dokterEventController.onSave();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btn_simpan_dokterActionPerformed
 
     private void tbl_dokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dokterMouseClicked
-        int row = tbl_dokter.getSelectedRow();
-
-        DokterTableModel model = (DokterTableModel)tbl_dokter.getModel();
-        dokter = model.getDokter(row);
-        
-        txt_dokter_kode.setText(dokter.getKode());
-        txt_dokter_nip.setText(dokter.getNip());
-        txt_dokter_nama.setText(dokter.getNama());
-        txt_dokter_nik.setText(dokter.getNik());
-        txt_dokter_lahir.setText(dokter.getTanggalLahir().toString());
-        txt_dokter_telepon.setText(dokter.getTelepon());
-        txt_dokter_agama.setText(dokter.getAgama());
-        txt_dokter_darah.setText(dokter.getDarah());
-        cb_dokter_kelamin.setSelectedItem(dokter.getKelamin().toString());
+        dokterEventController.onTableClick();
     }//GEN-LAST:event_tbl_dokterMouseClicked
 
     private void btn_clear_dokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clear_dokterMouseClicked
-        dokter = null;
-        
-        txt_dokter_nip.setText("");
-        txt_dokter_nama.setText("");
-        txt_dokter_nik.setText("");
-        txt_dokter_lahir.setText("");
-        txt_dokter_telepon.setText("");
-        txt_dokter_agama.setText("");
-        txt_dokter_darah.setText("");
-        cb_dokter_kelamin.setSelectedIndex(0);
+        dokterEventController.onCleanForm();
     }//GEN-LAST:event_btn_clear_dokterMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
