@@ -86,6 +86,8 @@ public class FrameLogin extends javax.swing.JFrame {
             }else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)){
                 new FramePendaftaran().setVisible(true);
             }
+            
+            this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

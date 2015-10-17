@@ -1,7 +1,11 @@
 package com.dbsys.rs.client;
 
+import static com.dbsys.rs.client.EventController.host;
+import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.client.tableModel.ApotekerTableModel;
+import com.dbsys.rs.client.tableModel.BhpTableModel;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
+import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
 import com.dbsys.rs.client.tableModel.PekerjaTableModel;
 import com.dbsys.rs.client.tableModel.PerawatTableModel;
@@ -9,17 +13,24 @@ import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.ApotekerService;
+import com.dbsys.rs.connector.service.BhpService;
 import com.dbsys.rs.connector.service.DokterService;
+import com.dbsys.rs.connector.service.ObatService;
 import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.PekerjaService;
+import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.PerawatService;
 import com.dbsys.rs.connector.service.UnitService;
 import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.lib.Tanggungan;
 import com.dbsys.rs.lib.entity.Apoteker;
+import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Pekerja;
+import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
@@ -31,6 +42,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Bramwell Kasaedja
+ * @author Deddy Christoper Kakunsi
  */
 public class FrameAdmin extends javax.swing.JFrame {
     private final UnitEventController unitEventController;
@@ -39,6 +51,9 @@ public class FrameAdmin extends javax.swing.JFrame {
     private final PerawatEventController perawatEventController;
     private final ApotekerEventController apotekerEventController;
     private final PekerjaEventController pekerjaEventController;
+    private final PendudukEventController pendudukEventController;
+    private final ObatEventController obatEventController;
+    private final BhpEventController bhpEventController;
 
     /**
      * Creates new form admin
@@ -59,6 +74,9 @@ public class FrameAdmin extends javax.swing.JFrame {
         perawatEventController = new PerawatEventController();
         apotekerEventController = new ApotekerEventController();
         pekerjaEventController = new PekerjaEventController();
+        pendudukEventController = new PendudukEventController();
+        obatEventController = new ObatEventController();
+        bhpEventController = new BhpEventController();
         
         String nama = TokenHolder.getNamaOperator();
         lbl_status.setText(nama);
@@ -236,15 +254,17 @@ public class FrameAdmin extends javax.swing.JFrame {
             if (model == null)
                 model = new Dokter();
 
+            String tglLahir = txt_dokter_lahir.getText();
+            String kelamin = (String)cb_dokter_kelamin.getSelectedItem();
+
+            model.setKode(txt_dokter_kode.getText());
             model.setNip(txt_dokter_nip.getText());
             model.setNama(txt_dokter_nama.getText());
             model.setNik(txt_dokter_nik.getText());
-            String tglLahir = txt_dokter_lahir.getText();
             model.setTanggalLahir(DateUtil.getDate(tglLahir));
             model.setTelepon(txt_dokter_telepon.getText());
             model.setAgama(txt_dokter_agama.getText());
             model.setDarah(txt_dokter_darah.getText());
-            String kelamin = (String)cb_dokter_kelamin.getSelectedItem();
             model.setKelamin(Kelamin.valueOf(kelamin));
             model.setSpesialisasi(null);
 
@@ -329,6 +349,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             String tglLahir = txt_perawat_lahir.getText();
             String kelamin = (String)cb_perawat_kelamin.getSelectedItem();
 
+            model.setKode(txt_perawat_kode.getText());
             model.setNip(txt_perawat_nip.getText());
             model.setNama(txt_perawat_nama.getText());
             model.setNik(txt_perawat_nik.getText());
@@ -412,6 +433,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             String tglLahir = txtApotekerLahir.getText();
             String kelamin = (String)cbApotekerKelamin.getSelectedItem();
 
+            model.setKode(txtApotekerKode.getText());
             model.setNip(txtApotekerNip.getText());
             model.setNama(txtApotekerNama.getText());
             model.setNik(txtApotekerNik.getText());
@@ -496,6 +518,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             String kelamin = (String)cbPekerjaKelamin.getSelectedItem();
 
             model.setNip(txtPekerjaNip.getText());
+            model.setKode(txtPekerjaKode.getText());
             model.setNama(txtPekerjaNama.getText());
             model.setNik(txtPekerjaNik.getText());
             model.setTanggalLahir(DateUtil.getDate(tglLahir));
@@ -555,6 +578,281 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
         
     }
+
+    private class PendudukEventController implements EventController<Penduduk> {
+        private final PendudukService pendudukService = PendudukService.getInstance(host);
+        private Penduduk model;
+
+        @Override
+        public Penduduk getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Penduduk t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new Penduduk();
+
+            String tglLahir = txtPendudukLahir.getText();
+            String kelamin = (String)cbPendudukKelamin.getSelectedItem();
+
+            model.setKode(txtPendudukKode.getText());
+            model.setNama(txtPendudukNama.getText());
+            model.setNik(txtPendudukNik.getText());
+            model.setTelepon(txtPendudukTelepon.getText());
+            model.setAgama(txtPendudukAgama.getText());
+            model.setDarah(txtPendudukDarah.getText());
+            model.setTanggalLahir(DateUtil.getDate(tglLahir));
+            model.setKelamin(Kelamin.valueOf(kelamin));
+
+            pendudukService.simpan(model);
+            onLoad();
+            onCleanForm();
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            int row = tblPenduduk.getSelectedRow();
+
+            PendudukTableModel tableModel = (PendudukTableModel)tblPenduduk.getModel();
+            model = tableModel.getPenduduk(row);
+
+            txtPendudukKode.setText(model.getKode());
+            txtPendudukNama.setText(model.getNama());
+            txtPendudukNik.setText(model.getNik());
+            txtPendudukLahir.setText(model.getTanggalLahir().toString());
+            txtPendudukTelepon.setText(model.getTelepon());
+            txtPendudukAgama.setText(model.getAgama());
+            txtPendudukDarah.setText(model.getDarah());
+            cbPendudukKelamin.setSelectedItem(model.getKelamin().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            model = null;
+
+            txtPendudukKode.setText("");
+            txtPendudukNama.setText("");
+            txtPendudukNik.setText("");
+            txtPendudukLahir.setText("");
+            txtPendudukTelepon.setText("");
+            txtPendudukAgama.setText("");
+            txtPendudukDarah.setText("");
+            cbPendudukKelamin.setSelectedIndex(0);
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            pnl_tindakan.setVisible(false);
+            pnl_unit.setVisible(false);
+            pnl_barang.setVisible(false);
+            pnl_rekam.setVisible(true);
+            pnl_pegawai.setVisible(false);
+            pnl_op.setVisible(false);
+
+            List<Penduduk> listPenduduk = pendudukService.getAll();
+            PendudukTableModel tableModel = new PendudukTableModel(listPenduduk);
+            tblPenduduk.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        public void onSearch() throws ServiceException {
+            String keyword = txtPendudukKeyword.getText();
+            
+            List<Penduduk> listPenduduk = pendudukService.cari(keyword);
+            PendudukTableModel tableModel = (PendudukTableModel)tblPenduduk.getModel();
+            tableModel.setList(listPenduduk);
+            tableModel.fireTableDataChanged();
+            onCleanForm();
+        }
+        
+    }
+
+    private class ObatEventController implements EventController<ObatFarmasi> {
+        private final ObatService obatService = ObatService.getInstance(host);
+        private ObatFarmasi model;
+
+        @Override
+        public ObatFarmasi getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(ObatFarmasi t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new ObatFarmasi();
+
+            String harga = txtObatHarga.getText();
+            String jumlah = txtObatJumlah.getText();
+            String tanggungan = (String)cbObatTanggungan.getSelectedItem();
+            
+            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setHarga(Long.valueOf(harga));
+            model.setJumlah(Long.valueOf(jumlah));
+            model.setKode(txtObatKode.getText());
+            model.setNama(txtObatNama.getText());
+            model.setSatuan(txtObatSatuan.getText());
+            model.setKeterangan(txtObatKeterangan.getText());
+
+            obatService.simpan(model);
+            onLoad();
+            onCleanForm();
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            int row = tblObat.getSelectedRow();
+
+            ObatTableModel tableModel = (ObatTableModel)tblObat.getModel();
+            model = tableModel.getObat(row);
+
+            txtObatKode.setText(model.getKode());
+            txtObatNama.setText(model.getNama());
+            txtObatSatuan.setText(model.getSatuan());
+            txtObatKeterangan.setText(model.getKeterangan());
+            txtObatHarga.setText(model.getHarga().toString());
+            txtObatJumlah.setText(model.getJumlah().toString());
+            cbObatTanggungan.setSelectedItem(model.getTanggungan().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            model = null;
+
+            txtObatKode.setText("");
+            txtObatNama.setText("");
+            txtObatSatuan.setText("");
+            txtObatKeterangan.setText("");
+            txtObatHarga.setText("");
+            txtObatJumlah.setText("");
+            cbObatTanggungan.setSelectedIndex(0);
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            List<ObatFarmasi> listObat = obatService.getAll();
+            ObatTableModel tableModel = new ObatTableModel(listObat);
+            tblObat.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        public void onSearch() throws ServiceException {
+            String keyword = txtObatKeyword.getText();
+            
+            List<ObatFarmasi> listObat = obatService.cari(keyword);
+            ObatTableModel tableModel = (ObatTableModel)tblObat.getModel();
+            tableModel.setList(listObat);
+            tableModel.fireTableDataChanged();
+            onCleanForm();
+        }
+        
+    }
+
+    private class BhpEventController implements EventController<BahanHabisPakai> {
+        private final BhpService bhpService = BhpService.getInstance(host);
+        private BahanHabisPakai model;
+
+        @Override
+        public BahanHabisPakai getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(BahanHabisPakai t) {
+            this.model = t;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            System.out.println("simpan bhp");
+            
+            if (model == null)
+                model = new BahanHabisPakai();
+
+            String harga = txtBhpHarga.getText();
+            String jumlah = txtBhpJumlah.getText();
+            String tanggungan = (String)cbBhpTanggungan.getSelectedItem();
+            
+            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setHarga(Long.valueOf(harga));
+            model.setJumlah(Long.valueOf(jumlah));
+            model.setKode(txtBhpKode.getText());
+            model.setNama(txtBhpNama.getText());
+            model.setSatuan(txtBhpSatuan.getText());
+
+            bhpService.simpan(model);
+            onLoad();
+            onCleanForm();
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            int row = tblBhp.getSelectedRow();
+
+            BhpTableModel tableModel = (BhpTableModel)tblBhp.getModel();
+            model = tableModel.getBhp(row);
+
+            txtBhpKode.setText(model.getKode());
+            txtBhpNama.setText(model.getNama());
+            txtBhpSatuan.setText(model.getSatuan());
+            txtBhpHarga.setText(model.getHarga().toString());
+            txtBhpJumlah.setText(model.getJumlah().toString());
+            cbObatTanggungan.setSelectedItem(model.getTanggungan().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            model = null;
+
+            txtBhpKode.setText("");
+            txtBhpNama.setText("");
+            txtBhpSatuan.setText("");
+            txtBhpHarga.setText("");
+            txtBhpJumlah.setText("");
+            cbBhpTanggungan.setSelectedIndex(0);
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            List<BahanHabisPakai> listBhp = bhpService.getAll();
+            BhpTableModel tableModel = new BhpTableModel(listBhp);
+            tblBhp.setModel(tableModel);
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        public void onSearch() throws ServiceException {
+            String keyword = txtBhpKeyword.getText();
+            
+            List<BahanHabisPakai> listObat = bhpService.cari(keyword);
+            BhpTableModel tableModel = (BhpTableModel)tblBhp.getModel();
+            tableModel.setList(listObat);
+            tableModel.fireTableDataChanged();
+            onCleanForm();
+        }
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -565,6 +863,32 @@ public class FrameAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnl_rekam = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtPendudukKode = new javax.swing.JTextField();
+        txtPendudukNik = new javax.swing.JTextField();
+        txtPendudukNama = new javax.swing.JTextField();
+        cbPendudukKelamin = new javax.swing.JComboBox();
+        txtPendudukTelepon = new javax.swing.JTextField();
+        txtPendudukAgama = new javax.swing.JTextField();
+        txtPendudukLahir = new javax.swing.JTextField();
+        txtPendudukDarah = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtPendudukKeyword = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPenduduk = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        btnPendudukEdit = new javax.swing.JButton();
+        btnPendudukSimpan = new javax.swing.JButton();
         pnl_pegawai = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         tab_pane = new javax.swing.JTabbedPane();
@@ -672,6 +996,53 @@ public class FrameAdmin extends javax.swing.JFrame {
         txtPekerjaDarah = new javax.swing.JTextField();
         txtPekerjaAgama = new javax.swing.JTextField();
         txtPekerjaTelepon = new javax.swing.JTextField();
+        pnl_barang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        tabBhp = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblObat = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtObatKode = new javax.swing.JTextField();
+        txtObatNama = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtObatSatuan = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtObatHarga = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtObatKeterangan = new javax.swing.JTextField();
+        txtObatJumlah = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtObatKeyword = new javax.swing.JTextField();
+        cbObatTanggungan = new javax.swing.JComboBox();
+        jLabel84 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnTambahObat = new javax.swing.JButton();
+        btnClearObat = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblBhp = new javax.swing.JTable();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        txtBhpKode = new javax.swing.JTextField();
+        txtBhpNama = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        txtBhpSatuan = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        txtBhpHarga = new javax.swing.JTextField();
+        txtBhpJumlah = new javax.swing.JTextField();
+        jLabel83 = new javax.swing.JLabel();
+        txtBhpKeyword = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        cbBhpTanggungan = new javax.swing.JComboBox();
+        jPanel17 = new javax.swing.JPanel();
+        btnTambahBhp = new javax.swing.JButton();
+        btnClearBhp = new javax.swing.JButton();
         pnl_unit = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -724,55 +1095,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnTambahTindakan = new javax.swing.JButton();
         btnResetTindakan = new javax.swing.JButton();
-        pnl_barang = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_barang = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txt_barang_id = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txt_barang_kode = new javax.swing.JTextField();
-        txt_barang_nama = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_barang_jumlah = new javax.swing.JTextField();
-        cb_barang_satuan = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txt_barang_harga = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txt_barang_ket = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        btn_tambah_barang = new javax.swing.JButton();
-        btn_edit_barang = new javax.swing.JButton();
-        btn_clear_barang = new javax.swing.JButton();
-        pnl_rekam = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txt_rekam_id = new javax.swing.JTextField();
-        txt_rekam_kode = new javax.swing.JTextField();
-        txt_rekam_nik = new javax.swing.JTextField();
-        txt_rekam_nama = new javax.swing.JTextField();
-        cb_rekam_kelamin = new javax.swing.JComboBox();
-        cb_rekam_gol = new javax.swing.JComboBox();
-        cb_rekam_agama = new javax.swing.JComboBox();
-        txt_rekam_telp = new javax.swing.JTextField();
-        txt_rekam_tl = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_rekam = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        btn_rekam_edit = new javax.swing.JButton();
-        btn_rekam_tambah = new javax.swing.JButton();
         pnl_menu = new javax.swing.JPanel();
         btnBarang = new javax.swing.JButton();
         btn_unit = new javax.swing.JButton();
@@ -787,6 +1109,112 @@ public class FrameAdmin extends javax.swing.JFrame {
         setName("ADMIN"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnl_rekam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_rekam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("REKAM MEDIK");
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnl_rekam.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setText("KODE");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel12.setText("NIK");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        jLabel13.setText("NAMA");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("KELAMIN");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jLabel15.setText("TGL LAHIR");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
+
+        jLabel16.setText("GOL. DARAH");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
+
+        jLabel17.setText("AGAMA");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
+
+        jLabel18.setText("NO TELEPON");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        jPanel3.add(txtPendudukKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 200, -1));
+        jPanel3.add(txtPendudukNik, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 200, -1));
+        jPanel3.add(txtPendudukNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 200, -1));
+
+        cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
+        jPanel3.add(cbPendudukKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 200, -1));
+        jPanel3.add(txtPendudukTelepon, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 200, -1));
+        jPanel3.add(txtPendudukAgama, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 200, -1));
+        jPanel3.add(txtPendudukLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 200, -1));
+        jPanel3.add(txtPendudukDarah, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 200, -1));
+
+        jLabel10.setText("CARI");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        txtPendudukKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPendudukKeywordFocusLost(evt);
+            }
+        });
+        txtPendudukKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPendudukKeywordKeyPressed(evt);
+            }
+        });
+        jPanel3.add(txtPendudukKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, -1));
+
+        pnl_rekam.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 700, 190));
+
+        tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPenduduk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPendudukMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblPenduduk);
+
+        pnl_rekam.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 200));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnPendudukEdit.setText("EDIT");
+        btnPendudukEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendudukEditActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnPendudukEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+
+        btnPendudukSimpan.setLabel("+ DATA");
+        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendudukSimpanActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnPendudukSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+
+        pnl_rekam.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 700, 60));
+
+        getContentPane().add(pnl_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_pegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1375,6 +1803,254 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         getContentPane().add(pnl_pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 720, 540));
 
+        pnl_barang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_barang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("BARANG");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnl_barang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 20));
+
+        tabBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabBhpMouseClicked(evt);
+            }
+        });
+
+        tblObat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblObatMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblObat);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("KODE");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        jPanel1.add(txtObatKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 200, -1));
+        jPanel1.add(txtObatNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 200, -1));
+
+        jLabel4.setText("NAMA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        jLabel5.setText("JUMLAH");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
+
+        txtObatSatuan.setToolTipText("");
+        jPanel1.add(txtObatSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 200, -1));
+
+        jLabel6.setText("SATUAN");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+
+        jLabel7.setText("HARGA");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        jPanel1.add(txtObatHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 200, -1));
+
+        jLabel8.setText("KETERANGAN");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+
+        txtObatKeterangan.setToolTipText("");
+        jPanel1.add(txtObatKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 200, -1));
+
+        txtObatJumlah.setToolTipText("");
+        jPanel1.add(txtObatJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 200, -1));
+
+        jLabel3.setText("CARI");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObatKeywordFocusLost(evt);
+            }
+        });
+        txtObatKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtObatKeywordKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 200, -1));
+
+        cbObatTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel1.add(cbObatTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 200, -1));
+
+        jLabel84.setText("TANGGUNGAN");
+        jPanel1.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTambahObat.setText("+ BARANG");
+        btnTambahObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahObatActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnTambahObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
+
+        btnClearObat.setText("X Fields");
+        btnClearObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearObatActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnClearObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 40));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabBhp.addTab("OBAT", jPanel5);
+
+        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBhpMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(tblBhp);
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel36.setText("KODE");
+        jPanel13.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        jPanel13.add(txtBhpKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 200, -1));
+        jPanel13.add(txtBhpNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 200, -1));
+
+        jLabel37.setText("NAMA");
+        jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        jLabel38.setText("JUMLAH");
+        jPanel13.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
+
+        txtBhpSatuan.setToolTipText("");
+        jPanel13.add(txtBhpSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 200, -1));
+
+        jLabel39.setText("SATUAN");
+        jPanel13.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+
+        jLabel40.setText("HARGA");
+        jPanel13.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        jPanel13.add(txtBhpHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 200, -1));
+
+        txtBhpJumlah.setToolTipText("");
+        jPanel13.add(txtBhpJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 200, -1));
+
+        jLabel83.setText("CARI");
+        jPanel13.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        txtBhpKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBhpKeywordFocusLost(evt);
+            }
+        });
+        txtBhpKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBhpKeywordKeyPressed(evt);
+            }
+        });
+        jPanel13.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 200, -1));
+
+        jLabel41.setText("TANGGUNGAN");
+        jPanel13.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+
+        cbBhpTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel13.add(cbBhpTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 200, -1));
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTambahBhp.setText("+ BARANG");
+        btnTambahBhp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahBhpActionPerformed(evt);
+            }
+        });
+        jPanel17.add(btnTambahBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
+
+        btnClearBhp.setText("X Fields");
+        btnClearBhp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearBhpActionPerformed(evt);
+            }
+        });
+        jPanel17.add(btnClearBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 40));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabBhp.addTab("BARANG HABIS PAKAI", jPanel12);
+
+        pnl_barang.add(tabBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 700, 500));
+
+        getContentPane().add(pnl_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
+
         pnl_unit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_unit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1627,168 +2303,6 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         getContentPane().add(pnl_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
-        pnl_barang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_barang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("OBAT DAN BAHAN HABIS PAKAI");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnl_barang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
-
-        tbl_barang.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_barang);
-
-        pnl_barang.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 220));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setText("ID");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel1.add(txt_barang_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 80, -1));
-
-        jLabel2.setText("KODE");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-        jPanel1.add(txt_barang_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 80, -1));
-        jPanel1.add(txt_barang_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 250, -1));
-
-        jLabel4.setText("NAMA");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        jLabel5.setText("JUMLAH");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
-
-        txt_barang_jumlah.setToolTipText("");
-        jPanel1.add(txt_barang_jumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 60, -1));
-
-        cb_barang_satuan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cb_barang_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 110, -1));
-
-        jLabel6.setText("SATUAN");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
-
-        jLabel7.setText("HARGA");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
-        jPanel1.add(txt_barang_harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 110, -1));
-
-        jLabel8.setText("KETERANGAN");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-
-        txt_barang_ket.setToolTipText("");
-        jPanel1.add(txt_barang_ket, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 250, -1));
-
-        pnl_barang.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 700, 130));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_barang.setText("+ BARANG");
-        jPanel2.add(btn_tambah_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, 40));
-
-        btn_edit_barang.setText("EDIT");
-        jPanel2.add(btn_edit_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 40));
-
-        btn_clear_barang.setText("X Fields");
-        jPanel2.add(btn_clear_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, 40));
-
-        pnl_barang.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 700, 60));
-
-        getContentPane().add(pnl_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
-
-        pnl_rekam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_rekam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("REKAM MEDIK");
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnl_rekam.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, 20));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setText("ID");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 22, -1, -1));
-
-        jLabel11.setText("KODE");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 55, -1, -1));
-
-        jLabel12.setText("NIK");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, -1, -1));
-
-        jLabel13.setText("NAMA");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("JENIS KELAMIN");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, -1, -1));
-
-        jLabel15.setText("TGL LAHIR");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 22, -1, -1));
-
-        jLabel16.setText("GOL. DARAH");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 55, -1, -1));
-
-        jLabel17.setText("AGAMA");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 85, -1, -1));
-
-        jLabel18.setText("NO TELEPON");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 115, -1, -1));
-        jPanel3.add(txt_rekam_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 50, -1));
-        jPanel3.add(txt_rekam_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 50, -1));
-        jPanel3.add(txt_rekam_nik, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 160, -1));
-        jPanel3.add(txt_rekam_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 200, -1));
-
-        cb_rekam_kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cb_rekam_kelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 200, -1));
-
-        cb_rekam_gol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cb_rekam_gol, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
-
-        cb_rekam_agama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cb_rekam_agama, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
-        jPanel3.add(txt_rekam_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 160, -1));
-        jPanel3.add(txt_rekam_tl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 150, -1));
-
-        pnl_rekam.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 700, 190));
-
-        tbl_rekam.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tbl_rekam);
-
-        pnl_rekam.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 200));
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_rekam_edit.setText("EDIT");
-        jPanel4.add(btn_rekam_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
-
-        btn_rekam_tambah.setLabel("+ DATA");
-        jPanel4.add(btn_rekam_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
-
-        pnl_rekam.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 700, 60));
-
-        getContentPane().add(pnl_rekam, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
-
         pnl_menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1856,15 +2370,20 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnl_rekam.setVisible(false);
         pnl_pegawai.setVisible(false);
         pnl_op.setVisible(false);
+        
+        try {
+            obatEventController.onLoad();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnBarangActionPerformed
 
     private void btn_rekamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rekamActionPerformed
-        pnl_tindakan.setVisible(false);
-        pnl_unit.setVisible(false);
-        pnl_barang.setVisible(false);
-        pnl_rekam.setVisible(true);
-        pnl_pegawai.setVisible(false);
-        pnl_op.setVisible(false);
+        try {
+            pendudukEventController.onLoad();
+        } catch (ServiceException ex) {
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btn_rekamActionPerformed
 
     private void btn_pegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pegawaiActionPerformed
@@ -1904,7 +2423,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         try {
             unitEventController.onSave();
         } catch (ServiceException ex) {
-            Logger.getLogger(FrameAdmin.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btn_simpan_unitActionPerformed
 
@@ -2024,42 +2543,163 @@ public class FrameAdmin extends javax.swing.JFrame {
     private void btn_clear_apotekerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_apotekerActionPerformed
         apotekerEventController.onCleanForm();
     }//GEN-LAST:event_btn_clear_apotekerActionPerformed
+
+    private void txtPendudukKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendudukKeywordFocusLost
+        try {
+            pendudukEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtPendudukKeywordFocusLost
+
+    private void btnPendudukEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukEditActionPerformed
+        pendudukEventController.onCleanForm();
+    }//GEN-LAST:event_btnPendudukEditActionPerformed
+
+    private void btnPendudukSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukSimpanActionPerformed
+        try {
+            pendudukEventController.onSave();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPendudukSimpanActionPerformed
+
+    private void tblPendudukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendudukMouseClicked
+        try {
+            pendudukEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblPendudukMouseClicked
+
+    private void txtObatKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObatKeywordFocusLost
+        try {
+            obatEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtObatKeywordFocusLost
+
+    private void tblObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblObatMouseClicked
+        try {
+            obatEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblObatMouseClicked
+
+    private void btnTambahObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahObatActionPerformed
+        try {
+            obatEventController.onSave();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTambahObatActionPerformed
+
+    private void btnClearObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearObatActionPerformed
+        obatEventController.onCleanForm();
+    }//GEN-LAST:event_btnClearObatActionPerformed
+
+    private void tblBhpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBhpMouseClicked
+        try {
+            bhpEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblBhpMouseClicked
+
+    private void txtBhpKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBhpKeywordFocusLost
+        try {
+            bhpEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtBhpKeywordFocusLost
+
+    private void btnTambahBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahBhpActionPerformed
+        try {
+            bhpEventController.onSave();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTambahBhpActionPerformed
+
+    private void btnClearBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearBhpActionPerformed
+        bhpEventController.onCleanForm();
+    }//GEN-LAST:event_btnClearBhpActionPerformed
+
+    private void tabBhpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabBhpMouseClicked
+        int index = tabBhp.getSelectedIndex();
+        
+        try {
+            switch(index) {
+                case 0: obatEventController.onLoad();
+                    break;
+                case 1: bhpEventController.onLoad();
+                    break;
+                default: break;
+            }
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tabBhpMouseClicked
+
+    private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
+        int i = evt.getKeyCode();
+        if (i == 10) {
+            txtBhpKode.requestFocus();
+        }
+    }//GEN-LAST:event_txtBhpKeywordKeyPressed
+
+    private void txtObatKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObatKeywordKeyPressed
+        int i = evt.getKeyCode();
+        if (i == 10) {
+            txtObatKode.requestFocus();
+        }
+    }//GEN-LAST:event_txtObatKeywordKeyPressed
+
+    private void txtPendudukKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPendudukKeywordKeyPressed
+        int i = evt.getKeyCode();
+        if (i == 10) {
+            txtPendudukKode.requestFocus();
+        }
+    }//GEN-LAST:event_txtPendudukKeywordKeyPressed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;
+    private javax.swing.JButton btnClearBhp;
+    private javax.swing.JButton btnClearObat;
+    private javax.swing.JButton btnPendudukEdit;
+    private javax.swing.JButton btnPendudukSimpan;
     private javax.swing.JButton btnResetTindakan;
+    private javax.swing.JButton btnTambahBhp;
+    private javax.swing.JButton btnTambahObat;
     private javax.swing.JButton btnTambahTindakan;
     private javax.swing.JButton btn_clear_adm;
     private javax.swing.JButton btn_clear_apoteker;
-    private javax.swing.JButton btn_clear_barang;
     private javax.swing.JButton btn_clear_dokter;
     private javax.swing.JButton btn_clear_op;
     private javax.swing.JButton btn_clear_perawat;
     private javax.swing.JButton btn_clear_unit;
-    private javax.swing.JButton btn_edit_barang;
     private javax.swing.JButton btn_op;
     private javax.swing.JButton btn_pegawai;
     private javax.swing.JButton btn_rekam;
-    private javax.swing.JButton btn_rekam_edit;
-    private javax.swing.JButton btn_rekam_tambah;
     private javax.swing.JButton btn_simpan_dokter;
     private javax.swing.JButton btn_simpan_unit;
     private javax.swing.JButton btn_tambah_adm;
     private javax.swing.JButton btn_tambah_apoteker;
-    private javax.swing.JButton btn_tambah_barang;
     private javax.swing.JButton btn_tambah_op;
     private javax.swing.JButton btn_tambah_perawat;
     private javax.swing.JButton btn_tindakan;
     private javax.swing.JButton btn_unit;
     private javax.swing.JComboBox cbApotekerKelamin;
+    private javax.swing.JComboBox cbBhpTanggungan;
+    private javax.swing.JComboBox cbObatTanggungan;
     private javax.swing.JComboBox cbPekerjaKelamin;
+    private javax.swing.JComboBox cbPendudukKelamin;
     private javax.swing.JComboBox cb_admin_operator_role;
-    private javax.swing.JComboBox cb_barang_satuan;
     private javax.swing.JComboBox cb_dokter_kelamin;
     private javax.swing.JComboBox cb_perawat_kelamin;
-    private javax.swing.JComboBox cb_rekam_agama;
-    private javax.swing.JComboBox cb_rekam_gol;
-    private javax.swing.JComboBox cb_rekam_kelamin;
     private javax.swing.JComboBox cb_unit_tipe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2090,7 +2730,13 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2136,13 +2782,18 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
+    private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -2151,11 +2802,13 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2172,19 +2825,21 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_rekam;
     private javax.swing.JPanel pnl_tindakan;
     private javax.swing.JPanel pnl_unit;
+    private javax.swing.JTabbedPane tabBhp;
     private javax.swing.JPanel tab_administrasi;
     private javax.swing.JPanel tab_apoteker;
     private javax.swing.JPanel tab_dokter;
     private javax.swing.JTabbedPane tab_pane;
     private javax.swing.JPanel tab_perawat;
+    private javax.swing.JTable tblBhp;
+    private javax.swing.JTable tblObat;
+    private javax.swing.JTable tblPenduduk;
     private javax.swing.JTable tbl_adm;
     private javax.swing.JTable tbl_admin_tindakan;
     private javax.swing.JTable tbl_apoteker;
-    private javax.swing.JTable tbl_barang;
     private javax.swing.JTable tbl_dokter;
     private javax.swing.JTable tbl_op;
     private javax.swing.JTable tbl_perawat;
-    private javax.swing.JTable tbl_rekam;
     private javax.swing.JTable tbl_unit;
     private javax.swing.JTextField txtApotekerAgama;
     private javax.swing.JTextField txtApotekerDarah;
@@ -2194,6 +2849,19 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtApotekerNik;
     private javax.swing.JTextField txtApotekerNip;
     private javax.swing.JTextField txtApotekerTelepon;
+    private javax.swing.JTextField txtBhpHarga;
+    private javax.swing.JTextField txtBhpJumlah;
+    private javax.swing.JTextField txtBhpKeyword;
+    private javax.swing.JTextField txtBhpKode;
+    private javax.swing.JTextField txtBhpNama;
+    private javax.swing.JTextField txtBhpSatuan;
+    private javax.swing.JTextField txtObatHarga;
+    private javax.swing.JTextField txtObatJumlah;
+    private javax.swing.JTextField txtObatKeterangan;
+    private javax.swing.JTextField txtObatKeyword;
+    private javax.swing.JTextField txtObatKode;
+    private javax.swing.JTextField txtObatNama;
+    private javax.swing.JTextField txtObatSatuan;
     private javax.swing.JTextField txtPekerjaAgama;
     private javax.swing.JTextField txtPekerjaDarah;
     private javax.swing.JTextField txtPekerjaKode;
@@ -2202,6 +2870,14 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtPekerjaNik;
     private javax.swing.JTextField txtPekerjaNip;
     private javax.swing.JTextField txtPekerjaTelepon;
+    private javax.swing.JTextField txtPendudukAgama;
+    private javax.swing.JTextField txtPendudukDarah;
+    private javax.swing.JTextField txtPendudukKeyword;
+    private javax.swing.JTextField txtPendudukKode;
+    private javax.swing.JTextField txtPendudukLahir;
+    private javax.swing.JTextField txtPendudukNama;
+    private javax.swing.JTextField txtPendudukNik;
+    private javax.swing.JTextField txtPendudukTelepon;
     private javax.swing.JTextField txt_admin_operator_unit;
     private javax.swing.JTextField txt_admin_tindakan_id;
     private javax.swing.JTextField txt_admin_tindakan_kategori;
@@ -2209,12 +2885,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txt_admin_tindakan_kode;
     private javax.swing.JTextField txt_admin_tindakan_nama;
     private javax.swing.JTextField txt_admin_tindakan_tarif;
-    private javax.swing.JTextField txt_barang_harga;
-    private javax.swing.JTextField txt_barang_id;
-    private javax.swing.JTextField txt_barang_jumlah;
-    private javax.swing.JTextField txt_barang_ket;
-    private javax.swing.JTextField txt_barang_kode;
-    private javax.swing.JTextField txt_barang_nama;
     private javax.swing.JTextField txt_dokter_agama;
     private javax.swing.JTextField txt_dokter_darah;
     private javax.swing.JTextField txt_dokter_kode;
@@ -2234,12 +2904,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txt_perawat_nik;
     private javax.swing.JTextField txt_perawat_nip;
     private javax.swing.JTextField txt_perawat_telepon;
-    private javax.swing.JTextField txt_rekam_id;
-    private javax.swing.JTextField txt_rekam_kode;
-    private javax.swing.JTextField txt_rekam_nama;
-    private javax.swing.JTextField txt_rekam_nik;
-    private javax.swing.JTextField txt_rekam_telp;
-    private javax.swing.JTextField txt_rekam_tl;
     private javax.swing.JTextField txt_unit_bobot;
     private javax.swing.JTextField txt_unit_nama;
     // End of variables declaration//GEN-END:variables
