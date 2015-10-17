@@ -26,33 +26,39 @@
     <dependencies>
 
         <dependency>
-              <groupId>org.netbeans.external</groupId>
-              <artifactId>AbsoluteLayout</artifactId>
-              <version>RELEASE802</version>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE802</version>
         </dependency>
 
         <dependency>
             <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-connector</artifactId>
-            <version>0.1.8-SNAPSHOT</version>
+            <version>0.2.10-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-    	<groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
- 		<version>${spring.version}</version>
+            <groupId>com.dbsys.rs</groupId>
+            <artifactId>rumkit-library</artifactId>
+            <version>0.3.17-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
 	</dependency>
         
         <dependency>
-    	<groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-		<version>${jackson.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
 	</dependency>
         
         <dependency>
-	  <groupId>junit</groupId>
-	  <artifactId>junit</artifactId>
-	  <version>${junit.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
 	</dependency>        
     </dependencies>
     
