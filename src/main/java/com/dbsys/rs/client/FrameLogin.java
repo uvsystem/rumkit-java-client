@@ -20,7 +20,7 @@ public class FrameLogin extends javax.swing.JFrame {
      */
     public FrameLogin() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,11 +36,13 @@ public class FrameLogin extends javax.swing.JFrame {
         txt_login_uname = new javax.swing.JTextField();
         txt_login_pass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        btn_login_ok = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         background = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USER LOGIN");
+        setUndecorated(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,32 +55,46 @@ public class FrameLogin extends javax.swing.JFrame {
         jLabel2.setText("PASSWORD");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
 
-        btn_login_ok.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btn_login_ok.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        btn_login_ok.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("CANCEL");
+        btnCancel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnCancel.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_login_okActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_login_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 80, 40));
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
+
+        btnLogin.setText("LOGIN");
+        btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnLogin.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_login_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_login_okActionPerformed
-        Credential credential = new Credential();
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        TokenService tokenservice = TokenService.getInstance("http://localhost:8080");
+        
         String username = txt_login_uname.getText();
         String pass = String.valueOf(txt_login_pass.getPassword());
 
+        Credential credential = new Credential();
         credential.setUsername(username);
         credential.setPassword(pass);
 
-        TokenService tokenservice = TokenService.getInstance("http://localhost:8080");
-        
-        Token token;
         try {
-            token = tokenservice.create(credential);
+            Token token = tokenservice.create(credential);
             TokenHolder.token = token;
 
             if(token.getRole().equals(Role.ADMIN)){
@@ -91,7 +107,7 @@ public class FrameLogin extends javax.swing.JFrame {
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btn_login_okActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,7 +144,8 @@ public class FrameLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private javax.swing.JButton btn_login_ok;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField txt_login_pass;

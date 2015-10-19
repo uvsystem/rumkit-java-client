@@ -34,20 +34,26 @@ public class FrameCari extends javax.swing.JFrame {
      */
     public FrameCari(JFrame frame, Class<?> cls) {
         initComponents();
+
+        this.setLocationRelativeTo(null);
         this.frame = frame;
         this.cls = cls;
+        
         chkTambah.setVisible(false);
-        this.setSize(500, 260);
+
+        disableTambah();
         
         if (cls.equals(Unit.class)){
             unitService = UnitService.getInstance(EventController.host);
             txtKeyword.setEnabled(false);
-            btnPilih.setEnabled(false);
+            btnCari.setEnabled(false);
+
             loadTableUnit();
         } else if (cls.equals(KategoriTindakan.class)) {
             kategoriService = KategoriService.getInstance(EventController.host);
-            loadTableKategori();
             chkTambah.setVisible(true);
+
+            loadTableKategori();
         }
     }
 
@@ -75,7 +81,9 @@ public class FrameCari extends javax.swing.JFrame {
         btnSimpan = new javax.swing.JButton();
         chkTambah = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CARI DATA");
+        setResizable(false);
 
         jLabel1.setText("Kata Kunci");
 
@@ -159,12 +167,12 @@ public class FrameCari extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKeyword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPilih)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chkTambah))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlKategori, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -255,10 +263,10 @@ public class FrameCari extends javax.swing.JFrame {
     private void enableTambah() {
         btnPilih.setEnabled(false);
         btnSimpan.setEnabled(true);
-        txtKategoriNama.setEditable(true);
-        txtKategoriParent.setEditable(true);
+        txtKategoriNama.setEnabled(true);
+        txtKategoriParent.setEnabled(true);
         
-        this.setSize(500, 400);
+        this.setSize(500, 420);
         pnlKategori.setVisible(true);
     }
     
@@ -268,7 +276,7 @@ public class FrameCari extends javax.swing.JFrame {
         txtKategoriNama.setEditable(false);
         txtKategoriParent.setEditable(false);
 
-        this.setSize(500, 260);
+        this.setSize(500, 300);
         pnlKategori.setVisible(false);
     }
     
