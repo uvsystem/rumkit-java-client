@@ -9,6 +9,7 @@ import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
 import com.dbsys.rs.client.tableModel.PekerjaTableModel;
 import com.dbsys.rs.client.tableModel.PerawatTableModel;
+import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -20,12 +21,15 @@ import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.PekerjaService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.PerawatService;
+import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.UnitService;
 import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.Tanggungan;
 import com.dbsys.rs.lib.entity.Apoteker;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.lib.entity.KategoriTindakan;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
@@ -33,10 +37,9 @@ import com.dbsys.rs.lib.entity.Pekerja;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
+import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,6 +57,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     private final PendudukEventController pendudukEventController;
     private final ObatEventController obatEventController;
     private final BhpEventController bhpEventController;
+    private final TindakanEventController tindakanEventController;
 
     /**
      * Creates new form admin
@@ -77,6 +81,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pendudukEventController = new PendudukEventController();
         obatEventController = new ObatEventController();
         bhpEventController = new BhpEventController();
+        tindakanEventController = new TindakanEventController();
         
         String nama = TokenHolder.getNamaOperator();
         lbl_status.setText(nama);
@@ -85,6 +90,11 @@ public class FrameAdmin extends javax.swing.JFrame {
     public void setUnitForOperator(Unit unit){
         unitEventController.setModel(unit);
         txt_admin_operator_unit.setText(unit.getNama());
+    }
+    
+    public void setKategoriForTindakan(KategoriTindakan kategori) {
+        tindakanEventController.setKategori(kategori);
+        txtTindakanKategori.setText(kategori.getNama());
     }
     
     private class UnitEventController implements EventController<Unit> {
@@ -655,10 +665,8 @@ public class FrameAdmin extends javax.swing.JFrame {
             pnl_pegawai.setVisible(false);
             pnl_op.setVisible(false);
 
-            List<Penduduk> listPenduduk = pendudukService.getAll();
-            PendudukTableModel tableModel = new PendudukTableModel(listPenduduk);
-            tblPenduduk.setModel(tableModel);
-        }
+           JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode rekam medik");
+         }
 
         @Override
         public void onDelete() throws ServiceException {
@@ -666,13 +674,12 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
         
         public void onSearch() throws ServiceException {
+            onCleanForm();
             String keyword = txtPendudukKeyword.getText();
             
             List<Penduduk> listPenduduk = pendudukService.cari(keyword);
-            PendudukTableModel tableModel = (PendudukTableModel)tblPenduduk.getModel();
-            tableModel.setList(listPenduduk);
-            tableModel.fireTableDataChanged();
-            onCleanForm();
+            PendudukTableModel tableModel = new PendudukTableModel(listPenduduk);
+            tblPenduduk.setModel(tableModel);
         }
         
     }
@@ -744,9 +751,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            List<ObatFarmasi> listObat = obatService.getAll();
-            ObatTableModel tableModel = new ObatTableModel(listObat);
-            tblObat.setModel(tableModel);
+            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode obat");
         }
 
         @Override
@@ -755,13 +760,12 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
         
         public void onSearch() throws ServiceException {
+            onCleanForm();
             String keyword = txtObatKeyword.getText();
             
             List<ObatFarmasi> listObat = obatService.cari(keyword);
-            ObatTableModel tableModel = (ObatTableModel)tblObat.getModel();
-            tableModel.setList(listObat);
-            tableModel.fireTableDataChanged();
-            onCleanForm();
+            ObatTableModel tableModel = new ObatTableModel(listObat);
+            tblObat.setModel(tableModel);
         }
         
     }
@@ -832,9 +836,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            List<BahanHabisPakai> listBhp = bhpService.getAll();
-            BhpTableModel tableModel = new BhpTableModel(listBhp);
-            tblBhp.setModel(tableModel);
+            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode bhp");
         }
 
         @Override
@@ -843,13 +845,118 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
         
         public void onSearch() throws ServiceException {
+            onCleanForm();
             String keyword = txtBhpKeyword.getText();
             
-            List<BahanHabisPakai> listObat = bhpService.cari(keyword);
-            BhpTableModel tableModel = (BhpTableModel)tblBhp.getModel();
-            tableModel.setList(listObat);
-            tableModel.fireTableDataChanged();
+            List<BahanHabisPakai> list = bhpService.cari(keyword);
+            BhpTableModel tableModel = new BhpTableModel(list);
+            tblBhp.setModel(tableModel);
+        }
+        
+    }
+    
+    private class TindakanEventController implements EventController<Tindakan> {
+        private final TindakanService tindakanService = TindakanService.getInstance(host);
+        private Tindakan model;
+        private KategoriTindakan kategori;
+
+        @Override
+        public Tindakan getModel() {
+            return model;
+        }
+
+        @Override
+        public void setModel(Tindakan t) {
+            this.model = t;
+        }
+        
+        public KategoriTindakan getKategori() {
+            return kategori;
+        }
+        
+        public void setKategori(KategoriTindakan kategori) {
+            this.kategori = kategori;
+        }
+
+        @Override
+        public void onSave() throws ServiceException {
+            if (model == null)
+                model = new Tindakan();
+            
+            String kelas = (String)cbTindakanKelas.getSelectedItem();
+            String satuan = (String)cbTindakanSatuan.getSelectedItem();
+            String tanggungan = (String)cbTindakanTanggungan.getSelectedItem();
+            String tarif = txtTindakanTarif.getText();
+
+            model.setKelas(Kelas.valueOf(kelas));
+            model.setSatuan(Tindakan.Satuan.valueOf(satuan));
+            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setTarif(Long.valueOf(tarif));
+            model.setKode(txtTindakanKode.getText());
+            model.setNama(txtTindakanNama.getText());
+            model.setKeterangan(txtTindakanKeterangan.getText());
+            model.setKategori(kategori);
+            
+            tindakanService.simpan(model);
+            onLoad();
             onCleanForm();
+        }
+
+        @Override
+        public void onTableClick() throws ServiceException {
+            int row = tblTindakan.getSelectedRow();
+
+            TindakanTableModel tableModel = (TindakanTableModel)tblTindakan.getModel();
+            model = tableModel.getTindakan(row);
+
+            txtTindakanKode.setText(model.getKode());
+            txtTindakanNama.setText(model.getNama());
+            txtTindakanKategori.setText(model.getKategori().getNama());
+            txtTindakanKeterangan.setText(model.getKeterangan());
+            txtTindakanTarif.setText(model.getTarif().toString());
+            cbTindakanKelas.setSelectedItem(model.getKelas().toString());
+            cbTindakanTanggungan.setSelectedItem(model.getTanggungan().toString());
+            cbTindakanSatuan.setSelectedItem(model.getSatuan().toString());
+        }
+
+        @Override
+        public void onCleanForm() {
+            model = null;
+            
+            txtTindakanKode.setText("");
+            txtTindakanNama.setText("");
+            txtTindakanKategori.setText("");
+            txtTindakanKeterangan.setText("");
+            txtTindakanTarif.setText("");
+            cbTindakanKelas.setSelectedIndex(0);
+            cbTindakanTanggungan.setSelectedIndex(0);
+            cbTindakanSatuan.setSelectedIndex(0);
+        }
+
+        @Override
+        public void onLoad() throws ServiceException {
+            pnl_tindakan.setVisible(true);
+            pnl_unit.setVisible(false);
+            pnl_barang.setVisible(false);
+            pnl_rekam.setVisible(false);
+            pnl_pegawai.setVisible(false);
+            pnl_op.setVisible(false);
+
+            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode tindakan");
+        }
+
+        @Override
+        public void onDelete() throws ServiceException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        public void onSearch() throws ServiceException {
+            onCleanForm();
+            String keyword = txtTindakanKeyword.getText();
+            
+            List<Tindakan> list = tindakanService.cari(keyword);
+            TindakanTableModel tableModel = new TindakanTableModel(list);
+            tblTindakan.setModel(tableModel);
         }
         
     }
@@ -863,6 +970,32 @@ public class FrameAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnl_tindakan = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTindakan = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        txtTindakanKode = new javax.swing.JTextField();
+        txtTindakanNama = new javax.swing.JTextField();
+        txtTindakanTarif = new javax.swing.JTextField();
+        txtTindakanKeterangan = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        txtTindakanKategori = new javax.swing.JTextField();
+        jLabel85 = new javax.swing.JLabel();
+        cbTindakanTanggungan = new javax.swing.JComboBox();
+        jLabel86 = new javax.swing.JLabel();
+        cbTindakanKelas = new javax.swing.JComboBox();
+        jLabel87 = new javax.swing.JLabel();
+        cbTindakanSatuan = new javax.swing.JComboBox();
+        jPanel7 = new javax.swing.JPanel();
+        btnSimpanTindakan = new javax.swing.JButton();
+        btnResetTindakan = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        txtTindakanKeyword = new javax.swing.JTextField();
         pnl_rekam = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -1075,26 +1208,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         btn_tambah_op = new javax.swing.JButton();
         btn_clear_op = new javax.swing.JButton();
-        pnl_tindakan = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbl_admin_tindakan = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        txt_admin_tindakan_id = new javax.swing.JTextField();
-        txt_admin_tindakan_kode = new javax.swing.JTextField();
-        txt_admin_tindakan_nama = new javax.swing.JTextField();
-        txt_admin_tindakan_tarif = new javax.swing.JTextField();
-        txt_admin_tindakan_keterangan = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        txt_admin_tindakan_kategori = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        btnTambahTindakan = new javax.swing.JButton();
-        btnResetTindakan = new javax.swing.JButton();
         pnl_menu = new javax.swing.JPanel();
         btnBarang = new javax.swing.JButton();
         btn_unit = new javax.swing.JButton();
@@ -1109,6 +1222,121 @@ public class FrameAdmin extends javax.swing.JFrame {
         setName("ADMIN"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnl_tindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_tindakan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("TINDAKAN");
+        pnl_tindakan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
+
+        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTindakanMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblTindakan);
+
+        pnl_tindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 270));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.add(txtTindakanKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, -1));
+        jPanel6.add(txtTindakanNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 200, -1));
+        jPanel6.add(txtTindakanTarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 200, -1));
+        jPanel6.add(txtTindakanKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 200, -1));
+
+        jLabel21.setText("KODE");
+        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jLabel22.setText("NAMA");
+        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jLabel23.setText("TARIF");
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
+
+        jLabel24.setText("KETERANGAN");
+        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel32.setText("KATEGORI");
+        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        txtTindakanKategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTindakanKategoriMouseClicked(evt);
+            }
+        });
+        jPanel6.add(txtTindakanKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 200, -1));
+
+        jLabel85.setText("TANGGUNGAN");
+        jPanel6.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+
+        cbTindakanTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel6.add(cbTindakanTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 200, -1));
+
+        jLabel86.setText("KELAS");
+        jPanel6.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        cbTindakanKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
+        jPanel6.add(cbTindakanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 200, -1));
+
+        jLabel87.setText("SATUAN");
+        jPanel6.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+
+        cbTindakanSatuan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "TINDAKAN", "HARI", "JAM" }));
+        jPanel6.add(cbTindakanSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 200, -1));
+
+        pnl_tindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 700, 130));
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSimpanTindakan.setText("+ TINDAKAN");
+        btnSimpanTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSimpanTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSimpanTindakanMouseClicked(evt);
+            }
+        });
+        jPanel7.add(btnSimpanTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 100, 40));
+
+        btnResetTindakan.setText("X FIELDS");
+        btnResetTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetTindakanMouseClicked(evt);
+            }
+        });
+        jPanel7.add(btnResetTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
+
+        jLabel20.setText("CARI");
+        jPanel7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        txtTindakanKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTindakanKeywordFocusLost(evt);
+            }
+        });
+        txtTindakanKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTindakanKeywordKeyTyped(evt);
+            }
+        });
+        jPanel7.add(txtTindakanKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 200, -1));
+
+        pnl_tindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 700, 60));
+
+        getContentPane().add(pnl_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
         pnl_rekam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_rekam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2238,71 +2466,6 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         getContentPane().add(pnl_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
 
-        pnl_tindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl_tindakan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("TINDAKAN");
-        pnl_tindakan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 720, -1));
-
-        tbl_admin_tindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(tbl_admin_tindakan);
-
-        pnl_tindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 700, 270));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(txt_admin_tindakan_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, -1));
-        jPanel6.add(txt_admin_tindakan_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 50, -1));
-        jPanel6.add(txt_admin_tindakan_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 140, -1));
-        jPanel6.add(txt_admin_tindakan_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
-        jPanel6.add(txt_admin_tindakan_keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 160, -1));
-
-        jLabel20.setText("ID");
-        jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
-
-        jLabel21.setText("KODE");
-        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, -1, -1));
-
-        jLabel22.setText("NAMA");
-        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 73, -1, -1));
-
-        jLabel23.setText("TARIF");
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 15, -1, -1));
-
-        jLabel24.setText("KETERANGAN");
-        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
-
-        jLabel32.setText("KATEGORI");
-        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
-        jPanel6.add(txt_admin_tindakan_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 140, -1));
-
-        pnl_tindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 700, 110));
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnTambahTindakan.setText("+ TINDAKAN");
-        btnTambahTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel7.add(btnTambahTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
-
-        btnResetTindakan.setText("X FIELDS");
-        jPanel7.add(btnResetTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, 40));
-
-        pnl_tindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 700, 60));
-
-        getContentPane().add(pnl_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, 540));
-
         pnl_menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnl_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2395,12 +2558,11 @@ public class FrameAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_pegawaiActionPerformed
 
     private void btn_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tindakanActionPerformed
-        pnl_tindakan.setVisible(true);
-        pnl_unit.setVisible(false);
-        pnl_barang.setVisible(false);
-        pnl_rekam.setVisible(false);
-        pnl_pegawai.setVisible(false);
-        pnl_op.setVisible(false);
+        try {
+            tindakanEventController.onLoad();
+        } catch (ServiceException ex) {
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btn_tindakanActionPerformed
 
     private void btn_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_unitActionPerformed
@@ -2664,6 +2826,46 @@ public class FrameAdmin extends javax.swing.JFrame {
             txtPendudukKode.requestFocus();
         }
     }//GEN-LAST:event_txtPendudukKeywordKeyPressed
+
+    private void btnSimpanTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanTindakanMouseClicked
+        try {
+            tindakanEventController.onSave();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanTindakanMouseClicked
+
+    private void btnResetTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetTindakanMouseClicked
+        tindakanEventController.onCleanForm();
+    }//GEN-LAST:event_btnResetTindakanMouseClicked
+
+    private void txtTindakanKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTindakanKeywordFocusLost
+        try {
+            tindakanEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtTindakanKeywordFocusLost
+
+    private void txtTindakanKeywordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTindakanKeywordKeyTyped
+        int i = evt.getKeyCode();
+        if (i == 10) {
+            txtTindakanKode.requestFocus();
+        }
+    }//GEN-LAST:event_txtTindakanKeywordKeyTyped
+
+    private void tblTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTindakanMouseClicked
+        try {
+            tindakanEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblTindakanMouseClicked
+
+    private void txtTindakanKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTindakanKategoriMouseClicked
+        FrameCari cari = new FrameCari(this,KategoriTindakan.class);
+        cari.setVisible(true);
+    }//GEN-LAST:event_txtTindakanKategoriMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;
@@ -2672,9 +2874,9 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnPendudukEdit;
     private javax.swing.JButton btnPendudukSimpan;
     private javax.swing.JButton btnResetTindakan;
+    private javax.swing.JButton btnSimpanTindakan;
     private javax.swing.JButton btnTambahBhp;
     private javax.swing.JButton btnTambahObat;
-    private javax.swing.JButton btnTambahTindakan;
     private javax.swing.JButton btn_clear_adm;
     private javax.swing.JButton btn_clear_apoteker;
     private javax.swing.JButton btn_clear_dokter;
@@ -2697,6 +2899,9 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox cbObatTanggungan;
     private javax.swing.JComboBox cbPekerjaKelamin;
     private javax.swing.JComboBox cbPendudukKelamin;
+    private javax.swing.JComboBox cbTindakanKelas;
+    private javax.swing.JComboBox cbTindakanSatuan;
+    private javax.swing.JComboBox cbTindakanTanggungan;
     private javax.swing.JComboBox cb_admin_operator_role;
     private javax.swing.JComboBox cb_dokter_kelamin;
     private javax.swing.JComboBox cb_perawat_kelamin;
@@ -2784,6 +2989,9 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -2834,8 +3042,8 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTable tblBhp;
     private javax.swing.JTable tblObat;
     private javax.swing.JTable tblPenduduk;
+    private javax.swing.JTable tblTindakan;
     private javax.swing.JTable tbl_adm;
-    private javax.swing.JTable tbl_admin_tindakan;
     private javax.swing.JTable tbl_apoteker;
     private javax.swing.JTable tbl_dokter;
     private javax.swing.JTable tbl_op;
@@ -2878,13 +3086,13 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtPendudukNama;
     private javax.swing.JTextField txtPendudukNik;
     private javax.swing.JTextField txtPendudukTelepon;
+    private javax.swing.JTextField txtTindakanKategori;
+    private javax.swing.JTextField txtTindakanKeterangan;
+    private javax.swing.JTextField txtTindakanKeyword;
+    private javax.swing.JTextField txtTindakanKode;
+    private javax.swing.JTextField txtTindakanNama;
+    private javax.swing.JTextField txtTindakanTarif;
     private javax.swing.JTextField txt_admin_operator_unit;
-    private javax.swing.JTextField txt_admin_tindakan_id;
-    private javax.swing.JTextField txt_admin_tindakan_kategori;
-    private javax.swing.JTextField txt_admin_tindakan_keterangan;
-    private javax.swing.JTextField txt_admin_tindakan_kode;
-    private javax.swing.JTextField txt_admin_tindakan_nama;
-    private javax.swing.JTextField txt_admin_tindakan_tarif;
     private javax.swing.JTextField txt_dokter_agama;
     private javax.swing.JTextField txt_dokter_darah;
     private javax.swing.JTextField txt_dokter_kode;
