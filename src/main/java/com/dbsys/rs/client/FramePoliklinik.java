@@ -1,6 +1,19 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.tableModel.PemakaianTableModel;
+import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.service.PasienService;
+import com.dbsys.rs.connector.service.PemakaianBhpService;
+import com.dbsys.rs.connector.service.TokenService;
+import com.dbsys.rs.lib.entity.BahanHabisPakai;
+import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.PemakaianBhp;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,11 +21,67 @@ import java.awt.Color;
  */
 public class FramePoliklinik extends javax.swing.JFrame {
 
+    private final TokenService tokenService = TokenService.getInstance(EventController.host);
+    private final PasienService pasienService = PasienService.getInstance(EventController.host);
+    private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
+
+    private Pasien pasien;
+    
     /**
      * Creates new form Poliklinik
      */
     public FramePoliklinik() {
+        super();
         initComponents();
+        
+        lblOperator.setText(TokenHolder.getNamaOperator());
+        lblUnit.setText(TokenHolder.getNamaUnit());
+    }
+    
+    private void setDetailPasien(final Pasien pasien) {
+        txtPasienKodePenduduk.setText(pasien.getKodePenduduk());
+        txtPasienNik.setText(pasien.getNik());
+        txtPasienNama.setText(pasien.getNama());
+        txtPasienKelamin.setText(pasien.getKelamin().toString());
+        txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
+        txtPasienDarah.setText(pasien.getDarah());
+        txtPasienAgama.setText(pasien.getAgama());
+        txtPasienTelepon.setText(pasien.getTelepon());
+        txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+        txtPasienStatus.setText(pasien.getStatus().toString());
+        txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
+    }
+    
+    private void loadTabelTindakan(final Pasien pasien) throws ServiceException {
+        
+    }
+    
+    private void loadTabelBhp(final Pasien pasien) throws ServiceException {
+        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
+        List<Pemakaian> listPemakaian = new ArrayList<>();
+        for (Pemakaian pemakaian : listPemakaianBhp)
+            listPemakaian.add(pemakaian);
+        
+        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        tblBhp.setModel(tableModel);
+    }
+    
+    public void reloadTableBhp() {
+        try {
+            loadTabelBhp(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private PemakaianBhp getPemakaianBhp() throws ComponentSelectionException {
+        int index = tblBhp.getSelectedRow();
+        
+        if (index < 0)
+            throw new ComponentSelectionException("Silahkan memilih data pada tabel terlebih dahulu");
+        
+        PemakaianTableModel tableModel = (PemakaianTableModel)tblBhp.getModel();
+        return (PemakaianBhp)tableModel.getPemakaian(index);
     }
 
     /**
@@ -26,6 +95,8 @@ public class FramePoliklinik extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         lblOperator = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblUnit = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         tabPane = new javax.swing.JTabbedPane();
         pnlTindakan = new javax.swing.JPanel();
@@ -80,14 +151,31 @@ public class FramePoliklinik extends javax.swing.JFrame {
         lblOperator.setText("jLabel1");
         jToolBar1.add(lblOperator);
 
+        jLabel2.setText(" - ");
+        jToolBar1.add(jLabel2);
+
+        lblUnit.setText("jLabel3");
+        jToolBar1.add(lblUnit);
+
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 500, 800, 20);
+
+        tabPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabPaneMouseClicked(evt);
+            }
+        });
 
         pnlTindakan.setLayout(null);
 
@@ -105,7 +193,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 452, 300);
+        jScrollPane1.setBounds(10, 11, 660, 300);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(null);
@@ -123,7 +211,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
         btnTindakanUpdate.setBounds(100, 10, 71, 23);
 
         pnlTindakan.add(jPanel1);
-        jPanel1.setBounds(10, 320, 450, 50);
+        jPanel1.setBounds(10, 320, 660, 50);
 
         tabPane.addTab("TINDAKAN", pnlTindakan);
 
@@ -143,25 +231,40 @@ public class FramePoliklinik extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblBhp);
 
         pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 11, 452, 300);
+        jScrollPane2.setBounds(10, 11, 660, 300);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(null);
 
         btnBhpHapus.setText("HAPUS");
+        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpHapusActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnBhpHapus);
         btnBhpHapus.setBounds(190, 10, 65, 23);
 
         btnBhpTambah.setText("TAMBAH");
+        btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpTambahActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnBhpTambah);
         btnBhpTambah.setBounds(10, 10, 73, 23);
 
         btnBhpUpdate.setText("UPDATE");
+        btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpUpdateActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnBhpUpdate);
         btnBhpUpdate.setBounds(100, 10, 71, 23);
 
         pnlBhp.add(jPanel2);
-        jPanel2.setBounds(10, 320, 450, 50);
+        jPanel2.setBounds(10, 320, 650, 50);
 
         tabPane.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
@@ -178,6 +281,11 @@ public class FramePoliklinik extends javax.swing.JFrame {
         txtPasienKode.setBounds(90, 10, 160, 20);
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
         pnlCari.add(btnCari);
         btnCari.setBounds(260, 10, 51, 23);
 
@@ -293,6 +401,75 @@ public class FramePoliklinik extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        String keyword = txtPasienKode.getText();
+        
+        try {
+            pasien = pasienService.get(keyword);
+            setDetailPasien(pasien);
+
+            loadTabelTindakan(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCariActionPerformed
+
+    private void tabPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPaneMouseClicked
+        int index = tabPane.getSelectedIndex();
+        
+        try {
+            switch(index) {
+                case 0: loadTabelTindakan(pasien);
+                    break;
+                case 1: loadTabelBhp(pasien);
+                    break;
+                default: break;
+            }
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tabPaneMouseClicked
+
+    private void btnBhpHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpHapusActionPerformed
+        try {
+            PemakaianBhp pemakaianBhp = getPemakaianBhp();
+
+            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pemakaian %s pada tanggal %s", 
+                    pemakaianBhp.getBarang().getNama(), pemakaianBhp.getTanggal()));
+
+            if (JOptionPane.YES_OPTION == pilihan) {
+                JOptionPane.showMessageDialog(this, "Belum bisa");
+            }
+        } catch (ComponentSelectionException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnBhpHapusActionPerformed
+
+    private void btnBhpTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpTambahActionPerformed
+        new FrameTambahObject(this, BahanHabisPakai.class, pasien).setVisible(true);
+    }//GEN-LAST:event_btnBhpTambahActionPerformed
+
+    private void btnBhpUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpUpdateActionPerformed
+        try {
+            PemakaianBhp pemakaianBhp = getPemakaianBhp();
+            
+            new FrameTambahObject(this, BahanHabisPakai.class, pasien, pemakaianBhp).setVisible(true);
+        } catch (ComponentSelectionException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnBhpUpdateActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        try {
+            tokenService.lock(TokenHolder.getKode());
+            
+            new FrameLogin().setVisible(true);
+            this.dispose();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBhpHapus;
     private javax.swing.JButton btnBhpTambah;
@@ -308,6 +485,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -320,6 +498,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
+    private javax.swing.JLabel lblUnit;
     private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlCari;
     private javax.swing.JPanel pnlDetail;

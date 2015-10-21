@@ -19,12 +19,12 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameCari extends javax.swing.JFrame {
-    private final JFrame frame;
-    private final Class<?> cls;
+public class FrameCari extends JFrame {
+    protected final JFrame frame;
+    protected final Class<?> cls;
     
-    private UnitService unitService;
-    private KategoriService kategoriService;
+    protected UnitService unitService;
+    protected KategoriService kategoriService;
     
     /**
      * Creates new form formCari
@@ -40,6 +40,7 @@ public class FrameCari extends javax.swing.JFrame {
         this.cls = cls;
         
         chkTambah.setVisible(false);
+        pnlKategori.setVisible(false);
 
         disableTambah();
         
@@ -52,6 +53,7 @@ public class FrameCari extends javax.swing.JFrame {
         } else if (cls.equals(KategoriTindakan.class)) {
             kategoriService = KategoriService.getInstance(EventController.host);
             chkTambah.setVisible(true);
+            pnlKategori.setVisible(true);
 
             loadTableKategori();
         }
@@ -72,7 +74,6 @@ public class FrameCari extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCari = new javax.swing.JTable();
         btnPilih = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         pnlKategori = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -84,8 +85,13 @@ public class FrameCari extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CARI DATA");
         setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Kata Kunci");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 59, 50, 14);
+        getContentPane().add(txtKeyword);
+        txtKeyword.setBounds(80, 56, 209, 20);
 
         btnCari.setText("OK");
         btnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +99,8 @@ public class FrameCari extends javax.swing.JFrame {
                 btnCariActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCari);
+        btnCari.setBounds(295, 55, 47, 23);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,14 +120,17 @@ public class FrameCari extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCari);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 89, 452, 154);
+
         btnPilih.setText("PILIH");
         btnPilih.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPilihActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("PENCARIAN");
+        getContentPane().add(btnPilih);
+        btnPilih.setBounds(348, 55, 59, 23);
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder("Tambah Kategori"));
         pnlKategori.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -146,56 +157,17 @@ public class FrameCari extends javax.swing.JFrame {
         });
         pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
 
+        getContentPane().add(pnlKategori);
+        pnlKategori.setBounds(20, 280, 452, 109);
+
         chkTambah.setText("Tambah");
         chkTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkTambahActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(226, 226, 226))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtKeyword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCari)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPilih)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkTambah))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlKategori, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCari)
-                    .addComponent(btnPilih)
-                    .addComponent(chkTambah))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(pnlKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(chkTambah);
+        chkTambah.setBounds(409, 55, 63, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -336,7 +308,6 @@ public class FrameCari extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpan;
     private javax.swing.JCheckBox chkTambah;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

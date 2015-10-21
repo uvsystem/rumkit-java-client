@@ -97,10 +97,12 @@ public class FrameLogin extends javax.swing.JFrame {
             Token token = tokenservice.create(credential);
             TokenHolder.token = token;
 
-            if(token.getRole().equals(Role.ADMIN)){
+            if(token.getRole().equals(Role.ADMIN)) {
                 new FrameAdmin().setVisible(true);
-            }else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)){
+            } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
+                new FramePoliklinik().setVisible(true);
             }
             
             this.dispose();
