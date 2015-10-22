@@ -1,15 +1,19 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
+import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.PemakaianBhpService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianBhp;
+import com.dbsys.rs.lib.entity.Tindakan;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
+    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
 
     private Pasien pasien;
     
@@ -52,26 +57,53 @@ public class FramePoliklinik extends javax.swing.JFrame {
         txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
     }
     
-    private void loadTabelTindakan(final Pasien pasien) throws ServiceException {
+    private void loadTabelTindakan(final Pasien pasien) {
+        List<Pelayanan> listPelayanan = null;
         
+        try {
+            listPelayanan = pelayananService.getByPasien(pasien.getId());
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
+            tblTindakan.setModel(tableModel);
+        }
     }
     
-    private void loadTabelBhp(final Pasien pasien) throws ServiceException {
-        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
-        List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : listPemakaianBhp)
-            listPemakaian.add(pemakaian);
+    public void reloadTableTindakan() {
+        loadTabelTindakan(pasien);
+    }
+    
+    private Pelayanan getPelayanan() throws ComponentSelectionException {
+        int index = tblTindakan.getSelectedRow();
         
-        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
-        tblBhp.setModel(tableModel);
+        if (index < 0)
+            throw new ComponentSelectionException("Silahkan memilih data pada tabel terlebih dahulu");
+        
+        PelayananTableModel tableModel = (PelayananTableModel)tblTindakan.getModel();
+        return tableModel.getPelayanan(index);
+    }
+    
+    private void loadTabelBhp(final Pasien pasien) {
+        List<PemakaianBhp> listPemakaianBhp;
+        List<Pemakaian> listPemakaian = null;
+        
+        try {
+            listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
+            listPemakaian = new ArrayList<>();
+            for (Pemakaian pemakaian : listPemakaianBhp)
+                listPemakaian.add(pemakaian);
+
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+            tblBhp.setModel(tableModel);
+        }
     }
     
     public void reloadTableBhp() {
-        try {
-            loadTabelBhp(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+        loadTabelBhp(pasien);
     }
     
     private PemakaianBhp getPemakaianBhp() throws ComponentSelectionException {
@@ -199,14 +231,29 @@ public class FramePoliklinik extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         btnTindakanHapus.setText("HAPUS");
+        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanHapusActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnTindakanHapus);
         btnTindakanHapus.setBounds(190, 10, 65, 23);
 
         btnTindakanTambah.setText("TAMBAH");
+        btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanTambahActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnTindakanTambah);
         btnTindakanTambah.setBounds(10, 10, 73, 23);
 
         btnTindakanUpdate.setText("UPDATE");
+        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanUpdateActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnTindakanUpdate);
         btnTindakanUpdate.setBounds(100, 10, 71, 23);
 
@@ -417,16 +464,12 @@ public class FramePoliklinik extends javax.swing.JFrame {
     private void tabPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPaneMouseClicked
         int index = tabPane.getSelectedIndex();
         
-        try {
-            switch(index) {
-                case 0: loadTabelTindakan(pasien);
-                    break;
-                case 1: loadTabelBhp(pasien);
-                    break;
-                default: break;
-            }
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        switch(index) {
+            case 0: loadTabelTindakan(pasien);
+                break;
+            case 1: loadTabelBhp(pasien);
+                break;
+            default: break;
         }
     }//GEN-LAST:event_tabPaneMouseClicked
 
@@ -453,7 +496,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
         try {
             PemakaianBhp pemakaianBhp = getPemakaianBhp();
             
-            new FrameTambahObject(this, BahanHabisPakai.class, pasien, pemakaianBhp).setVisible(true);
+            new FrameTambahObject(this, pasien, pemakaianBhp).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -469,6 +512,35 @@ public class FramePoliklinik extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnTindakanTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanTambahActionPerformed
+        new FrameTambahObject(this, Tindakan.class, pasien).setVisible(true);
+    }//GEN-LAST:event_btnTindakanTambahActionPerformed
+
+    private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
+        try {
+            Pelayanan pelayanan = getPelayanan();
+            
+            new FrameTambahObject(this, pasien, pelayanan).setVisible(true);
+        } catch (ComponentSelectionException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTindakanUpdateActionPerformed
+
+    private void btnTindakanHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanHapusActionPerformed
+        try {
+            Pelayanan pelayanan = getPelayanan();
+
+            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s", 
+                    pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));
+
+            if (JOptionPane.YES_OPTION == pilihan) {
+                JOptionPane.showMessageDialog(this, "Belum bisa");
+            }
+        } catch (ComponentSelectionException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTindakanHapusActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBhpHapus;

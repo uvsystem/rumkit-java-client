@@ -1,11 +1,18 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.KategoriTableModel;
+import com.dbsys.rs.client.tableModel.PerawatTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.service.DokterService;
 import com.dbsys.rs.connector.service.KategoriService;
+import com.dbsys.rs.connector.service.PerawatService;
 import com.dbsys.rs.connector.service.UnitService;
+import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.KategoriTindakan;
+import com.dbsys.rs.lib.entity.Pegawai;
+import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
 import javax.swing.JFrame;
@@ -20,11 +27,13 @@ import javax.swing.JOptionPane;
  * @author Deddy Christoper Kakunsi
  */
 public class FrameCari extends JFrame {
-    protected final JFrame frame;
-    protected final Class<?> cls;
+    private final JFrame frame;
+    private final Class<?> cls;
     
-    protected UnitService unitService;
-    protected KategoriService kategoriService;
+    private UnitService unitService;
+    private KategoriService kategoriService;
+    private DokterService dokterService;
+    private PerawatService perawatService;
     
     /**
      * Creates new form formCari
@@ -52,10 +61,20 @@ public class FrameCari extends JFrame {
             loadTableUnit();
         } else if (cls.equals(KategoriTindakan.class)) {
             kategoriService = KategoriService.getInstance(EventController.host);
+            txtKeyword.setEnabled(false);
+            btnCari.setEnabled(false);
             chkTambah.setVisible(true);
             pnlKategori.setVisible(true);
 
             loadTableKategori();
+        } else if (cls.equals(Dokter.class)) {
+            dokterService = DokterService.getInstance(EventController.host);
+
+            loadTableDokter(null);
+        } else if (cls.equals(Perawat.class)) {
+            perawatService = PerawatService.getInstance(EventController.host);
+
+            loadTablePerawat(null);
         }
     }
 
@@ -158,7 +177,7 @@ public class FrameCari extends JFrame {
         pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
 
         getContentPane().add(pnlKategori);
-        pnlKategori.setBounds(20, 280, 452, 109);
+        pnlKategori.setBounds(20, 310, 452, 109);
 
         chkTambah.setText("Tambah");
         chkTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -174,13 +193,14 @@ public class FrameCari extends JFrame {
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String keyword = txtKeyword.getText();
+        
         if (keyword.equals(""))
             return;
         
-        if (cls.equals(Unit.class)) {
-            cariUnit(keyword);
-        } else if (cls.equals(KategoriTindakan.class)) {
-            cariKategori(keyword);
+        if (cls.equals(Dokter.class)) {
+            loadTableDokter(keyword);
+        } else if (cls.equals(Perawat.class)) {
+            loadTablePerawat(keyword);
         }
     }//GEN-LAST:event_btnCariActionPerformed
 
@@ -189,6 +209,10 @@ public class FrameCari extends JFrame {
             pilihUnit();
         } else if (cls.equals(KategoriTindakan.class)) {
             pilihKategori();
+        } else if (cls.equals(Dokter.class)) {
+            pilihPegawai();
+        } else if (cls.equals(Perawat.class)) {
+            pilihPegawai();
         }
 
         this.dispose();
@@ -238,7 +262,7 @@ public class FrameCari extends JFrame {
         txtKategoriNama.setEnabled(true);
         txtKategoriParent.setEnabled(true);
         
-        this.setSize(500, 420);
+        this.setSize(500, 430);
         pnlKategori.setVisible(true);
     }
     
@@ -273,6 +297,21 @@ public class FrameCari extends JFrame {
         KategoriTindakan kategori = getKategori();
         ((FrameAdmin)frame).setKategoriForTindakan(kategori);
     }
+    
+    private void pilihPegawai() {
+        int index = tblCari.getSelectedRow();
+        Pegawai pegawai = null;
+
+        if (cls.equals(Dokter.class)) {
+            DokterTableModel tableModel = (DokterTableModel)tblCari.getModel();
+            pegawai = tableModel.getDokter(index);
+        } else if (cls.equals(Perawat.class)) {
+            PerawatTableModel tableModel = (PerawatTableModel)tblCari.getModel();
+            pegawai = tableModel.getPerawat(index);
+        }
+
+        ((TindakanFrame)frame).setPegawaiForPelayanan(pegawai);
+    }
    
     public final void loadTableUnit(){
         try {
@@ -284,10 +323,6 @@ public class FrameCari extends JFrame {
         }
     }
     
-    private void cariUnit(String keyword) {
-        JOptionPane.showMessageDialog(this, "Maaf belum dapat mencari unit");
-    }
-    
     private void loadTableKategori() {
         try {
             List<KategoriTindakan> list = kategoriService.getAll();
@@ -297,11 +332,40 @@ public class FrameCari extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    
-    private void cariKategori(String keyword) {
-        JOptionPane.showMessageDialog(this, "Maaf belum dapat mencari kategori");
+
+    private void loadTableDokter(String keyword) {
+        List<Dokter> list;
+        
+        try {
+            if (keyword == null) {
+                list = dokterService.getAll();
+            } else {
+                list = dokterService.cari(keyword);
+            }
+
+            DokterTableModel tableModel = new DokterTableModel(list);
+            tblCari.setModel(tableModel);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
-  
+    private void loadTablePerawat(String keyword) {
+        List<Perawat> list;
+        
+        try {
+            if (keyword == null) {
+                list = perawatService.getAll();
+            } else {
+                list = perawatService.cari(keyword);
+            }
+            
+            PerawatTableModel tableModel = new PerawatTableModel(list);
+            tblCari.setModel(tableModel);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnPilih;
