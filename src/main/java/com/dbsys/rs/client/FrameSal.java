@@ -27,20 +27,6 @@ public class FrameSal extends javax.swing.JFrame {
         pnlMain = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
-        pnlHomeDetail = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        txtJumlahPasien = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
-        txtJumlahPasienKelas3 = new javax.swing.JTextField();
-        txtJumlahPasienVvip = new javax.swing.JTextField();
-        txtJumlahPasienVip = new javax.swing.JTextField();
-        txtJumlahPasienKelas1 = new javax.swing.JTextField();
-        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         pnlPasienDetail = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -50,7 +36,7 @@ public class FrameSal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtPasienKodePenduduk = new javax.swing.JTextField();
+        txtPasienKode = new javax.swing.JTextField();
         txtPasienNik = new javax.swing.JTextField();
         txtPasienNama = new javax.swing.JTextField();
         txtPasienTanggalLahir = new javax.swing.JTextField();
@@ -65,17 +51,20 @@ public class FrameSal extends javax.swing.JFrame {
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        pnlHome = new javax.swing.JPanel();
-        tblPasien = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        pnlMasuk = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPasienMasuk = new javax.swing.JTextField();
-        btnMasuk = new javax.swing.JButton();
-        pnlKeluar = new javax.swing.JPanel();
-        txtPasienKeluar = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        btnKeluar = new javax.swing.JButton();
+        pnlHomeDetail = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        txtJumlahPasien = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        txtJumlahPasienKelas3 = new javax.swing.JTextField();
+        txtJumlahPasienVvip = new javax.swing.JTextField();
+        txtJumlahPasienVip = new javax.swing.JTextField();
+        txtJumlahPasienKelas1 = new javax.swing.JTextField();
+        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         panePasien = new javax.swing.JTabbedPane();
         pnlTindakan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -91,6 +80,17 @@ public class FrameSal extends javax.swing.JFrame {
         btnBhpHapus = new javax.swing.JButton();
         btnBhpTambah = new javax.swing.JButton();
         btnBhpUpdate = new javax.swing.JButton();
+        pnlHome = new javax.swing.JPanel();
+        tblPasien = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        pnlMasuk = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPasienMasuk = new javax.swing.JTextField();
+        btnMasuk = new javax.swing.JButton();
+        pnlKeluar = new javax.swing.JPanel();
+        txtPasienKeluar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btnKeluar = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         lblOperator = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -115,70 +115,13 @@ public class FrameSal extends javax.swing.JFrame {
         getContentPane().add(pnlMain);
         pnlMain.setBounds(10, 130, 330, 70);
 
-        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
-        pnlPasienDetail.setBackground(new Color(0,0,0,20));
-        pnlHomeDetail.setLayout(null);
-
-        jLabel26.setText("Jumlah Pasien");
-        pnlHomeDetail.add(jLabel26);
-        jLabel26.setBounds(20, 30, 70, 14);
-
-        jLabel27.setText("VVIP");
-        pnlHomeDetail.add(jLabel27);
-        jLabel27.setBounds(20, 110, 40, 14);
-
-        txtJumlahPasien.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasien);
-        txtJumlahPasien.setBounds(110, 30, 200, 20);
-
-        jLabel28.setText("VIP");
-        pnlHomeDetail.add(jLabel28);
-        jLabel28.setBounds(20, 150, 40, 14);
-
-        jLabel29.setText("KELAS I");
-        pnlHomeDetail.add(jLabel29);
-        jLabel29.setBounds(20, 190, 40, 14);
-
-        jLabel30.setText("KELAS II");
-        pnlHomeDetail.add(jLabel30);
-        jLabel30.setBounds(20, 230, 50, 14);
-
-        jLabel31.setText("KELAS III");
-        pnlHomeDetail.add(jLabel31);
-        jLabel31.setBounds(20, 270, 50, 14);
-        pnlHomeDetail.add(jSeparator3);
-        jSeparator3.setBounds(0, 70, 330, 10);
-
-        txtJumlahPasienKelas3.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas3);
-        txtJumlahPasienKelas3.setBounds(110, 270, 200, 20);
-
-        txtJumlahPasienVvip.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienVvip);
-        txtJumlahPasienVvip.setBounds(110, 110, 200, 20);
-
-        txtJumlahPasienVip.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienVip);
-        txtJumlahPasienVip.setBounds(110, 150, 200, 20);
-
-        txtJumlahPasienKelas1.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas1);
-        txtJumlahPasienKelas1.setBounds(110, 190, 200, 20);
-
-        txtJumlahPasienKelas2.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas2);
-        txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
-
-        getContentPane().add(pnlHomeDetail);
-        pnlHomeDetail.setBounds(10, 220, 330, 390);
-
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
 
-        jLabel4.setText("NO. MEDREK");
+        jLabel4.setText("No. Register Pasien");
         pnlPasienDetail.add(jLabel4);
-        jLabel4.setBounds(20, 30, 80, 14);
+        jLabel4.setBounds(20, 30, 100, 14);
 
         jLabel5.setText("NIK");
         pnlPasienDetail.add(jLabel5);
@@ -208,10 +151,10 @@ public class FrameSal extends javax.swing.JFrame {
         pnlPasienDetail.add(jLabel11);
         jLabel11.setBounds(20, 270, 70, 14);
 
-        txtPasienKodePenduduk.setEditable(false);
-        txtPasienKodePenduduk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienKodePenduduk);
-        txtPasienKodePenduduk.setBounds(120, 30, 180, 20);
+        txtPasienKode.setEditable(false);
+        txtPasienKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienKode);
+        txtPasienKode.setBounds(120, 30, 180, 20);
 
         txtPasienNik.setEditable(false);
         txtPasienNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -280,59 +223,62 @@ public class FrameSal extends javax.swing.JFrame {
         getContentPane().add(pnlPasienDetail);
         pnlPasienDetail.setBounds(10, 220, 330, 390);
 
-        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlHome.setLayout(null);
+        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
+        pnlPasienDetail.setBackground(new Color(0,0,0,20));
+        pnlHomeDetail.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblPasien.setViewportView(jTable1);
+        jLabel26.setText("Jumlah Pasien");
+        pnlHomeDetail.add(jLabel26);
+        jLabel26.setBounds(20, 30, 70, 14);
 
-        pnlHome.add(tblPasien);
-        tblPasien.setBounds(10, 80, 600, 390);
+        jLabel27.setText("VVIP");
+        pnlHomeDetail.add(jLabel27);
+        jLabel27.setBounds(20, 110, 40, 14);
 
-        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
-        pnlMasuk.setLayout(null);
+        txtJumlahPasien.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasien);
+        txtJumlahPasien.setBounds(110, 30, 200, 20);
 
-        jLabel2.setText("No. Pasien");
-        pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 60, 20);
-        pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(70, 20, 130, 20);
+        jLabel28.setText("VIP");
+        pnlHomeDetail.add(jLabel28);
+        jLabel28.setBounds(20, 150, 40, 14);
 
-        btnMasuk.setText("MASUK");
-        pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(210, 20, 73, 23);
+        jLabel29.setText("KELAS I");
+        pnlHomeDetail.add(jLabel29);
+        jLabel29.setBounds(20, 190, 40, 14);
 
-        pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 290, 60);
+        jLabel30.setText("KELAS II");
+        pnlHomeDetail.add(jLabel30);
+        jLabel30.setBounds(20, 230, 50, 14);
 
-        pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Keluar"));
-        pnlKeluar.setLayout(null);
-        pnlKeluar.add(txtPasienKeluar);
-        txtPasienKeluar.setBounds(70, 20, 130, 20);
+        jLabel31.setText("KELAS III");
+        pnlHomeDetail.add(jLabel31);
+        jLabel31.setBounds(20, 270, 50, 14);
+        pnlHomeDetail.add(jSeparator3);
+        jSeparator3.setBounds(0, 70, 330, 10);
 
-        jLabel3.setText("No. Pasien");
-        pnlKeluar.add(jLabel3);
-        jLabel3.setBounds(10, 20, 60, 20);
+        txtJumlahPasienKelas3.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas3);
+        txtJumlahPasienKelas3.setBounds(110, 270, 200, 20);
 
-        btnKeluar.setText("KELUAR");
-        pnlKeluar.add(btnKeluar);
-        btnKeluar.setBounds(210, 20, 71, 23);
+        txtJumlahPasienVvip.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienVvip);
+        txtJumlahPasienVvip.setBounds(110, 110, 200, 20);
 
-        pnlHome.add(pnlKeluar);
-        pnlKeluar.setBounds(320, 10, 290, 60);
+        txtJumlahPasienVip.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienVip);
+        txtJumlahPasienVip.setBounds(110, 150, 200, 20);
 
-        getContentPane().add(pnlHome);
-        pnlHome.setBounds(360, 130, 620, 480);
+        txtJumlahPasienKelas1.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas1);
+        txtJumlahPasienKelas1.setBounds(110, 190, 200, 20);
+
+        txtJumlahPasienKelas2.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas2);
+        txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
+
+        getContentPane().add(pnlHomeDetail);
+        pnlHomeDetail.setBounds(10, 220, 330, 390);
 
         pnlTindakan.setLayout(null);
 
@@ -413,6 +359,60 @@ public class FrameSal extends javax.swing.JFrame {
         getContentPane().add(panePasien);
         panePasien.setBounds(360, 130, 620, 480);
 
+        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHome.setLayout(null);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPasien.setViewportView(jTable1);
+
+        pnlHome.add(tblPasien);
+        tblPasien.setBounds(10, 80, 600, 390);
+
+        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
+        pnlMasuk.setLayout(null);
+
+        jLabel2.setText("No. Pasien");
+        pnlMasuk.add(jLabel2);
+        jLabel2.setBounds(10, 20, 60, 20);
+        pnlMasuk.add(txtPasienMasuk);
+        txtPasienMasuk.setBounds(70, 20, 130, 20);
+
+        btnMasuk.setText("MASUK");
+        pnlMasuk.add(btnMasuk);
+        btnMasuk.setBounds(210, 20, 73, 23);
+
+        pnlHome.add(pnlMasuk);
+        pnlMasuk.setBounds(10, 10, 290, 60);
+
+        pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Keluar"));
+        pnlKeluar.setLayout(null);
+        pnlKeluar.add(txtPasienKeluar);
+        txtPasienKeluar.setBounds(70, 20, 130, 20);
+
+        jLabel3.setText("No. Pasien");
+        pnlKeluar.add(jLabel3);
+        jLabel3.setBounds(10, 20, 60, 20);
+
+        btnKeluar.setText("KELUAR");
+        pnlKeluar.add(btnKeluar);
+        btnKeluar.setBounds(210, 20, 71, 23);
+
+        pnlHome.add(pnlKeluar);
+        pnlKeluar.setBounds(320, 10, 290, 60);
+
+        getContentPane().add(pnlHome);
+        pnlHome.setBounds(360, 130, 620, 480);
+
         jToolBar1.setRollover(true);
 
         lblOperator.setText("jLabel31");
@@ -431,7 +431,7 @@ public class FrameSal extends javax.swing.JFrame {
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
-        jToolBar1.setBounds(0, 620, 990, 25);
+        jToolBar1.setBounds(0, 620, 990, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -500,7 +500,7 @@ public class FrameSal extends javax.swing.JFrame {
     private javax.swing.JTextField txtPasienDarah;
     private javax.swing.JTextField txtPasienKelamin;
     private javax.swing.JTextField txtPasienKeluar;
-    private javax.swing.JTextField txtPasienKodePenduduk;
+    private javax.swing.JTextField txtPasienKode;
     private javax.swing.JTextField txtPasienMasuk;
     private javax.swing.JTextField txtPasienNama;
     private javax.swing.JTextField txtPasienNik;

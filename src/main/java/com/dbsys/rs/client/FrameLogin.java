@@ -37,8 +37,8 @@ public class FrameLogin extends javax.swing.JFrame {
         txt_login_pass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
-        background = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USER LOGIN");
@@ -64,7 +64,6 @@ public class FrameLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 80, 40));
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
 
         btnLogin.setText("LOGIN");
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -75,6 +74,7 @@ public class FrameLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,7 +101,8 @@ public class FrameLogin extends javax.swing.JFrame {
                 new FrameAdmin().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
+            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK) ||
+                    token.getTipe().equals(Unit.Type.UNIT_LAIN)) {
                 new FramePoliklinik().setVisible(true);
             }
             
