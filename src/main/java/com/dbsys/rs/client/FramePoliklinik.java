@@ -58,6 +58,9 @@ public class FramePoliklinik extends javax.swing.JFrame {
     }
     
     private void loadTabelTindakan(final Pasien pasien) {
+        if (pasien == null)
+            return;
+
         List<Pelayanan> listPelayanan = null;
         
         try {
@@ -85,6 +88,9 @@ public class FramePoliklinik extends javax.swing.JFrame {
     }
     
     private void loadTabelBhp(final Pasien pasien) {
+        if (pasien == null)
+            return;
+
         List<PemakaianBhp> listPemakaianBhp;
         List<Pemakaian> listPemakaian = null;
         
@@ -174,6 +180,7 @@ public class FramePoliklinik extends javax.swing.JFrame {
         txtPasienTanggungan = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("RUMAH SAKIT LIUN KENDAGE");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         getContentPane().setLayout(null);
