@@ -157,7 +157,7 @@
         <Component class="javax.swing.JButton" name="btnSimpan">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/dbsys/rs/images/btn_Tambah(small).png"/>
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_Tambah(small).png"/>
             </Property>
           </Properties>
           <Events>
@@ -165,7 +165,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="360" y="60" width="80" height="-1"/>
+              <AbsoluteConstraints x="360" y="39" width="80" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -187,7 +187,7 @@
     <Component class="javax.swing.JLabel" name="Background">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/images/Pencarian.jpg"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/Pencarian.jpg"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>

@@ -169,13 +169,13 @@ public class FrameCari extends JFrame {
         });
         pnlKategori.add(txtKategoriParent, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 66, 229, -1));
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/btn_Tambah(small).png"))); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSimpanMouseClicked(evt);
             }
         });
-        pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 80, -1));
+        pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 39, 80, 40));
 
         getContentPane().add(pnlKategori);
         pnlKategori.setBounds(20, 310, 452, 109);
@@ -189,7 +189,7 @@ public class FrameCari extends JFrame {
         getContentPane().add(chkTambah);
         chkTambah.setBounds(410, 90, 63, 23);
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/Pencarian.jpg"))); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pencarian.jpg"))); // NOI18N
         Background.setText("jLabel2");
         getContentPane().add(Background);
         Background.setBounds(0, 0, 500, 430);
