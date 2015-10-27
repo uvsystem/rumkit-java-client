@@ -253,7 +253,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPendudukSimpan">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Simpan"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/images/btn_simpan small.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPendudukSimpanActionPerformed"/>
@@ -266,7 +268,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPendudukClean">
           <Properties>
-            <Property name="text" type="java.lang.String" value="X Fields"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/images/btn_Clear Small.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPendudukCleanActionPerformed"/>
@@ -473,7 +477,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPasienTambah">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Simpan"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/images/btn_simpan small.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPasienTambahActionPerformed"/>
@@ -579,6 +585,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="Image">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/dbsys/rs/images/Pendaftaran_Bg.jpg"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="jLabel14"/>
       </Properties>
       <Constraints>

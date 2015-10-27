@@ -163,7 +163,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(txtPendudukTelepon);
         txtPendudukTelepon.setBounds(120, 240, 179, 20);
 
-        btnPendudukSimpan.setText("Simpan");
+        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/btn_simpan small.png"))); // NOI18N
         btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukSimpanActionPerformed(evt);
@@ -172,7 +172,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(btnPendudukSimpan);
         btnPendudukSimpan.setBounds(120, 270, 80, 30);
 
-        btnPendudukClean.setText("X Fields");
+        btnPendudukClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/btn_Clear Small.png"))); // NOI18N
         btnPendudukClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukCleanActionPerformed(evt);
@@ -270,7 +270,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlPendaftaran.add(txtPasienTanggalMasuk);
         txtPasienTanggalMasuk.setBounds(120, 80, 180, 18);
 
-        btnPasienTambah.setText("Simpan");
+        btnPasienTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/btn_simpan small.png"))); // NOI18N
         btnPasienTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienTambahActionPerformed(evt);
@@ -335,6 +335,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
 
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 1080, 20));
 
+        Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/Pendaftaran_Bg.jpg"))); // NOI18N
         Image.setText("jLabel14");
         getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
 
