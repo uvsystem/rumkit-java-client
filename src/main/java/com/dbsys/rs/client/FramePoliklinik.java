@@ -14,6 +14,7 @@ import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.lib.entity.Unit;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +35,24 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
     
     /**
      * Creates new form Poliklinik
+     * @param unit
      */
-    public FramePoliklinik() {
+    public FramePoliklinik(Unit unit) {
         super();
         initComponents();
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
+        
+//        if (Unit.Type.POLIKLINIK.equals(unit.getTipe())) {
+// TODO
+//        } else if (Unit.Type.LABORATORIUM.equals(unit.getTipe())) {
+// TODO           
+//        } else if (Unit.Type.TRANSFUSI_DARAH.equals(unit.getTipe())) {
+// TODO           
+//        } else if (Unit.Type.RADIOLOGI.equals(unit.getTipe())) {
+// TODO           
+//        }
     }
     
     private void setDetailPasien(final Pasien pasien) {
@@ -127,26 +139,24 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         lblOperator = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblUnit = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         tabPane = new javax.swing.JTabbedPane();
         pnlTindakan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTindakan = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        btnTindakanHapus = new javax.swing.JButton();
         btnTindakanTambah = new javax.swing.JButton();
         btnTindakanUpdate = new javax.swing.JButton();
+        btnTindakanHapus = new javax.swing.JButton();
         pnlBhp = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBhp = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        btnBhpHapus = new javax.swing.JButton();
         btnBhpTambah = new javax.swing.JButton();
         btnBhpUpdate = new javax.swing.JButton();
+        btnBhpHapus = new javax.swing.JButton();
         pnlCari = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtPasienKode = new javax.swing.JTextField();
-        btnCari = new javax.swing.JButton();
         pnlDetail = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -178,6 +188,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         jLabel13.setText("ANDA LOGIN SEBAGAI : ");
@@ -191,6 +202,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
 
         lblUnit.setText("jLabel3");
         jToolBar1.add(lblUnit);
+        jToolBar1.add(jSeparator1);
 
         btnLogout.setText("       LOGOUT");
         btnLogout.setFocusable(false);
@@ -204,7 +216,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
-        jToolBar1.setBounds(0, 780, 1060, 20);
+        jToolBar1.setBounds(0, 770, 1270, 30);
 
         tabPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -228,19 +240,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 660, 300);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(null);
-
-        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
-        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanHapusActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(190, 10, 80, 30);
+        jScrollPane1.setBounds(10, 11, 780, 590);
 
         btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -248,8 +248,8 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
                 btnTindakanTambahActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTindakanTambah);
-        btnTindakanTambah.setBounds(10, 10, 80, 30);
+        pnlTindakan.add(btnTindakanTambah);
+        btnTindakanTambah.setBounds(800, 10, 80, 30);
 
         btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -257,11 +257,17 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
                 btnTindakanUpdateActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(100, 10, 80, 30);
+        pnlTindakan.add(btnTindakanUpdate);
+        btnTindakanUpdate.setBounds(800, 50, 80, 30);
 
-        pnlTindakan.add(jPanel1);
-        jPanel1.setBounds(10, 320, 660, 50);
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanHapusActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanHapus);
+        btnTindakanHapus.setBounds(800, 90, 80, 30);
 
         tabPane.addTab("TINDAKAN", pnlTindakan);
 
@@ -281,19 +287,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jScrollPane2.setViewportView(tblBhp);
 
         pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 11, 880, 300);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(null);
-
-        btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
-        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpHapusActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnBhpHapus);
-        btnBhpHapus.setBounds(190, 10, 80, 30);
+        jScrollPane2.setBounds(10, 11, 780, 590);
 
         btnBhpTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -301,8 +295,8 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
                 btnBhpTambahActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBhpTambah);
-        btnBhpTambah.setBounds(10, 10, 80, 30);
+        pnlBhp.add(btnBhpTambah);
+        btnBhpTambah.setBounds(800, 10, 80, 30);
 
         btnBhpUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -310,16 +304,22 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
                 btnBhpUpdateActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBhpUpdate);
-        btnBhpUpdate.setBounds(100, 10, 80, 30);
+        pnlBhp.add(btnBhpUpdate);
+        btnBhpUpdate.setBounds(800, 50, 80, 30);
 
-        pnlBhp.add(jPanel2);
-        jPanel2.setBounds(10, 320, 650, 50);
+        btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpHapusActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpHapus);
+        btnBhpHapus.setBounds(800, 90, 80, 30);
 
         tabPane.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
         getContentPane().add(tabPane);
-        tabPane.setBounds(360, 120, 900, 410);
+        tabPane.setBounds(360, 120, 900, 640);
 
         pnlCari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlCari.setLayout(null);
@@ -327,17 +327,14 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jLabel1.setText("No. Pasien");
         pnlCari.add(jLabel1);
         jLabel1.setBounds(10, 10, 90, 14);
-        pnlCari.add(txtPasienKode);
-        txtPasienKode.setBounds(90, 10, 160, 20);
 
-        btnCari.setText("Cari");
-        btnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariActionPerformed(evt);
+        txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasienKodeFocusLost(evt);
             }
         });
-        pnlCari.add(btnCari);
-        btnCari.setBounds(260, 10, 51, 23);
+        pnlCari.add(txtPasienKode);
+        txtPasienKode.setBounds(140, 10, 160, 20);
 
         getContentPane().add(pnlCari);
         pnlCari.setBounds(20, 120, 330, 40);
@@ -455,19 +452,6 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        String keyword = txtPasienKode.getText();
-        
-        try {
-            pasien = pasienService.get(keyword);
-            setDetailPasien(pasien);
-
-            loadTabelTindakan(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnCariActionPerformed
-
     private void tabPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPaneMouseClicked
         int index = tabPane.getSelectedIndex();
 
@@ -553,11 +537,23 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         }
     }//GEN-LAST:event_btnTindakanHapusActionPerformed
 
+    private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
+        String keyword = txtPasienKode.getText();
+        
+        try {
+            pasien = pasienService.get(keyword);
+            setDetailPasien(pasien);
+
+            loadTabelTindakan(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtPasienKodeFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBhpHapus;
     private javax.swing.JButton btnBhpTambah;
     private javax.swing.JButton btnBhpUpdate;
-    private javax.swing.JButton btnCari;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanTambah;
@@ -577,10 +573,9 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
     private javax.swing.JLabel lblUnit;

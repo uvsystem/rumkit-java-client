@@ -234,15 +234,6 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        pnlHome = new javax.swing.JPanel();
-        scrollPasien = new javax.swing.JScrollPane();
-        tblPasien = new javax.swing.JTable();
-        pnlMasuk = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPasienMasuk = new javax.swing.JTextField();
-        cbKelas = new javax.swing.JComboBox();
-        btnMasuk = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
         panePasien = new javax.swing.JTabbedPane();
         pnlTindakan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -258,10 +249,22 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         btnBhpHapus = new javax.swing.JButton();
         btnBhpTambah = new javax.swing.JButton();
         btnBhpUpdate = new javax.swing.JButton();
+        pnlHome = new javax.swing.JPanel();
+        scrollPasien = new javax.swing.JScrollPane();
+        tblPasien = new javax.swing.JTable();
+        pnlMasuk = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPasienMasuk = new javax.swing.JTextField();
+        cbKelas = new javax.swing.JComboBox();
+        btnMasuk = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
+        jLabel17 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         lblUnit = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
 
         dialogKeluar.setUndecorated(true);
@@ -384,7 +387,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
 
         getContentPane().add(pnlHomeDetail);
-        pnlHomeDetail.setBounds(10, 220, 330, 430);
+        pnlHomeDetail.setBounds(10, 220, 330, 410);
 
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -496,63 +499,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jSeparator1.setBounds(0, 62, 330, 10);
 
         getContentPane().add(pnlPasienDetail);
-        pnlPasienDetail.setBounds(10, 220, 330, 430);
-
-        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlHome.setLayout(null);
-
-        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPasienMouseClicked(evt);
-            }
-        });
-        scrollPasien.setViewportView(tblPasien);
-
-        pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 100, 600, 410);
-
-        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
-        pnlMasuk.setLayout(null);
-
-        jLabel2.setText("No. Pasien");
-        pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 60, 20);
-        pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(90, 20, 160, 20);
-
-        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
-        pnlMasuk.add(cbKelas);
-        cbKelas.setBounds(350, 20, 160, 20);
-
-        btnMasuk.setText("MASUK");
-        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMasukActionPerformed(evt);
-            }
-        });
-        pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(520, 20, 73, 23);
-
-        jLabel13.setText("Kelas");
-        pnlMasuk.add(jLabel13);
-        jLabel13.setBounds(300, 20, 25, 14);
-
-        pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 600, 60);
-
-        getContentPane().add(pnlHome);
-        pnlHome.setBounds(360, 130, 620, 520);
+        pnlPasienDetail.setBounds(10, 220, 330, 410);
 
         panePasien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -576,7 +523,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 590, 410);
+        jScrollPane1.setBounds(10, 11, 590, 390);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(null);
@@ -609,7 +556,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         btnTindakanUpdate.setBounds(100, 10, 71, 23);
 
         pnlTindakan.add(jPanel3);
-        jPanel3.setBounds(10, 430, 590, 50);
+        jPanel3.setBounds(10, 410, 590, 50);
 
         panePasien.addTab("TINDAKAN", pnlTindakan);
 
@@ -667,9 +614,69 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         panePasien.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
         getContentPane().add(panePasien);
-        panePasien.setBounds(360, 130, 620, 520);
+        panePasien.setBounds(360, 130, 620, 500);
 
+        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHome.setLayout(null);
+
+        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPasienMouseClicked(evt);
+            }
+        });
+        scrollPasien.setViewportView(tblPasien);
+
+        pnlHome.add(scrollPasien);
+        scrollPasien.setBounds(10, 100, 600, 390);
+
+        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
+        pnlMasuk.setLayout(null);
+
+        jLabel2.setText("No. Pasien");
+        pnlMasuk.add(jLabel2);
+        jLabel2.setBounds(10, 20, 60, 20);
+        pnlMasuk.add(txtPasienMasuk);
+        txtPasienMasuk.setBounds(90, 20, 160, 20);
+
+        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
+        pnlMasuk.add(cbKelas);
+        cbKelas.setBounds(350, 20, 160, 20);
+
+        btnMasuk.setText("MASUK");
+        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasukActionPerformed(evt);
+            }
+        });
+        pnlMasuk.add(btnMasuk);
+        btnMasuk.setBounds(520, 20, 73, 23);
+
+        jLabel13.setText("Kelas");
+        pnlMasuk.add(jLabel13);
+        jLabel13.setBounds(300, 20, 25, 14);
+
+        pnlHome.add(pnlMasuk);
+        pnlMasuk.setBounds(10, 10, 600, 60);
+
+        getContentPane().add(pnlHome);
+        pnlHome.setBounds(360, 130, 620, 500);
+
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+
+        jLabel17.setText("LOGIN SEBAGAI : ");
+        jToolBar1.add(jLabel17);
 
         lblOperator.setText("jLabel31");
         jToolBar1.add(lblOperator);
@@ -677,8 +684,12 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jLabel1.setText(" - ");
         jToolBar1.add(jLabel1);
 
+        jLabel18.setText("UNIT :");
+        jToolBar1.add(jLabel18);
+
         lblUnit.setText("jLabel1");
         jToolBar1.add(lblUnit);
+        jToolBar1.add(jSeparator2);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
@@ -692,7 +703,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
-        jToolBar1.setBounds(0, 660, 990, 23);
+        jToolBar1.setBounds(0, 653, 990, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -918,6 +929,8 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -937,6 +950,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
