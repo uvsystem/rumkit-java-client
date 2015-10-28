@@ -973,6 +973,24 @@ public class FrameAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlOperator = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbl_op = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        txt_op_nama = new javax.swing.JTextField();
+        txt_admin_operator_unit = new javax.swing.JTextField();
+        txt_op_uname = new javax.swing.JTextField();
+        txt_op_pass = new javax.swing.JTextField();
+        cb_admin_operator_role = new javax.swing.JComboBox();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        btn_tambah_op = new javax.swing.JButton();
+        btn_clear_op = new javax.swing.JButton();
         pnlUnit = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_unit = new javax.swing.JTable();
@@ -1137,24 +1155,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         txtPekerjaDarah = new javax.swing.JTextField();
         txtPekerjaAgama = new javax.swing.JTextField();
         txtPekerjaTelepon = new javax.swing.JTextField();
-        pnlOperator = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        tbl_op = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        txt_op_nama = new javax.swing.JTextField();
-        txt_admin_operator_unit = new javax.swing.JTextField();
-        txt_op_uname = new javax.swing.JTextField();
-        txt_op_pass = new javax.swing.JTextField();
-        cb_admin_operator_role = new javax.swing.JComboBox();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        btn_tambah_op = new javax.swing.JButton();
-        btn_clear_op = new javax.swing.JButton();
         pnlTindakan = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -1228,6 +1228,104 @@ public class FrameAdmin extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlOperator.setLayout(null);
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_operator.png"))); // NOI18N
+        pnlOperator.add(jLabel28);
+        jLabel28.setBounds(0, 10, 1060, 20);
+
+        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbl_op.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_opMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tbl_op);
+
+        pnlOperator.add(jScrollPane9);
+        jScrollPane9.setBounds(10, 60, 1030, 380);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(null);
+        jPanel10.add(txt_op_nama);
+        txt_op_nama.setBounds(140, 13, 350, 20);
+
+        txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_admin_operator_unitMouseClicked(evt);
+            }
+        });
+        jPanel10.add(txt_admin_operator_unit);
+        txt_admin_operator_unit.setBounds(140, 40, 350, 20);
+        jPanel10.add(txt_op_uname);
+        txt_op_uname.setBounds(140, 70, 350, 20);
+        jPanel10.add(txt_op_pass);
+        txt_op_pass.setBounds(140, 100, 350, 20);
+
+        cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
+        jPanel10.add(cb_admin_operator_role);
+        cb_admin_operator_role.setBounds(140, 130, 350, 20);
+
+        jLabel49.setText("NAMA");
+        jPanel10.add(jLabel49);
+        jLabel49.setBounds(30, 16, 90, 14);
+
+        jLabel27.setText("UNIT");
+        jPanel10.add(jLabel27);
+        jLabel27.setBounds(30, 43, 90, 14);
+
+        jLabel50.setText("USERNAME");
+        jPanel10.add(jLabel50);
+        jLabel50.setBounds(30, 70, 90, 14);
+
+        jLabel51.setText("PASSWORD");
+        jPanel10.add(jLabel51);
+        jLabel51.setBounds(30, 100, 90, 14);
+
+        jLabel31.setText("ROLE");
+        jPanel10.add(jLabel31);
+        jLabel31.setBounds(30, 130, 90, 14);
+
+        pnlOperator.add(jPanel10);
+        jPanel10.setBounds(10, 450, 700, 170);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_tambah_op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambah_opActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+
+        btn_clear_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btn_clear_op.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clear_opActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 100, 40));
+
+        pnlOperator.add(jPanel11);
+        jPanel11.setBounds(800, 560, 240, 60);
+
+        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlUnit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlUnit.setLayout(null);
@@ -2020,104 +2118,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         tab_pane.setBounds(10, 40, 1040, 580);
 
         getContentPane().add(pnlPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
-
-        pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlOperator.setLayout(null);
-
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_operator.png"))); // NOI18N
-        pnlOperator.add(jLabel28);
-        jLabel28.setBounds(0, 10, 1060, 20);
-
-        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbl_op.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_opMouseClicked(evt);
-            }
-        });
-        jScrollPane9.setViewportView(tbl_op);
-
-        pnlOperator.add(jScrollPane9);
-        jScrollPane9.setBounds(10, 60, 1030, 380);
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10.setLayout(null);
-        jPanel10.add(txt_op_nama);
-        txt_op_nama.setBounds(140, 13, 350, 20);
-
-        txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_admin_operator_unitMouseClicked(evt);
-            }
-        });
-        jPanel10.add(txt_admin_operator_unit);
-        txt_admin_operator_unit.setBounds(140, 40, 350, 20);
-        jPanel10.add(txt_op_uname);
-        txt_op_uname.setBounds(140, 70, 350, 20);
-        jPanel10.add(txt_op_pass);
-        txt_op_pass.setBounds(140, 100, 350, 20);
-
-        cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
-        jPanel10.add(cb_admin_operator_role);
-        cb_admin_operator_role.setBounds(140, 130, 350, 20);
-
-        jLabel49.setText("NAMA");
-        jPanel10.add(jLabel49);
-        jLabel49.setBounds(30, 16, 90, 14);
-
-        jLabel27.setText("UNIT");
-        jPanel10.add(jLabel27);
-        jLabel27.setBounds(30, 43, 90, 14);
-
-        jLabel50.setText("USERNAME");
-        jPanel10.add(jLabel50);
-        jLabel50.setBounds(30, 70, 90, 14);
-
-        jLabel51.setText("PASSWORD");
-        jPanel10.add(jLabel51);
-        jLabel51.setBounds(30, 100, 90, 14);
-
-        jLabel31.setText("ROLE");
-        jPanel10.add(jLabel31);
-        jLabel31.setBounds(30, 130, 90, 14);
-
-        pnlOperator.add(jPanel10);
-        jPanel10.setBounds(10, 450, 700, 170);
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_tambah_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
-        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_tambah_op.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambah_opActionPerformed(evt);
-            }
-        });
-        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
-
-        btn_clear_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btn_clear_op.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_clear_opActionPerformed(evt);
-            }
-        });
-        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 100, 40));
-
-        pnlOperator.add(jPanel11);
-        jPanel11.setBounds(800, 560, 240, 60);
-
-        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlTindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlTindakan.setLayout(null);

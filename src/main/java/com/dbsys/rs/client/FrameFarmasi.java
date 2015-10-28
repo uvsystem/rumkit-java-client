@@ -4,12 +4,14 @@ import com.dbsys.rs.client.tableModel.BhpTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.BhpService;
 import com.dbsys.rs.connector.service.ObatService;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PemakaianObatService;
 import com.dbsys.rs.connector.service.StokKeluarService;
 import com.dbsys.rs.connector.service.StokMasukService;
+import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Barang;
@@ -29,6 +31,7 @@ import javax.swing.JOptionPane;
  */
 public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
+    private final TokenService tokenService = TokenService.getInstance(EventController.host);
     private final BhpService bhpService = BhpService.getInstance(EventController.host);
     private final ObatService obatService = ObatService.getInstance(EventController.host);
     private final StokMasukService stokMasukService = StokMasukService.getInstance(EventController.host);
@@ -44,24 +47,32 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
      */
     public FrameFarmasi() {
         initComponents();
+        setSize(1280, 800);
         
         paneBarang.setVisible(false);
         pnlResep.setVisible(true);
         
         setDetailPasien(pasien);
         
-        JOptionPane.showMessageDialog(null, "Silahkan masukan Nomor Pasien");
+        lblOperator.setText(TokenHolder.getNamaOperator());
+        lblUnit.setText(TokenHolder.getNamaUnit());
     }
 
     private void setDetailBhp(BahanHabisPakai bhp) {
-        if (bhp == null)
+        if (bhp == null) {
             bhp = new BahanHabisPakai();
+
+            this.txtBhpHarga.setText(null);
+            this.txtBhpTanggungan.setText(null);
+            this.txtBhpJumlah.setText(null);
+        } else {
+            this.txtBhpHarga.setText(bhp.getHarga().toString());
+            this.txtBhpTanggungan.setText(bhp.getTanggungan().toString());
+            this.txtBhpJumlah.setText(bhp.getJumlah().toString());
+        }
         
         this.txtBhpKode.setText(bhp.getKode());
         this.txtBhpNama.setText(bhp.getNama());
-        this.txtBhpHarga.setText(bhp.getHarga().toString());
-        this.txtBhpTanggungan.setText(bhp.getTanggungan().toString());
-        this.txtBhpJumlah.setText(bhp.getJumlah().toString());
         this.txtBhpSatuan.setText(bhp.getSatuan());
 
         this.txtBhpStokJumlah.setText("0");
@@ -74,14 +85,20 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }
 
     private void setDetailObat(ObatFarmasi obat) {
-        if (obat == null)
+        if (obat == null) {
             obat = new ObatFarmasi();
+
+            this.txtObatHarga.setText(null);
+            this.txtObatTanggungan.setText(null);
+            this.txtObatJumlah.setText(null);
+        } else {
+            this.txtObatHarga.setText(obat.getHarga().toString());
+            this.txtObatTanggungan.setText(obat.getTanggungan().toString());
+            this.txtObatJumlah.setText(obat.getJumlah().toString());
+        }
         
         this.txtObatKode.setText(obat.getKode());
         this.txtObatNama.setText(obat.getNama());
-        this.txtObatHarga.setText(obat.getHarga().toString());
-        this.txtObatTanggungan.setText(obat.getTanggungan().toString());
-        this.txtObatJumlah.setText(obat.getJumlah().toString());
         this.txtObatSatuan.setText(obat.getSatuan());
 
         this.txtObatStokJumlah.setText("0");
@@ -94,19 +111,27 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }
 
     private void setDetailPasien(Pasien pasien) {
-        if (pasien == null)
+        if (pasien == null) {
             pasien = new Pasien();
+
+            txtPasienKelamin.setText(null);
+            txtPasienTanggalLahir.setText(null);
+            txtPasienTanggungan.setText(null);
+            txtPasienStatusRawat.setText(null);
+            txtPasienTanggalMasuk.setText(null);
+        } else {
+            txtPasienKelamin.setText(pasien.getKelamin().toString());
+            txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
+            txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+            txtPasienStatusRawat.setText(pasien.getStatus().toString());
+            txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
+        }
         
         txtPasienNik.setText(pasien.getNik());
         txtPasienNama.setText(pasien.getNama());
-        txtPasienKelamin.setText(pasien.getKelamin().toString());
-        txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
         txtPasienGolonganDarah.setText(pasien.getDarah());
         txtPasienAgama.setText(pasien.getAgama());
         txtPasienTelepon.setText(pasien.getTelepon());
-        txtPasienTanggungan.setText(pasien.getTanggungan().toString());
-        txtPasienStatusRawat.setText(pasien.getStatus().toString());
-        txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
         
         tblResepObat.removeAll();
         
@@ -236,9 +261,20 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnObatStokMasuk = new javax.swing.JButton();
         btnObatStokReset = new javax.swing.JButton();
         btnObatStokKeluar = new javax.swing.JButton();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabel31 = new javax.swing.JLabel();
+        lblOperator = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        lblUnit = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RUMAH SAKIT LIUN KENDAGE TAHUNA - FARMASI");
+        setBounds(new java.awt.Rectangle(0, 0, 1280, 800));
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -697,6 +733,39 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         getContentPane().add(paneBarang);
         paneBarang.setBounds(150, 90, 750, 560);
 
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+
+        jLabel31.setText("LOGIN SEBAGAI:");
+        jToolBar1.add(jLabel31);
+
+        lblOperator.setText("jLabel32");
+        jToolBar1.add(lblOperator);
+
+        jLabel32.setText(" - ");
+        jToolBar1.add(jLabel32);
+
+        jLabel33.setText("UNIT: ");
+        jToolBar1.add(jLabel33);
+
+        lblUnit.setText("jLabel34");
+        jToolBar1.add(lblUnit);
+        jToolBar1.add(jSeparator1);
+
+        btnLogout.setText("LOGOUT");
+        btnLogout.setFocusable(false);
+        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnLogout);
+
+        getContentPane().add(jToolBar1);
+        jToolBar1.setBounds(0, 770, 1280, 30);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -861,7 +930,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }//GEN-LAST:event_btnResepActionPerformed
 
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
-        String keyword = txtResepNomor.getText();
+        String keyword = txtPasienKode.getText();
 
         try {
             pasien = pasienService.get(keyword);
@@ -875,13 +944,31 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }//GEN-LAST:event_txtPasienKodeFocusLost
 
     private void btnObatTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObatTambahActionPerformed
-        new FrameTambahObject(this, ObatFarmasi.class, pasien).setVisible(true);
+        String nomorResep = txtResepNomor.getText();
+        if (nomorResep == null || nomorResep.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan masukan nomor resep");
+            return;
+        }
+        
+        new FrameTambahObject(this, pasien, nomorResep).setVisible(true);
     }//GEN-LAST:event_btnObatTambahActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        try {
+            tokenService.lock(TokenHolder.getKode());
+            
+            new FrameLogin().setVisible(true);
+            this.dispose();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBhpStokKeluar;
     private javax.swing.JButton btnBhpStokMasuk;
     private javax.swing.JButton btnBhpStokReset;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatStokKeluar;
     private javax.swing.JButton btnObatStokMasuk;
     private javax.swing.JButton btnObatStokReset;
@@ -912,6 +999,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -924,6 +1014,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblOperator;
+    private javax.swing.JLabel lblUnit;
     private javax.swing.JTabbedPane paneBarang;
     private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlBhpDetail;

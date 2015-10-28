@@ -49,6 +49,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
 
     private PemakaianObat pemakaianObat;
     private ObatFarmasi obat;
+    private String nomorResep;
     
     private Pelayanan pelayanan;
     private Tindakan tindakan;
@@ -57,7 +58,6 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     /**
      * Creates new form FrameTambahObject
      * @param frame
-     * @param clsFrame
      * @param clsDomain
      * @param pasien
      */
@@ -71,11 +71,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pnlPelayanan.setVisible(false);
         
         if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class)) {
-            setSize(493, 530);
+            setSize(493, 550);
             txtPemakaianTanggal.setText(DateUtil.getDate().toString());
             pnlPemakaian.setVisible(true);
         } else if (clsDomain.equals(Tindakan.class)) {
-            setSize(493, 650);
+            setSize(493, 670);
             txtPelayananTanggal.setText(DateUtil.getDate().toString());
             pnlPelayanan.setVisible(true);
         }
@@ -108,6 +108,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         
         if (pelaksana != null)
             txtPelayananPelaksana.setText(pelaksana.getNama());
+    }
+
+    FrameTambahObject(JFrame frame, Pasien pasien, String nomorResep) {
+        this(frame, ObatFarmasi.class, pasien);
+        this.nomorResep = nomorResep;
     }
     
     @Override
@@ -174,6 +179,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pemakaianObat.setTanggal(DateUtil.getDate(tanggal));
         pemakaianObat.setPasien(pasien);
         pemakaianObat.setUnit(TokenHolder.getToken().getOperator().getUnit());
+        pemakaianObat.setNomorResep(nomorResep);
+        // TODO tambah obat luar
+        pemakaianObat.setAsal(PemakaianObat.AsalObat.FARMASI);
         
         return pemakaianObat;
     }
@@ -443,7 +451,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             txtPemakaianBarang.setText(bhp.getNama());
         } else if (clsDomain.equals(ObatFarmasi.class)) {
             obat = getObat(index);
-            txtPemakaianBarang.setText(bhp.getNama());
+            txtPemakaianBarang.setText(obat.getNama());
         } else if (clsDomain.equals(Tindakan.class)) {
             tindakan = getTindakan(index);
             txtPelayananTindakanNama.setText(tindakan.getNama());
@@ -460,7 +468,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
                 ((BhpTableFrame)frame).reloadTableBhp();
             } else if (clsDomain.equals(ObatFarmasi.class)) {
                 pemakaianObat = getPemakaianObat();
-                pelayananService.simpan(pelayanan);
+                pemakaianObatService.simpan(pemakaianObat);
                 
                 ((ObatTableFrame)frame).reloadTableObat();
             } else if (clsDomain.equals(Tindakan.class)) {
