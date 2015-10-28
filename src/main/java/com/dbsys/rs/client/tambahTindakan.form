@@ -130,7 +130,7 @@
                       <Group type="102" attributes="0">
                           <Component id="cb_satuan_tindakan" min="-2" pref="137" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btn_tambah_tindakan" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_tambah_tindakan" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -167,7 +167,7 @@
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cb_satuan_tindakan" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btn_tambah_tindakan" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_tambah_tindakan" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -229,7 +229,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_tambah_tindakan">
           <Properties>
-            <Property name="text" type="java.lang.String" value="+ Tindakan"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/images/btn_Tambah(small).png"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">

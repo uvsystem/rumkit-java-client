@@ -73,7 +73,7 @@ public class tambahTindakan extends javax.swing.JFrame {
 
         cb_satuan_tindakan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih - ", "Hari", "Tindakan", "Jam" }));
 
-        btn_tambah_tindakan.setText("+ Tindakan");
+        btn_tambah_tindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/images/btn_Tambah(small).png"))); // NOI18N
 
         jLabel10.setText("Pelaksana");
 
@@ -112,7 +112,7 @@ public class tambahTindakan extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cb_satuan_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_tambah_tindakan)))
+                        .addComponent(btn_tambah_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,7 +141,7 @@ public class tambahTindakan extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
                         .addComponent(cb_satuan_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_tambah_tindakan))
+                    .addComponent(btn_tambah_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

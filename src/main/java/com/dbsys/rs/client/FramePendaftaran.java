@@ -83,6 +83,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
+        jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
@@ -91,6 +92,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         setTitle("Rumah Sakit Liun Kendage Tahuna");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 800));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -163,7 +165,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(txtPendudukTelepon);
         txtPendudukTelepon.setBounds(120, 240, 179, 20);
 
-        btnPendudukSimpan.setText("Simpan");
+        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukSimpanActionPerformed(evt);
@@ -172,7 +174,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(btnPendudukSimpan);
         btnPendudukSimpan.setBounds(120, 270, 80, 30);
 
-        btnPendudukClean.setText("X Fields");
+        btnPendudukClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
         btnPendudukClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukCleanActionPerformed(evt);
@@ -181,7 +183,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(btnPendudukClean);
         btnPendudukClean.setBounds(220, 270, 80, 30);
 
-        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 310, 310));
+        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 310, 310));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,11 +203,11 @@ public class FramePendaftaran extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPenduduk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 740, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 940, 410));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("DAFTAR PASIEN / REKAM MEDIK");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 90, 190, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 190, -1));
 
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder("Pencarian"));
 
@@ -243,7 +245,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 310, 50));
+        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 310, 50));
 
         pnlPendaftaran.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Pendaftaran Pasien"));
         pnlPendaftaran.setLayout(null);
@@ -270,7 +272,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlPendaftaran.add(txtPasienTanggalMasuk);
         txtPasienTanggalMasuk.setBounds(120, 80, 180, 18);
 
-        btnPasienTambah.setText("Simpan");
+        btnPasienTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnPasienTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienTambahActionPerformed(evt);
@@ -292,7 +294,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlPendaftaran.add(jLabel16);
         jLabel16.setBounds(10, 50, 110, 14);
 
-        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 310, 150));
+        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 310, 150));
 
         jPanel3.setBackground(new Color(0,0,0,20));
 
@@ -311,18 +313,23 @@ public class FramePendaftaran extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 405, 740, 65));
 
+        jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
+        jToolBar1.setEnabled(false);
+
+        jLabel1.setText("ANDA LOGIN SEBEGAI :");
+        jToolBar1.add(jLabel1);
 
         lblOperator.setText("jLabel1");
         jToolBar1.add(lblOperator);
 
-        btnLogout.setText("LOGOUT");
+        btnLogout.setText("        LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -333,10 +340,10 @@ public class FramePendaftaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnLogout);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 1080, 20));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 1280, 20));
 
-        Image.setText("jLabel14");
-        getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
+        Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pendaftaran_Bg.jpg"))); // NOI18N
+        getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -448,6 +455,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
     private javax.swing.JComboBox cbPasienTanggungan;
     private javax.swing.JComboBox cbPendudukKelamin;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
