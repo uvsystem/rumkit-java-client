@@ -103,7 +103,10 @@ public class FrameLogin extends javax.swing.JFrame {
                 new FrameAdmin().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
+            } else if (token.getTipe().equals(Unit.Type.RUANG_PERAWATAN)) {
+                new FrameSal().setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK) ||
+                    token.getTipe().equals(Unit.Type.UNIT_LAIN)) {
                 new FramePoliklinik().setVisible(true);
             }
             
