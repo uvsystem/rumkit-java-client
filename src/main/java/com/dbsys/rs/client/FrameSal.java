@@ -20,6 +20,7 @@ import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.Tindakan;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,7 +29,7 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public class FrameSal extends javax.swing.JFrame {
+public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, TindakanTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
@@ -58,6 +59,18 @@ public class FrameSal extends javax.swing.JFrame {
             loadDetailRuangan(list);
         } catch (ServiceException ex) { }
     }
+
+    private void reloadHome() {
+        List<Pasien> list = null;
+        try {
+            list = loadPasienPerawatan();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            tblPasien.setModel(new PasienTableModel(list));
+        } finally {
+            loadDetailRuangan(list);
+        }
+    }
     
     private List<Pasien> loadPasienPerawatan() throws ServiceException {
         List<Pasien> list = pasienService.getByUnit(TokenHolder.getIdUnit());
@@ -68,6 +81,9 @@ public class FrameSal extends javax.swing.JFrame {
     }
     
     private void loadDetailRuangan(List<Pasien> list) {
+        if (list == null)
+            list = new ArrayList<>();
+        
         txtJumlahPasien.setText(String.valueOf(list.size()));
         
         Integer jumlahVvip = 0;
@@ -97,24 +113,24 @@ public class FrameSal extends javax.swing.JFrame {
         txtJumlahPasienKelas3.setText(jumlahKelas3.toString());
     }
 
-    private void loadTindakan(Pasien pasien) {
+    private void loadTindakan(Pasien pasien) throws ServiceException {
         if (pasien == null)
             return;
 
-        List<Pelayanan> listPelayanan = null;
-        
-        try {
-            listPelayanan = pelayananService.getByPasien(pasien.getId());
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-            PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
-            tblTindakan.setModel(tableModel);
-        }
+        List<Pelayanan> list = pelayananService.getByPasien(pasien.getId());
+
+        PelayananTableModel tableModel = new PelayananTableModel(list);
+        tblTindakan.setModel(tableModel);
     }
     
-    public void reloadTindakan() {
-        loadTindakan(pasien);
+    @Override
+    public void reloadTableTindakan() {
+        try {
+            loadTindakan(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            tblTindakan.setModel(new PelayananTableModel(null));
+        }
     }
     
     private Pelayanan getPelayanan() throws ComponentSelectionException {
@@ -127,29 +143,28 @@ public class FrameSal extends javax.swing.JFrame {
         return tableModel.getPelayanan(index);
     }
     
-    private void loadBhp(Pasien pasien) {
+    private void loadBhp(Pasien pasien) throws ServiceException {
         if (pasien == null)
             return;
 
-        List<PemakaianBhp> listPemakaianBhp;
-        List<Pemakaian> listPemakaian = null;
-        
-        try {
-            listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
-            listPemakaian = new ArrayList<>();
-            for (Pemakaian pemakaian : listPemakaianBhp)
-                listPemakaian.add(pemakaian);
+        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
 
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-            PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
-            tblBhp.setModel(tableModel);
-        }
+        List<Pemakaian> listPemakaian = new ArrayList<>();
+        for (Pemakaian pemakaian : listPemakaianBhp)
+            listPemakaian.add(pemakaian);
+
+        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        tblBhp.setModel(tableModel);
     }
     
-    public void reloadBhp() {
-        loadBhp(pasien);
+    @Override
+    public void reloadTableBhp() {
+        try {
+            loadBhp(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            tblBhp.setModel(new PemakaianTableModel(null));
+        }
     }
     
     private PemakaianBhp getPemakaianBhp() throws ComponentSelectionException {
@@ -177,9 +192,24 @@ public class FrameSal extends javax.swing.JFrame {
         txtKeterangan = new javax.swing.JTextField();
         txtBiayaTambahan = new javax.swing.JTextField();
         btnPasienKeluar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pnlMain = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
+        pnlHomeDetail = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        txtJumlahPasien = new javax.swing.JTextField();
+        txtJumlahPasienKelas3 = new javax.swing.JTextField();
+        txtJumlahPasienVvip = new javax.swing.JTextField();
+        txtJumlahPasienVip = new javax.swing.JTextField();
+        txtJumlahPasienKelas1 = new javax.swing.JTextField();
+        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         pnlPasienDetail = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -204,20 +234,6 @@ public class FrameSal extends javax.swing.JFrame {
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        pnlHomeDetail = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        txtJumlahPasien = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
-        txtJumlahPasienKelas3 = new javax.swing.JTextField();
-        txtJumlahPasienVvip = new javax.swing.JTextField();
-        txtJumlahPasienVip = new javax.swing.JTextField();
-        txtJumlahPasienKelas1 = new javax.swing.JTextField();
-        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         pnlHome = new javax.swing.JPanel();
         scrollPasien = new javax.swing.JScrollPane();
         tblPasien = new javax.swing.JTable();
@@ -248,6 +264,8 @@ public class FrameSal extends javax.swing.JFrame {
         lblUnit = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
 
+        dialogKeluar.setUndecorated(true);
+        dialogKeluar.setResizable(false);
         dialogKeluar.getContentPane().setLayout(null);
 
         jLabel3.setText("Biaya Tambahan");
@@ -262,14 +280,23 @@ public class FrameSal extends javax.swing.JFrame {
         dialogKeluar.getContentPane().add(txtBiayaTambahan);
         txtBiayaTambahan.setBounds(120, 20, 140, 20);
 
-        btnPasienKeluar.setText("Keluar");
+        btnPasienKeluar.setText("Pasien Keluar");
         btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienKeluarActionPerformed(evt);
             }
         });
         dialogKeluar.getContentPane().add(btnPasienKeluar);
-        btnPasienKeluar.setBounds(180, 90, 80, 30);
+        btnPasienKeluar.setBounds(163, 90, 97, 30);
+
+        jButton1.setText("Batal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        dialogKeluar.getContentPane().add(jButton1);
+        jButton1.setBounds(70, 90, 57, 30);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("RUMAH SAKIT LIUN KENDAGE");
@@ -301,6 +328,63 @@ public class FrameSal extends javax.swing.JFrame {
 
         getContentPane().add(pnlMain);
         pnlMain.setBounds(10, 130, 330, 70);
+
+        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
+        pnlPasienDetail.setBackground(new Color(0,0,0,20));
+        pnlHomeDetail.setLayout(null);
+
+        jLabel26.setText("Jumlah Pasien");
+        pnlHomeDetail.add(jLabel26);
+        jLabel26.setBounds(20, 30, 70, 14);
+
+        jLabel27.setText("VVIP");
+        pnlHomeDetail.add(jLabel27);
+        jLabel27.setBounds(20, 110, 40, 14);
+
+        jLabel28.setText("VIP");
+        pnlHomeDetail.add(jLabel28);
+        jLabel28.setBounds(20, 150, 40, 14);
+
+        jLabel29.setText("KELAS I");
+        pnlHomeDetail.add(jLabel29);
+        jLabel29.setBounds(20, 190, 40, 14);
+
+        jLabel30.setText("KELAS II");
+        pnlHomeDetail.add(jLabel30);
+        jLabel30.setBounds(20, 230, 50, 14);
+
+        jLabel31.setText("KELAS III");
+        pnlHomeDetail.add(jLabel31);
+        jLabel31.setBounds(20, 270, 50, 14);
+        pnlHomeDetail.add(jSeparator3);
+        jSeparator3.setBounds(0, 70, 330, 10);
+
+        txtJumlahPasien.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasien);
+        txtJumlahPasien.setBounds(110, 30, 200, 20);
+
+        txtJumlahPasienKelas3.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas3);
+        txtJumlahPasienKelas3.setBounds(110, 270, 200, 20);
+
+        txtJumlahPasienVvip.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienVvip);
+        txtJumlahPasienVvip.setBounds(110, 110, 200, 20);
+
+        txtJumlahPasienVip.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienVip);
+        txtJumlahPasienVip.setBounds(110, 150, 200, 20);
+
+        txtJumlahPasienKelas1.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas1);
+        txtJumlahPasienKelas1.setBounds(110, 190, 200, 20);
+
+        txtJumlahPasienKelas2.setEditable(false);
+        pnlHomeDetail.add(txtJumlahPasienKelas2);
+        txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
+
+        getContentPane().add(pnlHomeDetail);
+        pnlHomeDetail.setBounds(10, 220, 330, 430);
 
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -413,63 +497,6 @@ public class FrameSal extends javax.swing.JFrame {
 
         getContentPane().add(pnlPasienDetail);
         pnlPasienDetail.setBounds(10, 220, 330, 430);
-
-        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
-        pnlPasienDetail.setBackground(new Color(0,0,0,20));
-        pnlHomeDetail.setLayout(null);
-
-        jLabel26.setText("Jumlah Pasien");
-        pnlHomeDetail.add(jLabel26);
-        jLabel26.setBounds(20, 30, 70, 14);
-
-        jLabel27.setText("VVIP");
-        pnlHomeDetail.add(jLabel27);
-        jLabel27.setBounds(20, 110, 40, 14);
-
-        txtJumlahPasien.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasien);
-        txtJumlahPasien.setBounds(110, 30, 200, 20);
-
-        jLabel28.setText("VIP");
-        pnlHomeDetail.add(jLabel28);
-        jLabel28.setBounds(20, 150, 40, 14);
-
-        jLabel29.setText("KELAS I");
-        pnlHomeDetail.add(jLabel29);
-        jLabel29.setBounds(20, 190, 40, 14);
-
-        jLabel30.setText("KELAS II");
-        pnlHomeDetail.add(jLabel30);
-        jLabel30.setBounds(20, 230, 50, 14);
-
-        jLabel31.setText("KELAS III");
-        pnlHomeDetail.add(jLabel31);
-        jLabel31.setBounds(20, 270, 50, 14);
-        pnlHomeDetail.add(jSeparator3);
-        jSeparator3.setBounds(0, 70, 330, 10);
-
-        txtJumlahPasienKelas3.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas3);
-        txtJumlahPasienKelas3.setBounds(110, 270, 200, 20);
-
-        txtJumlahPasienVvip.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienVvip);
-        txtJumlahPasienVvip.setBounds(110, 110, 200, 20);
-
-        txtJumlahPasienVip.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienVip);
-        txtJumlahPasienVip.setBounds(110, 150, 200, 20);
-
-        txtJumlahPasienKelas1.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas1);
-        txtJumlahPasienKelas1.setBounds(110, 190, 200, 20);
-
-        txtJumlahPasienKelas2.setEditable(false);
-        pnlHomeDetail.add(txtJumlahPasienKelas2);
-        txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
-
-        getContentPane().add(pnlHomeDetail);
-        pnlHomeDetail.setBounds(10, 220, 330, 430);
 
         pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHome.setLayout(null);
@@ -677,12 +704,7 @@ public class FrameSal extends javax.swing.JFrame {
         panePasien.setVisible(false);
         pnlPasienDetail.setVisible(false);
 
-        try {
-            List<Pasien> list = loadPasienPerawatan();
-            loadDetailRuangan(list);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+        reloadHome();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasukActionPerformed
@@ -704,14 +726,26 @@ public class FrameSal extends javax.swing.JFrame {
             pelayanan.setTanggalMulai(DateUtil.getDate());
             pelayanan.setJamMasuk(DateUtil.getTime());
             pelayanan.setTindakan(tindakan);
+            pelayanan.setBiayaTambahan(new Long(0));
+            pelayanan.setJumlah(0);
+            pelayanan.setKeterangan("");
             
             pelayananService.masukSal(pelayanan);
+
+            JOptionPane.showMessageDialog(this, "Berhasil!");
+            reloadHome();
         } catch (ServiceException | ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnMasukActionPerformed
 
     private void tblPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPasienMouseClicked
+        Point point = evt.getLocationOnScreen();
+        dialogKeluar.setBounds(point.x, point.y, 280, 140);
+
+        txtBiayaTambahan.setText("0");
+        txtKeterangan.setText("-");
+
         dialogKeluar.setVisible(true);
     }//GEN-LAST:event_tblPasienMouseClicked
 
@@ -727,6 +761,9 @@ public class FrameSal extends javax.swing.JFrame {
         
         try {
             pelayananService.keluarSal(p.getId(), DateUtil.getDate(), DateUtil.getTime(), Long.valueOf(tambahan), keterangan);
+
+            JOptionPane.showMessageDialog(this, "Berhasil!");
+            reloadHome();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -770,14 +807,18 @@ public class FrameSal extends javax.swing.JFrame {
         Integer index = panePasien.getSelectedIndex();
         
         if (pasien == null)
-            index = 2;
+            index = -1;
         
-        switch(index) {
-            case 0: loadTindakan(pasien);
-                break;
-            case 1: loadBhp(pasien);
-                break;
-            default: break;
+        try {
+            switch(index) {
+                case 0: loadTindakan(pasien);
+                    break;
+                case 1: loadBhp(pasien);
+                    break;
+                default: break;
+            }
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_panePasienMouseClicked
 
@@ -850,6 +891,10 @@ public class FrameSal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dialogKeluar.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBhpHapus;
     private javax.swing.JButton btnBhpTambah;
@@ -864,6 +909,7 @@ public class FrameSal extends javax.swing.JFrame {
     private javax.swing.JButton btnTindakanUpdate;
     private javax.swing.JComboBox cbKelas;
     private javax.swing.JDialog dialogKeluar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
