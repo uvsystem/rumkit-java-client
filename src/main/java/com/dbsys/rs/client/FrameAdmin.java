@@ -973,58 +973,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlPenduduk = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txtPendudukKode = new javax.swing.JTextField();
-        txtPendudukNik = new javax.swing.JTextField();
-        txtPendudukNama = new javax.swing.JTextField();
-        cbPendudukKelamin = new javax.swing.JComboBox();
-        txtPendudukLahir = new javax.swing.JTextField();
-        txtPendudukDarah = new javax.swing.JTextField();
-        txtPendudukAgama = new javax.swing.JTextField();
-        txtPendudukTelepon = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblPenduduk = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        txtPendudukKeyword = new javax.swing.JTextField();
-        btnPendudukSimpan = new javax.swing.JButton();
-        btnPendudukEdit = new javax.swing.JButton();
-        pnlTindakan = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblTindakan = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        txtTindakanKode = new javax.swing.JTextField();
-        txtTindakanNama = new javax.swing.JTextField();
-        txtTindakanKategori = new javax.swing.JTextField();
-        txtTindakanKeterangan = new javax.swing.JTextField();
-        cbTindakanKelas = new javax.swing.JComboBox();
-        cbTindakanTanggungan = new javax.swing.JComboBox();
-        cbTindakanSatuan = new javax.swing.JComboBox();
-        txtTindakanTarif = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        jLabel86 = new javax.swing.JLabel();
-        jLabel87 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        txtTindakanKeyword = new javax.swing.JTextField();
-        btnSimpanTindakan = new javax.swing.JButton();
-        btnResetTindakan = new javax.swing.JButton();
         pnlUnit = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_unit = new javax.swing.JTable();
@@ -1039,24 +987,53 @@ public class FrameAdmin extends javax.swing.JFrame {
         btn_simpan_unit = new javax.swing.JButton();
         btn_clear_unit = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
-        pnlOperator = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        tbl_op = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        txt_op_nama = new javax.swing.JTextField();
-        txt_admin_operator_unit = new javax.swing.JTextField();
-        txt_op_uname = new javax.swing.JTextField();
-        txt_op_pass = new javax.swing.JTextField();
-        cb_admin_operator_role = new javax.swing.JComboBox();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        btn_tambah_op = new javax.swing.JButton();
-        btn_clear_op = new javax.swing.JButton();
+        pnlBarang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        tabBhp = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblObat = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        txtObatKode = new javax.swing.JTextField();
+        txtObatNama = new javax.swing.JTextField();
+        txtObatHarga = new javax.swing.JTextField();
+        txtObatKeterangan = new javax.swing.JTextField();
+        cbObatTanggungan = new javax.swing.JComboBox();
+        txtObatJumlah = new javax.swing.JTextField();
+        txtObatSatuan = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel84 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtObatKeyword = new javax.swing.JTextField();
+        btnTambahObat = new javax.swing.JButton();
+        btnClearObat = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblBhp = new javax.swing.JTable();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        txtBhpKode = new javax.swing.JTextField();
+        txtBhpNama = new javax.swing.JTextField();
+        txtBhpHarga = new javax.swing.JTextField();
+        cbBhpTanggungan = new javax.swing.JComboBox();
+        txtBhpJumlah = new javax.swing.JTextField();
+        txtBhpSatuan = new javax.swing.JTextField();
+        jPanel17 = new javax.swing.JPanel();
+        txtBhpKeyword = new javax.swing.JTextField();
+        jLabel83 = new javax.swing.JLabel();
+        btnTambahBhp = new javax.swing.JButton();
+        btnClearBhp = new javax.swing.JButton();
         pnlPegawai = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         tab_pane = new javax.swing.JTabbedPane();
@@ -1076,9 +1053,9 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
-        txt_dokter_nip = new javax.swing.JTextField();
-        txt_dokter_nama = new javax.swing.JTextField();
         txt_dokter_kode = new javax.swing.JTextField();
+        txt_dokter_nama = new javax.swing.JTextField();
+        txt_dokter_nip = new javax.swing.JTextField();
         txt_dokter_nik = new javax.swing.JTextField();
         txt_dokter_lahir = new javax.swing.JTextField();
         cb_dokter_kelamin = new javax.swing.JComboBox();
@@ -1160,53 +1137,76 @@ public class FrameAdmin extends javax.swing.JFrame {
         txtPekerjaDarah = new javax.swing.JTextField();
         txtPekerjaAgama = new javax.swing.JTextField();
         txtPekerjaTelepon = new javax.swing.JTextField();
-        pnlBarang = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tabBhp = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblObat = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        txtObatKode = new javax.swing.JTextField();
-        txtObatNama = new javax.swing.JTextField();
-        txtObatHarga = new javax.swing.JTextField();
-        txtObatKeterangan = new javax.swing.JTextField();
-        cbObatTanggungan = new javax.swing.JComboBox();
-        txtObatJumlah = new javax.swing.JTextField();
-        txtObatSatuan = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel84 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txtObatKeyword = new javax.swing.JTextField();
-        btnTambahObat = new javax.swing.JButton();
-        btnClearObat = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        tblBhp = new javax.swing.JTable();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        txtBhpKode = new javax.swing.JTextField();
-        txtBhpNama = new javax.swing.JTextField();
-        txtBhpHarga = new javax.swing.JTextField();
-        cbBhpTanggungan = new javax.swing.JComboBox();
-        txtBhpJumlah = new javax.swing.JTextField();
-        txtBhpSatuan = new javax.swing.JTextField();
-        jPanel17 = new javax.swing.JPanel();
-        txtBhpKeyword = new javax.swing.JTextField();
-        jLabel83 = new javax.swing.JLabel();
-        btnTambahBhp = new javax.swing.JButton();
-        btnClearBhp = new javax.swing.JButton();
+        pnlOperator = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbl_op = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        txt_op_nama = new javax.swing.JTextField();
+        txt_admin_operator_unit = new javax.swing.JTextField();
+        txt_op_uname = new javax.swing.JTextField();
+        txt_op_pass = new javax.swing.JTextField();
+        cb_admin_operator_role = new javax.swing.JComboBox();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        btn_tambah_op = new javax.swing.JButton();
+        btn_clear_op = new javax.swing.JButton();
+        pnlTindakan = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTindakan = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        txtTindakanKode = new javax.swing.JTextField();
+        txtTindakanNama = new javax.swing.JTextField();
+        txtTindakanKategori = new javax.swing.JTextField();
+        txtTindakanKeterangan = new javax.swing.JTextField();
+        cbTindakanKelas = new javax.swing.JComboBox();
+        cbTindakanTanggungan = new javax.swing.JComboBox();
+        cbTindakanSatuan = new javax.swing.JComboBox();
+        txtTindakanTarif = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel85 = new javax.swing.JLabel();
+        jLabel86 = new javax.swing.JLabel();
+        jLabel87 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        txtTindakanKeyword = new javax.swing.JTextField();
+        btnSimpanTindakan = new javax.swing.JButton();
+        btnResetTindakan = new javax.swing.JButton();
+        pnlPenduduk = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtPendudukKode = new javax.swing.JTextField();
+        txtPendudukNik = new javax.swing.JTextField();
+        txtPendudukNama = new javax.swing.JTextField();
+        cbPendudukKelamin = new javax.swing.JComboBox();
+        txtPendudukLahir = new javax.swing.JTextField();
+        txtPendudukDarah = new javax.swing.JTextField();
+        txtPendudukAgama = new javax.swing.JTextField();
+        txtPendudukTelepon = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPenduduk = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtPendudukKeyword = new javax.swing.JTextField();
+        btnPendudukSimpan = new javax.swing.JButton();
+        btnPendudukEdit = new javax.swing.JButton();
         btnUnit = new javax.swing.JButton();
         btnOperator = new javax.swing.JButton();
         btnPegawai = new javax.swing.JButton();
@@ -1228,275 +1228,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnlPenduduk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlPenduduk.setLayout(null);
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_rekmed.png"))); // NOI18N
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlPenduduk.add(jLabel9);
-        jLabel9.setBounds(0, 10, 1060, 20);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(null);
-
-        jLabel11.setText("KODE");
-        jPanel3.add(jLabel11);
-        jLabel11.setBounds(20, 20, 100, 14);
-
-        jLabel12.setText("NIK");
-        jPanel3.add(jLabel12);
-        jLabel12.setBounds(20, 50, 100, 14);
-
-        jLabel13.setText("NAMA");
-        jPanel3.add(jLabel13);
-        jLabel13.setBounds(20, 80, 100, 14);
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setText("KELAMIN");
-        jPanel3.add(jLabel14);
-        jLabel14.setBounds(20, 110, 100, 14);
-
-        jLabel15.setText("TGL LAHIR");
-        jPanel3.add(jLabel15);
-        jLabel15.setBounds(550, 20, 110, 14);
-
-        jLabel16.setText("GOL. DARAH");
-        jPanel3.add(jLabel16);
-        jLabel16.setBounds(550, 50, 110, 14);
-
-        jLabel17.setText("AGAMA");
-        jPanel3.add(jLabel17);
-        jLabel17.setBounds(550, 80, 110, 14);
-
-        jLabel18.setText("NO TELEPON");
-        jPanel3.add(jLabel18);
-        jLabel18.setBounds(550, 110, 110, 14);
-        jPanel3.add(txtPendudukKode);
-        txtPendudukKode.setBounds(130, 20, 350, 20);
-        jPanel3.add(txtPendudukNik);
-        txtPendudukNik.setBounds(130, 50, 350, 20);
-        jPanel3.add(txtPendudukNama);
-        txtPendudukNama.setBounds(130, 80, 350, 20);
-
-        cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
-        jPanel3.add(cbPendudukKelamin);
-        cbPendudukKelamin.setBounds(130, 110, 350, 20);
-        jPanel3.add(txtPendudukLahir);
-        txtPendudukLahir.setBounds(670, 20, 350, 20);
-        jPanel3.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(670, 50, 350, 20);
-        jPanel3.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(670, 80, 350, 20);
-        jPanel3.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(670, 110, 350, 20);
-
-        pnlPenduduk.add(jPanel3);
-        jPanel3.setBounds(10, 470, 1040, 150);
-
-        tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblPenduduk.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPendudukMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblPenduduk);
-
-        pnlPenduduk.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 40, 1040, 340);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
-        jPanel4.setLayout(null);
-
-        jLabel10.setText("KATA KUNCI");
-        jPanel4.add(jLabel10);
-        jLabel10.setBounds(20, 30, 60, 14);
-
-        txtPendudukKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPendudukKeywordFocusLost(evt);
-            }
-        });
-        txtPendudukKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPendudukKeywordKeyPressed(evt);
-            }
-        });
-        jPanel4.add(txtPendudukKeyword);
-        txtPendudukKeyword.setBounds(130, 30, 350, 20);
-
-        pnlPenduduk.add(jPanel4);
-        jPanel4.setBounds(10, 390, 530, 70);
-
-        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukSimpanActionPerformed(evt);
-            }
-        });
-        pnlPenduduk.add(btnPendudukSimpan);
-        btnPendudukSimpan.setBounds(960, 400, 80, 40);
-
-        btnPendudukEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btnPendudukEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukEditActionPerformed(evt);
-            }
-        });
-        pnlPenduduk.add(btnPendudukEdit);
-        btnPendudukEdit.setBounds(860, 400, 80, 40);
-
-        getContentPane().add(pnlPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
-
-        pnlTindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlTindakan.setLayout(null);
-
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_tindakan.png"))); // NOI18N
-        pnlTindakan.add(jLabel19);
-        jLabel19.setBounds(0, 10, 1060, 20);
-
-        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTindakanMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblTindakan);
-
-        pnlTindakan.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 40, 1030, 340);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(null);
-        jPanel6.add(txtTindakanKode);
-        txtTindakanKode.setBounds(140, 20, 350, 20);
-        jPanel6.add(txtTindakanNama);
-        txtTindakanNama.setBounds(140, 50, 350, 20);
-
-        txtTindakanKategori.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtTindakanKategoriMouseClicked(evt);
-            }
-        });
-        jPanel6.add(txtTindakanKategori);
-        txtTindakanKategori.setBounds(140, 80, 350, 20);
-        jPanel6.add(txtTindakanKeterangan);
-        txtTindakanKeterangan.setBounds(140, 110, 350, 20);
-
-        cbTindakanKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
-        jPanel6.add(cbTindakanKelas);
-        cbTindakanKelas.setBounds(640, 20, 350, 20);
-
-        cbTindakanTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
-        jPanel6.add(cbTindakanTanggungan);
-        cbTindakanTanggungan.setBounds(640, 50, 350, 20);
-
-        cbTindakanSatuan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "TINDAKAN", "HARI", "JAM" }));
-        jPanel6.add(cbTindakanSatuan);
-        cbTindakanSatuan.setBounds(640, 80, 350, 20);
-        jPanel6.add(txtTindakanTarif);
-        txtTindakanTarif.setBounds(640, 110, 350, 20);
-
-        jLabel21.setText("KODE");
-        jPanel6.add(jLabel21);
-        jLabel21.setBounds(30, 20, 90, 14);
-
-        jLabel22.setText("NAMA");
-        jPanel6.add(jLabel22);
-        jLabel22.setBounds(30, 50, 90, 14);
-
-        jLabel23.setText("TARIF");
-        jPanel6.add(jLabel23);
-        jLabel23.setBounds(540, 110, 90, 14);
-
-        jLabel24.setText("KETERANGAN");
-        jPanel6.add(jLabel24);
-        jLabel24.setBounds(30, 110, 90, 14);
-
-        jLabel32.setText("KATEGORI");
-        jPanel6.add(jLabel32);
-        jLabel32.setBounds(30, 80, 90, 14);
-
-        jLabel85.setText("TANGGUNGAN");
-        jPanel6.add(jLabel85);
-        jLabel85.setBounds(540, 50, 90, 14);
-
-        jLabel86.setText("KELAS");
-        jPanel6.add(jLabel86);
-        jLabel86.setBounds(540, 20, 90, 14);
-
-        jLabel87.setText("SATUAN");
-        jPanel6.add(jLabel87);
-        jLabel87.setBounds(540, 80, 90, 14);
-
-        pnlTindakan.add(jPanel6);
-        jPanel6.setBounds(20, 460, 1020, 150);
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel7.setLayout(null);
-
-        jLabel20.setText("CARI");
-        jPanel7.add(jLabel20);
-        jLabel20.setBounds(30, 20, 70, 14);
-
-        txtTindakanKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtTindakanKeywordFocusLost(evt);
-            }
-        });
-        txtTindakanKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTindakanKeywordKeyTyped(evt);
-            }
-        });
-        jPanel7.add(txtTindakanKeyword);
-        txtTindakanKeyword.setBounds(140, 20, 350, 20);
-
-        pnlTindakan.add(jPanel7);
-        jPanel7.setBounds(20, 390, 510, 60);
-
-        btnSimpanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnSimpanTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSimpanTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSimpanTindakanMouseClicked(evt);
-            }
-        });
-        pnlTindakan.add(btnSimpanTindakan);
-        btnSimpanTindakan.setBounds(860, 400, 80, 40);
-
-        btnResetTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btnResetTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnResetTindakanMouseClicked(evt);
-            }
-        });
-        pnlTindakan.add(btnResetTindakan);
-        btnResetTindakan.setBounds(950, 400, 80, 40);
-
-        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlUnit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlUnit.setLayout(null);
@@ -1520,18 +1251,18 @@ public class FrameAdmin extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tbl_unit);
 
         pnlUnit.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 60, 1030, 430);
+        jScrollPane4.setBounds(10, 60, 1030, 440);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(null);
         jPanel8.add(txt_unit_nama);
-        txt_unit_nama.setBounds(140, 13, 350, 20);
+        txt_unit_nama.setBounds(140, 10, 350, 25);
         jPanel8.add(txt_unit_bobot);
-        txt_unit_bobot.setBounds(140, 40, 350, 20);
+        txt_unit_bobot.setBounds(140, 40, 350, 25);
 
         cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "LOKET_PENDAFTARAN", "LOKET_PEMBAYARAN", "POLIKLINIK", "RUANG_PERAWATAN", "FARMASI", "UNIT_LAIN" }));
         jPanel8.add(cb_unit_tipe);
-        cb_unit_tipe.setBounds(140, 70, 350, 20);
+        cb_unit_tipe.setBounds(140, 70, 350, 25);
 
         jLabel29.setText("NAMA");
         jPanel8.add(jLabel29);
@@ -1546,7 +1277,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel52.setBounds(30, 70, 90, 14);
 
         pnlUnit.add(jPanel8);
-        jPanel8.setBounds(10, 500, 510, 120);
+        jPanel8.setBounds(10, 510, 510, 110);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1578,15 +1309,24 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         getContentPane().add(pnlUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
-        pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlOperator.setLayout(null);
+        pnlBarang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlBarang.setLayout(null);
 
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_operator.png"))); // NOI18N
-        pnlOperator.add(jLabel28);
-        jLabel28.setBounds(0, 10, 1060, 20);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_barang.png"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlBarang.add(jLabel1);
+        jLabel1.setBounds(260, 0, 210, 30);
 
-        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
+        tabBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabBhpMouseClicked(evt);
+            }
+        });
+
+        jPanel5.setLayout(null);
+
+        tblObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1597,84 +1337,233 @@ public class FrameAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_op.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_opMouseClicked(evt);
+                tblObatMouseClicked(evt);
             }
         });
-        jScrollPane9.setViewportView(tbl_op);
+        jScrollPane1.setViewportView(tblObat);
 
-        pnlOperator.add(jScrollPane9);
-        jScrollPane9.setBounds(10, 60, 1030, 380);
+        jPanel5.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 1015, 320);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10.setLayout(null);
-        jPanel10.add(txt_op_nama);
-        txt_op_nama.setBounds(140, 13, 350, 20);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(null);
+        jPanel1.add(txtObatKode);
+        txtObatKode.setBounds(140, 20, 350, 20);
+        jPanel1.add(txtObatNama);
+        txtObatNama.setBounds(140, 50, 350, 20);
+        jPanel1.add(txtObatHarga);
+        txtObatHarga.setBounds(140, 80, 350, 20);
 
-        txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtObatKeterangan.setToolTipText("");
+        jPanel1.add(txtObatKeterangan);
+        txtObatKeterangan.setBounds(140, 110, 350, 20);
+
+        cbObatTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel1.add(cbObatTanggungan);
+        cbObatTanggungan.setBounds(640, 20, 350, 20);
+
+        txtObatJumlah.setToolTipText("");
+        jPanel1.add(txtObatJumlah);
+        txtObatJumlah.setBounds(640, 50, 350, 20);
+
+        txtObatSatuan.setToolTipText("");
+        jPanel1.add(txtObatSatuan);
+        txtObatSatuan.setBounds(640, 80, 350, 20);
+
+        jLabel2.setText("KODE");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 20, 90, 14);
+
+        jLabel4.setText("NAMA");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(30, 50, 90, 14);
+
+        jLabel7.setText("HARGA");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(30, 80, 90, 14);
+
+        jLabel8.setText("KETERANGAN");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(30, 110, 90, 14);
+
+        jLabel84.setText("TANGGUNGAN");
+        jPanel1.add(jLabel84);
+        jLabel84.setBounds(540, 20, 90, 14);
+
+        jLabel5.setText("JUMLAH");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(540, 50, 90, 14);
+
+        jLabel6.setText("SATUAN");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(540, 80, 90, 14);
+
+        jPanel5.add(jPanel1);
+        jPanel1.setBounds(10, 408, 1010, 143);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
+        jPanel2.setLayout(null);
+
+        jLabel3.setText("KATA KUNCI");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(30, 20, 90, 14);
+
+        txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObatKeywordFocusLost(evt);
+            }
+        });
+        txtObatKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtObatKeywordKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtObatKeyword);
+        txtObatKeyword.setBounds(140, 20, 350, 20);
+
+        jPanel5.add(jPanel2);
+        jPanel2.setBounds(10, 340, 510, 60);
+
+        btnTambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTambahObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahObatActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnTambahObat);
+        btnTambahObat.setBounds(940, 350, 80, 40);
+
+        btnClearObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnClearObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearObatActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnClearObat);
+        btnClearObat.setBounds(850, 350, 80, 40);
+
+        tabBhp.addTab("OBAT", jPanel5);
+
+        jPanel12.setLayout(null);
+
+        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBhp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_admin_operator_unitMouseClicked(evt);
+                tblBhpMouseClicked(evt);
             }
         });
-        jPanel10.add(txt_admin_operator_unit);
-        txt_admin_operator_unit.setBounds(140, 40, 350, 20);
-        jPanel10.add(txt_op_uname);
-        txt_op_uname.setBounds(140, 70, 350, 20);
-        jPanel10.add(txt_op_pass);
-        txt_op_pass.setBounds(140, 100, 350, 20);
+        jScrollPane10.setViewportView(tblBhp);
 
-        cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
-        jPanel10.add(cb_admin_operator_role);
-        cb_admin_operator_role.setBounds(140, 130, 350, 20);
+        jPanel12.add(jScrollPane10);
+        jScrollPane10.setBounds(10, 0, 1010, 350);
 
-        jLabel49.setText("NAMA");
-        jPanel10.add(jLabel49);
-        jLabel49.setBounds(30, 16, 90, 14);
+        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setLayout(null);
 
-        jLabel27.setText("UNIT");
-        jPanel10.add(jLabel27);
-        jLabel27.setBounds(30, 43, 90, 14);
+        jLabel36.setText("KODE");
+        jPanel13.add(jLabel36);
+        jLabel36.setBounds(30, 20, 90, 14);
 
-        jLabel50.setText("USERNAME");
-        jPanel10.add(jLabel50);
-        jLabel50.setBounds(30, 70, 90, 14);
+        jLabel37.setText("NAMA");
+        jPanel13.add(jLabel37);
+        jLabel37.setBounds(30, 50, 90, 14);
 
-        jLabel51.setText("PASSWORD");
-        jPanel10.add(jLabel51);
-        jLabel51.setBounds(30, 100, 90, 14);
+        jLabel40.setText("HARGA");
+        jPanel13.add(jLabel40);
+        jLabel40.setBounds(30, 80, 90, 14);
 
-        jLabel31.setText("ROLE");
-        jPanel10.add(jLabel31);
-        jLabel31.setBounds(30, 130, 90, 14);
+        jLabel41.setText("TANGGUNGAN");
+        jPanel13.add(jLabel41);
+        jLabel41.setBounds(540, 20, 90, 14);
 
-        pnlOperator.add(jPanel10);
-        jPanel10.setBounds(10, 450, 700, 170);
+        jLabel38.setText("JUMLAH");
+        jPanel13.add(jLabel38);
+        jLabel38.setBounds(540, 50, 90, 14);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel39.setText("SATUAN");
+        jPanel13.add(jLabel39);
+        jLabel39.setBounds(540, 80, 90, 14);
+        jPanel13.add(txtBhpKode);
+        txtBhpKode.setBounds(140, 20, 350, 20);
+        jPanel13.add(txtBhpNama);
+        txtBhpNama.setBounds(140, 50, 350, 20);
+        jPanel13.add(txtBhpHarga);
+        txtBhpHarga.setBounds(140, 80, 350, 20);
 
-        btn_tambah_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
-        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_tambah_op.addActionListener(new java.awt.event.ActionListener() {
+        cbBhpTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel13.add(cbBhpTanggungan);
+        cbBhpTanggungan.setBounds(640, 20, 350, 20);
+
+        txtBhpJumlah.setToolTipText("");
+        jPanel13.add(txtBhpJumlah);
+        txtBhpJumlah.setBounds(640, 50, 350, 20);
+
+        txtBhpSatuan.setToolTipText("");
+        jPanel13.add(txtBhpSatuan);
+        txtBhpSatuan.setBounds(640, 80, 350, 20);
+
+        jPanel12.add(jPanel13);
+        jPanel13.setBounds(10, 430, 1015, 120);
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
+        jPanel17.setLayout(null);
+
+        txtBhpKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBhpKeywordFocusLost(evt);
+            }
+        });
+        txtBhpKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBhpKeywordKeyPressed(evt);
+            }
+        });
+        jPanel17.add(txtBhpKeyword);
+        txtBhpKeyword.setBounds(140, 20, 350, 20);
+
+        jLabel83.setText("KATA KUNCI");
+        jPanel17.add(jLabel83);
+        jLabel83.setBounds(30, 20, 80, 14);
+
+        jPanel12.add(jPanel17);
+        jPanel17.setBounds(10, 360, 500, 60);
+
+        btnTambahBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTambahBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambah_opActionPerformed(evt);
+                btnTambahBhpActionPerformed(evt);
             }
         });
-        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+        jPanel12.add(btnTambahBhp);
+        btnTambahBhp.setBounds(930, 370, 80, 40);
 
-        btn_clear_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btn_clear_op.addActionListener(new java.awt.event.ActionListener() {
+        btnClearBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnClearBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_clear_opActionPerformed(evt);
+                btnClearBhpActionPerformed(evt);
             }
         });
-        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 100, 40));
+        jPanel12.add(btnClearBhp);
+        btnClearBhp.setBounds(840, 370, 80, 40);
 
-        pnlOperator.add(jPanel11);
-        jPanel11.setBounds(800, 560, 240, 60);
+        tabBhp.addTab("BARANG HABIS PAKAI", jPanel12);
 
-        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        pnlBarang.add(tabBhp);
+        tabBhp.setBounds(10, 30, 1040, 590);
+
+        getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlPegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlPegawai.setLayout(null);
@@ -1774,12 +1663,12 @@ public class FrameAdmin extends javax.swing.JFrame {
         jLabel59.setText("TELEPON");
         jPanel21.add(jLabel59);
         jLabel59.setBounds(540, 110, 90, 14);
-        jPanel21.add(txt_dokter_nip);
-        txt_dokter_nip.setBounds(140, 80, 350, 20);
-        jPanel21.add(txt_dokter_nama);
-        txt_dokter_nama.setBounds(140, 50, 350, 20);
         jPanel21.add(txt_dokter_kode);
         txt_dokter_kode.setBounds(140, 20, 350, 20);
+        jPanel21.add(txt_dokter_nama);
+        txt_dokter_nama.setBounds(140, 50, 350, 20);
+        jPanel21.add(txt_dokter_nip);
+        txt_dokter_nip.setBounds(140, 80, 350, 20);
         jPanel21.add(txt_dokter_nik);
         txt_dokter_nik.setBounds(140, 110, 350, 20);
         jPanel21.add(txt_dokter_lahir);
@@ -2132,24 +2021,15 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         getContentPane().add(pnlPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
-        pnlBarang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlBarang.setLayout(null);
+        pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlOperator.setLayout(null);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_barang.png"))); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlBarang.add(jLabel1);
-        jLabel1.setBounds(260, 0, 210, 30);
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_operator.png"))); // NOI18N
+        pnlOperator.add(jLabel28);
+        jLabel28.setBounds(0, 10, 1060, 20);
 
-        tabBhp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabBhpMouseClicked(evt);
-            }
-        });
-
-        jPanel5.setLayout(null);
-
-        tblObat.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_op.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2160,118 +2040,94 @@ public class FrameAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblObat.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_op.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblObatMouseClicked(evt);
+                tbl_opMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblObat);
+        jScrollPane9.setViewportView(tbl_op);
 
-        jPanel5.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 1015, 320);
+        pnlOperator.add(jScrollPane9);
+        jScrollPane9.setBounds(10, 60, 1030, 380);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(null);
-        jPanel1.add(txtObatKode);
-        txtObatKode.setBounds(140, 20, 350, 20);
-        jPanel1.add(txtObatNama);
-        txtObatNama.setBounds(140, 50, 350, 20);
-        jPanel1.add(txtObatHarga);
-        txtObatHarga.setBounds(140, 80, 350, 20);
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(null);
+        jPanel10.add(txt_op_nama);
+        txt_op_nama.setBounds(140, 13, 350, 20);
 
-        txtObatKeterangan.setToolTipText("");
-        jPanel1.add(txtObatKeterangan);
-        txtObatKeterangan.setBounds(140, 110, 350, 20);
-
-        cbObatTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
-        jPanel1.add(cbObatTanggungan);
-        cbObatTanggungan.setBounds(640, 20, 350, 20);
-
-        txtObatJumlah.setToolTipText("");
-        jPanel1.add(txtObatJumlah);
-        txtObatJumlah.setBounds(640, 50, 350, 20);
-
-        txtObatSatuan.setToolTipText("");
-        jPanel1.add(txtObatSatuan);
-        txtObatSatuan.setBounds(640, 80, 350, 20);
-
-        jLabel2.setText("KODE");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 20, 90, 14);
-
-        jLabel4.setText("NAMA");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 50, 90, 14);
-
-        jLabel7.setText("HARGA");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(30, 80, 90, 14);
-
-        jLabel8.setText("KETERANGAN");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(30, 110, 90, 14);
-
-        jLabel84.setText("TANGGUNGAN");
-        jPanel1.add(jLabel84);
-        jLabel84.setBounds(540, 20, 90, 14);
-
-        jLabel5.setText("JUMLAH");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(540, 50, 90, 14);
-
-        jLabel6.setText("SATUAN");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(540, 80, 90, 14);
-
-        jPanel5.add(jPanel1);
-        jPanel1.setBounds(10, 408, 1010, 143);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
-        jPanel2.setLayout(null);
-
-        jLabel3.setText("KATA KUNCI");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(30, 20, 90, 14);
-
-        txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtObatKeywordFocusLost(evt);
+        txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_admin_operator_unitMouseClicked(evt);
             }
         });
-        txtObatKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtObatKeywordKeyPressed(evt);
-            }
-        });
-        jPanel2.add(txtObatKeyword);
-        txtObatKeyword.setBounds(140, 20, 350, 20);
+        jPanel10.add(txt_admin_operator_unit);
+        txt_admin_operator_unit.setBounds(140, 40, 350, 20);
+        jPanel10.add(txt_op_uname);
+        txt_op_uname.setBounds(140, 70, 350, 20);
+        jPanel10.add(txt_op_pass);
+        txt_op_pass.setBounds(140, 100, 350, 20);
 
-        jPanel5.add(jPanel2);
-        jPanel2.setBounds(10, 340, 510, 60);
+        cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
+        jPanel10.add(cb_admin_operator_role);
+        cb_admin_operator_role.setBounds(140, 130, 350, 20);
 
-        btnTambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnTambahObat.addActionListener(new java.awt.event.ActionListener() {
+        jLabel49.setText("NAMA");
+        jPanel10.add(jLabel49);
+        jLabel49.setBounds(30, 16, 90, 14);
+
+        jLabel27.setText("UNIT");
+        jPanel10.add(jLabel27);
+        jLabel27.setBounds(30, 43, 90, 14);
+
+        jLabel50.setText("USERNAME");
+        jPanel10.add(jLabel50);
+        jLabel50.setBounds(30, 70, 90, 14);
+
+        jLabel51.setText("PASSWORD");
+        jPanel10.add(jLabel51);
+        jLabel51.setBounds(30, 100, 90, 14);
+
+        jLabel31.setText("ROLE");
+        jPanel10.add(jLabel31);
+        jLabel31.setBounds(30, 130, 90, 14);
+
+        pnlOperator.add(jPanel10);
+        jPanel10.setBounds(10, 450, 700, 170);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_tambah_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btn_tambah_op.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_tambah_op.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahObatActionPerformed(evt);
+                btn_tambah_opActionPerformed(evt);
             }
         });
-        jPanel5.add(btnTambahObat);
-        btnTambahObat.setBounds(940, 350, 80, 40);
+        jPanel11.add(btn_tambah_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
 
-        btnClearObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btnClearObat.addActionListener(new java.awt.event.ActionListener() {
+        btn_clear_op.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btn_clear_op.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearObatActionPerformed(evt);
+                btn_clear_opActionPerformed(evt);
             }
         });
-        jPanel5.add(btnClearObat);
-        btnClearObat.setBounds(850, 350, 80, 40);
+        jPanel11.add(btn_clear_op, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 100, 40));
 
-        tabBhp.addTab("OBAT", jPanel5);
+        pnlOperator.add(jPanel11);
+        jPanel11.setBounds(800, 560, 240, 60);
 
-        jPanel12.setLayout(null);
+        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
-        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
+        pnlTindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlTindakan.setLayout(null);
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_tindakan.png"))); // NOI18N
+        pnlTindakan.add(jLabel19);
+        jLabel19.setBounds(0, 10, 1060, 20);
+
+        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2282,111 +2138,255 @@ public class FrameAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblBhpMouseClicked(evt);
+                tblTindakanMouseClicked(evt);
             }
         });
-        jScrollPane10.setViewportView(tblBhp);
+        jScrollPane3.setViewportView(tblTindakan);
 
-        jPanel12.add(jScrollPane10);
-        jScrollPane10.setBounds(10, 0, 1010, 350);
+        pnlTindakan.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 40, 1030, 340);
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel13.setLayout(null);
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setLayout(null);
+        jPanel6.add(txtTindakanKode);
+        txtTindakanKode.setBounds(140, 20, 350, 20);
+        jPanel6.add(txtTindakanNama);
+        txtTindakanNama.setBounds(140, 50, 350, 20);
 
-        jLabel36.setText("KODE");
-        jPanel13.add(jLabel36);
-        jLabel36.setBounds(30, 20, 90, 14);
+        txtTindakanKategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTindakanKategoriMouseClicked(evt);
+            }
+        });
+        jPanel6.add(txtTindakanKategori);
+        txtTindakanKategori.setBounds(140, 80, 350, 20);
+        jPanel6.add(txtTindakanKeterangan);
+        txtTindakanKeterangan.setBounds(140, 110, 350, 20);
 
-        jLabel37.setText("NAMA");
-        jPanel13.add(jLabel37);
-        jLabel37.setBounds(30, 50, 90, 14);
+        cbTindakanKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
+        jPanel6.add(cbTindakanKelas);
+        cbTindakanKelas.setBounds(640, 20, 350, 20);
 
-        jLabel40.setText("HARGA");
-        jPanel13.add(jLabel40);
-        jLabel40.setBounds(30, 80, 90, 14);
+        cbTindakanTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        jPanel6.add(cbTindakanTanggungan);
+        cbTindakanTanggungan.setBounds(640, 50, 350, 20);
 
-        jLabel41.setText("TANGGUNGAN");
-        jPanel13.add(jLabel41);
-        jLabel41.setBounds(540, 20, 90, 14);
+        cbTindakanSatuan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "TINDAKAN", "HARI", "JAM" }));
+        jPanel6.add(cbTindakanSatuan);
+        cbTindakanSatuan.setBounds(640, 80, 350, 20);
+        jPanel6.add(txtTindakanTarif);
+        txtTindakanTarif.setBounds(640, 110, 350, 20);
 
-        jLabel38.setText("JUMLAH");
-        jPanel13.add(jLabel38);
-        jLabel38.setBounds(540, 50, 90, 14);
+        jLabel21.setText("KODE");
+        jPanel6.add(jLabel21);
+        jLabel21.setBounds(30, 20, 90, 14);
 
-        jLabel39.setText("SATUAN");
-        jPanel13.add(jLabel39);
-        jLabel39.setBounds(540, 80, 90, 14);
-        jPanel13.add(txtBhpKode);
-        txtBhpKode.setBounds(140, 20, 350, 20);
-        jPanel13.add(txtBhpNama);
-        txtBhpNama.setBounds(140, 50, 350, 20);
-        jPanel13.add(txtBhpHarga);
-        txtBhpHarga.setBounds(140, 80, 350, 20);
+        jLabel22.setText("NAMA");
+        jPanel6.add(jLabel22);
+        jLabel22.setBounds(30, 50, 90, 14);
 
-        cbBhpTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
-        jPanel13.add(cbBhpTanggungan);
-        cbBhpTanggungan.setBounds(640, 20, 350, 20);
+        jLabel23.setText("TARIF");
+        jPanel6.add(jLabel23);
+        jLabel23.setBounds(540, 110, 90, 14);
 
-        txtBhpJumlah.setToolTipText("");
-        jPanel13.add(txtBhpJumlah);
-        txtBhpJumlah.setBounds(640, 50, 350, 20);
+        jLabel24.setText("KETERANGAN");
+        jPanel6.add(jLabel24);
+        jLabel24.setBounds(30, 110, 90, 14);
 
-        txtBhpSatuan.setToolTipText("");
-        jPanel13.add(txtBhpSatuan);
-        txtBhpSatuan.setBounds(640, 80, 350, 20);
+        jLabel32.setText("KATEGORI");
+        jPanel6.add(jLabel32);
+        jLabel32.setBounds(30, 80, 90, 14);
 
-        jPanel12.add(jPanel13);
-        jPanel13.setBounds(10, 430, 1015, 120);
+        jLabel85.setText("TANGGUNGAN");
+        jPanel6.add(jLabel85);
+        jLabel85.setBounds(540, 50, 90, 14);
 
-        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
-        jPanel17.setLayout(null);
+        jLabel86.setText("KELAS");
+        jPanel6.add(jLabel86);
+        jLabel86.setBounds(540, 20, 90, 14);
 
-        txtBhpKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+        jLabel87.setText("SATUAN");
+        jPanel6.add(jLabel87);
+        jLabel87.setBounds(540, 80, 90, 14);
+
+        pnlTindakan.add(jPanel6);
+        jPanel6.setBounds(20, 460, 1020, 150);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setLayout(null);
+
+        jLabel20.setText("CARI");
+        jPanel7.add(jLabel20);
+        jLabel20.setBounds(30, 20, 70, 14);
+
+        txtTindakanKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtBhpKeywordFocusLost(evt);
+                txtTindakanKeywordFocusLost(evt);
             }
         });
-        txtBhpKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTindakanKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTindakanKeywordKeyTyped(evt);
+            }
+        });
+        jPanel7.add(txtTindakanKeyword);
+        txtTindakanKeyword.setBounds(140, 20, 350, 20);
+
+        pnlTindakan.add(jPanel7);
+        jPanel7.setBounds(20, 390, 510, 60);
+
+        btnSimpanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnSimpanTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSimpanTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSimpanTindakanMouseClicked(evt);
+            }
+        });
+        pnlTindakan.add(btnSimpanTindakan);
+        btnSimpanTindakan.setBounds(860, 400, 80, 40);
+
+        btnResetTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnResetTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetTindakanMouseClicked(evt);
+            }
+        });
+        pnlTindakan.add(btnResetTindakan);
+        btnResetTindakan.setBounds(950, 400, 80, 40);
+
+        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+
+        pnlPenduduk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlPenduduk.setLayout(null);
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/lbl_rekmed.png"))); // NOI18N
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlPenduduk.add(jLabel9);
+        jLabel9.setBounds(0, 10, 1060, 20);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(null);
+
+        jLabel11.setText("KODE");
+        jPanel3.add(jLabel11);
+        jLabel11.setBounds(20, 20, 100, 14);
+
+        jLabel12.setText("NIK");
+        jPanel3.add(jLabel12);
+        jLabel12.setBounds(20, 50, 100, 14);
+
+        jLabel13.setText("NAMA");
+        jPanel3.add(jLabel13);
+        jLabel13.setBounds(20, 80, 100, 14);
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("KELAMIN");
+        jPanel3.add(jLabel14);
+        jLabel14.setBounds(20, 110, 100, 14);
+
+        jLabel15.setText("TGL LAHIR");
+        jPanel3.add(jLabel15);
+        jLabel15.setBounds(550, 20, 110, 14);
+
+        jLabel16.setText("GOL. DARAH");
+        jPanel3.add(jLabel16);
+        jLabel16.setBounds(550, 50, 110, 14);
+
+        jLabel17.setText("AGAMA");
+        jPanel3.add(jLabel17);
+        jLabel17.setBounds(550, 80, 110, 14);
+
+        jLabel18.setText("NO TELEPON");
+        jPanel3.add(jLabel18);
+        jLabel18.setBounds(550, 110, 110, 14);
+        jPanel3.add(txtPendudukKode);
+        txtPendudukKode.setBounds(130, 20, 350, 20);
+        jPanel3.add(txtPendudukNik);
+        txtPendudukNik.setBounds(130, 50, 350, 20);
+        jPanel3.add(txtPendudukNama);
+        txtPendudukNama.setBounds(130, 80, 350, 20);
+
+        cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
+        jPanel3.add(cbPendudukKelamin);
+        cbPendudukKelamin.setBounds(130, 110, 350, 20);
+        jPanel3.add(txtPendudukLahir);
+        txtPendudukLahir.setBounds(670, 20, 350, 20);
+        jPanel3.add(txtPendudukDarah);
+        txtPendudukDarah.setBounds(670, 50, 350, 20);
+        jPanel3.add(txtPendudukAgama);
+        txtPendudukAgama.setBounds(670, 80, 350, 20);
+        jPanel3.add(txtPendudukTelepon);
+        txtPendudukTelepon.setBounds(670, 110, 350, 20);
+
+        pnlPenduduk.add(jPanel3);
+        jPanel3.setBounds(10, 470, 1040, 150);
+
+        tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPenduduk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPendudukMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblPenduduk);
+
+        pnlPenduduk.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 40, 1040, 340);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
+        jPanel4.setLayout(null);
+
+        jLabel10.setText("KATA KUNCI");
+        jPanel4.add(jLabel10);
+        jLabel10.setBounds(20, 30, 60, 14);
+
+        txtPendudukKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPendudukKeywordFocusLost(evt);
+            }
+        });
+        txtPendudukKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBhpKeywordKeyPressed(evt);
+                txtPendudukKeywordKeyPressed(evt);
             }
         });
-        jPanel17.add(txtBhpKeyword);
-        txtBhpKeyword.setBounds(140, 20, 350, 20);
+        jPanel4.add(txtPendudukKeyword);
+        txtPendudukKeyword.setBounds(130, 30, 350, 20);
 
-        jLabel83.setText("KATA KUNCI");
-        jPanel17.add(jLabel83);
-        jLabel83.setBounds(30, 20, 80, 14);
+        pnlPenduduk.add(jPanel4);
+        jPanel4.setBounds(10, 390, 530, 70);
 
-        jPanel12.add(jPanel17);
-        jPanel17.setBounds(10, 360, 500, 60);
-
-        btnTambahBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnTambahBhp.addActionListener(new java.awt.event.ActionListener() {
+        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahBhpActionPerformed(evt);
+                btnPendudukSimpanActionPerformed(evt);
             }
         });
-        jPanel12.add(btnTambahBhp);
-        btnTambahBhp.setBounds(930, 370, 80, 40);
+        pnlPenduduk.add(btnPendudukSimpan);
+        btnPendudukSimpan.setBounds(960, 400, 80, 40);
 
-        btnClearBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btnClearBhp.addActionListener(new java.awt.event.ActionListener() {
+        btnPendudukEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnPendudukEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearBhpActionPerformed(evt);
+                btnPendudukEditActionPerformed(evt);
             }
         });
-        jPanel12.add(btnClearBhp);
-        btnClearBhp.setBounds(840, 370, 80, 40);
+        pnlPenduduk.add(btnPendudukEdit);
+        btnPendudukEdit.setBounds(860, 400, 80, 40);
 
-        tabBhp.addTab("BARANG HABIS PAKAI", jPanel12);
-
-        pnlBarang.add(tabBhp);
-        tabBhp.setBounds(10, 30, 1040, 590);
-
-        getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         btnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/UnitIcon.png"))); // NOI18N
         btnUnit.addActionListener(new java.awt.event.ActionListener() {
