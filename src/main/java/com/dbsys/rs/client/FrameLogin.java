@@ -37,8 +37,8 @@ public class FrameLogin extends javax.swing.JFrame {
         txt_login_pass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
-        background = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USER LOGIN");
@@ -55,7 +55,7 @@ public class FrameLogin extends javax.swing.JFrame {
         jLabel2.setText("PASSWORD");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
 
-        btnCancel.setText("CANCEL");
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Cancel Login.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnCancel.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -63,10 +63,9 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 80, 40));
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 80, 40));
 
-        btnLogin.setText("LOGIN");
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Button Login.png"))); // NOI18N
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnLogin.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +73,10 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 40));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 80, 40));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Login Form.jpg"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -84,7 +86,7 @@ public class FrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        TokenService tokenservice = TokenService.getInstance("http://localhost:8080");
+        TokenService tokenservice = TokenService.getInstance(EventController.host);
         
         String username = txt_login_uname.getText();
         String pass = String.valueOf(txt_login_pass.getPassword());
@@ -101,9 +103,18 @@ public class FrameLogin extends javax.swing.JFrame {
                 new FrameAdmin().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.RUANG_PERAWATAN)) {
+                new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
-                new FramePoliklinik().setVisible(true);
+                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
             }
+//            else if (token.getTipe().equals(Unit.Type.LABORATORIUM)) {
+//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+//            } else if (token.getTipe().equals(Unit.Type.RADIOLOGI)) {
+//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+//            } else if (token.getTipe().equals(Unit.Type.TRANSFUSI_DARAH)) {
+//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+//            }
             
             this.dispose();
         } catch (ServiceException ex) {
