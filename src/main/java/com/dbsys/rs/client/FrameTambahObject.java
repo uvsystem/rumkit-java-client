@@ -493,6 +493,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
 
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
         String keyword = txtKeyword.getText();
+
         if (keyword.equals(""))
             return;
 

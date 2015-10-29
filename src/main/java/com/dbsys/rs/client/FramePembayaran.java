@@ -14,8 +14,10 @@ import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.PemakaianObat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,29 +39,30 @@ public class FramePembayaran extends javax.swing.JFrame {
      */
     public FramePembayaran() {
         initComponents();
+        setSize(1280, 800);
     }
     
-    private void setDetailPasien(final Pasien pasien) {
+    private void setDetailPasien(Pasien pasien) {
         if (pasien == null) {
-            this.pasien = new Pasien();
+            pasien = new Pasien();
 
             txtPendudukKelamin.setText(null);
             txtPendudukTanggalLahir.setText(null);
             txtPasienTanggungan.setText(null);
             txtPasienTanggalMasuk.setText(null);
         } else {
-            txtPendudukKelamin.setText(this.pasien.getKelamin().toString());
-            txtPendudukTanggalLahir.setText(this.pasien.getTanggalLahir().toString());
-            txtPasienTanggungan.setText(this.pasien.getTanggungan().toString());
-            txtPasienTanggalMasuk.setText(this.pasien.getTanggalMasuk().toString());
+            txtPendudukKelamin.setText(pasien.getKelamin().toString());
+            txtPendudukTanggalLahir.setText(pasien.getTanggalLahir().toString());
+            txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+            txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
         }
         
-        txtPendudukKode.setText(this.pasien.getKodePenduduk());
-        txtPendudukNik.setText(this.pasien.getNik());
-        txtPendudukNama.setText(this.pasien.getNama());
-        txtPendudukDarah.setText(this.pasien.getDarah());
-        txtPendudukAgama.setText(this.pasien.getAgama());
-        txtPendudukTelepon.setText(this.pasien.getTelepon());
+        txtPendudukKode.setText(pasien.getKodePenduduk());
+        txtPendudukNik.setText(pasien.getNik());
+        txtPendudukNama.setText(pasien.getNama());
+        txtPendudukDarah.setText(pasien.getDarah());
+        txtPendudukAgama.setText(pasien.getAgama());
+        txtPendudukTelepon.setText(pasien.getTelepon());
     }
     
     private List<Pelayanan> loadTabelTindakan(final Pasien pasien) throws ServiceException {
@@ -451,36 +454,41 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
         String keyword = txtKeyword.getText();
+        
+        if (keyword.equals(""))
+            return;
+        
         Long total = 0L;
         List<Pelayanan> listPelayanan;
         List<Pemakaian> listPemakaianBhp;
         List<Pemakaian> listPemakaianObat;
         
         try {
-            Pasien p = pasienService.get(keyword);
-            setDetailPasien(p);
+            pasien = pasienService.get(keyword);
+            setDetailPasien(pasien);
             
             try {
-                listPelayanan = loadTabelTindakan(p);
+                listPelayanan = loadTabelTindakan(pasien);
                 for (Pelayanan pelayanan : listPelayanan)
                     total += pelayanan.getTagihan();
             } catch (ServiceException ex) {}
             
             try {
-                listPemakaianBhp = loadTabelBhp(p);
+                listPemakaianBhp = loadTabelBhp(pasien);
                 for (Pemakaian pemakaian : listPemakaianBhp)
                     total += pemakaian.getTagihan();
             } catch (ServiceException ex) {}
             
             try {
-                listPemakaianObat = loadTabelObat(p);
+                listPemakaianObat = loadTabelObat(pasien);
                 for (Pemakaian pemakaian : listPemakaianObat)
                     total += pemakaian.getTagihan();
             } catch (ServiceException ex) {}
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
-            lblTagihan.setText(String.format("Rp %d", total));
+            String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
+            lblTagihan.setText(String.format("Rp %s", totalString));
         }
     }//GEN-LAST:event_txtKeywordFocusLost
 

@@ -1,7 +1,9 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Pemakaian;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +20,7 @@ public class PemakaianTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 4;
+        return 5;
     }
     
     @Override
@@ -35,6 +37,7 @@ public class PemakaianTableModel extends DefaultTableModel {
             case 1: return "NAMA UNIT";
             case 2: return "TANGGAL";
             case 3: return "JUMLAH";
+            case 4: return "BIAYA";
             default: return "";
         }
     }
@@ -48,6 +51,9 @@ public class PemakaianTableModel extends DefaultTableModel {
             case 1: return pemakaian.getUnit().getNama();
             case 2: return pemakaian.getTanggal();
             case 3: return pemakaian.getJumlah();
+            case 4: 
+                String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pemakaian.getTagihan());
+                return tagihan;
             default: return "";
         }
     }

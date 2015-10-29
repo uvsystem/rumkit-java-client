@@ -540,6 +540,9 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
         String keyword = txtPasienKode.getText();
         
+        if (keyword.equals(""))
+            return;
+        
         try {
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);

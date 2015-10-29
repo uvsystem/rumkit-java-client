@@ -104,7 +104,7 @@ public class FrameLogin extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.LOKET_PEMBAYARAN)) {
-                // TODO
+                new FramePembayaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.RUANG_PERAWATAN)) {
                 new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
