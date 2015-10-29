@@ -33,6 +33,10 @@ public class FramePembayaran extends javax.swing.JFrame {
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     
     private Pasien pasien;
+    private Long total = 0L;
+    private List<Pelayanan> listPelayanan;
+    private List<Pemakaian> listPemakaianBhp;
+    private List<Pemakaian> listPemakaianObat;
     
     /**
      * Creates new form FramePembayaran
@@ -69,20 +73,20 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (pasien == null)
             return null;
 
-        List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien.getId());
-        PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
+        List<Pelayanan> list = pelayananService.getByPasien(pasien.getId());
+        PelayananTableModel tableModel = new PelayananTableModel(list);
         tblTindakan.setModel(tableModel);
         
-        return listPelayanan;
+        return list;
     }
     
     private List<Pemakaian> loadTabelBhp(final Pasien pasien) throws ServiceException {
         if (pasien == null)
             return null;
 
-        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
+        List<PemakaianBhp> list = pemakaianBhpService.getByPasien(pasien.getId());
         List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : listPemakaianBhp)
+        for (Pemakaian pemakaian : list)
             listPemakaian.add(pemakaian);
 
         PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
@@ -95,9 +99,9 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (pasien == null)
             return null;
 
-        List<PemakaianObat> listPemakaianObat = pemakaianObatService.getByPasien(pasien.getId());
+        List<PemakaianObat> list = pemakaianObatService.getByPasien(pasien.getId());
         List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : listPemakaianObat)
+        for (Pemakaian pemakaian : list)
             listPemakaian.add(pemakaian);
 
         PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
@@ -137,13 +141,6 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        lblTagihan = new javax.swing.JLabel();
         txtPendudukKode = new javax.swing.JTextField();
         txtPendudukNama = new javax.swing.JTextField();
         txtPendudukNik = new javax.swing.JTextField();
@@ -152,8 +149,18 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtPendudukAgama = new javax.swing.JTextField();
         txtPendudukKelamin = new javax.swing.JTextField();
         txtPendudukTelepon = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         txtPasienTanggungan = new javax.swing.JTextField();
         txtPasienTanggalMasuk = new javax.swing.JTextField();
+        cbPasienKeadaan = new javax.swing.JComboBox();
+        btnPasienKeluar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        lblTagihan = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         txtPasienCicilan = new javax.swing.JTextField();
         btnCetak = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
@@ -295,102 +302,120 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         jLabel5.setText("No. Rekam Medik");
         pnlDetail.add(jLabel5);
-        jLabel5.setBounds(30, 40, 90, 14);
+        jLabel5.setBounds(30, 30, 90, 14);
 
         jLabel6.setText("Nama Pasien");
         pnlDetail.add(jLabel6);
-        jLabel6.setBounds(30, 70, 90, 14);
+        jLabel6.setBounds(30, 60, 90, 14);
 
         jLabel7.setText("NIK");
         pnlDetail.add(jLabel7);
-        jLabel7.setBounds(30, 100, 90, 14);
+        jLabel7.setBounds(30, 90, 90, 14);
 
         jLabel8.setText("Tanggal Lahir");
         pnlDetail.add(jLabel8);
-        jLabel8.setBounds(30, 130, 90, 14);
+        jLabel8.setBounds(30, 120, 90, 14);
 
         jLabel9.setText("Golongan Darah");
         pnlDetail.add(jLabel9);
-        jLabel9.setBounds(30, 160, 90, 14);
+        jLabel9.setBounds(30, 150, 90, 14);
 
         jLabel10.setText("Agama");
         pnlDetail.add(jLabel10);
-        jLabel10.setBounds(30, 190, 90, 14);
+        jLabel10.setBounds(30, 180, 90, 14);
 
         jLabel11.setText("Jenis Kelamin");
         pnlDetail.add(jLabel11);
-        jLabel11.setBounds(30, 220, 90, 14);
+        jLabel11.setBounds(30, 210, 90, 14);
 
         jLabel12.setText("Telepon");
         pnlDetail.add(jLabel12);
-        jLabel12.setBounds(30, 250, 90, 14);
-        pnlDetail.add(jSeparator2);
-        jSeparator2.setBounds(0, 280, 370, 10);
-
-        jLabel13.setText("Tanggungan");
-        pnlDetail.add(jLabel13);
-        jLabel13.setBounds(30, 300, 90, 14);
-
-        jLabel14.setText("Tanggal Masuk");
-        pnlDetail.add(jLabel14);
-        jLabel14.setBounds(30, 330, 90, 14);
-        pnlDetail.add(jSeparator3);
-        jSeparator3.setBounds(0, 360, 370, 10);
-
-        jLabel16.setText("Cicilan");
-        pnlDetail.add(jLabel16);
-        jLabel16.setBounds(20, 470, 90, 14);
-
-        jLabel15.setText("TOTAL");
-        pnlDetail.add(jLabel15);
-        jLabel15.setBounds(30, 380, 90, 14);
-
-        lblTagihan.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lblTagihan.setText("Rp 1.000.000.000");
-        pnlDetail.add(lblTagihan);
-        lblTagihan.setBounds(10, 410, 350, 40);
+        jLabel12.setBounds(30, 240, 90, 14);
 
         txtPendudukKode.setEditable(false);
         pnlDetail.add(txtPendudukKode);
-        txtPendudukKode.setBounds(140, 40, 200, 20);
+        txtPendudukKode.setBounds(140, 30, 200, 20);
 
         txtPendudukNama.setEditable(false);
         pnlDetail.add(txtPendudukNama);
-        txtPendudukNama.setBounds(140, 70, 200, 20);
+        txtPendudukNama.setBounds(140, 60, 200, 20);
 
         txtPendudukNik.setEditable(false);
         pnlDetail.add(txtPendudukNik);
-        txtPendudukNik.setBounds(140, 100, 200, 20);
+        txtPendudukNik.setBounds(140, 90, 200, 20);
 
         txtPendudukTanggalLahir.setEditable(false);
         pnlDetail.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(140, 130, 200, 20);
+        txtPendudukTanggalLahir.setBounds(140, 120, 200, 20);
 
         txtPendudukDarah.setEditable(false);
         pnlDetail.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(140, 160, 200, 20);
+        txtPendudukDarah.setBounds(140, 150, 200, 20);
 
         txtPendudukAgama.setEditable(false);
         pnlDetail.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(140, 190, 200, 20);
+        txtPendudukAgama.setBounds(140, 180, 200, 20);
 
         txtPendudukKelamin.setEditable(false);
         pnlDetail.add(txtPendudukKelamin);
-        txtPendudukKelamin.setBounds(140, 220, 200, 20);
+        txtPendudukKelamin.setBounds(140, 210, 200, 20);
 
         txtPendudukTelepon.setEditable(false);
         pnlDetail.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(140, 250, 200, 20);
+        txtPendudukTelepon.setBounds(140, 240, 200, 20);
+        pnlDetail.add(jSeparator2);
+        jSeparator2.setBounds(0, 270, 370, 10);
+
+        jLabel13.setText("Tanggungan");
+        pnlDetail.add(jLabel13);
+        jLabel13.setBounds(30, 290, 90, 14);
+
+        jLabel14.setText("Tanggal Masuk");
+        pnlDetail.add(jLabel14);
+        jLabel14.setBounds(30, 320, 90, 14);
+
+        jLabel18.setText("Keadaan Pasien");
+        pnlDetail.add(jLabel18);
+        jLabel18.setBounds(30, 350, 90, 14);
 
         txtPasienTanggungan.setEditable(false);
         pnlDetail.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(140, 300, 200, 20);
+        txtPasienTanggungan.setBounds(140, 290, 200, 20);
 
         txtPasienTanggalMasuk.setEditable(false);
         pnlDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(140, 330, 200, 20);
+        txtPasienTanggalMasuk.setBounds(140, 320, 200, 20);
+
+        cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI", "LARI" }));
+        pnlDetail.add(cbPasienKeadaan);
+        cbPasienKeadaan.setBounds(140, 350, 200, 20);
+
+        btnPasienKeluar.setText("PASIEN KELUAR");
+        btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienKeluarActionPerformed(evt);
+            }
+        });
+        pnlDetail.add(btnPasienKeluar);
+        btnPasienKeluar.setBounds(220, 380, 120, 30);
+        pnlDetail.add(jSeparator3);
+        jSeparator3.setBounds(0, 420, 370, 10);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setText("TOTAL");
+        pnlDetail.add(jLabel15);
+        jLabel15.setBounds(30, 430, 90, 15);
+
+        lblTagihan.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblTagihan.setText("Rp 00.000.000.000");
+        pnlDetail.add(lblTagihan);
+        lblTagihan.setBounds(10, 450, 350, 40);
+
+        jLabel16.setText("Pembayaran");
+        pnlDetail.add(jLabel16);
+        jLabel16.setBounds(30, 500, 90, 14);
         pnlDetail.add(txtPasienCicilan);
-        txtPasienCicilan.setBounds(130, 470, 200, 20);
+        txtPasienCicilan.setBounds(140, 500, 200, 20);
 
         btnCetak.setText("CETAK");
         btnCetak.addActionListener(new java.awt.event.ActionListener() {
@@ -399,16 +424,16 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnCetak);
-        btnCetak.setBounds(80, 510, 120, 50);
+        btnCetak.setBounds(90, 530, 120, 40);
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
         pnlDetail.add(btnSimpan);
-        btnSimpan.setBounds(210, 510, 120, 50);
+        btnSimpan.setBounds(220, 530, 120, 40);
 
         getContentPane().add(pnlDetail);
         pnlDetail.setBounds(900, 180, 370, 580);
@@ -458,11 +483,6 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (keyword.equals(""))
             return;
         
-        Long total = 0L;
-        List<Pelayanan> listPelayanan;
-        List<Pemakaian> listPemakaianBhp;
-        List<Pemakaian> listPemakaianObat;
-        
         try {
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);
@@ -511,10 +531,28 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void btnPasienKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienKeluarActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari pasien terlebih dulu.");
+            return;
+        }
+        
+        String keadaan = (String) cbPasienKeadaan.getSelectedItem();
+            
+        try {
+            pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
+            JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPasienKeluarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -523,6 +561,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
