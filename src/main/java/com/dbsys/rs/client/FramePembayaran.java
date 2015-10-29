@@ -1,21 +1,106 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dbsys.rs.client;
+
+import com.dbsys.rs.client.tableModel.PelayananTableModel;
+import com.dbsys.rs.client.tableModel.PemakaianTableModel;
+import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.service.PasienService;
+import com.dbsys.rs.connector.service.PelayananService;
+import com.dbsys.rs.connector.service.PemakaianBhpService;
+import com.dbsys.rs.connector.service.PemakaianObatService;
+import com.dbsys.rs.connector.service.TokenService;
+import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Pelayanan;
+import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.PemakaianBhp;
+import com.dbsys.rs.lib.entity.PemakaianObat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Acer One 10
+ * @author Deddy Christoper Kakunsi
  */
 public class FramePembayaran extends javax.swing.JFrame {
 
+    private final PasienService pasienService = PasienService.getInstance(EventController.host);
+    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+    private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
+    private final PemakaianObatService pemakaianObatService = PemakaianObatService.getInstance(EventController.host);
+    private final TokenService tokenService = TokenService.getInstance(EventController.host);
+    
+    private Pasien pasien;
+    
     /**
      * Creates new form FramePembayaran
      */
     public FramePembayaran() {
         initComponents();
+    }
+    
+    private void setDetailPasien(final Pasien pasien) {
+        if (pasien == null) {
+            this.pasien = new Pasien();
+
+            txtPendudukKelamin.setText(null);
+            txtPendudukTanggalLahir.setText(null);
+            txtPasienTanggungan.setText(null);
+            txtPasienTanggalMasuk.setText(null);
+        } else {
+            txtPendudukKelamin.setText(this.pasien.getKelamin().toString());
+            txtPendudukTanggalLahir.setText(this.pasien.getTanggalLahir().toString());
+            txtPasienTanggungan.setText(this.pasien.getTanggungan().toString());
+            txtPasienTanggalMasuk.setText(this.pasien.getTanggalMasuk().toString());
+        }
+        
+        txtPendudukKode.setText(this.pasien.getKodePenduduk());
+        txtPendudukNik.setText(this.pasien.getNik());
+        txtPendudukNama.setText(this.pasien.getNama());
+        txtPendudukDarah.setText(this.pasien.getDarah());
+        txtPendudukAgama.setText(this.pasien.getAgama());
+        txtPendudukTelepon.setText(this.pasien.getTelepon());
+    }
+    
+    private List<Pelayanan> loadTabelTindakan(final Pasien pasien) throws ServiceException {
+        if (pasien == null)
+            return null;
+
+        List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien.getId());
+        PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
+        tblTindakan.setModel(tableModel);
+        
+        return listPelayanan;
+    }
+    
+    private List<Pemakaian> loadTabelBhp(final Pasien pasien) throws ServiceException {
+        if (pasien == null)
+            return null;
+
+        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
+        List<Pemakaian> listPemakaian = new ArrayList<>();
+        for (Pemakaian pemakaian : listPemakaianBhp)
+            listPemakaian.add(pemakaian);
+
+        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        tblBhp.setModel(tableModel);
+        
+        return listPemakaian;
+    }
+    
+    private List<Pemakaian> loadTabelObat(final Pasien pasien) throws ServiceException {
+        if (pasien == null)
+            return null;
+
+        List<PemakaianObat> listPemakaianObat = pemakaianObatService.getByPasien(pasien.getId());
+        List<Pemakaian> listPemakaian = new ArrayList<>();
+        for (Pemakaian pemakaian : listPemakaianObat)
+            listPemakaian.add(pemakaian);
+
+        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        tblObat.setModel(tableModel);
+        
+        return listPemakaian;
     }
 
     /**
@@ -91,6 +176,12 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel1.setText("Nomor Pasien");
         pnlPencarian.add(jLabel1);
         jLabel1.setBounds(30, 30, 90, 14);
+
+        txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKeywordFocusLost(evt);
+            }
+        });
         pnlPencarian.add(txtKeyword);
         txtKeyword.setBounds(140, 30, 200, 20);
 
@@ -299,10 +390,20 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtPasienCicilan.setBounds(130, 470, 200, 20);
 
         btnCetak.setText("CETAK");
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakActionPerformed(evt);
+            }
+        });
         pnlDetail.add(btnCetak);
         btnCetak.setBounds(80, 510, 120, 50);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
         pnlDetail.add(btnSimpan);
         btnSimpan.setBounds(210, 510, 120, 50);
 
@@ -331,6 +432,11 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
@@ -343,40 +449,59 @@ public class FramePembayaran extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
+        String keyword = txtKeyword.getText();
+        Long total = 0L;
+        List<Pelayanan> listPelayanan;
+        List<Pemakaian> listPemakaianBhp;
+        List<Pemakaian> listPemakaianObat;
+        
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FramePembayaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FramePembayaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FramePembayaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FramePembayaran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Pasien p = pasienService.get(keyword);
+            setDetailPasien(p);
+            
+            try {
+                listPelayanan = loadTabelTindakan(p);
+                for (Pelayanan pelayanan : listPelayanan)
+                    total += pelayanan.getTagihan();
+            } catch (ServiceException ex) {}
+            
+            try {
+                listPemakaianBhp = loadTabelBhp(p);
+                for (Pemakaian pemakaian : listPemakaianBhp)
+                    total += pemakaian.getTagihan();
+            } catch (ServiceException ex) {}
+            
+            try {
+                listPemakaianObat = loadTabelObat(p);
+                for (Pemakaian pemakaian : listPemakaianObat)
+                    total += pemakaian.getTagihan();
+            } catch (ServiceException ex) {}
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            lblTagihan.setText(String.format("Rp %d", total));
         }
-        //</editor-fold>
+    }//GEN-LAST:event_txtKeywordFocusLost
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FramePembayaran().setVisible(true);
-            }
-        });
-    }
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        JOptionPane.showMessageDialog(this, "Sedang dalam pengembangan");
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+        JOptionPane.showMessageDialog(this, "Sedang dalam pengembangan");
+    }//GEN-LAST:event_btnCetakActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        try {
+            tokenService.lock(TokenHolder.getKode());
+            
+            new FrameLogin().setVisible(true);
+            this.dispose();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCetak;
