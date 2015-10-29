@@ -71,11 +71,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pnlPelayanan.setVisible(false);
         
         if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class)) {
-            setSize(493, 550);
+            setSize(500, 580);
             txtPemakaianTanggal.setText(DateUtil.getDate().toString());
             pnlPemakaian.setVisible(true);
         } else if (clsDomain.equals(Tindakan.class)) {
-            setSize(493, 670);
+            setSize(500, 700);
             txtPelayananTanggal.setText(DateUtil.getDate().toString());
             pnlPelayanan.setVisible(true);
         }
@@ -229,7 +229,6 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
-        btnCari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCari = new javax.swing.JTable();
         pnlPemakaian = new javax.swing.JPanel();
@@ -263,26 +262,25 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPelayananTindakanKelas = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         btnSimpan = new javax.swing.JButton();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PENAMBAHAN");
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jLabel1.setLabelFor(txtKeyword);
         jLabel1.setText("Kata Kunci");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 59, 50, 14);
-        getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(80, 56, 209, 20);
+        jLabel1.setBounds(20, 100, 80, 20);
 
-        btnCari.setText("OK");
-        btnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariActionPerformed(evt);
+        txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKeywordFocusLost(evt);
             }
         });
-        getContentPane().add(btnCari);
-        btnCari.setBounds(295, 55, 47, 23);
+        getContentPane().add(txtKeyword);
+        txtKeyword.setBounds(110, 100, 260, 20);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,7 +301,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         jScrollPane1.setViewportView(tblCari);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 89, 452, 154);
+        jScrollPane1.setBounds(20, 130, 460, 154);
 
         pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pemakaian"));
         pnlPemakaian.setLayout(null);
@@ -341,7 +339,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPemakaianTanggal.setBounds(160, 190, 270, 20);
 
         getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 250, 450, 240);
+        pnlPemakaian.setBounds(20, 290, 460, 240);
 
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pemakaian"));
         pnlPelayanan.setLayout(null);
@@ -411,37 +409,24 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         jSeparator6.setBounds(0, 98, 450, 10);
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 250, 450, 360);
+        pnlPelayanan.setBounds(20, 290, 460, 360);
 
-        btnSimpan.setText("SIMPAN");
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(400, 50, 71, 23);
+        btnSimpan.setBounds(380, 90, 100, 33);
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pencarian.jpg"))); // NOI18N
+        lblBackground.setText("jLabel8");
+        getContentPane().add(lblBackground);
+        lblBackground.setBounds(0, 0, 500, 430);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        String keyword = txtKeyword.getText();
-        if (keyword.equals(""))
-            return;
-
-        try {
-            if (clsDomain.equals(BahanHabisPakai.class)) {
-                cariBhp(keyword);
-            } else if (clsDomain.equals(ObatFarmasi.class)) {
-                cariObat(keyword);
-            } else if (clsDomain.equals(Tindakan.class)) {
-                cariTindakan(keyword);
-            }
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnCariActionPerformed
 
     private void tblCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCariMouseClicked
         int index = tblCari.getSelectedRow();
@@ -506,8 +491,25 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         new FrameCari(this, pegawai).setVisible(true);
     }//GEN-LAST:event_txtPelayananPelaksanaMouseClicked
 
+    private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
+        String keyword = txtKeyword.getText();
+        if (keyword.equals(""))
+            return;
+
+        try {
+            if (clsDomain.equals(BahanHabisPakai.class)) {
+                cariBhp(keyword);
+            } else if (clsDomain.equals(ObatFarmasi.class)) {
+                cariObat(keyword);
+            } else if (clsDomain.equals(Tindakan.class)) {
+                cariTindakan(keyword);
+            }
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtKeywordFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCari;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox cbPelayananTipePelaksana;
     private javax.swing.JLabel jLabel1;
@@ -527,6 +529,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JPanel pnlPelayanan;
     private javax.swing.JPanel pnlPemakaian;
     private javax.swing.JTable tblCari;
