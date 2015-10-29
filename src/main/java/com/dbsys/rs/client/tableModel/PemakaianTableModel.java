@@ -20,7 +20,7 @@ public class PemakaianTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 5;
+        return 6;
     }
     
     @Override
@@ -38,6 +38,7 @@ public class PemakaianTableModel extends DefaultTableModel {
             case 2: return "TANGGAL";
             case 3: return "JUMLAH";
             case 4: return "BIAYA";
+            case 5: return "PENANGUNG";
             default: return "";
         }
     }
@@ -54,6 +55,7 @@ public class PemakaianTableModel extends DefaultTableModel {
             case 4: 
                 String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pemakaian.getTagihan());
                 return tagihan;
+            case 5: return pemakaian.getTanggungan();
             default: return "";
         }
     }

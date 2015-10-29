@@ -21,7 +21,7 @@ public class PelayananTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 5;
+        return 6;
     }
     
     @Override
@@ -39,6 +39,7 @@ public class PelayananTableModel extends DefaultTableModel {
             case 2: return "TANGGAL";
             case 3: return "JUMLAH";
             case 4: return "BIAYA";
+            case 5: return "PENANGGUNG";
             default: return "";
         }
     }
@@ -55,6 +56,7 @@ public class PelayananTableModel extends DefaultTableModel {
             case 4:
                 String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pelayanan.getTagihan());
                 return tagihan;
+            case 5: return pelayanan.getTanggungan();
             default: return "";
         }
     }

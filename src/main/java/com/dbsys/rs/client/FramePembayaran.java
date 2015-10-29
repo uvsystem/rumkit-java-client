@@ -470,19 +470,19 @@ public class FramePembayaran extends javax.swing.JFrame {
             try {
                 listPelayanan = loadTabelTindakan(pasien);
                 for (Pelayanan pelayanan : listPelayanan)
-                    total += pelayanan.getTagihan();
+                    total += pelayanan.hitungTagihan();
             } catch (ServiceException ex) {}
             
             try {
                 listPemakaianBhp = loadTabelBhp(pasien);
                 for (Pemakaian pemakaian : listPemakaianBhp)
-                    total += pemakaian.getTagihan();
+                    total += pemakaian.hitungTagihan();
             } catch (ServiceException ex) {}
             
             try {
                 listPemakaianObat = loadTabelObat(pasien);
                 for (Pemakaian pemakaian : listPemakaianObat)
-                    total += pemakaian.getTagihan();
+                    total += pemakaian.hitungTagihan();
             } catch (ServiceException ex) {}
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
