@@ -44,6 +44,9 @@ public class FramePembayaran extends javax.swing.JFrame {
     public FramePembayaran() {
         initComponents();
         setSize(1280, 800);
+        
+        lblOperator.setText(TokenHolder.getNamaOperator());
+        lblUnit.setText(TokenHolder.getNamaUnit());
     }
     
     private void setDetailPasien(Pasien pasien) {
@@ -54,11 +57,13 @@ public class FramePembayaran extends javax.swing.JFrame {
             txtPendudukTanggalLahir.setText(null);
             txtPasienTanggungan.setText(null);
             txtPasienTanggalMasuk.setText(null);
+            cbPasienKeadaan.setSelectedIndex(0);
         } else {
             txtPendudukKelamin.setText(pasien.getKelamin().toString());
             txtPendudukTanggalLahir.setText(pasien.getTanggalLahir().toString());
             txtPasienTanggungan.setText(pasien.getTanggungan().toString());
             txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
+            cbPasienKeadaan.setSelectedItem(pasien.getKeadaan().toString());
         }
         
         txtPendudukKode.setText(pasien.getKodePenduduk());
@@ -507,13 +512,34 @@ public class FramePembayaran extends javax.swing.JFrame {
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
-            String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
+            Long cicilan = 0L;
+            if (pasien.getCicilan() != null)
+                cicilan = pasien.getCicilan();
+            
+            String totalString = NumberFormat.getNumberInstance(Locale.US).format(total - cicilan);
             lblTagihan.setText(String.format("Rp %s", totalString));
+            txtPasienCicilan.setText(total.toString());
         }
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        JOptionPane.showMessageDialog(this, "Sedang dalam pengembangan");
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan mencari pasien terlebih dahulu.");
+            return;
+        }
+        
+        String jumlah = txtPasienCicilan.getText();
+        if (jumlah.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan masukan jumlah pembayaran.");
+            return;
+        }
+        
+        try {
+            pasienService.bayar(pasien.getId(), Long.valueOf(jumlah));
+            JOptionPane.showMessageDialog(this, "Pembayaran pasien berhasil. Silahkan cetak struk pembayaran.");
+         } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
@@ -538,6 +564,10 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         String keadaan = (String) cbPasienKeadaan.getSelectedItem();
+        if (keadaan.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan pilih keadaan pasien.");
+            return;
+        }
             
         try {
             pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
