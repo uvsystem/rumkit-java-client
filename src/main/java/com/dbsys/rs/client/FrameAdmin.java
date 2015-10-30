@@ -1724,7 +1724,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         jPanel8.add(txt_unit_bobot);
         txt_unit_bobot.setBounds(140, 40, 350, 25);
 
-        cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "LOKET_PENDAFTARAN", "LOKET_PEMBAYARAN", "POLIKLINIK", "RUANG_PERAWATAN", "FARMASI", "UNIT_LAIN" }));
+        cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "LOKET_PENDAFTARAN", "LOKET_PEMBAYARAN", "POLIKLINIK", "RUANG_PERAWATAN", "FARMASI", "LABORATORIUM", "RADIOLOGI", "TRANSFUSI_DARAH", "UGD", "UNIT_LAIN" }));
         jPanel8.add(cb_unit_tipe);
         cb_unit_tipe.setBounds(140, 70, 350, 25);
 

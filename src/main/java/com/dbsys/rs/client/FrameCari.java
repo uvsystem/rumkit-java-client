@@ -272,7 +272,7 @@ public class FrameCari extends JFrame {
         txtKategoriNama.setEditable(false);
         txtKategoriParent.setEditable(false);
 
-        this.setSize(500, 320);
+        this.setSize(500, 330);
         pnlKategori.setVisible(false);
     }
     
