@@ -172,38 +172,6 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlMain = new javax.swing.JPanel();
-        btnResep = new javax.swing.JButton();
-        btnStok = new javax.swing.JButton();
-        pnlResep = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtPasienNik = new javax.swing.JTextField();
-        txtPasienNama = new javax.swing.JTextField();
-        txtPasienKelamin = new javax.swing.JTextField();
-        txtPasienTanggalLahir = new javax.swing.JTextField();
-        txtPasienGolonganDarah = new javax.swing.JTextField();
-        txtPasienAgama = new javax.swing.JTextField();
-        txtPasienTelepon = new javax.swing.JTextField();
-        txtPasienTanggungan = new javax.swing.JTextField();
-        txtPasienStatusRawat = new javax.swing.JTextField();
-        txtPasienTanggalMasuk = new javax.swing.JTextField();
-        txtPasienKode = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblResepObat = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txtResepNomor = new javax.swing.JTextField();
-        btnObatTambah = new javax.swing.JButton();
         paneBarang = new javax.swing.JTabbedPane();
         pnlBhp = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -233,6 +201,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnBhpStokMasuk = new javax.swing.JButton();
         btnBhpStokReset = new javax.swing.JButton();
         btnBhpStokKeluar = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
         pnlObat = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtObatKeyword = new javax.swing.JTextField();
@@ -261,6 +230,40 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnObatStokMasuk = new javax.swing.JButton();
         btnObatStokReset = new javax.swing.JButton();
         btnObatStokKeluar = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
+        pnlResep = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtPasienNik = new javax.swing.JTextField();
+        txtPasienNama = new javax.swing.JTextField();
+        txtPasienKelamin = new javax.swing.JTextField();
+        txtPasienTanggalLahir = new javax.swing.JTextField();
+        txtPasienGolonganDarah = new javax.swing.JTextField();
+        txtPasienAgama = new javax.swing.JTextField();
+        txtPasienTelepon = new javax.swing.JTextField();
+        txtPasienTanggungan = new javax.swing.JTextField();
+        txtPasienStatusRawat = new javax.swing.JTextField();
+        txtPasienTanggalMasuk = new javax.swing.JTextField();
+        txtPasienKode = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblResepObat = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtResepNomor = new javax.swing.JTextField();
+        btnObatTambah = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        pnlMain = new javax.swing.JPanel();
+        btnResep = new javax.swing.JButton();
+        btnStok = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -269,6 +272,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RUMAH SAKIT LIUN KENDAGE TAHUNA - FARMASI");
@@ -277,29 +281,310 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlMain.setLayout(null);
-
-        btnResep.setText("RESEP");
-        btnResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResepActionPerformed(evt);
+        paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paneBarangMouseClicked(evt);
             }
         });
-        pnlMain.add(btnResep);
-        btnResep.setBounds(10, 10, 110, 40);
 
-        btnStok.setText("STOK BARANG");
-        btnStok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStokActionPerformed(evt);
+        pnlBhp.setLayout(null);
+
+        jLabel6.setText("Kata Kunci");
+        pnlBhp.add(jLabel6);
+        jLabel6.setBounds(10, 10, 60, 14);
+
+        txtBhpKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBhpKeywordFocusLost(evt);
             }
         });
-        pnlMain.add(btnStok);
-        btnStok.setBounds(10, 60, 110, 40);
+        pnlBhp.add(txtBhpKeyword);
+        txtBhpKeyword.setBounds(90, 10, 280, 20);
 
-        getContentPane().add(pnlMain);
-        pnlMain.setBounds(10, 90, 130, 110);
+        pnlBhpDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlBhpDetail.setLayout(null);
+
+        txtBhpKode.setEditable(false);
+        pnlBhpDetail.add(txtBhpKode);
+        txtBhpKode.setBounds(160, 30, 170, 20);
+
+        txtBhpNama.setEditable(false);
+        pnlBhpDetail.add(txtBhpNama);
+        txtBhpNama.setBounds(160, 60, 170, 20);
+
+        txtBhpHarga.setEditable(false);
+        txtBhpHarga.setToolTipText("");
+        pnlBhpDetail.add(txtBhpHarga);
+        txtBhpHarga.setBounds(160, 90, 170, 20);
+
+        txtBhpTanggungan.setEditable(false);
+        txtBhpTanggungan.setToolTipText("");
+        pnlBhpDetail.add(txtBhpTanggungan);
+        txtBhpTanggungan.setBounds(160, 120, 170, 20);
+
+        txtBhpSatuan.setEditable(false);
+        pnlBhpDetail.add(txtBhpSatuan);
+        txtBhpSatuan.setBounds(160, 180, 170, 20);
+
+        txtBhpJumlah.setEditable(false);
+        pnlBhpDetail.add(txtBhpJumlah);
+        txtBhpJumlah.setBounds(160, 150, 170, 20);
+
+        jLabel14.setText("Kode");
+        pnlBhpDetail.add(jLabel14);
+        jLabel14.setBounds(30, 30, 24, 14);
+
+        jLabel15.setText("Nama");
+        pnlBhpDetail.add(jLabel15);
+        jLabel15.setBounds(30, 60, 27, 14);
+
+        jLabel16.setText("Harga");
+        pnlBhpDetail.add(jLabel16);
+        jLabel16.setBounds(30, 90, 29, 14);
+
+        jLabel84.setText("Tanggungan");
+        pnlBhpDetail.add(jLabel84);
+        jLabel84.setBounds(30, 120, 60, 14);
+
+        jLabel17.setText("Jumlah");
+        pnlBhpDetail.add(jLabel17);
+        jLabel17.setBounds(30, 150, 33, 14);
+
+        jLabel18.setText("Satuan");
+        pnlBhpDetail.add(jLabel18);
+        jLabel18.setBounds(30, 180, 34, 14);
+
+        pnlBhp.add(pnlBhpDetail);
+        pnlBhpDetail.setBounds(10, 300, 360, 220);
+
+        pnlBhpStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlBhpStok.setLayout(null);
+
+        jLabel19.setText("Tanggal");
+        pnlBhpStok.add(jLabel19);
+        jLabel19.setBounds(30, 30, 38, 14);
+
+        jLabel20.setText("Jam");
+        pnlBhpStok.add(jLabel20);
+        jLabel20.setBounds(30, 60, 19, 14);
+
+        jLabel21.setText("Jumlah");
+        pnlBhpStok.add(jLabel21);
+        jLabel21.setBounds(30, 90, 33, 14);
+        pnlBhpStok.add(txtBhpStokTanggal);
+        txtBhpStokTanggal.setBounds(119, 30, 190, 20);
+        pnlBhpStok.add(txtBhpStokJam);
+        txtBhpStokJam.setBounds(119, 60, 190, 20);
+        pnlBhpStok.add(txtBhpStokJumlah);
+        txtBhpStokJumlah.setBounds(119, 90, 190, 20);
+
+        pnlBhp.add(pnlBhpStok);
+        pnlBhpStok.setBounds(380, 300, 350, 140);
+
+        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBhpMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblBhp);
+
+        pnlBhp.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 50, 720, 240);
+
+        btnBhpStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
+        btnBhpStokMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpStokMasukActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpStokMasuk);
+        btnBhpStokMasuk.setBounds(380, 480, 100, 40);
+
+        btnBhpStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnBhpStokReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpStokResetActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpStokReset);
+        btnBhpStokReset.setBounds(635, 480, 90, 39);
+
+        btnBhpStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
+        btnBhpStokKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpStokKeluarActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpStokKeluar);
+        btnBhpStokKeluar.setBounds(510, 480, 100, 39);
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        pnlBhp.add(jLabel35);
+        jLabel35.setBounds(620, 10, 110, 30);
+
+        paneBarang.addTab("BAHAN HABIS PAKAI", pnlBhp);
+
+        pnlObat.setLayout(null);
+
+        jLabel22.setText("Kata Kunci");
+        pnlObat.add(jLabel22);
+        jLabel22.setBounds(10, 10, 60, 14);
+
+        txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObatKeywordFocusLost(evt);
+            }
+        });
+        pnlObat.add(txtObatKeyword);
+        txtObatKeyword.setBounds(90, 10, 280, 20);
+
+        pnlObatDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlObatDetail.setLayout(null);
+
+        txtObatKode.setEditable(false);
+        pnlObatDetail.add(txtObatKode);
+        txtObatKode.setBounds(160, 30, 170, 20);
+
+        txtObatNama.setEditable(false);
+        pnlObatDetail.add(txtObatNama);
+        txtObatNama.setBounds(160, 60, 170, 20);
+
+        txtObatHarga.setEditable(false);
+        txtObatHarga.setToolTipText("");
+        pnlObatDetail.add(txtObatHarga);
+        txtObatHarga.setBounds(160, 90, 170, 20);
+
+        txtObatTanggungan.setEditable(false);
+        txtObatTanggungan.setToolTipText("");
+        pnlObatDetail.add(txtObatTanggungan);
+        txtObatTanggungan.setBounds(160, 120, 170, 20);
+
+        txtObatSatuan.setEditable(false);
+        pnlObatDetail.add(txtObatSatuan);
+        txtObatSatuan.setBounds(160, 180, 170, 20);
+
+        txtObatJumlah.setEditable(false);
+        pnlObatDetail.add(txtObatJumlah);
+        txtObatJumlah.setBounds(160, 150, 170, 20);
+
+        jLabel23.setText("Kode");
+        pnlObatDetail.add(jLabel23);
+        jLabel23.setBounds(30, 30, 24, 14);
+
+        jLabel24.setText("Nama");
+        pnlObatDetail.add(jLabel24);
+        jLabel24.setBounds(30, 60, 27, 14);
+
+        jLabel25.setText("Harga");
+        pnlObatDetail.add(jLabel25);
+        jLabel25.setBounds(30, 90, 29, 14);
+
+        jLabel85.setText("Tanggungan");
+        pnlObatDetail.add(jLabel85);
+        jLabel85.setBounds(30, 120, 60, 14);
+
+        jLabel26.setText("Jumlah");
+        pnlObatDetail.add(jLabel26);
+        jLabel26.setBounds(30, 150, 33, 14);
+
+        jLabel27.setText("Satuan");
+        pnlObatDetail.add(jLabel27);
+        jLabel27.setBounds(30, 180, 34, 14);
+
+        pnlObat.add(pnlObatDetail);
+        pnlObatDetail.setBounds(10, 300, 360, 220);
+
+        pnlObatStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlObatStok.setLayout(null);
+
+        jLabel28.setText("Tanggal");
+        pnlObatStok.add(jLabel28);
+        jLabel28.setBounds(30, 30, 38, 14);
+
+        jLabel29.setText("Jam");
+        pnlObatStok.add(jLabel29);
+        jLabel29.setBounds(30, 60, 19, 14);
+
+        jLabel30.setText("Jumlah");
+        pnlObatStok.add(jLabel30);
+        jLabel30.setBounds(30, 90, 33, 14);
+        pnlObatStok.add(txtObatStokTanggal);
+        txtObatStokTanggal.setBounds(119, 30, 190, 20);
+        pnlObatStok.add(txtObatStokJam);
+        txtObatStokJam.setBounds(119, 60, 190, 20);
+        pnlObatStok.add(txtObatStokJumlah);
+        txtObatStokJumlah.setBounds(119, 90, 190, 20);
+
+        pnlObat.add(pnlObatStok);
+        pnlObatStok.setBounds(380, 300, 350, 140);
+
+        tblObat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblObatMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblObat);
+
+        pnlObat.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 50, 720, 240);
+
+        btnObatStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
+        btnObatStokMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObatStokMasukActionPerformed(evt);
+            }
+        });
+        pnlObat.add(btnObatStokMasuk);
+        btnObatStokMasuk.setBounds(380, 480, 90, 40);
+
+        btnObatStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnObatStokReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObatStokResetActionPerformed(evt);
+            }
+        });
+        pnlObat.add(btnObatStokReset);
+        btnObatStokReset.setBounds(650, 480, 80, 39);
+
+        btnObatStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
+        btnObatStokKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObatStokKeluarActionPerformed(evt);
+            }
+        });
+        pnlObat.add(btnObatStokKeluar);
+        btnObatStokKeluar.setBounds(520, 480, 90, 39);
+
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        pnlObat.add(jLabel36);
+        jLabel36.setBounds(620, 10, 110, 30);
+
+        paneBarang.addTab("OBAT", pnlObat);
+
+        getContentPane().add(paneBarang);
+        paneBarang.setBounds(150, 90, 750, 560);
 
         pnlResep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlResep.setLayout(null);
@@ -433,305 +718,37 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         pnlResep.add(btnObatTambah);
         btnObatTambah.setBounds(380, 40, 100, 23);
 
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/resep_icon.png"))); // NOI18N
+        pnlResep.add(jLabel34);
+        jLabel34.setBounds(630, 20, 100, 40);
+
         getContentPane().add(pnlResep);
         pnlResep.setBounds(150, 90, 750, 560);
 
-        paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                paneBarangMouseClicked(evt);
-            }
-        });
+        pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlMain.setBackground(new Color(0,0,0,20));
+        pnlMain.setLayout(null);
 
-        pnlBhp.setLayout(null);
-
-        jLabel6.setText("Kata Kunci");
-        pnlBhp.add(jLabel6);
-        jLabel6.setBounds(10, 10, 60, 14);
-
-        txtBhpKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtBhpKeywordFocusLost(evt);
-            }
-        });
-        pnlBhp.add(txtBhpKeyword);
-        txtBhpKeyword.setBounds(90, 10, 280, 20);
-
-        pnlBhpDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlBhpDetail.setLayout(null);
-
-        txtBhpKode.setEditable(false);
-        pnlBhpDetail.add(txtBhpKode);
-        txtBhpKode.setBounds(160, 30, 170, 20);
-
-        txtBhpNama.setEditable(false);
-        pnlBhpDetail.add(txtBhpNama);
-        txtBhpNama.setBounds(160, 60, 170, 20);
-
-        txtBhpHarga.setEditable(false);
-        txtBhpHarga.setToolTipText("");
-        pnlBhpDetail.add(txtBhpHarga);
-        txtBhpHarga.setBounds(160, 90, 170, 20);
-
-        txtBhpTanggungan.setEditable(false);
-        txtBhpTanggungan.setToolTipText("");
-        pnlBhpDetail.add(txtBhpTanggungan);
-        txtBhpTanggungan.setBounds(160, 120, 170, 20);
-
-        txtBhpSatuan.setEditable(false);
-        pnlBhpDetail.add(txtBhpSatuan);
-        txtBhpSatuan.setBounds(160, 180, 170, 20);
-
-        txtBhpJumlah.setEditable(false);
-        pnlBhpDetail.add(txtBhpJumlah);
-        txtBhpJumlah.setBounds(160, 150, 170, 20);
-
-        jLabel14.setText("Kode");
-        pnlBhpDetail.add(jLabel14);
-        jLabel14.setBounds(30, 30, 24, 14);
-
-        jLabel15.setText("Nama");
-        pnlBhpDetail.add(jLabel15);
-        jLabel15.setBounds(30, 60, 27, 14);
-
-        jLabel16.setText("Harga");
-        pnlBhpDetail.add(jLabel16);
-        jLabel16.setBounds(30, 90, 29, 14);
-
-        jLabel84.setText("Tanggungan");
-        pnlBhpDetail.add(jLabel84);
-        jLabel84.setBounds(30, 120, 60, 14);
-
-        jLabel17.setText("Jumlah");
-        pnlBhpDetail.add(jLabel17);
-        jLabel17.setBounds(30, 150, 33, 14);
-
-        jLabel18.setText("Satuan");
-        pnlBhpDetail.add(jLabel18);
-        jLabel18.setBounds(30, 180, 34, 14);
-
-        pnlBhp.add(pnlBhpDetail);
-        pnlBhpDetail.setBounds(10, 300, 360, 220);
-
-        pnlBhpStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlBhpStok.setLayout(null);
-
-        jLabel19.setText("Tanggal");
-        pnlBhpStok.add(jLabel19);
-        jLabel19.setBounds(30, 30, 38, 14);
-
-        jLabel20.setText("Jam");
-        pnlBhpStok.add(jLabel20);
-        jLabel20.setBounds(30, 60, 19, 14);
-
-        jLabel21.setText("Jumlah");
-        pnlBhpStok.add(jLabel21);
-        jLabel21.setBounds(30, 90, 33, 14);
-        pnlBhpStok.add(txtBhpStokTanggal);
-        txtBhpStokTanggal.setBounds(119, 30, 190, 20);
-        pnlBhpStok.add(txtBhpStokJam);
-        txtBhpStokJam.setBounds(119, 60, 190, 20);
-        pnlBhpStok.add(txtBhpStokJumlah);
-        txtBhpStokJumlah.setBounds(119, 90, 190, 20);
-
-        pnlBhp.add(pnlBhpStok);
-        pnlBhpStok.setBounds(380, 300, 350, 140);
-
-        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblBhp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblBhpMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblBhp);
-
-        pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 50, 720, 240);
-
-        btnBhpStokMasuk.setText("MASUK");
-        btnBhpStokMasuk.addActionListener(new java.awt.event.ActionListener() {
+        btnResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/resep_icon.png"))); // NOI18N
+        btnResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpStokMasukActionPerformed(evt);
+                btnResepActionPerformed(evt);
             }
         });
-        pnlBhp.add(btnBhpStokMasuk);
-        btnBhpStokMasuk.setBounds(490, 490, 71, 23);
+        pnlMain.add(btnResep);
+        btnResep.setBounds(10, 10, 110, 40);
 
-        btnBhpStokReset.setText("RESET");
-        btnBhpStokReset.addActionListener(new java.awt.event.ActionListener() {
+        btnStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        btnStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpStokResetActionPerformed(evt);
+                btnStokActionPerformed(evt);
             }
         });
-        pnlBhp.add(btnBhpStokReset);
-        btnBhpStokReset.setBounds(650, 490, 63, 23);
+        pnlMain.add(btnStok);
+        btnStok.setBounds(10, 60, 110, 40);
 
-        btnBhpStokKeluar.setText("KELUAR");
-        btnBhpStokKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpStokKeluarActionPerformed(evt);
-            }
-        });
-        pnlBhp.add(btnBhpStokKeluar);
-        btnBhpStokKeluar.setBounds(570, 490, 71, 23);
-
-        paneBarang.addTab("BAHAN HABIS PAKAI", pnlBhp);
-
-        pnlObat.setLayout(null);
-
-        jLabel22.setText("Kata Kunci");
-        pnlObat.add(jLabel22);
-        jLabel22.setBounds(10, 10, 60, 14);
-
-        txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtObatKeywordFocusLost(evt);
-            }
-        });
-        pnlObat.add(txtObatKeyword);
-        txtObatKeyword.setBounds(90, 10, 280, 20);
-
-        pnlObatDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlObatDetail.setLayout(null);
-
-        txtObatKode.setEditable(false);
-        pnlObatDetail.add(txtObatKode);
-        txtObatKode.setBounds(160, 30, 170, 20);
-
-        txtObatNama.setEditable(false);
-        pnlObatDetail.add(txtObatNama);
-        txtObatNama.setBounds(160, 60, 170, 20);
-
-        txtObatHarga.setEditable(false);
-        txtObatHarga.setToolTipText("");
-        pnlObatDetail.add(txtObatHarga);
-        txtObatHarga.setBounds(160, 90, 170, 20);
-
-        txtObatTanggungan.setEditable(false);
-        txtObatTanggungan.setToolTipText("");
-        pnlObatDetail.add(txtObatTanggungan);
-        txtObatTanggungan.setBounds(160, 120, 170, 20);
-
-        txtObatSatuan.setEditable(false);
-        pnlObatDetail.add(txtObatSatuan);
-        txtObatSatuan.setBounds(160, 180, 170, 20);
-
-        txtObatJumlah.setEditable(false);
-        pnlObatDetail.add(txtObatJumlah);
-        txtObatJumlah.setBounds(160, 150, 170, 20);
-
-        jLabel23.setText("Kode");
-        pnlObatDetail.add(jLabel23);
-        jLabel23.setBounds(30, 30, 24, 14);
-
-        jLabel24.setText("Nama");
-        pnlObatDetail.add(jLabel24);
-        jLabel24.setBounds(30, 60, 27, 14);
-
-        jLabel25.setText("Harga");
-        pnlObatDetail.add(jLabel25);
-        jLabel25.setBounds(30, 90, 29, 14);
-
-        jLabel85.setText("Tanggungan");
-        pnlObatDetail.add(jLabel85);
-        jLabel85.setBounds(30, 120, 60, 14);
-
-        jLabel26.setText("Jumlah");
-        pnlObatDetail.add(jLabel26);
-        jLabel26.setBounds(30, 150, 33, 14);
-
-        jLabel27.setText("Satuan");
-        pnlObatDetail.add(jLabel27);
-        jLabel27.setBounds(30, 180, 34, 14);
-
-        pnlObat.add(pnlObatDetail);
-        pnlObatDetail.setBounds(10, 300, 360, 220);
-
-        pnlObatStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlObatStok.setLayout(null);
-
-        jLabel28.setText("Tanggal");
-        pnlObatStok.add(jLabel28);
-        jLabel28.setBounds(30, 30, 38, 14);
-
-        jLabel29.setText("Jam");
-        pnlObatStok.add(jLabel29);
-        jLabel29.setBounds(30, 60, 19, 14);
-
-        jLabel30.setText("Jumlah");
-        pnlObatStok.add(jLabel30);
-        jLabel30.setBounds(30, 90, 33, 14);
-        pnlObatStok.add(txtObatStokTanggal);
-        txtObatStokTanggal.setBounds(119, 30, 190, 20);
-        pnlObatStok.add(txtObatStokJam);
-        txtObatStokJam.setBounds(119, 60, 190, 20);
-        pnlObatStok.add(txtObatStokJumlah);
-        txtObatStokJumlah.setBounds(119, 90, 190, 20);
-
-        pnlObat.add(pnlObatStok);
-        pnlObatStok.setBounds(380, 300, 350, 140);
-
-        tblObat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblObat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblObatMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblObat);
-
-        pnlObat.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 40, 720, 240);
-
-        btnObatStokMasuk.setText("MASUK");
-        btnObatStokMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObatStokMasukActionPerformed(evt);
-            }
-        });
-        pnlObat.add(btnObatStokMasuk);
-        btnObatStokMasuk.setBounds(490, 480, 67, 23);
-
-        btnObatStokReset.setText("RESET");
-        btnObatStokReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObatStokResetActionPerformed(evt);
-            }
-        });
-        pnlObat.add(btnObatStokReset);
-        btnObatStokReset.setBounds(650, 480, 63, 23);
-
-        btnObatStokKeluar.setText("KELUAR");
-        btnObatStokKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObatStokKeluarActionPerformed(evt);
-            }
-        });
-        pnlObat.add(btnObatStokKeluar);
-        btnObatStokKeluar.setBounds(570, 480, 71, 23);
-
-        paneBarang.addTab("OBAT", pnlObat);
-
-        getContentPane().add(paneBarang);
-        paneBarang.setBounds(150, 90, 750, 560);
+        getContentPane().add(pnlMain);
+        pnlMain.setBounds(10, 90, 130, 110);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -765,6 +782,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Farmasi_Bg.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1280, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -965,6 +986,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnBhpStokKeluar;
     private javax.swing.JButton btnBhpStokMasuk;
     private javax.swing.JButton btnBhpStokReset;
@@ -1002,6 +1024,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

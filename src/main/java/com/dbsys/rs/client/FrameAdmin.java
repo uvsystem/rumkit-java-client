@@ -1230,6 +1230,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlOperator.setBackground(new Color(0,0,0,20));
         pnlOperator.setLayout(null);
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1328,6 +1329,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlUnit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlUnit.setBackground(new Color(0,0,0,20));
         pnlUnit.setLayout(null);
 
         tbl_unit.setModel(new javax.swing.table.DefaultTableModel(
@@ -1408,6 +1410,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlBarang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlBarang.setBackground(new Color(0,0,0,20));
         pnlBarang.setLayout(null);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1664,6 +1667,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlPegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlPegawai.setBackground(new Color(0,0,0,20));
         pnlPegawai.setLayout(null);
 
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2120,6 +2124,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlTindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlTindakan.setBackground(new Color(0,0,0,20));
         pnlTindakan.setLayout(null);
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2259,6 +2264,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
 
         pnlPenduduk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlPenduduk.setBackground(new Color(0,0,0,20));
         pnlPenduduk.setLayout(null);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
