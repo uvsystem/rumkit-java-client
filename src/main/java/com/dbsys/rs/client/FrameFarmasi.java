@@ -175,35 +175,6 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         pnlMain = new javax.swing.JPanel();
         btnResep = new javax.swing.JButton();
         btnStok = new javax.swing.JButton();
-        pnlResep = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtPasienNik = new javax.swing.JTextField();
-        txtPasienNama = new javax.swing.JTextField();
-        txtPasienKelamin = new javax.swing.JTextField();
-        txtPasienTanggalLahir = new javax.swing.JTextField();
-        txtPasienGolonganDarah = new javax.swing.JTextField();
-        txtPasienAgama = new javax.swing.JTextField();
-        txtPasienTelepon = new javax.swing.JTextField();
-        txtPasienTanggungan = new javax.swing.JTextField();
-        txtPasienStatusRawat = new javax.swing.JTextField();
-        txtPasienTanggalMasuk = new javax.swing.JTextField();
-        txtPasienKode = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblResepObat = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txtResepNomor = new javax.swing.JTextField();
-        btnObatTambah = new javax.swing.JButton();
         paneBarang = new javax.swing.JTabbedPane();
         pnlBhp = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -261,6 +232,35 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnObatStokMasuk = new javax.swing.JButton();
         btnObatStokReset = new javax.swing.JButton();
         btnObatStokKeluar = new javax.swing.JButton();
+        pnlResep = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtPasienNik = new javax.swing.JTextField();
+        txtPasienNama = new javax.swing.JTextField();
+        txtPasienKelamin = new javax.swing.JTextField();
+        txtPasienTanggalLahir = new javax.swing.JTextField();
+        txtPasienGolonganDarah = new javax.swing.JTextField();
+        txtPasienAgama = new javax.swing.JTextField();
+        txtPasienTelepon = new javax.swing.JTextField();
+        txtPasienTanggungan = new javax.swing.JTextField();
+        txtPasienStatusRawat = new javax.swing.JTextField();
+        txtPasienTanggalMasuk = new javax.swing.JTextField();
+        txtPasienKode = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblResepObat = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtResepNomor = new javax.swing.JTextField();
+        btnObatTambah = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -300,141 +300,6 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
         getContentPane().add(pnlMain);
         pnlMain.setBounds(10, 90, 130, 110);
-
-        pnlResep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlResep.setLayout(null);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(null);
-
-        jLabel3.setText("NIK");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 30, 17, 14);
-
-        jLabel4.setText("Nama");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 60, 27, 14);
-
-        jLabel5.setText("Kelamin");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 90, 36, 14);
-
-        jLabel7.setText("Agama");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(370, 30, 33, 14);
-
-        jLabel8.setText("Telepon");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(370, 60, 38, 14);
-
-        jLabel9.setText("Gol. Darah");
-        jPanel1.add(jLabel9);
-        jLabel9.setBounds(20, 150, 70, 14);
-
-        jLabel10.setText("Tanggal Masuk");
-        jPanel1.add(jLabel10);
-        jLabel10.setBounds(370, 150, 80, 14);
-
-        jLabel11.setText("Tanggal Lahir");
-        jPanel1.add(jLabel11);
-        jLabel11.setBounds(20, 120, 70, 14);
-
-        jLabel12.setText("Tanggungan");
-        jPanel1.add(jLabel12);
-        jLabel12.setBounds(370, 90, 60, 14);
-
-        jLabel13.setText("Status Rawat");
-        jPanel1.add(jLabel13);
-        jLabel13.setBounds(370, 120, 70, 14);
-
-        txtPasienNik.setEditable(false);
-        jPanel1.add(txtPasienNik);
-        txtPasienNik.setBounds(110, 30, 210, 20);
-
-        txtPasienNama.setEditable(false);
-        jPanel1.add(txtPasienNama);
-        txtPasienNama.setBounds(110, 60, 210, 20);
-
-        txtPasienKelamin.setEditable(false);
-        jPanel1.add(txtPasienKelamin);
-        txtPasienKelamin.setBounds(110, 90, 210, 20);
-
-        txtPasienTanggalLahir.setEditable(false);
-        jPanel1.add(txtPasienTanggalLahir);
-        txtPasienTanggalLahir.setBounds(110, 120, 210, 20);
-
-        txtPasienGolonganDarah.setEditable(false);
-        jPanel1.add(txtPasienGolonganDarah);
-        txtPasienGolonganDarah.setBounds(110, 150, 210, 20);
-
-        txtPasienAgama.setEditable(false);
-        jPanel1.add(txtPasienAgama);
-        txtPasienAgama.setBounds(480, 30, 230, 20);
-
-        txtPasienTelepon.setEditable(false);
-        jPanel1.add(txtPasienTelepon);
-        txtPasienTelepon.setBounds(480, 60, 230, 20);
-
-        txtPasienTanggungan.setEditable(false);
-        jPanel1.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(480, 90, 230, 20);
-
-        txtPasienStatusRawat.setEditable(false);
-        jPanel1.add(txtPasienStatusRawat);
-        txtPasienStatusRawat.setBounds(480, 120, 230, 20);
-
-        txtPasienTanggalMasuk.setEditable(false);
-        jPanel1.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(480, 150, 230, 20);
-
-        pnlResep.add(jPanel1);
-        jPanel1.setBounds(10, 80, 730, 190);
-
-        txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPasienKodeFocusLost(evt);
-            }
-        });
-        pnlResep.add(txtPasienKode);
-        txtPasienKode.setBounds(120, 10, 210, 20);
-
-        tblResepObat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblResepObat);
-
-        pnlResep.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 280, 730, 270);
-
-        jLabel2.setText("No. Register Pasien");
-        pnlResep.add(jLabel2);
-        jLabel2.setBounds(10, 10, 94, 14);
-
-        jLabel1.setText("Nomor Resep");
-        pnlResep.add(jLabel1);
-        jLabel1.setBounds(10, 40, 90, 14);
-        pnlResep.add(txtResepNomor);
-        txtResepNomor.setBounds(120, 40, 210, 20);
-
-        btnObatTambah.setText("Tambah Obat");
-        btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObatTambahActionPerformed(evt);
-            }
-        });
-        pnlResep.add(btnObatTambah);
-        btnObatTambah.setBounds(380, 40, 100, 23);
-
-        getContentPane().add(pnlResep);
-        pnlResep.setBounds(150, 90, 750, 560);
 
         paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -733,6 +598,141 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         getContentPane().add(paneBarang);
         paneBarang.setBounds(150, 90, 750, 560);
 
+        pnlResep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlResep.setLayout(null);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(null);
+
+        jLabel3.setText("NIK");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 30, 17, 14);
+
+        jLabel4.setText("Nama");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 60, 27, 14);
+
+        jLabel5.setText("Kelamin");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(20, 90, 36, 14);
+
+        jLabel7.setText("Agama");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(370, 30, 33, 14);
+
+        jLabel8.setText("Telepon");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(370, 60, 38, 14);
+
+        jLabel9.setText("Gol. Darah");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(20, 150, 70, 14);
+
+        jLabel10.setText("Tanggal Masuk");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(370, 150, 80, 14);
+
+        jLabel11.setText("Tanggal Lahir");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(20, 120, 70, 14);
+
+        jLabel12.setText("Tanggungan");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(370, 90, 60, 14);
+
+        jLabel13.setText("Status Rawat");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(370, 120, 70, 14);
+
+        txtPasienNik.setEditable(false);
+        jPanel1.add(txtPasienNik);
+        txtPasienNik.setBounds(110, 30, 210, 20);
+
+        txtPasienNama.setEditable(false);
+        jPanel1.add(txtPasienNama);
+        txtPasienNama.setBounds(110, 60, 210, 20);
+
+        txtPasienKelamin.setEditable(false);
+        jPanel1.add(txtPasienKelamin);
+        txtPasienKelamin.setBounds(110, 90, 210, 20);
+
+        txtPasienTanggalLahir.setEditable(false);
+        jPanel1.add(txtPasienTanggalLahir);
+        txtPasienTanggalLahir.setBounds(110, 120, 210, 20);
+
+        txtPasienGolonganDarah.setEditable(false);
+        jPanel1.add(txtPasienGolonganDarah);
+        txtPasienGolonganDarah.setBounds(110, 150, 210, 20);
+
+        txtPasienAgama.setEditable(false);
+        jPanel1.add(txtPasienAgama);
+        txtPasienAgama.setBounds(480, 30, 230, 20);
+
+        txtPasienTelepon.setEditable(false);
+        jPanel1.add(txtPasienTelepon);
+        txtPasienTelepon.setBounds(480, 60, 230, 20);
+
+        txtPasienTanggungan.setEditable(false);
+        jPanel1.add(txtPasienTanggungan);
+        txtPasienTanggungan.setBounds(480, 90, 230, 20);
+
+        txtPasienStatusRawat.setEditable(false);
+        jPanel1.add(txtPasienStatusRawat);
+        txtPasienStatusRawat.setBounds(480, 120, 230, 20);
+
+        txtPasienTanggalMasuk.setEditable(false);
+        jPanel1.add(txtPasienTanggalMasuk);
+        txtPasienTanggalMasuk.setBounds(480, 150, 230, 20);
+
+        pnlResep.add(jPanel1);
+        jPanel1.setBounds(10, 80, 730, 190);
+
+        txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasienKodeFocusLost(evt);
+            }
+        });
+        pnlResep.add(txtPasienKode);
+        txtPasienKode.setBounds(120, 10, 210, 20);
+
+        tblResepObat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblResepObat);
+
+        pnlResep.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 280, 730, 270);
+
+        jLabel2.setText("No. Register Pasien");
+        pnlResep.add(jLabel2);
+        jLabel2.setBounds(10, 10, 94, 14);
+
+        jLabel1.setText("Nomor Resep");
+        pnlResep.add(jLabel1);
+        jLabel1.setBounds(10, 40, 90, 14);
+        pnlResep.add(txtResepNomor);
+        txtResepNomor.setBounds(120, 40, 210, 20);
+
+        btnObatTambah.setText("Tambah Obat");
+        btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObatTambahActionPerformed(evt);
+            }
+        });
+        pnlResep.add(btnObatTambah);
+        btnObatTambah.setBounds(380, 40, 100, 23);
+
+        getContentPane().add(pnlResep);
+        pnlResep.setBounds(150, 90, 750, 560);
+
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
@@ -788,6 +788,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
     private void txtBhpKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBhpKeywordFocusLost
         String keyword = txtBhpKeyword.getText();
+        
+        if (keyword.equals(""))
+            return;
         
         List<BahanHabisPakai> list = null;
         try {
@@ -855,6 +858,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
     private void txtObatKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObatKeywordFocusLost
         String keyword = txtObatKeyword.getText();
+        
+        if (keyword.equals(""))
+            return;
         
         List<ObatFarmasi> list = null;
         try {
@@ -931,6 +937,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
         String keyword = txtPasienKode.getText();
+        
+        if (keyword.equals(""))
+            return;
 
         try {
             pasien = pasienService.get(keyword);

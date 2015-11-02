@@ -44,15 +44,15 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
         
-//        if (Unit.Type.POLIKLINIK.equals(unit.getTipe())) {
-// TODO
-//        } else if (Unit.Type.LABORATORIUM.equals(unit.getTipe())) {
-// TODO           
-//        } else if (Unit.Type.TRANSFUSI_DARAH.equals(unit.getTipe())) {
-// TODO           
-//        } else if (Unit.Type.RADIOLOGI.equals(unit.getTipe())) {
-// TODO           
-//        }
+        if (Unit.Type.POLIKLINIK.equals(unit.getTipe())) {
+            // TODO
+        } else if (Unit.Type.LABORATORIUM.equals(unit.getTipe())) {
+            // TODO
+        } else if (Unit.Type.TRANSFUSI_DARAH.equals(unit.getTipe())) {
+            // TODO
+        } else if (Unit.Type.RADIOLOGI.equals(unit.getTipe())) {
+            // TODO
+        }
     }
     
     private void setDetailPasien(final Pasien pasien) {
@@ -539,6 +539,9 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
 
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
         String keyword = txtPasienKode.getText();
+        
+        if (keyword.equals(""))
+            return;
         
         try {
             pasien = pasienService.get(keyword);

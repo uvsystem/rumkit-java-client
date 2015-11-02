@@ -234,6 +234,15 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        pnlHome = new javax.swing.JPanel();
+        scrollPasien = new javax.swing.JScrollPane();
+        tblPasien = new javax.swing.JTable();
+        pnlMasuk = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPasienMasuk = new javax.swing.JTextField();
+        cbKelas = new javax.swing.JComboBox();
+        btnMasuk = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         panePasien = new javax.swing.JTabbedPane();
         pnlTindakan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -249,15 +258,6 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         btnBhpHapus = new javax.swing.JButton();
         btnBhpTambah = new javax.swing.JButton();
         btnBhpUpdate = new javax.swing.JButton();
-        pnlHome = new javax.swing.JPanel();
-        scrollPasien = new javax.swing.JScrollPane();
-        tblPasien = new javax.swing.JTable();
-        pnlMasuk = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPasienMasuk = new javax.swing.JTextField();
-        cbKelas = new javax.swing.JComboBox();
-        btnMasuk = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel17 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -501,6 +501,62 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         getContentPane().add(pnlPasienDetail);
         pnlPasienDetail.setBounds(10, 220, 330, 410);
 
+        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHome.setLayout(null);
+
+        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPasienMouseClicked(evt);
+            }
+        });
+        scrollPasien.setViewportView(tblPasien);
+
+        pnlHome.add(scrollPasien);
+        scrollPasien.setBounds(10, 100, 600, 390);
+
+        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
+        pnlMasuk.setLayout(null);
+
+        jLabel2.setText("No. Pasien");
+        pnlMasuk.add(jLabel2);
+        jLabel2.setBounds(10, 20, 60, 20);
+        pnlMasuk.add(txtPasienMasuk);
+        txtPasienMasuk.setBounds(90, 20, 160, 20);
+
+        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
+        pnlMasuk.add(cbKelas);
+        cbKelas.setBounds(350, 20, 160, 20);
+
+        btnMasuk.setText("MASUK");
+        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasukActionPerformed(evt);
+            }
+        });
+        pnlMasuk.add(btnMasuk);
+        btnMasuk.setBounds(520, 20, 73, 23);
+
+        jLabel13.setText("Kelas");
+        pnlMasuk.add(jLabel13);
+        jLabel13.setBounds(300, 20, 25, 14);
+
+        pnlHome.add(pnlMasuk);
+        pnlMasuk.setBounds(10, 10, 600, 60);
+
+        getContentPane().add(pnlHome);
+        pnlHome.setBounds(360, 130, 620, 500);
+
         panePasien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panePasienMouseClicked(evt);
@@ -615,62 +671,6 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
 
         getContentPane().add(panePasien);
         panePasien.setBounds(360, 130, 620, 500);
-
-        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlHome.setLayout(null);
-
-        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPasienMouseClicked(evt);
-            }
-        });
-        scrollPasien.setViewportView(tblPasien);
-
-        pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 100, 600, 390);
-
-        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
-        pnlMasuk.setLayout(null);
-
-        jLabel2.setText("No. Pasien");
-        pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 60, 20);
-        pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(90, 20, 160, 20);
-
-        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
-        pnlMasuk.add(cbKelas);
-        cbKelas.setBounds(350, 20, 160, 20);
-
-        btnMasuk.setText("MASUK");
-        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMasukActionPerformed(evt);
-            }
-        });
-        pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(520, 20, 73, 23);
-
-        jLabel13.setText("Kelas");
-        pnlMasuk.add(jLabel13);
-        jLabel13.setBounds(300, 20, 25, 14);
-
-        pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 600, 60);
-
-        getContentPane().add(pnlHome);
-        pnlHome.setBounds(360, 130, 620, 500);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);

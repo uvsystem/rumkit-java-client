@@ -390,6 +390,9 @@ public class FramePendaftaran extends javax.swing.JFrame {
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
         String keyword = txtKeyword.getText();
         
+        if (keyword.equals(""))
+            return;
+        
         try {
             List<Penduduk> list = pendudukService.cari(keyword);
             

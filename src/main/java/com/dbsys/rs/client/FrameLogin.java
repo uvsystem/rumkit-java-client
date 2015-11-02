@@ -104,21 +104,22 @@ public class FrameLogin extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.LOKET_PEMBAYARAN)) {
-                // TODO
+                new FramePembayaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.RUANG_PERAWATAN)) {
                 new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
                 new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
             } else if (token.getTipe().equals(Unit.Type.FARMASI)) {
                 new FrameFarmasi().setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.LABORATORIUM)) {
+                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.RADIOLOGI)) {
+                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.TRANSFUSI_DARAH)) {
+                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+            } else if (token.getTipe().equals(Unit.Type.UGD)) {
+                new FrameUgd().setVisible(true);
             }
-//            else if (token.getTipe().equals(Unit.Type.LABORATORIUM)) {
-//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-//            } else if (token.getTipe().equals(Unit.Type.RADIOLOGI)) {
-//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-//            } else if (token.getTipe().equals(Unit.Type.TRANSFUSI_DARAH)) {
-//                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-//            }
             
             this.dispose();
         } catch (ServiceException ex) {

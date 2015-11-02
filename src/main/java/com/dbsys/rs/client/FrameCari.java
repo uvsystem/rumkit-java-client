@@ -56,13 +56,11 @@ public class FrameCari extends JFrame {
         if (cls.equals(Unit.class)){
             unitService = UnitService.getInstance(EventController.host);
             txtKeyword.setEnabled(false);
-            btnCari.setEnabled(false);
 
             loadTableUnit();
         } else if (cls.equals(KategoriTindakan.class)) {
             kategoriService = KategoriService.getInstance(EventController.host);
             txtKeyword.setEnabled(false);
-            btnCari.setEnabled(false);
             chkTambah.setVisible(true);
             pnlKategori.setVisible(true);
 
@@ -89,7 +87,6 @@ public class FrameCari extends JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
-        btnCari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCari = new javax.swing.JTable();
         btnPilih = new javax.swing.JButton();
@@ -109,18 +106,15 @@ public class FrameCari extends JFrame {
 
         jLabel1.setText("Kata Kunci");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 90, 50, 14);
-        getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(80, 90, 209, 20);
+        jLabel1.setBounds(20, 90, 90, 14);
 
-        btnCari.setText("OK");
-        btnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariActionPerformed(evt);
+        txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKeywordFocusLost(evt);
             }
         });
-        getContentPane().add(btnCari);
-        btnCari.setBounds(300, 90, 47, 23);
+        getContentPane().add(txtKeyword);
+        txtKeyword.setBounds(140, 90, 200, 20);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,19 +191,6 @@ public class FrameCari extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        String keyword = txtKeyword.getText();
-        
-        if (keyword.equals(""))
-            return;
-        
-        if (cls.equals(Dokter.class)) {
-            loadTableDokter(keyword);
-        } else if (cls.equals(Perawat.class)) {
-            loadTablePerawat(keyword);
-        }
-    }//GEN-LAST:event_btnCariActionPerformed
-
     private void btnPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihActionPerformed
         if(cls.equals(Unit.class)){
             pilihUnit();
@@ -261,6 +242,19 @@ public class FrameCari extends JFrame {
             disableTambah();
         }
     }//GEN-LAST:event_chkTambahActionPerformed
+
+    private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
+        String keyword = txtKeyword.getText();
+        
+        if (keyword.equals(""))
+            return;
+        
+        if (cls.equals(Dokter.class)) {
+            loadTableDokter(keyword);
+        } else if (cls.equals(Perawat.class)) {
+            loadTablePerawat(keyword);
+        }
+    }//GEN-LAST:event_txtKeywordFocusLost
  
     private void enableTambah() {
         btnPilih.setEnabled(false);
@@ -268,7 +262,7 @@ public class FrameCari extends JFrame {
         txtKategoriNama.setEnabled(true);
         txtKategoriParent.setEnabled(true);
         
-        this.setSize(500, 430);
+        this.setSize(500, 450);
         pnlKategori.setVisible(true);
     }
     
@@ -278,7 +272,7 @@ public class FrameCari extends JFrame {
         txtKategoriNama.setEditable(false);
         txtKategoriParent.setEditable(false);
 
-        this.setSize(500, 300);
+        this.setSize(500, 330);
         pnlKategori.setVisible(false);
     }
     
@@ -374,7 +368,6 @@ public class FrameCari extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JButton btnCari;
     private javax.swing.JButton btnPilih;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JCheckBox chkTambah;

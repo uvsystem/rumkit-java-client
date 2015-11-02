@@ -1,7 +1,9 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Pelayanan;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +21,7 @@ public class PelayananTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 4;
+        return 6;
     }
     
     @Override
@@ -36,6 +38,8 @@ public class PelayananTableModel extends DefaultTableModel {
             case 1: return "NAMA UNIT";
             case 2: return "TANGGAL";
             case 3: return "JUMLAH";
+            case 4: return "BIAYA";
+            case 5: return "PENANGGUNG";
             default: return "";
         }
     }
@@ -49,6 +53,10 @@ public class PelayananTableModel extends DefaultTableModel {
             case 1: return pelayanan.getUnit().getNama();
             case 2: return pelayanan.getTanggal();
             case 3: return pelayanan.getJumlah();
+            case 4:
+                String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pelayanan.getTagihan());
+                return tagihan;
+            case 5: return pelayanan.getTanggungan();
             default: return "";
         }
     }
