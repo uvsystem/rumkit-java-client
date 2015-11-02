@@ -67,6 +67,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         txtPasienTanggungan.setText(pasien.getTanggungan().toString());
         txtPasienStatus.setText(pasien.getStatus().toString());
         txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
+        txtPasienTipe.setText(pasien.getTipe().toString());
     }
     
     private void loadTabelTindakan(final Pasien pasien) throws ServiceException {
@@ -180,6 +181,8 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         txtPasienStatus = new javax.swing.JTextField();
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtPasienTipe = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -204,7 +207,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jToolBar1.add(lblUnit);
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setText("       LOGOUT");
+        btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -419,7 +422,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         pnlDetail.add(jLabel12);
         jLabel12.setBounds(20, 270, 90, 14);
 
-        jLabel16.setText("STATUS RAWAT");
+        jLabel16.setText("STATUS");
         pnlDetail.add(jLabel16);
         jLabel16.setBounds(20, 300, 90, 14);
 
@@ -442,12 +445,20 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         pnlDetail.add(txtPasienTanggungan);
         txtPasienTanggungan.setBounds(120, 270, 180, 18);
 
+        jLabel14.setText("PERAWATAN");
+        pnlDetail.add(jLabel14);
+        jLabel14.setBounds(20, 360, 90, 14);
+
+        txtPasienTipe.setEditable(false);
+        pnlDetail.add(txtPasienTipe);
+        txtPasienTipe.setBounds(120, 360, 180, 20);
+
         getContentPane().add(pnlDetail);
-        pnlDetail.setBounds(20, 170, 330, 360);
+        pnlDetail.setBounds(20, 170, 330, 400);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/poliklinik.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1270, 800);
+        jLabel3.setBounds(0, 0, 1280, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -566,6 +577,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -601,5 +613,6 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
     private javax.swing.JTextField txtPasienTanggalMasuk;
     private javax.swing.JTextField txtPasienTanggungan;
     private javax.swing.JTextField txtPasienTelepon;
+    private javax.swing.JTextField txtPasienTipe;
     // End of variables declaration//GEN-END:variables
 }
