@@ -172,9 +172,6 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlMain = new javax.swing.JPanel();
-        btnResep = new javax.swing.JButton();
-        btnStok = new javax.swing.JButton();
         paneBarang = new javax.swing.JTabbedPane();
         pnlBhp = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -204,6 +201,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnBhpStokMasuk = new javax.swing.JButton();
         btnBhpStokReset = new javax.swing.JButton();
         btnBhpStokKeluar = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
         pnlObat = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtObatKeyword = new javax.swing.JTextField();
@@ -232,6 +230,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnObatStokMasuk = new javax.swing.JButton();
         btnObatStokReset = new javax.swing.JButton();
         btnObatStokKeluar = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
         pnlResep = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -261,6 +260,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         jLabel1 = new javax.swing.JLabel();
         txtResepNomor = new javax.swing.JTextField();
         btnObatTambah = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        pnlMain = new javax.swing.JPanel();
+        btnResep = new javax.swing.JButton();
+        btnStok = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -269,6 +272,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RUMAH SAKIT LIUN KENDAGE TAHUNA - FARMASI");
@@ -276,30 +280,6 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(null);
-
-        pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlMain.setLayout(null);
-
-        btnResep.setText("RESEP");
-        btnResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResepActionPerformed(evt);
-            }
-        });
-        pnlMain.add(btnResep);
-        btnResep.setBounds(10, 10, 110, 40);
-
-        btnStok.setText("STOK BARANG");
-        btnStok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStokActionPerformed(evt);
-            }
-        });
-        pnlMain.add(btnStok);
-        btnStok.setBounds(10, 60, 110, 40);
-
-        getContentPane().add(pnlMain);
-        pnlMain.setBounds(10, 90, 130, 110);
 
         paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -422,32 +402,36 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         pnlBhp.add(jScrollPane2);
         jScrollPane2.setBounds(10, 50, 720, 240);
 
-        btnBhpStokMasuk.setText("MASUK");
+        btnBhpStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
         btnBhpStokMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpStokMasukActionPerformed(evt);
             }
         });
         pnlBhp.add(btnBhpStokMasuk);
-        btnBhpStokMasuk.setBounds(490, 490, 71, 23);
+        btnBhpStokMasuk.setBounds(380, 480, 100, 40);
 
-        btnBhpStokReset.setText("RESET");
+        btnBhpStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
         btnBhpStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpStokResetActionPerformed(evt);
             }
         });
         pnlBhp.add(btnBhpStokReset);
-        btnBhpStokReset.setBounds(650, 490, 63, 23);
+        btnBhpStokReset.setBounds(635, 480, 90, 39);
 
-        btnBhpStokKeluar.setText("KELUAR");
+        btnBhpStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
         btnBhpStokKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpStokKeluarActionPerformed(evt);
             }
         });
         pnlBhp.add(btnBhpStokKeluar);
-        btnBhpStokKeluar.setBounds(570, 490, 71, 23);
+        btnBhpStokKeluar.setBounds(510, 480, 100, 39);
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        pnlBhp.add(jLabel35);
+        jLabel35.setBounds(620, 10, 110, 30);
 
         paneBarang.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
@@ -564,34 +548,38 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         jScrollPane3.setViewportView(tblObat);
 
         pnlObat.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 40, 720, 240);
+        jScrollPane3.setBounds(10, 50, 720, 240);
 
-        btnObatStokMasuk.setText("MASUK");
+        btnObatStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
         btnObatStokMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatStokMasukActionPerformed(evt);
             }
         });
         pnlObat.add(btnObatStokMasuk);
-        btnObatStokMasuk.setBounds(490, 480, 67, 23);
+        btnObatStokMasuk.setBounds(380, 480, 90, 40);
 
-        btnObatStokReset.setText("RESET");
+        btnObatStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
         btnObatStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatStokResetActionPerformed(evt);
             }
         });
         pnlObat.add(btnObatStokReset);
-        btnObatStokReset.setBounds(650, 480, 63, 23);
+        btnObatStokReset.setBounds(650, 480, 80, 39);
 
-        btnObatStokKeluar.setText("KELUAR");
+        btnObatStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
         btnObatStokKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatStokKeluarActionPerformed(evt);
             }
         });
         pnlObat.add(btnObatStokKeluar);
-        btnObatStokKeluar.setBounds(570, 480, 71, 23);
+        btnObatStokKeluar.setBounds(520, 480, 90, 39);
+
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        pnlObat.add(jLabel36);
+        jLabel36.setBounds(620, 10, 110, 30);
 
         paneBarang.addTab("OBAT", pnlObat);
 
@@ -730,8 +718,37 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         pnlResep.add(btnObatTambah);
         btnObatTambah.setBounds(380, 40, 100, 23);
 
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/resep_icon.png"))); // NOI18N
+        pnlResep.add(jLabel34);
+        jLabel34.setBounds(630, 20, 100, 40);
+
         getContentPane().add(pnlResep);
         pnlResep.setBounds(150, 90, 750, 560);
+
+        pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlMain.setBackground(new Color(0,0,0,20));
+        pnlMain.setLayout(null);
+
+        btnResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/resep_icon.png"))); // NOI18N
+        btnResep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResepActionPerformed(evt);
+            }
+        });
+        pnlMain.add(btnResep);
+        btnResep.setBounds(10, 10, 110, 40);
+
+        btnStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
+        btnStok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStokActionPerformed(evt);
+            }
+        });
+        pnlMain.add(btnStok);
+        btnStok.setBounds(10, 60, 110, 40);
+
+        getContentPane().add(pnlMain);
+        pnlMain.setBounds(10, 90, 130, 110);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -765,6 +782,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Farmasi_Bg.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1280, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -974,6 +995,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnBhpStokKeluar;
     private javax.swing.JButton btnBhpStokMasuk;
     private javax.swing.JButton btnBhpStokReset;
@@ -1011,6 +1033,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

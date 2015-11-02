@@ -196,6 +196,15 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlMain = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
+        pnlHome = new javax.swing.JPanel();
+        scrollPasien = new javax.swing.JScrollPane();
+        tblPasien = new javax.swing.JTable();
+        pnlMasuk = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPasienMasuk = new javax.swing.JTextField();
+        cbKelas = new javax.swing.JComboBox();
+        btnMasuk = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         pnlHomeDetail = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -266,6 +275,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         lblUnit = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
 
         dialogKeluar.setUndecorated(true);
         dialogKeluar.setResizable(false);
@@ -310,7 +320,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlMain.setLayout(null);
 
-        btnHome.setText("HOME");
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SalHome_icon.png"))); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -319,7 +329,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlMain.add(btnHome);
         btnHome.setBounds(10, 10, 150, 44);
 
-        btnPasien.setText("PASIEN");
+        btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SalPasien_icon.png"))); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(105, 23));
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,6 +341,62 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
 
         getContentPane().add(pnlMain);
         pnlMain.setBounds(10, 130, 330, 70);
+
+        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHome.setLayout(null);
+
+        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPasienMouseClicked(evt);
+            }
+        });
+        scrollPasien.setViewportView(tblPasien);
+
+        pnlHome.add(scrollPasien);
+        scrollPasien.setBounds(10, 100, 760, 390);
+
+        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
+        pnlMasuk.setLayout(null);
+
+        jLabel2.setText("No. Pasien");
+        pnlMasuk.add(jLabel2);
+        jLabel2.setBounds(10, 20, 60, 20);
+        pnlMasuk.add(txtPasienMasuk);
+        txtPasienMasuk.setBounds(90, 20, 160, 20);
+
+        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
+        pnlMasuk.add(cbKelas);
+        cbKelas.setBounds(370, 20, 160, 20);
+
+        btnMasuk.setText("MASUK");
+        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasukActionPerformed(evt);
+            }
+        });
+        pnlMasuk.add(btnMasuk);
+        btnMasuk.setBounds(670, 20, 73, 23);
+
+        jLabel13.setText("Kelas");
+        pnlMasuk.add(jLabel13);
+        jLabel13.setBounds(340, 20, 25, 20);
+
+        pnlHome.add(pnlMasuk);
+        pnlMasuk.setBounds(10, 10, 760, 60);
+
+        getContentPane().add(pnlHome);
+        pnlHome.setBounds(360, 130, 790, 500);
 
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -703,7 +769,11 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jToolBar1.add(btnLogout);
 
         getContentPane().add(jToolBar1);
-        jToolBar1.setBounds(0, 653, 990, 30);
+        jToolBar1.setBounds(0, 770, 1280, 30);
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SAL_Bg.jpg"))); // NOI18N
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(0, 0, 1280, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -931,6 +1001,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
