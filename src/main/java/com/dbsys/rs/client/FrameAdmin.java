@@ -43,6 +43,7 @@ import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 

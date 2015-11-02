@@ -19,6 +19,7 @@ import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianObat;
+import java.awt.Color;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -232,6 +233,9 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         btnObatStokKeluar = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         pnlResep = new javax.swing.JPanel();
+        txtPasienKode = new javax.swing.JTextField();
+        txtResepNomor = new javax.swing.JTextField();
+        btnObatTambah = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -253,13 +257,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         txtPasienTanggungan = new javax.swing.JTextField();
         txtPasienStatusRawat = new javax.swing.JTextField();
         txtPasienTanggalMasuk = new javax.swing.JTextField();
-        txtPasienKode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResepObat = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtResepNomor = new javax.swing.JTextField();
-        btnObatTambah = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
         btnResep = new javax.swing.JButton();
@@ -306,80 +307,80 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
         txtBhpKode.setEditable(false);
         pnlBhpDetail.add(txtBhpKode);
-        txtBhpKode.setBounds(160, 30, 170, 20);
+        txtBhpKode.setBounds(140, 30, 350, 20);
 
         txtBhpNama.setEditable(false);
         pnlBhpDetail.add(txtBhpNama);
-        txtBhpNama.setBounds(160, 60, 170, 20);
+        txtBhpNama.setBounds(140, 60, 350, 20);
 
         txtBhpHarga.setEditable(false);
         txtBhpHarga.setToolTipText("");
         pnlBhpDetail.add(txtBhpHarga);
-        txtBhpHarga.setBounds(160, 90, 170, 20);
+        txtBhpHarga.setBounds(140, 90, 350, 20);
 
         txtBhpTanggungan.setEditable(false);
         txtBhpTanggungan.setToolTipText("");
         pnlBhpDetail.add(txtBhpTanggungan);
-        txtBhpTanggungan.setBounds(160, 120, 170, 20);
+        txtBhpTanggungan.setBounds(140, 120, 350, 20);
 
         txtBhpSatuan.setEditable(false);
         pnlBhpDetail.add(txtBhpSatuan);
-        txtBhpSatuan.setBounds(160, 180, 170, 20);
+        txtBhpSatuan.setBounds(140, 180, 350, 20);
 
         txtBhpJumlah.setEditable(false);
         pnlBhpDetail.add(txtBhpJumlah);
-        txtBhpJumlah.setBounds(160, 150, 170, 20);
+        txtBhpJumlah.setBounds(140, 150, 350, 20);
 
         jLabel14.setText("Kode");
         pnlBhpDetail.add(jLabel14);
-        jLabel14.setBounds(30, 30, 24, 14);
+        jLabel14.setBounds(30, 30, 90, 14);
 
         jLabel15.setText("Nama");
         pnlBhpDetail.add(jLabel15);
-        jLabel15.setBounds(30, 60, 27, 14);
+        jLabel15.setBounds(30, 60, 90, 14);
 
         jLabel16.setText("Harga");
         pnlBhpDetail.add(jLabel16);
-        jLabel16.setBounds(30, 90, 29, 14);
+        jLabel16.setBounds(30, 90, 90, 14);
 
         jLabel84.setText("Tanggungan");
         pnlBhpDetail.add(jLabel84);
-        jLabel84.setBounds(30, 120, 60, 14);
+        jLabel84.setBounds(30, 120, 90, 14);
 
         jLabel17.setText("Jumlah");
         pnlBhpDetail.add(jLabel17);
-        jLabel17.setBounds(30, 150, 33, 14);
+        jLabel17.setBounds(30, 150, 90, 14);
 
         jLabel18.setText("Satuan");
         pnlBhpDetail.add(jLabel18);
-        jLabel18.setBounds(30, 180, 34, 14);
+        jLabel18.setBounds(30, 180, 90, 14);
 
         pnlBhp.add(pnlBhpDetail);
-        pnlBhpDetail.setBounds(10, 300, 360, 220);
+        pnlBhpDetail.setBounds(10, 410, 540, 220);
 
         pnlBhpStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlBhpStok.setLayout(null);
 
         jLabel19.setText("Tanggal");
         pnlBhpStok.add(jLabel19);
-        jLabel19.setBounds(30, 30, 38, 14);
+        jLabel19.setBounds(30, 30, 90, 14);
 
         jLabel20.setText("Jam");
         pnlBhpStok.add(jLabel20);
-        jLabel20.setBounds(30, 60, 19, 14);
+        jLabel20.setBounds(30, 60, 90, 14);
 
         jLabel21.setText("Jumlah");
         pnlBhpStok.add(jLabel21);
-        jLabel21.setBounds(30, 90, 33, 14);
+        jLabel21.setBounds(30, 90, 90, 14);
         pnlBhpStok.add(txtBhpStokTanggal);
-        txtBhpStokTanggal.setBounds(119, 30, 190, 20);
+        txtBhpStokTanggal.setBounds(140, 30, 350, 20);
         pnlBhpStok.add(txtBhpStokJam);
-        txtBhpStokJam.setBounds(119, 60, 190, 20);
+        txtBhpStokJam.setBounds(140, 60, 350, 20);
         pnlBhpStok.add(txtBhpStokJumlah);
-        txtBhpStokJumlah.setBounds(119, 90, 190, 20);
+        txtBhpStokJumlah.setBounds(140, 90, 350, 20);
 
         pnlBhp.add(pnlBhpStok);
-        pnlBhpStok.setBounds(380, 300, 350, 140);
+        pnlBhpStok.setBounds(560, 410, 540, 140);
 
         tblBhp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -400,7 +401,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         jScrollPane2.setViewportView(tblBhp);
 
         pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 50, 720, 240);
+        jScrollPane2.setBounds(10, 50, 1090, 350);
 
         btnBhpStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
         btnBhpStokMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -409,7 +410,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             }
         });
         pnlBhp.add(btnBhpStokMasuk);
-        btnBhpStokMasuk.setBounds(380, 480, 100, 40);
+        btnBhpStokMasuk.setBounds(750, 590, 100, 40);
 
         btnBhpStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
         btnBhpStokReset.addActionListener(new java.awt.event.ActionListener() {
@@ -418,7 +419,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             }
         });
         pnlBhp.add(btnBhpStokReset);
-        btnBhpStokReset.setBounds(635, 480, 90, 39);
+        btnBhpStokReset.setBounds(1010, 590, 90, 39);
 
         btnBhpStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
         btnBhpStokKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -427,11 +428,11 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             }
         });
         pnlBhp.add(btnBhpStokKeluar);
-        btnBhpStokKeluar.setBounds(510, 480, 100, 39);
+        btnBhpStokKeluar.setBounds(880, 590, 100, 39);
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
         pnlBhp.add(jLabel35);
-        jLabel35.setBounds(620, 10, 110, 30);
+        jLabel35.setBounds(990, 10, 110, 30);
 
         paneBarang.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
@@ -584,96 +585,10 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         paneBarang.addTab("OBAT", pnlObat);
 
         getContentPane().add(paneBarang);
-        paneBarang.setBounds(150, 90, 750, 560);
+        paneBarang.setBounds(150, 90, 1120, 670);
 
         pnlResep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlResep.setLayout(null);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(null);
-
-        jLabel3.setText("NIK");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 30, 17, 14);
-
-        jLabel4.setText("Nama");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 60, 27, 14);
-
-        jLabel5.setText("Kelamin");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 90, 36, 14);
-
-        jLabel7.setText("Agama");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(370, 30, 33, 14);
-
-        jLabel8.setText("Telepon");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(370, 60, 38, 14);
-
-        jLabel9.setText("Gol. Darah");
-        jPanel1.add(jLabel9);
-        jLabel9.setBounds(20, 150, 70, 14);
-
-        jLabel10.setText("Tanggal Masuk");
-        jPanel1.add(jLabel10);
-        jLabel10.setBounds(370, 150, 80, 14);
-
-        jLabel11.setText("Tanggal Lahir");
-        jPanel1.add(jLabel11);
-        jLabel11.setBounds(20, 120, 70, 14);
-
-        jLabel12.setText("Tanggungan");
-        jPanel1.add(jLabel12);
-        jLabel12.setBounds(370, 90, 60, 14);
-
-        jLabel13.setText("Status Rawat");
-        jPanel1.add(jLabel13);
-        jLabel13.setBounds(370, 120, 70, 14);
-
-        txtPasienNik.setEditable(false);
-        jPanel1.add(txtPasienNik);
-        txtPasienNik.setBounds(110, 30, 210, 20);
-
-        txtPasienNama.setEditable(false);
-        jPanel1.add(txtPasienNama);
-        txtPasienNama.setBounds(110, 60, 210, 20);
-
-        txtPasienKelamin.setEditable(false);
-        jPanel1.add(txtPasienKelamin);
-        txtPasienKelamin.setBounds(110, 90, 210, 20);
-
-        txtPasienTanggalLahir.setEditable(false);
-        jPanel1.add(txtPasienTanggalLahir);
-        txtPasienTanggalLahir.setBounds(110, 120, 210, 20);
-
-        txtPasienGolonganDarah.setEditable(false);
-        jPanel1.add(txtPasienGolonganDarah);
-        txtPasienGolonganDarah.setBounds(110, 150, 210, 20);
-
-        txtPasienAgama.setEditable(false);
-        jPanel1.add(txtPasienAgama);
-        txtPasienAgama.setBounds(480, 30, 230, 20);
-
-        txtPasienTelepon.setEditable(false);
-        jPanel1.add(txtPasienTelepon);
-        txtPasienTelepon.setBounds(480, 60, 230, 20);
-
-        txtPasienTanggungan.setEditable(false);
-        jPanel1.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(480, 90, 230, 20);
-
-        txtPasienStatusRawat.setEditable(false);
-        jPanel1.add(txtPasienStatusRawat);
-        txtPasienStatusRawat.setBounds(480, 120, 230, 20);
-
-        txtPasienTanggalMasuk.setEditable(false);
-        jPanel1.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(480, 150, 230, 20);
-
-        pnlResep.add(jPanel1);
-        jPanel1.setBounds(10, 80, 730, 190);
 
         txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -681,7 +596,104 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             }
         });
         pnlResep.add(txtPasienKode);
-        txtPasienKode.setBounds(120, 10, 210, 20);
+        txtPasienKode.setBounds(150, 10, 350, 20);
+        pnlResep.add(txtResepNomor);
+        txtResepNomor.setBounds(150, 40, 350, 20);
+
+        btnObatTambah.setText("Tambah Obat");
+        btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObatTambahActionPerformed(evt);
+            }
+        });
+        pnlResep.add(btnObatTambah);
+        btnObatTambah.setBounds(550, 40, 100, 23);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(null);
+
+        jLabel3.setText("NIK");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(40, 30, 90, 14);
+
+        jLabel4.setText("Nama");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(40, 60, 90, 14);
+
+        jLabel5.setText("Kelamin");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(40, 90, 90, 14);
+
+        jLabel7.setText("Agama");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(540, 30, 90, 14);
+
+        jLabel8.setText("Telepon");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(540, 60, 90, 14);
+
+        jLabel9.setText("Gol. Darah");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(40, 150, 90, 14);
+
+        jLabel10.setText("Tanggal Masuk");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(540, 150, 90, 14);
+
+        jLabel11.setText("Tanggal Lahir");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(40, 120, 90, 14);
+
+        jLabel12.setText("Tanggungan");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(540, 90, 90, 14);
+
+        jLabel13.setText("Status Rawat");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(540, 120, 90, 14);
+
+        txtPasienNik.setEditable(false);
+        jPanel1.add(txtPasienNik);
+        txtPasienNik.setBounds(140, 30, 350, 20);
+
+        txtPasienNama.setEditable(false);
+        jPanel1.add(txtPasienNama);
+        txtPasienNama.setBounds(140, 60, 350, 20);
+
+        txtPasienKelamin.setEditable(false);
+        jPanel1.add(txtPasienKelamin);
+        txtPasienKelamin.setBounds(140, 90, 350, 20);
+
+        txtPasienTanggalLahir.setEditable(false);
+        jPanel1.add(txtPasienTanggalLahir);
+        txtPasienTanggalLahir.setBounds(140, 120, 350, 20);
+
+        txtPasienGolonganDarah.setEditable(false);
+        jPanel1.add(txtPasienGolonganDarah);
+        txtPasienGolonganDarah.setBounds(140, 150, 350, 20);
+
+        txtPasienAgama.setEditable(false);
+        jPanel1.add(txtPasienAgama);
+        txtPasienAgama.setBounds(640, 30, 350, 20);
+
+        txtPasienTelepon.setEditable(false);
+        jPanel1.add(txtPasienTelepon);
+        txtPasienTelepon.setBounds(640, 60, 350, 20);
+
+        txtPasienTanggungan.setEditable(false);
+        jPanel1.add(txtPasienTanggungan);
+        txtPasienTanggungan.setBounds(640, 90, 350, 20);
+
+        txtPasienStatusRawat.setEditable(false);
+        jPanel1.add(txtPasienStatusRawat);
+        txtPasienStatusRawat.setBounds(640, 120, 350, 20);
+
+        txtPasienTanggalMasuk.setEditable(false);
+        jPanel1.add(txtPasienTanggalMasuk);
+        txtPasienTanggalMasuk.setBounds(640, 150, 350, 20);
+
+        pnlResep.add(jPanel1);
+        jPanel1.setBounds(10, 80, 1100, 190);
 
         tblResepObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -697,33 +709,22 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         jScrollPane1.setViewportView(tblResepObat);
 
         pnlResep.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 280, 730, 270);
+        jScrollPane1.setBounds(10, 280, 1100, 380);
 
         jLabel2.setText("No. Register Pasien");
         pnlResep.add(jLabel2);
-        jLabel2.setBounds(10, 10, 94, 14);
+        jLabel2.setBounds(10, 10, 130, 14);
 
         jLabel1.setText("Nomor Resep");
         pnlResep.add(jLabel1);
-        jLabel1.setBounds(10, 40, 90, 14);
-        pnlResep.add(txtResepNomor);
-        txtResepNomor.setBounds(120, 40, 210, 20);
-
-        btnObatTambah.setText("Tambah Obat");
-        btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObatTambahActionPerformed(evt);
-            }
-        });
-        pnlResep.add(btnObatTambah);
-        btnObatTambah.setBounds(380, 40, 100, 23);
+        jLabel1.setBounds(10, 40, 130, 14);
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/resep_icon.png"))); // NOI18N
         pnlResep.add(jLabel34);
-        jLabel34.setBounds(630, 20, 100, 40);
+        jLabel34.setBounds(1010, 10, 100, 40);
 
         getContentPane().add(pnlResep);
-        pnlResep.setBounds(150, 90, 750, 560);
+        pnlResep.setBounds(150, 90, 1120, 670);
 
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlMain.setBackground(new Color(0,0,0,20));
