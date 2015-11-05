@@ -1393,7 +1393,6 @@ public class FrameAdmin extends javax.swing.JFrame {
         btnTindakan = new javax.swing.JButton();
         btnPenduduk = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
-        jLabel88 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel89 = new javax.swing.JLabel();
         lbl_status = new javax.swing.JLabel();
@@ -1594,7 +1593,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlPasien.add(btnPasienEdit);
         btnPasienEdit.setBounds(860, 280, 80, 40);
 
-        getContentPane().add(pnlPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlOperator.setBackground(new Color(0,0,0,20));
@@ -1693,7 +1692,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlOperator.add(jPanel11);
         jPanel11.setBounds(800, 560, 240, 60);
 
-        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlUnit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlUnit.setBackground(new Color(0,0,0,20));
@@ -1774,7 +1773,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlUnit.add(jLabel26);
         jLabel26.setBounds(0, 0, 1060, 30);
 
-        getContentPane().add(pnlUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlBarang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlBarang.setBackground(new Color(0,0,0,20));
@@ -2031,7 +2030,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlBarang.add(tabBhp);
         tabBhp.setBounds(10, 30, 1040, 590);
 
-        getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlPegawai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlPegawai.setBackground(new Color(0,0,0,20));
@@ -2488,7 +2487,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlPegawai.add(tab_pane);
         tab_pane.setBounds(10, 40, 1040, 580);
 
-        getContentPane().add(pnlPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlTindakan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlTindakan.setBackground(new Color(0,0,0,20));
@@ -2628,7 +2627,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlTindakan.add(btnResetTindakan);
         btnResetTindakan.setBounds(950, 400, 80, 40);
 
-        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlPenduduk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlPenduduk.setBackground(new Color(0,0,0,20));
@@ -2759,7 +2758,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         pnlPenduduk.add(btnPendudukEdit);
         btnPendudukEdit.setBounds(860, 400, 80, 40);
 
-        getContentPane().add(pnlPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 1060, 630));
+        getContentPane().add(pnlPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         btnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/UnitIcon.png"))); // NOI18N
         btnUnit.addActionListener(new java.awt.event.ActionListener() {
@@ -2767,7 +2766,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnUnitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 130, 51));
+        getContentPane().add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 130, 130, 51));
 
         btnOperator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/OperatorIcon.png"))); // NOI18N
         btnOperator.addActionListener(new java.awt.event.ActionListener() {
@@ -2775,7 +2774,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnOperatorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 130, 51));
+        getContentPane().add(btnOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 190, 130, 51));
 
         btnPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/PegawaiIcon.png"))); // NOI18N
         btnPegawai.addActionListener(new java.awt.event.ActionListener() {
@@ -2783,7 +2782,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnPegawaiActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 130, 51));
+        getContentPane().add(btnPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 250, 130, 51));
 
         btnBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangIcon.png"))); // NOI18N
         btnBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -2791,7 +2790,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 130, 51));
+        getContentPane().add(btnBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 310, 130, 51));
         btnBarang.getAccessibleContext().setAccessibleName("BHP");
 
         btnTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/TindakanIcon.png"))); // NOI18N
@@ -2800,7 +2799,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnTindakanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 130, 51));
+        getContentPane().add(btnTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 370, 130, 51));
 
         btnPenduduk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/RekamMedikIcon.png"))); // NOI18N
         btnPenduduk.addActionListener(new java.awt.event.ActionListener() {
@@ -2808,7 +2807,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnPendudukActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 130, 51));
+        getContentPane().add(btnPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 430, 130, 51));
 
         btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/RekamMedikIcon.png"))); // NOI18N
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -2816,10 +2815,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 btnPasienActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 130, 51));
-
-        jLabel88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/FrameMenuAdmin.png"))); // NOI18N
-        getContentPane().add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 540));
+        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 490, 130, 51));
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -3366,7 +3362,6 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;

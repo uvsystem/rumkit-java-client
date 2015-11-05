@@ -196,6 +196,19 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlMain = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
+        panePasien = new javax.swing.JTabbedPane();
+        pnlTindakan = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTindakan = new javax.swing.JTable();
+        btnTindakanTambah = new javax.swing.JButton();
+        btnTindakanUpdate = new javax.swing.JButton();
+        btnTindakanHapus = new javax.swing.JButton();
+        pnlBhp = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblBhp = new javax.swing.JTable();
+        btnBhpTambah = new javax.swing.JButton();
+        btnBhpUpdate = new javax.swing.JButton();
+        btnBhpHapus = new javax.swing.JButton();
         pnlHome = new javax.swing.JPanel();
         scrollPasien = new javax.swing.JScrollPane();
         tblPasien = new javax.swing.JTable();
@@ -205,20 +218,6 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         cbKelas = new javax.swing.JComboBox();
         btnMasuk = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        pnlHomeDetail = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
-        txtJumlahPasien = new javax.swing.JTextField();
-        txtJumlahPasienKelas3 = new javax.swing.JTextField();
-        txtJumlahPasienVvip = new javax.swing.JTextField();
-        txtJumlahPasienVip = new javax.swing.JTextField();
-        txtJumlahPasienKelas1 = new javax.swing.JTextField();
-        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         pnlPasienDetail = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -243,30 +242,20 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        pnlHome = new javax.swing.JPanel();
-        scrollPasien = new javax.swing.JScrollPane();
-        tblPasien = new javax.swing.JTable();
-        pnlMasuk = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPasienMasuk = new javax.swing.JTextField();
-        cbKelas = new javax.swing.JComboBox();
-        btnMasuk = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        panePasien = new javax.swing.JTabbedPane();
-        pnlTindakan = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTindakan = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        btnTindakanHapus = new javax.swing.JButton();
-        btnTindakanTambah = new javax.swing.JButton();
-        btnTindakanUpdate = new javax.swing.JButton();
-        pnlBhp = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblBhp = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        btnBhpHapus = new javax.swing.JButton();
-        btnBhpTambah = new javax.swing.JButton();
-        btnBhpUpdate = new javax.swing.JButton();
+        pnlHomeDetail = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        txtJumlahPasien = new javax.swing.JTextField();
+        txtJumlahPasienKelas3 = new javax.swing.JTextField();
+        txtJumlahPasienVvip = new javax.swing.JTextField();
+        txtJumlahPasienVip = new javax.swing.JTextField();
+        txtJumlahPasienKelas1 = new javax.swing.JTextField();
+        txtJumlahPasienKelas2 = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel17 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -327,7 +316,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
             }
         });
         pnlMain.add(btnHome);
-        btnHome.setBounds(10, 10, 150, 44);
+        btnHome.setBounds(30, 10, 150, 44);
 
         btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SalPasien_icon.png"))); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -337,10 +326,113 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
             }
         });
         pnlMain.add(btnPasien);
-        btnPasien.setBounds(170, 10, 150, 44);
+        btnPasien.setBounds(220, 10, 150, 44);
 
         getContentPane().add(pnlMain);
-        pnlMain.setBounds(10, 130, 330, 70);
+        pnlMain.setBounds(870, 130, 400, 70);
+
+        panePasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panePasienMouseClicked(evt);
+            }
+        });
+
+        pnlTindakan.setLayout(null);
+
+        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblTindakan);
+
+        pnlTindakan.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 11, 720, 580);
+
+        btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanTambahActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanTambah);
+        btnTindakanTambah.setBounds(740, 10, 80, 30);
+
+        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanUpdateActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanUpdate);
+        btnTindakanUpdate.setBounds(740, 50, 80, 30);
+
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanHapusActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanHapus);
+        btnTindakanHapus.setBounds(740, 90, 80, 30);
+
+        panePasien.addTab("TINDAKAN", pnlTindakan);
+
+        pnlBhp.setLayout(null);
+
+        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblBhp);
+
+        pnlBhp.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 11, 720, 580);
+
+        btnBhpTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpTambahActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpTambah);
+        btnBhpTambah.setBounds(740, 10, 80, 30);
+
+        btnBhpUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpUpdateActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpUpdate);
+        btnBhpUpdate.setBounds(740, 50, 80, 30);
+
+        btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBhpHapusActionPerformed(evt);
+            }
+        });
+        pnlBhp.add(btnBhpHapus);
+        btnBhpHapus.setBounds(740, 90, 80, 30);
+
+        panePasien.addTab("BAHAN HABIS PAKAI", pnlBhp);
+
+        getContentPane().add(panePasien);
+        panePasien.setBounds(20, 130, 840, 630);
 
         pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHome.setLayout(null);
@@ -364,20 +456,20 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         scrollPasien.setViewportView(tblPasien);
 
         pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 100, 760, 390);
+        scrollPasien.setBounds(20, 80, 800, 540);
 
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
         pnlMasuk.setLayout(null);
 
         jLabel2.setText("No. Pasien");
         pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 60, 20);
+        jLabel2.setBounds(20, 20, 90, 20);
         pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(90, 20, 160, 20);
+        txtPasienMasuk.setBounds(130, 20, 200, 20);
 
         cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
         pnlMasuk.add(cbKelas);
-        cbKelas.setBounds(370, 20, 160, 20);
+        cbKelas.setBounds(470, 20, 200, 20);
 
         btnMasuk.setText("MASUK");
         btnMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -386,17 +478,129 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
             }
         });
         pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(670, 20, 73, 23);
+        btnMasuk.setBounds(710, 20, 73, 23);
 
         jLabel13.setText("Kelas");
         pnlMasuk.add(jLabel13);
-        jLabel13.setBounds(340, 20, 25, 20);
+        jLabel13.setBounds(370, 20, 90, 20);
 
         pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 760, 60);
+        pnlMasuk.setBounds(20, 10, 800, 60);
 
         getContentPane().add(pnlHome);
-        pnlHome.setBounds(360, 130, 790, 500);
+        pnlHome.setBounds(20, 130, 840, 630);
+
+        pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
+        pnlPasienDetail.setBackground(new Color(0,0,0,20));
+        pnlPasienDetail.setLayout(null);
+
+        jLabel4.setText("No. Pasien");
+        pnlPasienDetail.add(jLabel4);
+        jLabel4.setBounds(20, 30, 100, 14);
+
+        jLabel5.setText("NIK");
+        pnlPasienDetail.add(jLabel5);
+        jLabel5.setBounds(20, 90, 100, 14);
+
+        jLabel6.setText("NAMA");
+        pnlPasienDetail.add(jLabel6);
+        jLabel6.setBounds(20, 120, 100, 14);
+
+        jLabel7.setText("KELAMIN");
+        pnlPasienDetail.add(jLabel7);
+        jLabel7.setBounds(20, 150, 100, 14);
+
+        jLabel8.setText("TANGGAL LAHIR");
+        pnlPasienDetail.add(jLabel8);
+        jLabel8.setBounds(20, 180, 100, 14);
+
+        jLabel9.setText("GOL. DARAH");
+        pnlPasienDetail.add(jLabel9);
+        jLabel9.setBounds(20, 210, 100, 14);
+
+        jLabel10.setText("AGAMA");
+        pnlPasienDetail.add(jLabel10);
+        jLabel10.setBounds(20, 240, 100, 14);
+
+        jLabel11.setText("TELEPON");
+        pnlPasienDetail.add(jLabel11);
+        jLabel11.setBounds(20, 270, 100, 14);
+
+        jLabel12.setText("TANGGUNGAN");
+        pnlPasienDetail.add(jLabel12);
+        jLabel12.setBounds(20, 300, 100, 14);
+
+        jLabel16.setText("STATUS RAWAT");
+        pnlPasienDetail.add(jLabel16);
+        jLabel16.setBounds(20, 330, 100, 14);
+
+        jLabel15.setText("TANGGAL MASUK");
+        pnlPasienDetail.add(jLabel15);
+        jLabel15.setBounds(20, 360, 100, 14);
+
+        txtPasienKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasienKodeFocusLost(evt);
+            }
+        });
+        pnlPasienDetail.add(txtPasienKode);
+        txtPasienKode.setBounds(140, 30, 240, 20);
+
+        txtPasienNik.setEditable(false);
+        txtPasienNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienNik);
+        txtPasienNik.setBounds(140, 90, 240, 20);
+
+        txtPasienNama.setEditable(false);
+        txtPasienNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienNama);
+        txtPasienNama.setBounds(140, 120, 240, 20);
+
+        txtPasienTanggalLahir.setEditable(false);
+        txtPasienTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienTanggalLahir);
+        txtPasienTanggalLahir.setBounds(140, 180, 240, 20);
+
+        txtPasienDarah.setEditable(false);
+        txtPasienDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienDarah);
+        txtPasienDarah.setBounds(140, 210, 240, 20);
+
+        txtPasienAgama.setEditable(false);
+        txtPasienAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienAgama);
+        txtPasienAgama.setBounds(140, 240, 240, 20);
+
+        txtPasienTelepon.setEditable(false);
+        txtPasienTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienTelepon);
+        txtPasienTelepon.setBounds(140, 270, 240, 20);
+
+        txtPasienKelamin.setEditable(false);
+        txtPasienKelamin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienKelamin);
+        txtPasienKelamin.setBounds(140, 150, 240, 20);
+
+        txtPasienStatus.setEditable(false);
+        txtPasienStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienStatus);
+        txtPasienStatus.setBounds(140, 330, 240, 18);
+
+        txtPasienTanggalMasuk.setEditable(false);
+        txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienTanggalMasuk);
+        txtPasienTanggalMasuk.setBounds(140, 360, 240, 18);
+
+        txtPasienTanggungan.setEditable(false);
+        txtPasienTanggungan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPasienDetail.add(txtPasienTanggungan);
+        txtPasienTanggungan.setBounds(140, 300, 240, 18);
+        pnlPasienDetail.add(jSeparator1);
+        jSeparator1.setBounds(0, 62, 400, 10);
+
+        getContentPane().add(pnlPasienDetail);
+        pnlPasienDetail.setBounds(870, 210, 400, 410);
 
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Data Ruangan"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -453,290 +657,7 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtJumlahPasienKelas2.setBounds(110, 230, 200, 20);
 
         getContentPane().add(pnlHomeDetail);
-        pnlHomeDetail.setBounds(10, 220, 330, 410);
-
-        pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
-        pnlPasienDetail.setBackground(new Color(0,0,0,20));
-        pnlPasienDetail.setLayout(null);
-
-        jLabel4.setText("No. Register Pasien");
-        pnlPasienDetail.add(jLabel4);
-        jLabel4.setBounds(20, 30, 100, 14);
-
-        jLabel5.setText("NIK");
-        pnlPasienDetail.add(jLabel5);
-        jLabel5.setBounds(20, 90, 40, 14);
-
-        jLabel6.setText("NAMA");
-        pnlPasienDetail.add(jLabel6);
-        jLabel6.setBounds(20, 120, 50, 14);
-
-        jLabel7.setText("KELAMIN");
-        pnlPasienDetail.add(jLabel7);
-        jLabel7.setBounds(20, 150, 60, 14);
-
-        jLabel8.setText("TANGGAL LAHIR");
-        pnlPasienDetail.add(jLabel8);
-        jLabel8.setBounds(20, 180, 90, 14);
-
-        jLabel9.setText("GOL. DARAH");
-        pnlPasienDetail.add(jLabel9);
-        jLabel9.setBounds(20, 210, 80, 14);
-
-        jLabel10.setText("AGAMA");
-        pnlPasienDetail.add(jLabel10);
-        jLabel10.setBounds(20, 240, 50, 14);
-
-        jLabel11.setText("TELEPON");
-        pnlPasienDetail.add(jLabel11);
-        jLabel11.setBounds(20, 270, 70, 14);
-
-        jLabel12.setText("TANGGUNGAN");
-        pnlPasienDetail.add(jLabel12);
-        jLabel12.setBounds(20, 300, 90, 14);
-
-        jLabel16.setText("STATUS RAWAT");
-        pnlPasienDetail.add(jLabel16);
-        jLabel16.setBounds(20, 330, 90, 14);
-
-        jLabel15.setText("TANGGAL MASUK");
-        pnlPasienDetail.add(jLabel15);
-        jLabel15.setBounds(20, 360, 90, 14);
-
-        txtPasienKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPasienKodeFocusLost(evt);
-            }
-        });
-        pnlPasienDetail.add(txtPasienKode);
-        txtPasienKode.setBounds(120, 30, 180, 20);
-
-        txtPasienNik.setEditable(false);
-        txtPasienNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienNik);
-        txtPasienNik.setBounds(120, 90, 179, 20);
-
-        txtPasienNama.setEditable(false);
-        txtPasienNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienNama);
-        txtPasienNama.setBounds(120, 120, 179, 20);
-
-        txtPasienTanggalLahir.setEditable(false);
-        txtPasienTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienTanggalLahir);
-        txtPasienTanggalLahir.setBounds(120, 180, 179, 20);
-
-        txtPasienDarah.setEditable(false);
-        txtPasienDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienDarah);
-        txtPasienDarah.setBounds(120, 210, 179, 20);
-
-        txtPasienAgama.setEditable(false);
-        txtPasienAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienAgama);
-        txtPasienAgama.setBounds(120, 240, 179, 20);
-
-        txtPasienTelepon.setEditable(false);
-        txtPasienTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienTelepon);
-        txtPasienTelepon.setBounds(120, 270, 179, 20);
-
-        txtPasienKelamin.setEditable(false);
-        txtPasienKelamin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienKelamin);
-        txtPasienKelamin.setBounds(120, 150, 179, 20);
-
-        txtPasienStatus.setEditable(false);
-        txtPasienStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienStatus);
-        txtPasienStatus.setBounds(120, 330, 180, 18);
-
-        txtPasienTanggalMasuk.setEditable(false);
-        txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(120, 360, 180, 18);
-
-        txtPasienTanggungan.setEditable(false);
-        txtPasienTanggungan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPasienDetail.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(120, 300, 180, 18);
-        pnlPasienDetail.add(jSeparator1);
-        jSeparator1.setBounds(0, 62, 330, 10);
-
-        getContentPane().add(pnlPasienDetail);
-        pnlPasienDetail.setBounds(10, 220, 330, 410);
-
-        pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlHome.setLayout(null);
-
-        tblPasien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblPasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPasienMouseClicked(evt);
-            }
-        });
-        scrollPasien.setViewportView(tblPasien);
-
-        pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 100, 600, 390);
-
-        pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
-        pnlMasuk.setLayout(null);
-
-        jLabel2.setText("No. Pasien");
-        pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 60, 20);
-        pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(90, 20, 160, 20);
-
-        cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
-        pnlMasuk.add(cbKelas);
-        cbKelas.setBounds(350, 20, 160, 20);
-
-        btnMasuk.setText("MASUK");
-        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMasukActionPerformed(evt);
-            }
-        });
-        pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(520, 20, 73, 23);
-
-        jLabel13.setText("Kelas");
-        pnlMasuk.add(jLabel13);
-        jLabel13.setBounds(300, 20, 25, 14);
-
-        pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 600, 60);
-
-        getContentPane().add(pnlHome);
-        pnlHome.setBounds(360, 130, 620, 500);
-
-        panePasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panePasienMouseClicked(evt);
-            }
-        });
-
-        pnlTindakan.setLayout(null);
-
-        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblTindakan);
-
-        pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 590, 390);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(null);
-
-        btnTindakanHapus.setText("HAPUS");
-        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanHapusActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(190, 10, 65, 23);
-
-        btnTindakanTambah.setText("TAMBAH");
-        btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanTambahActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnTindakanTambah);
-        btnTindakanTambah.setBounds(10, 10, 73, 23);
-
-        btnTindakanUpdate.setText("UPDATE");
-        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanUpdateActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(100, 10, 71, 23);
-
-        pnlTindakan.add(jPanel3);
-        jPanel3.setBounds(10, 410, 590, 50);
-
-        panePasien.addTab("TINDAKAN", pnlTindakan);
-
-        pnlBhp.setLayout(null);
-
-        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tblBhp);
-
-        pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 11, 590, 410);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.setLayout(null);
-
-        btnBhpHapus.setText("HAPUS");
-        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpHapusActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnBhpHapus);
-        btnBhpHapus.setBounds(190, 10, 65, 23);
-
-        btnBhpTambah.setText("TAMBAH");
-        btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpTambahActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnBhpTambah);
-        btnBhpTambah.setBounds(10, 10, 73, 23);
-
-        btnBhpUpdate.setText("UPDATE");
-        btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpUpdateActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnBhpUpdate);
-        btnBhpUpdate.setBounds(100, 10, 71, 23);
-
-        pnlBhp.add(jPanel4);
-        jPanel4.setBounds(10, 430, 590, 50);
-
-        panePasien.addTab("BAHAN HABIS PAKAI", pnlBhp);
-
-        getContentPane().add(panePasien);
-        panePasien.setBounds(360, 130, 620, 500);
+        pnlHomeDetail.setBounds(870, 210, 400, 410);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -1016,8 +937,6 @@ public class FrameSal extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

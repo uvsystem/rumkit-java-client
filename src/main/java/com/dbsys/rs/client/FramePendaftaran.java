@@ -181,7 +181,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlDetail.add(btnPendudukClean);
         btnPendudukClean.setBounds(300, 270, 80, 30);
 
-        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 400, 320));
+        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 400, 320));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,11 +201,11 @@ public class FramePendaftaran extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPenduduk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 830, 570));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 830, 590));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("DAFTAR PASIEN / REKAM MEDIK");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 190, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 190, -1));
 
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder("Pencarian"));
         pnlCari.setLayout(null);
@@ -223,7 +223,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlCari.add(txtKeyword);
         txtKeyword.setBounds(170, 20, 210, 20);
 
-        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 400, 60));
+        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, 400, 60));
 
         pnlPendaftaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pendaftaran Pasien"));
         pnlPendaftaran.setLayout(null);
@@ -272,7 +272,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         pnlPendaftaran.add(btnCetakStatus);
         btnCetakStatus.setBounds(280, 120, 95, 30);
 
-        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 400, 170));
+        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 540, 400, 170));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);

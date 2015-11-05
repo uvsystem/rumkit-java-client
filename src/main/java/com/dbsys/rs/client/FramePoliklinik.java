@@ -243,7 +243,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 780, 590);
+        jScrollPane1.setBounds(10, 11, 690, 530);
 
         btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +252,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlTindakan.add(btnTindakanTambah);
-        btnTindakanTambah.setBounds(800, 10, 80, 30);
+        btnTindakanTambah.setBounds(710, 10, 90, 30);
 
         btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +261,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(800, 50, 80, 30);
+        btnTindakanUpdate.setBounds(710, 50, 90, 30);
 
         btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +270,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(800, 90, 80, 30);
+        btnTindakanHapus.setBounds(710, 90, 90, 30);
 
         tabPane.addTab("TINDAKAN", pnlTindakan);
 
@@ -290,7 +290,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         jScrollPane2.setViewportView(tblBhp);
 
         pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 11, 780, 590);
+        jScrollPane2.setBounds(10, 11, 700, 530);
 
         btnBhpTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +299,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlBhp.add(btnBhpTambah);
-        btnBhpTambah.setBounds(800, 10, 80, 30);
+        btnBhpTambah.setBounds(720, 10, 80, 30);
 
         btnBhpUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +308,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlBhp.add(btnBhpUpdate);
-        btnBhpUpdate.setBounds(800, 50, 80, 30);
+        btnBhpUpdate.setBounds(720, 50, 80, 30);
 
         btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
         btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -317,19 +317,19 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlBhp.add(btnBhpHapus);
-        btnBhpHapus.setBounds(800, 90, 80, 30);
+        btnBhpHapus.setBounds(720, 90, 80, 30);
 
         tabPane.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
         getContentPane().add(tabPane);
-        tabPane.setBounds(360, 120, 900, 640);
+        tabPane.setBounds(20, 180, 810, 580);
 
         pnlCari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlCari.setLayout(null);
 
         jLabel1.setText("No. Pasien");
         pnlCari.add(jLabel1);
-        jLabel1.setBounds(10, 10, 90, 14);
+        jLabel1.setBounds(20, 10, 110, 14);
 
         txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -337,10 +337,10 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
             }
         });
         pnlCari.add(txtPasienKode);
-        txtPasienKode.setBounds(140, 10, 160, 20);
+        txtPasienKode.setBounds(140, 10, 240, 20);
 
         getContentPane().add(pnlCari);
-        pnlCari.setBounds(20, 120, 330, 40);
+        pnlCari.setBounds(840, 130, 400, 40);
 
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Detail Pasien"));
         pnlDetail.setBackground(new Color(0,0,0,20));
@@ -348,113 +348,113 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
 
         jLabel4.setText("NO. MEDREK");
         pnlDetail.add(jLabel4);
-        jLabel4.setBounds(20, 30, 80, 14);
+        jLabel4.setBounds(20, 30, 110, 14);
 
         jLabel5.setText("NIK");
         pnlDetail.add(jLabel5);
-        jLabel5.setBounds(20, 60, 40, 14);
+        jLabel5.setBounds(20, 60, 110, 14);
 
         jLabel6.setText("NAMA");
         pnlDetail.add(jLabel6);
-        jLabel6.setBounds(20, 90, 50, 14);
+        jLabel6.setBounds(20, 90, 110, 14);
 
         jLabel7.setText("KELAMIN");
         pnlDetail.add(jLabel7);
-        jLabel7.setBounds(20, 120, 60, 14);
+        jLabel7.setBounds(20, 120, 110, 14);
 
         jLabel8.setText("TANGGAL LAHIR");
         pnlDetail.add(jLabel8);
-        jLabel8.setBounds(20, 150, 90, 14);
+        jLabel8.setBounds(20, 150, 110, 14);
 
         jLabel9.setText("GOL. DARAH");
         pnlDetail.add(jLabel9);
-        jLabel9.setBounds(20, 180, 80, 14);
+        jLabel9.setBounds(20, 180, 110, 14);
 
         jLabel10.setText("AGAMA");
         pnlDetail.add(jLabel10);
-        jLabel10.setBounds(20, 210, 50, 14);
+        jLabel10.setBounds(20, 210, 110, 14);
 
         jLabel11.setText("TELEPON");
         pnlDetail.add(jLabel11);
-        jLabel11.setBounds(20, 240, 70, 14);
+        jLabel11.setBounds(20, 240, 110, 14);
 
         txtPasienKodePenduduk.setEditable(false);
         txtPasienKodePenduduk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienKodePenduduk);
-        txtPasienKodePenduduk.setBounds(120, 30, 180, 20);
+        txtPasienKodePenduduk.setBounds(140, 30, 240, 20);
 
         txtPasienNik.setEditable(false);
         txtPasienNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienNik);
-        txtPasienNik.setBounds(120, 60, 179, 20);
+        txtPasienNik.setBounds(140, 60, 240, 20);
 
         txtPasienNama.setEditable(false);
         txtPasienNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienNama);
-        txtPasienNama.setBounds(120, 90, 179, 20);
+        txtPasienNama.setBounds(140, 90, 240, 20);
 
         txtPasienTanggalLahir.setEditable(false);
         txtPasienTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienTanggalLahir);
-        txtPasienTanggalLahir.setBounds(120, 150, 179, 20);
+        txtPasienTanggalLahir.setBounds(140, 150, 240, 20);
 
         txtPasienDarah.setEditable(false);
         txtPasienDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienDarah);
-        txtPasienDarah.setBounds(120, 180, 179, 20);
+        txtPasienDarah.setBounds(140, 180, 240, 20);
 
         txtPasienAgama.setEditable(false);
         txtPasienAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienAgama);
-        txtPasienAgama.setBounds(120, 210, 179, 20);
+        txtPasienAgama.setBounds(140, 210, 240, 20);
 
         txtPasienTelepon.setEditable(false);
         txtPasienTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienTelepon);
-        txtPasienTelepon.setBounds(120, 240, 179, 20);
+        txtPasienTelepon.setBounds(140, 240, 240, 20);
 
         txtPasienKelamin.setEditable(false);
         txtPasienKelamin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienKelamin);
-        txtPasienKelamin.setBounds(120, 120, 179, 20);
+        txtPasienKelamin.setBounds(140, 120, 240, 20);
 
         jLabel12.setText("TANGGUNGAN");
         pnlDetail.add(jLabel12);
-        jLabel12.setBounds(20, 270, 90, 14);
+        jLabel12.setBounds(20, 270, 110, 14);
 
         jLabel16.setText("STATUS");
         pnlDetail.add(jLabel16);
-        jLabel16.setBounds(20, 300, 90, 14);
+        jLabel16.setBounds(20, 300, 110, 14);
 
         jLabel15.setText("TANGGAL MASUK");
         pnlDetail.add(jLabel15);
-        jLabel15.setBounds(20, 330, 90, 14);
+        jLabel15.setBounds(20, 330, 110, 14);
 
         txtPasienStatus.setEditable(false);
         txtPasienStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienStatus);
-        txtPasienStatus.setBounds(120, 300, 180, 18);
+        txtPasienStatus.setBounds(140, 300, 240, 18);
 
         txtPasienTanggalMasuk.setEditable(false);
         txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(120, 330, 180, 18);
+        txtPasienTanggalMasuk.setBounds(140, 330, 240, 18);
 
         txtPasienTanggungan.setEditable(false);
         txtPasienTanggungan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(120, 270, 180, 18);
+        txtPasienTanggungan.setBounds(140, 270, 240, 18);
 
         jLabel14.setText("PERAWATAN");
         pnlDetail.add(jLabel14);
-        jLabel14.setBounds(20, 360, 90, 14);
+        jLabel14.setBounds(20, 360, 110, 14);
 
         txtPasienTipe.setEditable(false);
         pnlDetail.add(txtPasienTipe);
-        txtPasienTipe.setBounds(120, 360, 180, 20);
+        txtPasienTipe.setBounds(140, 360, 240, 20);
 
         getContentPane().add(pnlDetail);
-        pnlDetail.setBounds(20, 170, 330, 400);
+        pnlDetail.setBounds(840, 180, 400, 400);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/poliklinik.jpg"))); // NOI18N
         getContentPane().add(jLabel3);

@@ -39,13 +39,13 @@
         <dependency>
             <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-connector</artifactId>
-            <version>0.3.1-SNAPSHOT</version>
+            <version>${rumkit-connector.version}</version>
         </dependency>
         
         <dependency>
             <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-library</artifactId>
-            <version>0.4.9-SNAPSHOT</version>
+            <version>${rumkit-library.version}</version>
         </dependency>
         
         <dependency>
@@ -66,6 +66,12 @@
             <version>${junit.version}</version>
 	</dependency>        
 
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${itext.version}</version>
+        </dependency>
+
     </dependencies>
     
     <properties>
@@ -75,5 +81,8 @@
         <spring.version>4.0.7.RELEASE</spring.version>
   	<jackson.version>2.4.2</jackson.version>
 	<junit.version>4.11</junit.version>
+	<itext.version>2.1.7</itext.version>
+        <rumkit-library.version>0.4.10-SNAPSHOT</rumkit-library.version>
+        <rumkit-connector.version>0.3.2-SNAPSHOT</rumkit-connector.version>
     </properties>
 </project>

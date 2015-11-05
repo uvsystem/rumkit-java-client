@@ -2,6 +2,7 @@ package com.dbsys.rs.client;
 
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
+import com.dbsys.rs.client.tableModel.TagihanTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
@@ -63,7 +64,10 @@ public class FramePembayaran extends javax.swing.JFrame {
             txtPendudukTanggalLahir.setText(pasien.getTanggalLahir().toString());
             txtPasienTanggungan.setText(pasien.getTanggungan().toString());
             txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
-            cbPasienKeadaan.setSelectedItem(pasien.getKeadaan().toString());
+            
+            Pasien.KeadaanPasien keadaan = pasien.getKeadaan();
+            if (keadaan != null)
+                cbPasienKeadaan.setSelectedItem(pasien.getKeadaan().toString());
         }
         
         txtPendudukKode.setText(pasien.getKodePenduduk());
@@ -128,6 +132,9 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
         tabData = new javax.swing.JTabbedPane();
+        pnlSummary = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSemua = new javax.swing.JTable();
         pnlTindakan = new javax.swing.JPanel();
         scrollTindakan = new javax.swing.JScrollPane();
         tblTindakan = new javax.swing.JTable();
@@ -198,10 +205,42 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlPencarian.add(txtKeyword);
-        txtKeyword.setBounds(140, 30, 200, 20);
+        txtKeyword.setBounds(140, 30, 240, 20);
 
         getContentPane().add(pnlPencarian);
-        pnlPencarian.setBounds(900, 100, 370, 70);
+        pnlPencarian.setBounds(860, 100, 400, 70);
+
+        tblSemua.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblSemua);
+
+        javax.swing.GroupLayout pnlSummaryLayout = new javax.swing.GroupLayout(pnlSummary);
+        pnlSummary.setLayout(pnlSummaryLayout);
+        pnlSummaryLayout.setHorizontalGroup(
+            pnlSummaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSummaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlSummaryLayout.setVerticalGroup(
+            pnlSummaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSummaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tabData.addTab("SEMUA", pnlSummary);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +261,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             pnlTindakanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTindakanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                .addComponent(scrollTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlTindakanLayout.setVerticalGroup(
@@ -254,7 +293,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             pnlBhpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBhpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollBhp, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                .addComponent(scrollBhp, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlBhpLayout.setVerticalGroup(
@@ -286,7 +325,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             pnlObatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlObatLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollObat, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                .addComponent(scrollObat, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlObatLayout.setVerticalGroup(
@@ -300,7 +339,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         tabData.addTab("OBAT", pnlObat);
 
         getContentPane().add(tabData);
-        tabData.setBounds(10, 180, 880, 580);
+        tabData.setBounds(10, 180, 840, 580);
 
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Pasien"));
         pnlDetail.setLayout(null);
@@ -339,37 +378,37 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         txtPendudukKode.setEditable(false);
         pnlDetail.add(txtPendudukKode);
-        txtPendudukKode.setBounds(140, 30, 200, 20);
+        txtPendudukKode.setBounds(140, 30, 240, 20);
 
         txtPendudukNama.setEditable(false);
         pnlDetail.add(txtPendudukNama);
-        txtPendudukNama.setBounds(140, 60, 200, 20);
+        txtPendudukNama.setBounds(140, 60, 240, 20);
 
         txtPendudukNik.setEditable(false);
         pnlDetail.add(txtPendudukNik);
-        txtPendudukNik.setBounds(140, 90, 200, 20);
+        txtPendudukNik.setBounds(140, 90, 240, 20);
 
         txtPendudukTanggalLahir.setEditable(false);
         pnlDetail.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(140, 120, 200, 20);
+        txtPendudukTanggalLahir.setBounds(140, 120, 240, 20);
 
         txtPendudukDarah.setEditable(false);
         pnlDetail.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(140, 150, 200, 20);
+        txtPendudukDarah.setBounds(140, 150, 240, 20);
 
         txtPendudukAgama.setEditable(false);
         pnlDetail.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(140, 180, 200, 20);
+        txtPendudukAgama.setBounds(140, 180, 240, 20);
 
         txtPendudukKelamin.setEditable(false);
         pnlDetail.add(txtPendudukKelamin);
-        txtPendudukKelamin.setBounds(140, 210, 200, 20);
+        txtPendudukKelamin.setBounds(140, 210, 240, 20);
 
         txtPendudukTelepon.setEditable(false);
         pnlDetail.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(140, 240, 200, 20);
+        txtPendudukTelepon.setBounds(140, 240, 240, 20);
         pnlDetail.add(jSeparator2);
-        jSeparator2.setBounds(0, 270, 370, 10);
+        jSeparator2.setBounds(0, 270, 400, 10);
 
         jLabel13.setText("Tanggungan");
         pnlDetail.add(jLabel13);
@@ -385,15 +424,15 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         txtPasienTanggungan.setEditable(false);
         pnlDetail.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(140, 290, 200, 20);
+        txtPasienTanggungan.setBounds(140, 290, 240, 20);
 
         txtPasienTanggalMasuk.setEditable(false);
         pnlDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(140, 320, 200, 20);
+        txtPasienTanggalMasuk.setBounds(140, 320, 240, 20);
 
         cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI", "LARI" }));
         pnlDetail.add(cbPasienKeadaan);
-        cbPasienKeadaan.setBounds(140, 350, 200, 20);
+        cbPasienKeadaan.setBounds(140, 350, 240, 20);
 
         btnPasienKeluar.setText("PASIEN KELUAR");
         btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -402,9 +441,9 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnPasienKeluar);
-        btnPasienKeluar.setBounds(220, 380, 120, 30);
+        btnPasienKeluar.setBounds(270, 380, 110, 30);
         pnlDetail.add(jSeparator3);
-        jSeparator3.setBounds(0, 420, 370, 10);
+        jSeparator3.setBounds(0, 420, 400, 10);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("TOTAL");
@@ -420,7 +459,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlDetail.add(jLabel16);
         jLabel16.setBounds(30, 500, 90, 14);
         pnlDetail.add(txtPasienCicilan);
-        txtPasienCicilan.setBounds(140, 500, 200, 20);
+        txtPasienCicilan.setBounds(140, 500, 240, 20);
 
         btnCetak.setText("CETAK");
         btnCetak.addActionListener(new java.awt.event.ActionListener() {
@@ -429,7 +468,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnCetak);
-        btnCetak.setBounds(90, 530, 120, 40);
+        btnCetak.setBounds(140, 530, 110, 40);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -438,10 +477,10 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnSimpan);
-        btnSimpan.setBounds(220, 530, 120, 40);
+        btnSimpan.setBounds(270, 530, 110, 40);
 
         getContentPane().add(pnlDetail);
-        pnlDetail.setBounds(900, 180, 370, 580);
+        pnlDetail.setBounds(860, 180, 400, 580);
 
         jToolBar1.setRollover(true);
 
@@ -509,6 +548,13 @@ public class FramePembayaran extends javax.swing.JFrame {
                 for (Pemakaian pemakaian : listPemakaianObat)
                     total += pemakaian.hitungTagihan();
             } catch (ServiceException ex) {}
+
+            TagihanTableModel tableModel = new TagihanTableModel(null);
+            tableModel.addListPelayanan(listPelayanan);
+            tableModel.addListPemakaian(listPemakaianBhp);
+            tableModel.addListPemakaian(listPemakaianObat);
+            
+            tblSemua.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
@@ -600,6 +646,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -612,6 +659,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDetail;
     private javax.swing.JPanel pnlObat;
     private javax.swing.JPanel pnlPencarian;
+    private javax.swing.JPanel pnlSummary;
     private javax.swing.JPanel pnlTindakan;
     private javax.swing.JScrollPane scrollBhp;
     private javax.swing.JScrollPane scrollObat;
@@ -619,6 +667,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabData;
     private javax.swing.JTable tblBhp;
     private javax.swing.JTable tblObat;
+    private javax.swing.JTable tblSemua;
     private javax.swing.JTable tblTindakan;
     private javax.swing.JTextField txtKeyword;
     private javax.swing.JTextField txtPasienCicilan;
