@@ -118,6 +118,56 @@ public class FramePembayaran extends javax.swing.JFrame {
         
         return listPemakaian;
     }
+    
+    private void loadData() {
+        total = 0L;
+        String keyword = txtKeyword.getText();
+        
+        if (keyword.equals(""))
+            return;
+        
+        try {
+            pasien = pasienService.get(keyword);
+            setDetailPasien(pasien);
+            
+            try {
+                listPelayanan = loadTabelTindakan(pasien);
+                for (Pelayanan pelayanan : listPelayanan)
+                    total += pelayanan.hitungTagihan();
+            } catch (ServiceException ex) {}
+            
+            try {
+                listPemakaianBhp = loadTabelBhp(pasien);
+                for (Pemakaian pemakaian : listPemakaianBhp)
+                    total += pemakaian.hitungTagihan();
+            } catch (ServiceException ex) {}
+            
+            try {
+                listPemakaianObat = loadTabelObat(pasien);
+                for (Pemakaian pemakaian : listPemakaianObat)
+                    total += pemakaian.hitungTagihan();
+            } catch (ServiceException ex) {}
+
+            TagihanTableModel tableModel = new TagihanTableModel(null);
+            tableModel.addListPelayanan(listPelayanan);
+            tableModel.addListPemakaian(listPemakaianBhp);
+            tableModel.addListPemakaian(listPemakaianObat);
+            
+            tblSemua.setModel(tableModel);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            Long cicilan = 0L;
+            if (pasien.getCicilan() != null)
+                cicilan = pasien.getCicilan();
+            
+            Long sisa = total - cicilan;
+            String totalString = NumberFormat.getNumberInstance(Locale.US).format(sisa);
+
+            lblTagihan.setText(String.format("Rp %s", totalString));
+            txtPasienCicilan.setText(sisa.toString());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -430,7 +480,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlDetail.add(txtPasienTanggalMasuk);
         txtPasienTanggalMasuk.setBounds(140, 320, 240, 20);
 
-        cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI", "LARI" }));
+        cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI" }));
         pnlDetail.add(cbPasienKeadaan);
         cbPasienKeadaan.setBounds(140, 350, 240, 20);
 
@@ -470,7 +520,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlDetail.add(btnCetak);
         btnCetak.setBounds(140, 530, 110, 40);
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnSimpan.setText("BAYAR");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
@@ -522,50 +572,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
-        String keyword = txtKeyword.getText();
-        
-        if (keyword.equals(""))
-            return;
-        
-        try {
-            pasien = pasienService.get(keyword);
-            setDetailPasien(pasien);
-            
-            try {
-                listPelayanan = loadTabelTindakan(pasien);
-                for (Pelayanan pelayanan : listPelayanan)
-                    total += pelayanan.hitungTagihan();
-            } catch (ServiceException ex) {}
-            
-            try {
-                listPemakaianBhp = loadTabelBhp(pasien);
-                for (Pemakaian pemakaian : listPemakaianBhp)
-                    total += pemakaian.hitungTagihan();
-            } catch (ServiceException ex) {}
-            
-            try {
-                listPemakaianObat = loadTabelObat(pasien);
-                for (Pemakaian pemakaian : listPemakaianObat)
-                    total += pemakaian.hitungTagihan();
-            } catch (ServiceException ex) {}
-
-            TagihanTableModel tableModel = new TagihanTableModel(null);
-            tableModel.addListPelayanan(listPelayanan);
-            tableModel.addListPemakaian(listPemakaianBhp);
-            tableModel.addListPemakaian(listPemakaianObat);
-            
-            tblSemua.setModel(tableModel);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-            Long cicilan = 0L;
-            if (pasien.getCicilan() != null)
-                cicilan = pasien.getCicilan();
-            
-            String totalString = NumberFormat.getNumberInstance(Locale.US).format(total - cicilan);
-            lblTagihan.setText(String.format("Rp %s", totalString));
-            txtPasienCicilan.setText(total.toString());
-        }
+        loadData();
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
@@ -583,6 +590,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         try {
             pasienService.bayar(pasien.getId(), Long.valueOf(jumlah));
             JOptionPane.showMessageDialog(this, "Pembayaran pasien berhasil. Silahkan cetak struk pembayaran.");
+            loadData();
          } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -610,11 +618,11 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         String keadaan = (String) cbPasienKeadaan.getSelectedItem();
-        if (keadaan.equals("")) {
+        if (keadaan.equals("- Pilih -")) {
             JOptionPane.showMessageDialog(this, "Silahkan pilih keadaan pasien.");
             return;
         }
-            
+        
         try {
             pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");

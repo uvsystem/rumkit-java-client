@@ -8,6 +8,7 @@ import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Token;
 import com.dbsys.rs.lib.entity.Unit;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -20,6 +21,7 @@ public class FrameLogin extends javax.swing.JFrame {
      */
     public FrameLogin() {
         initComponents();
+        this.setSize(250, 160);
         this.setLocationRelativeTo(null);
     }
 
@@ -45,19 +47,20 @@ public class FrameLogin extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("USERNAME");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 10, 54, 14);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 110, -1));
 
         jLabel2.setText("PASSWORD");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(110, 55, 57, 14);
-        getContentPane().add(txt_login_uname);
-        txt_login_uname.setBounds(110, 25, 110, 25);
-        getContentPane().add(txt_login_pass);
-        txt_login_pass.setBounds(110, 70, 110, 25);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, 110, -1));
+
+        txt_login_uname.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_login_uname.setPreferredSize(new java.awt.Dimension(100, 25));
+        getContentPane().add(txt_login_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 25, 110, 25));
+
+        txt_login_pass.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        getContentPane().add(txt_login_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 110, 25));
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Cancel Login.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -67,8 +70,7 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel);
-        btnCancel.setBounds(70, 110, 80, 40);
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 80, 40));
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Button Login.png"))); // NOI18N
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -78,12 +80,10 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin);
-        btnLogin.setBounds(160, 110, 80, 40);
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 80, 40));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Login Form.jpg"))); // NOI18N
-        getContentPane().add(background);
-        background.setBounds(0, 0, 250, 160);
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

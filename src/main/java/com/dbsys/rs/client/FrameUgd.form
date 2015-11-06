@@ -1396,7 +1396,22 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblOperator">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
+            <Property name="text" type="java.lang.String" value="OPERATOR"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel35">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" - "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel36">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="UNIT : "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblUnit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="UNIT"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">

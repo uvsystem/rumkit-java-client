@@ -53,6 +53,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         initComponents();
         
         lblOperator.setText(TokenHolder.getNamaOperator());
+        lblUnit.setText(TokenHolder.getNamaUnit());
         txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
         
         showPendaftaran();
@@ -302,6 +303,9 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         btnPendaftaran = new javax.swing.JButton();
@@ -866,8 +870,17 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         jLabel1.setText("ANDA LOGIN SEBEGAI :");
         jToolBar1.add(jLabel1);
 
-        lblOperator.setText("jLabel1");
+        lblOperator.setText("OPERATOR");
         jToolBar1.add(lblOperator);
+
+        jLabel35.setText(" - ");
+        jToolBar1.add(jLabel35);
+
+        jLabel36.setText("UNIT : ");
+        jToolBar1.add(jLabel36);
+
+        lblUnit.setText("UNIT");
+        jToolBar1.add(lblUnit);
         jToolBar1.add(jSeparator1);
 
         btnLogout.setText("LOGOUT");
@@ -1268,6 +1281,8 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1282,6 +1297,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
     private javax.swing.JLabel lblPendaftaran;
+    private javax.swing.JLabel lblUnit;
     private javax.swing.JTabbedPane panePasien;
     private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlHome;

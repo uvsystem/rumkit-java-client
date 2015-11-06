@@ -6,6 +6,7 @@ import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.PemakaianObat;
 import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
@@ -67,6 +68,8 @@ public final class TagihanTableModel extends DefaultTableModel {
     }
 
     public void setList(List<Tagihan> list) {
+        if (list == null)
+            list = new ArrayList<>();
         this.list = list;
     }
     
