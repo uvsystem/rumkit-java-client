@@ -102,17 +102,19 @@ public class FrameCari extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CARI DATA");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Kata Kunci");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 90, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 90, 90, 14);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtKeywordFocusLost(evt);
             }
         });
-        getContentPane().add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 200, 25));
+        getContentPane().add(txtKeyword);
+        txtKeyword.setBounds(140, 90, 200, 20);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,7 +134,8 @@ public class FrameCari extends JFrame {
         });
         jScrollPane1.setViewportView(tblCari);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 154));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 130, 452, 154);
 
         btnPilih.setText("PILIH");
         btnPilih.addActionListener(new java.awt.event.ActionListener() {
@@ -140,24 +143,25 @@ public class FrameCari extends JFrame {
                 btnPilihActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 25));
+        getContentPane().add(btnPilih);
+        btnPilih.setBounds(350, 90, 59, 23);
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder("Tambah Kategori"));
         pnlKategori.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Nama");
-        pnlKategori.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, -1));
+        pnlKategori.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, -1, -1));
 
         jLabel4.setText("Parent");
-        pnlKategori.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, -1));
-        pnlKategori.add(txtKategoriNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 200, 25));
+        pnlKategori.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 74, -1, -1));
+        pnlKategori.add(txtKategoriNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 27, 230, -1));
 
         txtKategoriParent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtKategoriParentMouseClicked(evt);
             }
         });
-        pnlKategori.add(txtKategoriParent, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, 25));
+        pnlKategori.add(txtKategoriParent, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 66, 229, -1));
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,9 +169,10 @@ public class FrameCari extends JFrame {
                 btnSimpanMouseClicked(evt);
             }
         });
-        pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 80, 40));
+        pnlKategori.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 39, 80, 40));
 
-        getContentPane().add(pnlKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 452, 109));
+        getContentPane().add(pnlKategori);
+        pnlKategori.setBounds(20, 310, 452, 109);
 
         chkTambah.setText("Tambah");
         chkTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -175,11 +180,13 @@ public class FrameCari extends JFrame {
                 chkTambahActionPerformed(evt);
             }
         });
-        getContentPane().add(chkTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 25));
+        getContentPane().add(chkTambah);
+        chkTambah.setBounds(410, 90, 63, 23);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pencarian.jpg"))); // NOI18N
         Background.setText("jLabel2");
-        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
+        getContentPane().add(Background);
+        Background.setBounds(0, 0, 500, 430);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
