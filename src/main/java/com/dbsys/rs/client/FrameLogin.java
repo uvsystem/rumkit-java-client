@@ -33,9 +33,9 @@ public class FrameLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         txt_login_uname = new javax.swing.JTextField();
         txt_login_pass = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         background = new javax.swing.JLabel();
@@ -45,15 +45,19 @@ public class FrameLogin extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jLabel1.setText("USERNAME");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
-        getContentPane().add(txt_login_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 25, 110, -1));
-        getContentPane().add(txt_login_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 110, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(110, 10, 54, 14);
 
         jLabel2.setText("PASSWORD");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(110, 55, 57, 14);
+        getContentPane().add(txt_login_uname);
+        txt_login_uname.setBounds(110, 25, 110, 25);
+        getContentPane().add(txt_login_pass);
+        txt_login_pass.setBounds(110, 70, 110, 25);
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Cancel Login.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -63,7 +67,8 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 80, 40));
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(70, 110, 80, 40);
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Button Login.png"))); // NOI18N
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -73,10 +78,12 @@ public class FrameLogin extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 80, 40));
+        getContentPane().add(btnLogin);
+        btnLogin.setBounds(160, 110, 80, 40);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Login Form.jpg"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 160));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 250, 160);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,39 +133,6 @@ public class FrameLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FrameLogin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

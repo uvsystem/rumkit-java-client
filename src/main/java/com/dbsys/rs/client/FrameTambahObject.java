@@ -231,6 +231,25 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtKeyword = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCari = new javax.swing.JTable();
+        pnlPelayanan = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        txtPelayananTindakanNama = new javax.swing.JTextField();
+        txtPelayananTindakanKelas = new javax.swing.JTextField();
+        txtPelayananJumlah = new javax.swing.JTextField();
+        txtPelayananBiayaTambahan = new javax.swing.JTextField();
+        txtPelayananKeterangan = new javax.swing.JTextField();
+        txtPelayananTanggal = new javax.swing.JTextField();
+        cbPelayananTipePelaksana = new javax.swing.JComboBox();
+        txtPelayananPelaksana = new javax.swing.JTextField();
         pnlPemakaian = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -242,25 +261,6 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPemakaianBiayaTambahan = new javax.swing.JTextField();
         txtPemakaianKeterangan = new javax.swing.JTextField();
         txtPemakaianTanggal = new javax.swing.JTextField();
-        pnlPelayanan = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        txtPelayananTindakanNama = new javax.swing.JTextField();
-        txtPelayananJumlah = new javax.swing.JTextField();
-        txtPelayananBiayaTambahan = new javax.swing.JTextField();
-        txtPelayananKeterangan = new javax.swing.JTextField();
-        txtPelayananTanggal = new javax.swing.JTextField();
-        txtPelayananPelaksana = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
-        cbPelayananTipePelaksana = new javax.swing.JComboBox();
-        jLabel17 = new javax.swing.JLabel();
-        txtPelayananTindakanKelas = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
         btnSimpan = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
@@ -272,7 +272,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         jLabel1.setLabelFor(txtKeyword);
         jLabel1.setText("Kata Kunci");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 100, 80, 20);
+        jLabel1.setBounds(20, 95, 80, 20);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -280,7 +280,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 100, 260, 20);
+        txtKeyword.setBounds(110, 95, 260, 25);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,113 +303,85 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 130, 460, 154);
 
-        pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pemakaian"));
-        pnlPemakaian.setLayout(null);
-
-        jLabel2.setText("Nama Barang");
-        pnlPemakaian.add(jLabel2);
-        jLabel2.setBounds(20, 40, 70, 14);
-
-        jLabel3.setText("Jumlah");
-        pnlPemakaian.add(jLabel3);
-        jLabel3.setBounds(20, 80, 34, 14);
-
-        jLabel4.setText("Biaya Tambahan");
-        pnlPemakaian.add(jLabel4);
-        jLabel4.setBounds(20, 120, 90, 14);
-
-        jLabel5.setText("Keterangan");
-        pnlPemakaian.add(jLabel5);
-        jLabel5.setBounds(20, 160, 70, 14);
-
-        jLabel6.setText("Tanggal");
-        pnlPemakaian.add(jLabel6);
-        jLabel6.setBounds(20, 200, 60, 14);
-
-        txtPemakaianBarang.setEditable(false);
-        pnlPemakaian.add(txtPemakaianBarang);
-        txtPemakaianBarang.setBounds(160, 30, 270, 20);
-        pnlPemakaian.add(txtPemakaianJumlah);
-        txtPemakaianJumlah.setBounds(160, 70, 270, 20);
-        pnlPemakaian.add(txtPemakaianBiayaTambahan);
-        txtPemakaianBiayaTambahan.setBounds(160, 110, 270, 20);
-        pnlPemakaian.add(txtPemakaianKeterangan);
-        txtPemakaianKeterangan.setBounds(160, 150, 270, 20);
-        pnlPemakaian.add(txtPemakaianTanggal);
-        txtPemakaianTanggal.setBounds(160, 190, 270, 20);
-
-        getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 290, 460, 240);
-
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pemakaian"));
-        pnlPelayanan.setLayout(null);
+        pnlPelayanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setText("Nama Tindakan");
-        pnlPelayanan.add(jLabel12);
-        jLabel12.setBounds(20, 40, 80, 14);
+        pnlPelayanan.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, -1));
 
         jLabel13.setText("Jumlah");
-        pnlPelayanan.add(jLabel13);
-        jLabel13.setBounds(20, 130, 34, 14);
+        pnlPelayanan.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 90, -1));
 
         jLabel14.setText("Biaya Tambahan");
-        pnlPelayanan.add(jLabel14);
-        jLabel14.setBounds(20, 160, 90, 14);
+        pnlPelayanan.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 90, -1));
 
         jLabel15.setText("Keterangan");
-        pnlPelayanan.add(jLabel15);
-        jLabel15.setBounds(20, 200, 70, 14);
+        pnlPelayanan.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, -1));
 
         jLabel16.setText("Tanggal");
-        pnlPelayanan.add(jLabel16);
-        jLabel16.setBounds(20, 240, 60, 14);
+        pnlPelayanan.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 90, -1));
 
         jLabel22.setText("Pelaksana");
-        pnlPelayanan.add(jLabel22);
-        jLabel22.setBounds(20, 320, 60, 14);
+        pnlPelayanan.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 90, -1));
+
+        jLabel7.setText("Tipe Pelaksana");
+        pnlPelayanan.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 90, -1));
+
+        jLabel17.setText("Kelas Tindakan");
+        pnlPelayanan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, -1));
+        pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 460, 10));
+        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 460, 10));
 
         txtPelayananTindakanNama.setEditable(false);
-        pnlPelayanan.add(txtPelayananTindakanNama);
-        txtPelayananTindakanNama.setBounds(160, 30, 270, 20);
-        pnlPelayanan.add(txtPelayananJumlah);
-        txtPelayananJumlah.setBounds(160, 120, 270, 20);
-        pnlPelayanan.add(txtPelayananBiayaTambahan);
-        txtPelayananBiayaTambahan.setBounds(160, 150, 270, 20);
-        pnlPelayanan.add(txtPelayananKeterangan);
-        txtPelayananKeterangan.setBounds(160, 190, 270, 20);
-        pnlPelayanan.add(txtPelayananTanggal);
-        txtPelayananTanggal.setBounds(160, 230, 270, 20);
+        pnlPelayanan.add(txtPelayananTindakanNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 270, 25));
+
+        txtPelayananTindakanKelas.setEditable(false);
+        pnlPelayanan.add(txtPelayananTindakanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 270, 25));
+        pnlPelayanan.add(txtPelayananJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 270, 25));
+        pnlPelayanan.add(txtPelayananBiayaTambahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 270, 25));
+        pnlPelayanan.add(txtPelayananKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 270, 25));
+        pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 270, 25));
+
+        cbPelayananTipePelaksana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "DOKTER", "PERAWAT" }));
+        pnlPelayanan.add(cbPelayananTipePelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 270, 25));
 
         txtPelayananPelaksana.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPelayananPelaksanaMouseClicked(evt);
             }
         });
-        pnlPelayanan.add(txtPelayananPelaksana);
-        txtPelayananPelaksana.setBounds(160, 320, 270, 20);
-        pnlPelayanan.add(jSeparator5);
-        jSeparator5.setBounds(0, 268, 450, 10);
-
-        jLabel7.setText("Tipe Pelaksana");
-        pnlPelayanan.add(jLabel7);
-        jLabel7.setBounds(20, 290, 80, 14);
-
-        cbPelayananTipePelaksana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "DOKTER", "PERAWAT" }));
-        pnlPelayanan.add(cbPelayananTipePelaksana);
-        cbPelayananTipePelaksana.setBounds(160, 290, 270, 20);
-
-        jLabel17.setText("Kelas Tindakan");
-        pnlPelayanan.add(jLabel17);
-        jLabel17.setBounds(20, 70, 80, 14);
-
-        txtPelayananTindakanKelas.setEditable(false);
-        pnlPelayanan.add(txtPelayananTindakanKelas);
-        txtPelayananTindakanKelas.setBounds(160, 60, 270, 20);
-        pnlPelayanan.add(jSeparator6);
-        jSeparator6.setBounds(0, 98, 450, 10);
+        pnlPelayanan.add(txtPelayananPelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 270, 25));
 
         getContentPane().add(pnlPelayanan);
         pnlPelayanan.setBounds(20, 290, 460, 360);
+
+        pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pemakaian"));
+        pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Nama Barang");
+        pnlPemakaian.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, -1));
+
+        jLabel3.setText("Jumlah");
+        pnlPemakaian.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, -1));
+
+        jLabel4.setText("Biaya Tambahan");
+        pnlPemakaian.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 90, -1));
+
+        jLabel5.setText("Keterangan");
+        pnlPemakaian.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 90, -1));
+
+        jLabel6.setText("Tanggal");
+        pnlPemakaian.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 90, -1));
+
+        txtPemakaianBarang.setEditable(false);
+        pnlPemakaian.add(txtPemakaianBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 270, 25));
+        pnlPemakaian.add(txtPemakaianJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 270, 25));
+        pnlPemakaian.add(txtPemakaianBiayaTambahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 270, 25));
+        pnlPemakaian.add(txtPemakaianKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 25));
+        pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 270, 25));
+
+        getContentPane().add(pnlPemakaian);
+        pnlPemakaian.setBounds(20, 290, 460, 240);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
