@@ -252,10 +252,10 @@ public class FrameCari extends JFrame {
     private void enableTambah() {
         btnPilih.setEnabled(false);
         btnSimpan.setEnabled(true);
-        txtKategoriNama.setEnabled(true);
-        txtKategoriParent.setEnabled(true);
+        txtKategoriNama.setEditable(true);
+        txtKategoriParent.setEditable(true);
         
-        this.setSize(500, 450);
+        this.setSize(500, 470);
         pnlKategori.setVisible(true);
     }
     

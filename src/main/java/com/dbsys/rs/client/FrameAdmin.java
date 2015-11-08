@@ -844,7 +844,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             txtBhpSatuan.setText(model.getSatuan());
             txtBhpHarga.setText(model.getHarga().toString());
             txtBhpJumlah.setText(model.getJumlah().toString());
-            cbObatTanggungan.setSelectedItem(model.getTanggungan().toString());
+            cbBhpTanggungan.setSelectedItem(model.getTanggungan().toString());
         }
 
         @Override
@@ -935,10 +935,11 @@ public class FrameAdmin extends javax.swing.JFrame {
 
             TindakanTableModel tableModel = (TindakanTableModel)tblTindakan.getModel();
             model = tableModel.getTindakan(row);
+            kategori= model.getKategori();
 
             txtTindakanKode.setText(model.getKode());
             txtTindakanNama.setText(model.getNama());
-            txtTindakanKategori.setText(model.getKategori().getNama());
+            txtTindakanKategori.setText(kategori.getNama());
             txtTindakanKeterangan.setText(model.getKeterangan());
             txtTindakanTarif.setText(model.getTarif().toString());
             cbTindakanKelas.setSelectedItem(model.getKelas().toString());
