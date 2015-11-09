@@ -74,21 +74,33 @@ public final class TagihanTableModel extends DefaultTableModel {
     }
     
     public void addListPelayanan(List<Pelayanan> list) {
+        if (list == null)
+            list = new ArrayList<>();
+
         for (Pelayanan pelayanan : list)
             this.list.add(pelayanan);
     }
     
     public void addListPemakaian(List<Pemakaian> list) {
+        if (list == null)
+            list = new ArrayList<>();
+
         for (Pemakaian pemakaian : list)
             this.list.add(pemakaian);
     }
     
     public void addListPemakaianObat(List<PemakaianObat> list) {
+        if (list == null)
+            list = new ArrayList<>();
+
         for (Pemakaian pemakaian : list)
             this.list.add(pemakaian);
     }
     
     public void addListPemakaianBhp(List<PemakaianBhp> list) {
+        if (list == null)
+            list = new ArrayList<>();
+
         for (Pemakaian pemakaian : list)
             this.list.add(pemakaian);
     }

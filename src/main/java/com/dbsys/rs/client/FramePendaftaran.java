@@ -285,7 +285,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         jToolBar1.add(lblOperator);
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setText("        LOGOUT");
+        btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

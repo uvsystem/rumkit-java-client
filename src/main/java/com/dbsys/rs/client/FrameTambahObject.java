@@ -138,6 +138,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             pemakaianBhp = new PemakaianBhp();
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
+        if (biayaTambahan == null || biayaTambahan.equals(""))
+            biayaTambahan = "0";
+        
         String jumlah = txtPemakaianJumlah.getText();
         String tanggal = txtPemakaianTanggal.getText();
         
@@ -169,6 +172,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             pemakaianObat = new PemakaianObat();
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
+        if (biayaTambahan == null || biayaTambahan.equals(""))
+            biayaTambahan = "0";
+        
         String jumlah = txtPemakaianJumlah.getText();
         String tanggal = txtPemakaianTanggal.getText();
         
@@ -203,6 +209,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             pelayanan = new Pelayanan();
         
         String biayaTambahan = txtPelayananBiayaTambahan.getText();
+        if (biayaTambahan == null || biayaTambahan.equals(""))
+            biayaTambahan = "0";
+        
         String jumlah = txtPelayananJumlah.getText();
         String tanggal = txtPelayananTanggal.getText();
         

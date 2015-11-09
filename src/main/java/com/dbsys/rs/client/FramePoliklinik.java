@@ -45,13 +45,13 @@ public class FramePoliklinik extends javax.swing.JFrame implements BhpTableFrame
         lblUnit.setText(TokenHolder.getNamaUnit());
         
         if (Unit.Type.POLIKLINIK.equals(unit.getTipe())) {
-            // TODO
+            // TODO ubah background
         } else if (Unit.Type.LABORATORIUM.equals(unit.getTipe())) {
-            // TODO
+            // TODO ubah background
         } else if (Unit.Type.TRANSFUSI_DARAH.equals(unit.getTipe())) {
-            // TODO
+            // TODO ubah background
         } else if (Unit.Type.RADIOLOGI.equals(unit.getTipe())) {
-            // TODO
+            // TODO ubah background
         }
     }
     
