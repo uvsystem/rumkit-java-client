@@ -33,4 +33,9 @@ public class ExceptionPdfView extends AbstractPdfView {
 
         return doc;
     }
+
+    @Override
+    public Document newDocument() {
+        return new Document();
+    }
 }
