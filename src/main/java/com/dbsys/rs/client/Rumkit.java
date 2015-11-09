@@ -1,5 +1,10 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.document.DocumentException;
+import com.dbsys.rs.client.document.pdf.ExceptionPdfView;
+import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.UIManager;
 
 /**
@@ -14,7 +19,18 @@ public class Rumkit {
     public static void main(String args[]) {
         
         setLookAndFeel();
-        
+        run();
+    }
+    
+    private static void setLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+    
+    private static void run() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -24,18 +40,16 @@ public class Rumkit {
         });
     }
     
-    private static void setLookAndFeel() {
+    private static void testPdf() {
+        ExceptionPdfView pdfView = new ExceptionPdfView();
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", "Test Jadi");
+        
+        PdfProcessor pdfProcessor = new PdfProcessor();
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            pdfProcessor.generate(pdfView, model, "E:\\test.pdf");
+        } catch (DocumentException ex) {
+            System.out.println(ex);
         }
     }
 }

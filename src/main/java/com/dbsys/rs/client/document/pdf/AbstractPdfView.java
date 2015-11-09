@@ -1,8 +1,8 @@
 package com.dbsys.rs.client.document.pdf;
 
+import com.dbsys.rs.client.document.AbstractDocumentView;
 import com.dbsys.rs.lib.DateUtil;
 import java.sql.Date;
-import java.util.Map;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -13,7 +13,7 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
-public abstract class AbstractPdfView {
+public abstract class AbstractPdfView extends AbstractDocumentView {
     protected int fontTitleSize = 14;
     protected int fontTitleStyle = Font.BOLD;
     protected int fontTitleType = Font.TIMES_ROMAN;
@@ -37,8 +37,8 @@ public abstract class AbstractPdfView {
 
     protected float minimumCellHeight = 10f;
 
-    public abstract Document create(Map<String, Object> model, Document doc) throws DocumentException;
     protected abstract void createTitle(Paragraph paragraph) throws DocumentException;
+    public abstract Document newDocument();
 
     protected void decorateDocument(Document doc, String title) {
         doc.addAuthor("UnitedVision");

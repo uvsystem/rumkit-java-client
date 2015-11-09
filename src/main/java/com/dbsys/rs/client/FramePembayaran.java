@@ -1,5 +1,8 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.document.DocumentException;
+import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
@@ -15,10 +18,13 @@ import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.PemakaianObat;
+import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,6 +44,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private List<Pelayanan> listPelayanan;
     private List<Pemakaian> listPemakaianBhp;
     private List<Pemakaian> listPemakaianObat;
+    private List<Tagihan> listTagihan;
     
     /**
      * Creates new form FramePembayaran
@@ -153,6 +160,8 @@ public class FramePembayaran extends javax.swing.JFrame {
             tableModel.addListPemakaian(listPemakaianBhp);
             tableModel.addListPemakaian(listPemakaianObat);
             
+            listTagihan = tableModel.getList();
+            
             tblSemua.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -225,7 +234,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtPasienCicilan = new javax.swing.JTextField();
         btnCetak = new javax.swing.JButton();
-        btnSimpan = new javax.swing.JButton();
+        btnBayar = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -520,14 +529,14 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlDetail.add(btnCetak);
         btnCetak.setBounds(140, 530, 110, 40);
 
-        btnSimpan.setText("BAYAR");
-        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+        btnBayar.setText("BAYAR");
+        btnBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanActionPerformed(evt);
+                btnBayarActionPerformed(evt);
             }
         });
-        pnlDetail.add(btnSimpan);
-        btnSimpan.setBounds(270, 530, 110, 40);
+        pnlDetail.add(btnBayar);
+        btnBayar.setBounds(270, 530, 110, 40);
 
         getContentPane().add(pnlDetail);
         pnlDetail.setBounds(860, 180, 400, 580);
@@ -575,7 +584,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         loadData();
     }//GEN-LAST:event_txtKeywordFocusLost
 
-    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+    private void btnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarActionPerformed
         if (pasien == null) {
             JOptionPane.showMessageDialog(this, "Silahkan mencari pasien terlebih dahulu.");
             return;
@@ -594,10 +603,21 @@ public class FramePembayaran extends javax.swing.JFrame {
          } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btnSimpanActionPerformed
+    }//GEN-LAST:event_btnBayarActionPerformed
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
-        JOptionPane.showMessageDialog(this, "Sedang dalam pengembangan");
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        
+        TagihanPdfView pdfView = new TagihanPdfView();
+        Map<String, Object> model = new HashMap<>();
+        model.put("list", listTagihan);
+        model.put("pasien", pasien);
+        
+        try {
+            pdfProcessor.generate(pdfView, model, "E://test.pdf");
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnCetakActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -624,7 +644,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
+            pasien = pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -632,10 +652,10 @@ public class FramePembayaran extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPasienKeluarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBayar;
     private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
-    private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

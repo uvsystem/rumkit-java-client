@@ -67,6 +67,10 @@ public final class TagihanTableModel extends DefaultTableModel {
         return list.get(index);
     }
 
+    public List<Tagihan> getList() {
+        return list;
+    }
+
     public void setList(List<Tagihan> list) {
         if (list == null)
             list = new ArrayList<>();
