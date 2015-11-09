@@ -3,7 +3,6 @@ package com.dbsys.rs.client.document.pdf;
 import com.dbsys.rs.client.document.AbstractDocumentView;
 import com.dbsys.rs.lib.DateUtil;
 import java.sql.Date;
-import java.util.Map;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
