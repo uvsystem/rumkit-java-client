@@ -3,19 +3,11 @@ package com.dbsys.rs.client;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
-import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PemakaianService;
-import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -26,10 +18,6 @@ import javax.swing.JOptionPane;
 public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
-    private final BarangService bhpService = BarangService.getInstance(EventController.host);
-    private final BarangService obatService = BarangService.getInstance(EventController.host);
-    private final StokService stokMasukService = StokService.getInstance(EventController.host);
-    private final StokService stokKeluarService = StokService.getInstance(EventController.host);
     private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
 
@@ -73,30 +61,21 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         txtPasienAgama.setText(pasien.getAgama());
         txtPasienTelepon.setText(pasien.getTelepon());
         
-        tblResepObat.removeAll();
+        tblResep.removeAll();
         
         this.pasien = pasien;
     }
-    
-    private void simpanStokMasuk(Long idBarang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
-        stokMasukService.simpan(idBarang, jumlah, tanggal, jam);
-    }
-    
-    private void simpanStokKeluar(Long idBarang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
-        stokKeluarService.simpan(idBarang, jumlah, tanggal, jam);
-    }
 
-    private void loadTableObat(Pasien pasien) throws ServiceException {
+    private void loadTableResep(Pasien pasien) throws ServiceException {
         List<Pemakaian> list = pemakaianObatService.getByPasien(pasien.getId());
-
         PemakaianTableModel tableModel = new PemakaianTableModel(list);
-        tblResepObat.setModel(tableModel);
+        tblResep.setModel(tableModel);
     }
     
     @Override
     public void reloadTableObat() {
         try {
-            loadTableObat(pasien);
+            loadTableResep(pasien);
         } catch (ServiceException ex) {}
     }
 
@@ -137,7 +116,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         txtResepNomor = new javax.swing.JTextField();
         btnObatTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblResepObat = new javax.swing.JTable();
+        tblResep = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
@@ -272,7 +251,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         pnlResep.add(btnObatTambah);
         btnObatTambah.setBounds(700, 37, 100, 30);
 
-        tblResepObat.setModel(new javax.swing.table.DefaultTableModel(
+        tblResep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -283,7 +262,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblResepObat);
+        jScrollPane1.setViewportView(tblResep);
 
         pnlResep.add(jScrollPane1);
         jScrollPane1.setBounds(20, 90, 790, 510);
@@ -343,10 +322,8 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
         try {
             pasien = pasienService.get(keyword);
-            
             setDetailPasien(pasien);
-
-            loadTableObat(pasien);
+            loadTableResep(pasien);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -354,6 +331,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
     private void btnObatTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObatTambahActionPerformed
         String nomorResep = txtResepNomor.getText();
+        
         if (nomorResep == null || nomorResep.equals("")) {
             JOptionPane.showMessageDialog(this, "Silahkan masukan nomor resep");
             return;
@@ -400,7 +378,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
     private javax.swing.JPanel pnlCari;
     private javax.swing.JPanel pnlPasien;
     private javax.swing.JPanel pnlResep;
-    private javax.swing.JTable tblResepObat;
+    private javax.swing.JTable tblResep;
     private javax.swing.JTextField txtPasienAgama;
     private javax.swing.JTextField txtPasienGolonganDarah;
     private javax.swing.JTextField txtPasienKelamin;

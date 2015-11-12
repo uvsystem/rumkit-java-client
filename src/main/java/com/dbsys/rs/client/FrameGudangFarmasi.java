@@ -93,12 +93,12 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
         this.barang = obat;
     }
     
-    private void simpanStokMasuk(Long idBarang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
-        stokService.simpan(idBarang, jumlah, tanggal, jam);
+    private void simpanStokMasuk(Barang barang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
+        stokService.masuk(barang, jumlah, tanggal, jam);
     }
     
-    private void simpanStokKeluar(Long idBarang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
-        stokService.simpan(idBarang, jumlah, tanggal, jam);
+    private void simpanStokKeluar(Barang barang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
+        stokService.keluar(barang, jumlah, tanggal, jam);
     }
 
     /**
@@ -567,7 +567,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
         String jumlah = txtEksternalStokJumlah.getText();
         
         try {
-            simpanStokMasuk(barang.getId(), new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
+            stokService.masuk(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
             
             setDetailBhp(null);
         } catch (ServiceException ex) {
@@ -586,7 +586,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
         String jumlah = txtEksternalStokJumlah.getText();
         
         try {
-            simpanStokKeluar(barang.getId(), new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
+            stokService.keluar(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
             
             setDetailBhp(null);
         } catch (ServiceException ex) {
@@ -635,7 +635,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
         String jumlah = txtInternalStokJumlah.getText();
         
         try {
-            simpanStokKeluar(barang.getId(), new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
+            stokService.supply(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam), null); // TODO null ganti dengan unit.
             
             setDetailObat(null);
         } catch (ServiceException ex) {
