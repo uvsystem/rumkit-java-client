@@ -114,9 +114,9 @@ public class FrameLogin extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
                 new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.APOTEK_FARMASI)) {
-                new FrameFarmasi().setVisible(true);
+                new FrameApotek().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
-                new FrameFarmasi().setVisible(true);
+                new FrameGudangFarmasi().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {
                 new FrameUgd().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.POLIKLINIK)) {
@@ -124,7 +124,7 @@ public class FrameLogin extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.TipeUnit.PENUNJANG_MEDIK)) {
                 new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
             } else {
-                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+                throw new ServiceException("Anda tidak terdaftar pada unit apapun");
             }
             
             this.dispose();
