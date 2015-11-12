@@ -51,7 +51,7 @@ public class PasienTableModel extends AbstractTableModel {
             case 0: return pasien.getKode();
             case 1: return pasien.getNama();
             case 2: return pasien.getKelas();
-            case 3: return pasien.getTanggungan();
+            case 3: return pasien.getPenanggung();
             default: return "";
         }
     }

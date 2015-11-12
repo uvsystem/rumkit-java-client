@@ -1,7 +1,6 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Dokter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -10,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class DokterTableModel extends DefaultTableModel {
-    private List<Dokter> listDokter;
+    private final List<Dokter> listDokter;
     
     public DokterTableModel(List<Dokter> list){
         super();
@@ -53,11 +52,5 @@ public class DokterTableModel extends DefaultTableModel {
     }
     public Dokter getDokter(int row){
         return listDokter.get(row);
-    }
-
-    public void add(Dokter dokter) {
-        if (listDokter == null)
-            listDokter = new ArrayList<Dokter>();
-        listDokter.add(dokter);
     }
 }

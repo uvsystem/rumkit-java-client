@@ -55,7 +55,7 @@ public class PemakaianTableModel extends DefaultTableModel {
             case 4: 
                 String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pemakaian.getTagihan());
                 return tagihan;
-            case 5: return pemakaian.getTanggungan();
+            case 5: return pemakaian.getPenanggung();
             default: return "";
         }
     }

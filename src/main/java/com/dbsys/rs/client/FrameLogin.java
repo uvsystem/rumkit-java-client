@@ -107,23 +107,21 @@ public class FrameLogin extends javax.swing.JFrame {
 
             if(token.getRole().equals(Role.ADMIN)) {
                 new FrameAdmin().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.LOKET_PENDAFTARAN)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.LOKET_PENDAFTARAN)) {
                 new FramePendaftaran().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.LOKET_PEMBAYARAN)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.LOKET_PEMBAYARAN)) {
                 new FramePembayaran().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.RUANG_PERAWATAN)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
                 new FrameSal().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.FARMASI)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.APOTEK_FARMASI)) {
                 new FrameFarmasi().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.UGD)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
+                new FrameFarmasi().setVisible(true);
+            } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {
                 new FrameUgd().setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.POLIKLINIK)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.POLIKLINIK)) {
                 new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.LABORATORIUM)) {
-                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.RADIOLOGI)) {
-                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
-            } else if (token.getTipe().equals(Unit.Type.TRANSFUSI_DARAH)) {
+            } else if (token.getTipe().equals(Unit.TipeUnit.PENUNJANG_MEDIK)) {
                 new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
             } else {
                 new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);

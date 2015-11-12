@@ -5,15 +5,15 @@ import com.dbsys.rs.client.tableModel.KategoriTableModel;
 import com.dbsys.rs.client.tableModel.PerawatTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.connector.service.DokterService;
 import com.dbsys.rs.connector.service.KategoriService;
-import com.dbsys.rs.connector.service.PerawatService;
+import com.dbsys.rs.connector.service.PegawaiServices;
 import com.dbsys.rs.connector.service.UnitService;
 import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.KategoriTindakan;
 import com.dbsys.rs.lib.entity.Pegawai;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Unit;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -32,8 +32,8 @@ public class FrameCari extends JFrame {
     
     private UnitService unitService;
     private KategoriService kategoriService;
-    private DokterService dokterService;
-    private PerawatService perawatService;
+    private PegawaiServices dokterService;
+    private PegawaiServices perawatService;
     
     /**
      * Creates new form formCari
@@ -66,11 +66,11 @@ public class FrameCari extends JFrame {
 
             loadTableKategori();
         } else if (cls.equals(Dokter.class)) {
-            dokterService = DokterService.getInstance(EventController.host);
+            dokterService = PegawaiServices.getInstance(EventController.host);
 
             loadTableDokter(null);
         } else if (cls.equals(Perawat.class)) {
-            perawatService = PerawatService.getInstance(EventController.host);
+            perawatService = PegawaiServices.getInstance(EventController.host);
 
             loadTablePerawat(null);
         }
@@ -327,32 +327,44 @@ public class FrameCari extends JFrame {
     }
 
     private void loadTableDokter(String keyword) {
-        List<Dokter> list;
+        List<Pegawai> list;
         
         try {
             if (keyword == null) {
-                list = dokterService.getAll();
+                list = dokterService.getAll(Dokter.class);
             } else {
-                list = dokterService.cari(keyword);
+                list = dokterService.cari(keyword, Dokter.class);
             }
 
-            DokterTableModel tableModel = new DokterTableModel(list);
+            List<Dokter> listDokter = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Dokter)
+                    listDokter.add((Dokter) pegawai);
+            }
+            
+            DokterTableModel tableModel = new DokterTableModel(listDokter);
             tblCari.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
     private void loadTablePerawat(String keyword) {
-        List<Perawat> list;
+        List<Pegawai> list;
         
         try {
             if (keyword == null) {
-                list = perawatService.getAll();
+                list = perawatService.getAll(Perawat.class);
             } else {
-                list = perawatService.cari(keyword);
+                list = perawatService.cari(keyword, Perawat.class);
             }
             
-            PerawatTableModel tableModel = new PerawatTableModel(list);
+            List<Perawat> listPerawat = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Perawat)
+                    listPerawat.add((Perawat) pegawai);
+            }
+            
+            PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
             tblCari.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

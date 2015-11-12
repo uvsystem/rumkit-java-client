@@ -5,12 +5,10 @@ import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
-import com.dbsys.rs.connector.service.BhpService;
-import com.dbsys.rs.connector.service.ObatService;
+import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.PasienService;
-import com.dbsys.rs.connector.service.PemakaianObatService;
-import com.dbsys.rs.connector.service.StokKeluarService;
-import com.dbsys.rs.connector.service.StokMasukService;
+import com.dbsys.rs.connector.service.PemakaianService;
+import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
@@ -18,11 +16,9 @@ import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.PemakaianObat;
 import java.awt.Color;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -33,11 +29,11 @@ import javax.swing.JOptionPane;
 public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
-    private final BhpService bhpService = BhpService.getInstance(EventController.host);
-    private final ObatService obatService = ObatService.getInstance(EventController.host);
-    private final StokMasukService stokMasukService = StokMasukService.getInstance(EventController.host);
-    private final StokKeluarService stokKeluarService = StokKeluarService.getInstance(EventController.host);
-    private final PemakaianObatService pemakaianObatService = PemakaianObatService.getInstance(EventController.host);
+    private final BarangService bhpService = BarangService.getInstance(EventController.host);
+    private final BarangService obatService = BarangService.getInstance(EventController.host);
+    private final StokService stokMasukService = StokService.getInstance(EventController.host);
+    private final StokService stokKeluarService = StokService.getInstance(EventController.host);
+    private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     
     private Barang barang;
@@ -68,7 +64,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             this.txtBhpJumlah.setText(null);
         } else {
             this.txtBhpHarga.setText(bhp.getHarga().toString());
-            this.txtBhpTanggungan.setText(bhp.getTanggungan().toString());
+            this.txtBhpTanggungan.setText(bhp.getPenanggung().toString());
             this.txtBhpJumlah.setText(bhp.getJumlah().toString());
         }
         
@@ -94,7 +90,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
             this.txtObatJumlah.setText(null);
         } else {
             this.txtObatHarga.setText(obat.getHarga().toString());
-            this.txtObatTanggungan.setText(obat.getTanggungan().toString());
+            this.txtObatTanggungan.setText(obat.getPenanggung().toString());
             this.txtObatJumlah.setText(obat.getJumlah().toString());
         }
         
@@ -123,7 +119,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         } else {
             txtPasienKelamin.setText(pasien.getKelamin().toString());
             txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
-            txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+            txtPasienTanggungan.setText(pasien.getPenanggung().toString());
             txtPasienStatusRawat.setText(pasien.getStatus().toString());
             txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
         }
@@ -148,10 +144,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
     }
 
     private void loadTableObat(Pasien pasien) throws ServiceException {
-        List<PemakaianObat> listObat = pemakaianObatService.getByPasien(pasien.getId());
-        List<Pemakaian> list = new ArrayList<>();
-        for (PemakaianObat po : listObat)
-            list.add(po);
+        List<Pemakaian> list = pemakaianObatService.getByPasien(pasien.getId());
 
         PemakaianTableModel tableModel = new PemakaianTableModel(list);
         tblResepObat.setModel(tableModel);
@@ -814,7 +807,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         if (keyword.equals(""))
             return;
         
-        List<BahanHabisPakai> list = null;
+        List<Barang> list = null;
         try {
             list = bhpService.cari(keyword);
         } catch (ServiceException ex) {
@@ -884,7 +877,7 @@ public class FrameFarmasi extends javax.swing.JFrame implements ObatTableFrame {
         if (keyword.equals(""))
             return;
         
-        List<ObatFarmasi> list = null;
+        List<Barang> list = null;
         try {
             list = obatService.cari(keyword);
         } catch (ServiceException ex) {

@@ -5,23 +5,22 @@ import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
-import com.dbsys.rs.connector.service.BhpService;
-import com.dbsys.rs.connector.service.ObatService;
+import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.PemakaianBhpService;
-import com.dbsys.rs.connector.service.PemakaianObatService;
+import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
+import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pegawai;
 import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.PemakaianBhp;
-import com.dbsys.rs.lib.entity.PemakaianObat;
+import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Tindakan;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,19 +34,19 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     private final JFrame frame;
     private final Class<?> clsDomain;
     
-    private final BhpService bhpService = BhpService.getInstance(EventController.host);
-    private final ObatService obatService = ObatService.getInstance(EventController.host);
-    private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
-    private final PemakaianObatService pemakaianObatService = PemakaianObatService.getInstance(EventController.host);
+    private final BarangService bhpService = BarangService.getInstance(EventController.host);
+    private final BarangService obatService = BarangService.getInstance(EventController.host);
+    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
+    private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
     private final TindakanService tindakanService = TindakanService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
 
     private final Pasien pasien;
 
-    private PemakaianBhp pemakaianBhp;
+    private Pemakaian pemakaianBhp;
     private BahanHabisPakai bhp;
 
-    private PemakaianObat pemakaianObat;
+    private Pemakaian pemakaianObat;
     private ObatFarmasi obat;
     private String nomorResep;
     
@@ -81,10 +80,10 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         }
     }
 
-    FrameTambahObject(JFrame frame, Pasien pasien, PemakaianBhp pemakaianBhp) {
+    FrameTambahObject(JFrame frame, Pasien pasien, Pemakaian pemakaianBhp) {
         this(frame, BahanHabisPakai.class, pasien);
         this.pemakaianBhp = pemakaianBhp;
-        this.bhp = pemakaianBhp.getBahanHabisPakai();
+        this.bhp = (BahanHabisPakai)pemakaianBhp.getBarang();
         
         txtPemakaianBarang.setText(bhp.getNama());
         txtPemakaianBiayaTambahan.setText(pemakaianBhp.getBiayaTambahan().toString());
@@ -122,9 +121,14 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     }
     
     private void cariBhp(String keyword) throws ServiceException {
-        List<BahanHabisPakai> list = bhpService.cari(keyword);
+        List<Barang> list = bhpService.cari(keyword, BahanHabisPakai.class);
+        List<BahanHabisPakai> listBhp = new ArrayList<>();
+        for (Barang barang : list) {
+            if (barang instanceof BahanHabisPakai)
+                listBhp.add((BahanHabisPakai) barang);
+        }
         
-        BhpTableModel tableModel = new BhpTableModel(list);
+        BhpTableModel tableModel = new BhpTableModel(listBhp);
         tblCari.setModel(tableModel);
     }
     
@@ -133,9 +137,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         return tableModel.getBhp(index);
     }
     
-    private PemakaianBhp getPemakaianBhp() {
+    private Pemakaian getPemakaianBhp() {
         if (pemakaianBhp == null)
-            pemakaianBhp = new PemakaianBhp();
+            pemakaianBhp = new Pemakaian();
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
@@ -144,7 +148,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         String jumlah = txtPemakaianJumlah.getText();
         String tanggal = txtPemakaianTanggal.getText();
         
-        pemakaianBhp.setBahanHabisPakai(bhp);
+        pemakaianBhp.setBarang(bhp);
         pemakaianBhp.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pemakaianBhp.setJumlah(Integer.valueOf(jumlah));
         pemakaianBhp.setKeterangan(txtPemakaianKeterangan.getText());
@@ -156,9 +160,14 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     }
     
     private void cariObat(String keyword) throws ServiceException {
-        List<ObatFarmasi> list = obatService.cari(keyword);
+        List<Barang> list = obatService.cari(keyword);
+        List<ObatFarmasi> listObat = new ArrayList<>();
+        for (Barang barang : list) {
+            if (barang instanceof ObatFarmasi)
+                listObat.add((ObatFarmasi) barang);
+        }
         
-        ObatTableModel tableModel = new ObatTableModel(list);
+        ObatTableModel tableModel = new ObatTableModel(listObat);
         tblCari.setModel(tableModel);
     }
     
@@ -167,9 +176,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         return tableModel.getObat(index);
     }
     
-    private PemakaianObat getPemakaianObat() {
+    private Pemakaian getPemakaianObat() {
         if (pemakaianObat == null)
-            pemakaianObat = new PemakaianObat();
+            pemakaianObat = new Pemakaian();
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
@@ -178,7 +187,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         String jumlah = txtPemakaianJumlah.getText();
         String tanggal = txtPemakaianTanggal.getText();
         
-        pemakaianObat.setObat(obat);
+        pemakaianObat.setBarang(obat);
         pemakaianObat.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pemakaianObat.setJumlah(Integer.valueOf(jumlah));
         pemakaianObat.setKeterangan(txtPemakaianKeterangan.getText());
@@ -186,8 +195,6 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pemakaianObat.setPasien(pasien);
         pemakaianObat.setUnit(TokenHolder.getToken().getOperator().getUnit());
         pemakaianObat.setNomorResep(nomorResep);
-        // TODO tambah obat luar
-        pemakaianObat.setAsal(PemakaianObat.AsalObat.FARMASI);
         
         return pemakaianObat;
     }

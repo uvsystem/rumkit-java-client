@@ -2,8 +2,6 @@ package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.PemakaianBhp;
-import com.dbsys.rs.lib.entity.PemakaianObat;
 import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -59,7 +57,7 @@ public final class TagihanTableModel extends DefaultTableModel {
             case 3: return tagihan.getJumlah();
             case 4:
                 return NumberFormat.getNumberInstance(Locale.US).format(tagihan.getTagihan());
-            case 5: return tagihan.getTanggungan();
+            case 5: return tagihan.getPenanggung();
             default: return "";
         }
     }
@@ -86,22 +84,6 @@ public final class TagihanTableModel extends DefaultTableModel {
     }
     
     public void addListPemakaian(List<Pemakaian> list) {
-        if (list == null)
-            list = new ArrayList<>();
-
-        for (Pemakaian pemakaian : list)
-            this.list.add(pemakaian);
-    }
-    
-    public void addListPemakaianObat(List<PemakaianObat> list) {
-        if (list == null)
-            list = new ArrayList<>();
-
-        for (Pemakaian pemakaian : list)
-            this.list.add(pemakaian);
-    }
-    
-    public void addListPemakaianBhp(List<PemakaianBhp> list) {
         if (list == null)
             list = new ArrayList<>();
 

@@ -14,29 +14,27 @@ import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
-import com.dbsys.rs.connector.service.ApotekerService;
-import com.dbsys.rs.connector.service.BhpService;
-import com.dbsys.rs.connector.service.DokterService;
-import com.dbsys.rs.connector.service.ObatService;
+import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.PasienService;
-import com.dbsys.rs.connector.service.PekerjaService;
+import com.dbsys.rs.connector.service.PegawaiServices;
 import com.dbsys.rs.connector.service.PendudukService;
-import com.dbsys.rs.connector.service.PerawatService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.connector.service.UnitService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.Tanggungan;
+import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.Apoteker;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
+import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.KategoriTindakan;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Pegawai;
 import com.dbsys.rs.lib.entity.Pekerja;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
@@ -44,6 +42,7 @@ import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -126,7 +125,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 model = new Unit();
 
             String tipe = (String)cb_unit_tipe.getSelectedItem();
-            model.setTipe(Unit.Type.valueOf(tipe));
+            model.setTipe(Unit.TipeUnit.valueOf(tipe));
             model.setBobot(Float.valueOf(txt_unit_bobot.getText()));
             model.setNama(txt_unit_nama.getText());
 
@@ -257,7 +256,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
     
     private class DokterEventController implements EventController<Dokter> {
-        private final DokterService dokterService = DokterService.getInstance(host);
+        private final PegawaiServices dokterService = PegawaiServices.getInstance(host);
         private Dokter model;
 
         @Override
@@ -337,7 +336,13 @@ public class FrameAdmin extends javax.swing.JFrame {
             pnlOperator.setVisible(false);
             pnlPasien.setVisible(false);
 
-            List<Dokter> listDokter = dokterService.getAll();
+            List<Pegawai> list = dokterService.getAll(Dokter.class);
+            List<Dokter> listDokter = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Dokter)
+                    listDokter.add((Dokter) pegawai);
+            }
+
             DokterTableModel tableModel = new DokterTableModel(listDokter);
             tbl_dokter.setModel(tableModel);
         }
@@ -350,7 +355,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
     
     private class PerawatEventController implements EventController<Perawat> {
-        private final PerawatService perawatService = PerawatService.getInstance(host);
+        private final PegawaiServices perawatService = PegawaiServices.getInstance(host);
         private Perawat model;
 
         @Override
@@ -421,7 +426,13 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            List<Perawat> listPerawat = perawatService.getAll();
+            List<Pegawai> list = perawatService.getAll(Perawat.class);
+            List<Perawat> listPerawat = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Perawat)
+                    listPerawat.add((Perawat) pegawai);
+            }
+            
             PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
             tbl_perawat.setModel(tableModel);
         }
@@ -434,7 +445,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
     
     private class ApotekerEventController implements EventController<Apoteker> {
-        private final ApotekerService apotekerService = ApotekerService.getInstance(host);
+        private final PegawaiServices apotekerService = PegawaiServices.getInstance(host);
         private Apoteker model;
         
         @Override
@@ -505,7 +516,13 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            List<Apoteker> listApoteker = apotekerService.getAll();
+            List<Pegawai> list = apotekerService.getAll(Apoteker.class);
+            List<Apoteker> listApoteker = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Apoteker)
+                    listApoteker.add((Apoteker) pegawai);
+            }
+
             ApotekerTableModel tableModel = new ApotekerTableModel(listApoteker );
             tbl_apoteker.setModel(tableModel);
         }
@@ -518,7 +535,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
     
     private class PekerjaEventController implements EventController<Pekerja> {
-        private final PekerjaService pekerjaService = PekerjaService.getInstance(host);
+        private final PegawaiServices pekerjaService = PegawaiServices.getInstance(host);
         private Pekerja model;
 
         @Override
@@ -589,7 +606,13 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            List<Pekerja> listPekerja = pekerjaService.getAll();
+            List<Pegawai> list = pekerjaService.getAll(Pekerja.class);
+            List<Pekerja> listPekerja = new ArrayList<>();
+            for (Pegawai pegawai : list) {
+                if (pegawai instanceof Pekerja)
+                    listPekerja.add((Pekerja) pegawai);
+            }
+
             PekerjaTableModel tableModel = new PekerjaTableModel(listPekerja);
             tbl_adm.setModel(tableModel);
         }
@@ -700,7 +723,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
 
     private class ObatEventController implements EventController<ObatFarmasi> {
-        private final ObatService obatService = ObatService.getInstance(host);
+        private final BarangService obatService = BarangService.getInstance(host);
         private ObatFarmasi model;
 
         @Override
@@ -722,7 +745,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             String jumlah = txtObatJumlah.getText();
             String tanggungan = (String)cbObatTanggungan.getSelectedItem();
             
-            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setPenanggung(Penanggung.valueOf(tanggungan));
             model.setHarga(Long.valueOf(harga));
             model.setJumlah(Long.valueOf(jumlah));
             model.setKode(txtObatKode.getText());
@@ -748,7 +771,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             txtObatKeterangan.setText(model.getKeterangan());
             txtObatHarga.setText(model.getHarga().toString());
             txtObatJumlah.setText(model.getJumlah().toString());
-            cbObatTanggungan.setSelectedItem(model.getTanggungan().toString());
+            cbObatTanggungan.setSelectedItem(model.getPenanggung().toString());
         }
 
         @Override
@@ -788,7 +811,13 @@ public class FrameAdmin extends javax.swing.JFrame {
             if (keyword.equals(""))
                 throw new ServiceException("Silahkan masukan kata kunci.");
             
-            List<ObatFarmasi> listObat = obatService.cari(keyword);
+            List<Barang> list = obatService.cari(keyword, ObatFarmasi.class);
+            List<ObatFarmasi> listObat = new ArrayList<>();
+            for (Barang barang : list) {
+                if (barang instanceof ObatFarmasi)
+                    listObat.add((ObatFarmasi) barang);
+            }
+
             ObatTableModel tableModel = new ObatTableModel(listObat);
             tblObat.setModel(tableModel);
         }
@@ -796,7 +825,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     }
 
     private class BhpEventController implements EventController<BahanHabisPakai> {
-        private final BhpService bhpService = BhpService.getInstance(host);
+        private final BarangService bhpService = BarangService.getInstance(host);
         private BahanHabisPakai model;
 
         @Override
@@ -820,7 +849,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             String jumlah = txtBhpJumlah.getText();
             String tanggungan = (String)cbBhpTanggungan.getSelectedItem();
             
-            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setPenanggung(Penanggung.valueOf(tanggungan));
             model.setHarga(Long.valueOf(harga));
             model.setJumlah(Long.valueOf(jumlah));
             model.setKode(txtBhpKode.getText());
@@ -844,7 +873,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             txtBhpSatuan.setText(model.getSatuan());
             txtBhpHarga.setText(model.getHarga().toString());
             txtBhpJumlah.setText(model.getJumlah().toString());
-            cbBhpTanggungan.setSelectedItem(model.getTanggungan().toString());
+            cbBhpTanggungan.setSelectedItem(model.getPenanggung().toString());
         }
 
         @Override
@@ -875,8 +904,14 @@ public class FrameAdmin extends javax.swing.JFrame {
             if (keyword.equals(""))
                 throw new ServiceException("Silahkan masukan kata kunci.");
             
-            List<BahanHabisPakai> list = bhpService.cari(keyword);
-            BhpTableModel tableModel = new BhpTableModel(list);
+            List<Barang> list = bhpService.cari(keyword, BahanHabisPakai.class);
+            List<BahanHabisPakai> listBhp = new ArrayList<>();
+            for (Barang barang : list) {
+                if (barang instanceof BahanHabisPakai)
+                    listBhp.add((BahanHabisPakai) barang);
+            }
+
+            BhpTableModel tableModel = new BhpTableModel(listBhp);
             tblBhp.setModel(tableModel);
         }
         
@@ -916,8 +951,8 @@ public class FrameAdmin extends javax.swing.JFrame {
             String tarif = txtTindakanTarif.getText();
 
             model.setKelas(Kelas.valueOf(kelas));
-            model.setSatuan(Tindakan.Satuan.valueOf(satuan));
-            model.setTanggungan(Tanggungan.valueOf(tanggungan));
+            model.setSatuan(Tindakan.SatuanTindakan.valueOf(satuan));
+            model.setPenanggung(Penanggung.valueOf(tanggungan));
             model.setTarif(Long.valueOf(tarif));
             model.setKode(txtTindakanKode.getText());
             model.setNama(txtTindakanNama.getText());
@@ -943,7 +978,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             txtTindakanKeterangan.setText(model.getKeterangan());
             txtTindakanTarif.setText(model.getTarif().toString());
             cbTindakanKelas.setSelectedItem(model.getKelas().toString());
-            cbTindakanTanggungan.setSelectedItem(model.getTanggungan().toString());
+            cbTindakanTanggungan.setSelectedItem(model.getPenanggung().toString());
             cbTindakanSatuan.setSelectedItem(model.getSatuan().toString());
         }
 
@@ -1046,7 +1081,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             
             txtPasienTanggalMasuk.setText(model.getTanggalMasuk() != null ? model.getTanggalMasuk().toString() : null);
             txtPasienTanggalKeluar.setText(model.getTanggalKeluar() != null ? model.getTanggalKeluar().toString() : null);
-            txtPasienTipe.setText(model.getTipe() != null ? model.getTipe().toString() : null);
+            txtPasienTipe.setText(model.getTipePerawatan() != null ? model.getTipePerawatan().toString() : null);
             txtPasienKelas.setText(model.getKelas() != null ? model.getKelas().toString() : null);
             cbPasienKeadaan.setSelectedItem(model.getKeadaan() != null ? model.getKeadaan().toString() : null);
             cbPasienStatus.setSelectedItem(model.getStatus() != null ? model.getStatus().toString() : null);

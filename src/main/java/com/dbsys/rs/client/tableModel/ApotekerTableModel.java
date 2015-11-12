@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class ApotekerTableModel extends DefaultTableModel {
-    private List<Apoteker> list;
+    private final List<Apoteker> list;
     
     public ApotekerTableModel(List<Apoteker> list){
         super();

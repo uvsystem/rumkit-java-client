@@ -3,6 +3,7 @@ package com.dbsys.rs.client;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.ExceptionPdfView;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.lib.entity.Dokter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.UIManager;
@@ -18,8 +19,10 @@ public class Rumkit {
      */
     public static void main(String args[]) {
         
-        setLookAndFeel();
-        run();
+//        setLookAndFeel();
+//        run();
+        
+        littleTest();
     }
     
     private static void setLookAndFeel() {
@@ -51,5 +54,9 @@ public class Rumkit {
         } catch (DocumentException ex) {
             System.out.println(ex);
         }
+    }
+    
+    private static void littleTest() {
+        System.out.println(Dokter.class.getSimpleName().equals("Dokter"));
     }
 }

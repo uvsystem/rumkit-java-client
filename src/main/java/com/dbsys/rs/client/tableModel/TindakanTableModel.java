@@ -49,7 +49,7 @@ public final class TindakanTableModel extends DefaultTableModel {
             case 1:return tindakan.getNama();
             case 2:return tindakan.getKategori().getNama();
             case 3:return tindakan.getKelas();
-            case 4:return tindakan.getTanggungan();
+            case 4:return tindakan.getPenanggung();
             default: return "";
         }
     }

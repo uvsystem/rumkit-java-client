@@ -63,7 +63,7 @@ public class TagihanPdfView extends  AbstractPdfView {
         insertCell(table, pasien.getNama(), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Tanggungan", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, pasien.getTanggungan().toString(), align, 1, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, pasien.getPenanggung().toString(), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Tanggal Masuk", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, pasien.getTanggalMasuk().toString(), align, 1, fontContent, Rectangle.NO_BORDER);

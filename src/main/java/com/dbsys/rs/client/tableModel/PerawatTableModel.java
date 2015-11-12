@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class PerawatTableModel extends DefaultTableModel {
-    private List<Perawat> list;
+    private final List<Perawat> list;
     
     public PerawatTableModel(List<Perawat> list){
         super();

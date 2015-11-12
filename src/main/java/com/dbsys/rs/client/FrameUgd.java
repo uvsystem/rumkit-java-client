@@ -8,19 +8,18 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.PemakaianBhpService;
+import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.Tanggungan;
+import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.PelayananTemporal;
 import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.PemakaianBhp;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Tindakan;
 import java.awt.Color;
@@ -40,7 +39,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     private final TokenService tokenService= TokenService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
-    private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
+    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
     private final TindakanService tindakanService = TindakanService.getInstance(EventController.host);
 
     private Penduduk penduduk;
@@ -117,24 +116,19 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         if (pasien == null)
             return;
 
-        List<PemakaianBhp> listPemakaianBhp = pemakaianBhpService.getByPasien(pasien.getId());
-
-        List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : listPemakaianBhp)
-            listPemakaian.add(pemakaian);
-
+        List<Pemakaian> listPemakaian = pemakaianBhpService.getByPasien(pasien.getId());
         PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
         tblBhp.setModel(tableModel);
     }
     
-    private PemakaianBhp getPemakaianBhp() throws ComponentSelectionException {
+    private Pemakaian getPemakaianBhp() throws ComponentSelectionException {
         int index = tblBhp.getSelectedRow();
         
         if (index < 0)
             throw new ComponentSelectionException("Silahkan memilih data pada tabel terlebih dahulu");
         
         PemakaianTableModel tableModel = (PemakaianTableModel)tblBhp.getModel();
-        return (PemakaianBhp)tableModel.getPemakaian(index);
+        return tableModel.getPemakaian(index);
     }
 
     private void reloadHome() {
@@ -985,7 +979,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         String kode = txtPasienNomor.getText();
         
         try {
-            pasien = pasienService.daftar(penduduk.getId(), Tanggungan.valueOf(tanggungan), DateUtil.getDate(tanggalMasuk), kode);
+            pasien = pasienService.daftar(penduduk.getId(), Penanggung.valueOf(tanggungan), DateUtil.getDate(tanggalMasuk), kode);
             JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
             
             txtPasienNomor.setText(pasien.getKode());
@@ -1088,7 +1082,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
 
     private void btnBhpHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpHapusActionPerformed
         try {
-            PemakaianBhp pemakaianBhp = getPemakaianBhp();
+            Pemakaian pemakaianBhp = getPemakaianBhp();
 
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pemakaian %s pada tanggal %s",
                 pemakaianBhp.getBarang().getNama(), pemakaianBhp.getTanggal()));
@@ -1107,7 +1101,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
 
     private void btnBhpUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpUpdateActionPerformed
         try {
-            PemakaianBhp pemakaianBhp = getPemakaianBhp();
+            Pemakaian pemakaianBhp = getPemakaianBhp();
 
             new FrameTambahObject(this, pasien, pemakaianBhp).setVisible(true);
         } catch (ComponentSelectionException ex) {
@@ -1154,7 +1148,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
             txtPasienDarah.setText(pasien.getDarah());
             txtPasienAgama.setText(pasien.getAgama());
             txtPasienTelepon.setText(pasien.getTelepon());
-            txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+            txtPasienTanggungan.setText(pasien.getPenanggung().toString());
             txtPasienStatus.setText(pasien.getStatus().toString());
             txtPasienTanggalMasukDetail.setText(pasien.getTanggalMasuk().toString());
 

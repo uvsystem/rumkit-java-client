@@ -10,17 +10,13 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.PemakaianBhpService;
-import com.dbsys.rs.connector.service.PemakaianObatService;
+import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.PemakaianBhp;
-import com.dbsys.rs.lib.entity.PemakaianObat;
 import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -35,8 +31,8 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
-    private final PemakaianBhpService pemakaianBhpService = PemakaianBhpService.getInstance(EventController.host);
-    private final PemakaianObatService pemakaianObatService = PemakaianObatService.getInstance(EventController.host);
+    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
+    private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     
     private Pasien pasien;
@@ -69,7 +65,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         } else {
             txtPendudukKelamin.setText(pasien.getKelamin().toString());
             txtPendudukTanggalLahir.setText(pasien.getTanggalLahir().toString());
-            txtPasienTanggungan.setText(pasien.getTanggungan().toString());
+            txtPasienTanggungan.setText(pasien.getPenanggung().toString());
             txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
             
             Pasien.KeadaanPasien keadaan = pasien.getKeadaan();
@@ -100,30 +96,24 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (pasien == null)
             return null;
 
-        List<PemakaianBhp> list = pemakaianBhpService.getByPasien(pasien.getId());
-        List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : list)
-            listPemakaian.add(pemakaian);
+        List<Pemakaian> list = pemakaianBhpService.getByPasien(pasien.getId());
 
-        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        PemakaianTableModel tableModel = new PemakaianTableModel(list);
         tblBhp.setModel(tableModel);
         
-        return listPemakaian;
+        return list;
     }
     
     private List<Pemakaian> loadTabelObat(final Pasien pasien) throws ServiceException {
         if (pasien == null)
             return null;
 
-        List<PemakaianObat> list = pemakaianObatService.getByPasien(pasien.getId());
-        List<Pemakaian> listPemakaian = new ArrayList<>();
-        for (Pemakaian pemakaian : list)
-            listPemakaian.add(pemakaian);
+        List<Pemakaian> list = pemakaianObatService.getByPasien(pasien.getId());
 
-        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+        PemakaianTableModel tableModel = new PemakaianTableModel(list);
         tblObat.setModel(tableModel);
         
-        return listPemakaian;
+        return list;
     }
     
     private void loadData() {
@@ -644,7 +634,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pasien = pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.PAID);
+            pasien = pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan));
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
