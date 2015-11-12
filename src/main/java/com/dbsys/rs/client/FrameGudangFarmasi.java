@@ -1,6 +1,6 @@
 package com.dbsys.rs.client;
 
-import com.dbsys.rs.client.tableModel.BhpTableModel;
+import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -550,8 +550,8 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
     private void tblEksternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEksternalMouseClicked
         Integer index = tblEksternal.getSelectedRow();
         
-        BhpTableModel tableModel = (BhpTableModel)tblEksternal.getModel();
-        BahanHabisPakai bhp = tableModel.getBhp(index);
+        BarangTableModel tableModel = (BarangTableModel)tblEksternal.getModel();
+        BahanHabisPakai bhp = (BahanHabisPakai) tableModel.getBarang(index);
         
         setDetailBhp(bhp);
     }//GEN-LAST:event_tblEksternalMouseClicked

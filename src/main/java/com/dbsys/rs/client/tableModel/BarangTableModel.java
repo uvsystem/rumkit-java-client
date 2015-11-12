@@ -1,6 +1,6 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
+import com.dbsys.rs.lib.entity.Barang;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -8,15 +8,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Deddy Christoper Kakunsi
  */
-public final class BhpTableModel extends AbstractTableModel {
-    private List<BahanHabisPakai> list;
+public final class BarangTableModel extends AbstractTableModel {
+    private final List<Barang> list;
 
-    public BhpTableModel(List<BahanHabisPakai> list) {
+    public BarangTableModel(List<Barang> list) {
         super();
-        setList(list);
-    }
-    
-    public void setList(List<BahanHabisPakai> list) {
         this.list = list;
     }
 
@@ -29,7 +25,7 @@ public final class BhpTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
     
     @Override
@@ -37,22 +33,24 @@ public final class BhpTableModel extends AbstractTableModel {
         switch(column){
             case 0:return "KODE";
             case 1:return "NAMA";
+            case 2:return "HARGA";
             default: return "";
         }
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        BahanHabisPakai Bhp = getBhp(rowIndex);
+        Barang barang = getBarang(rowIndex);
         
         switch(columnIndex) {
-            case 0: return Bhp.getKode();
-            case 1: return Bhp.getNama();
+            case 0: return barang.getKode();
+            case 1: return barang.getNama();
+            case 2: return barang.getHarga();
             default: return "";
         }
     }
 
-    public BahanHabisPakai getBhp(int row) {
+    public Barang getBarang(int row) {
         return list.get(row);
     }
 }

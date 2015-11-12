@@ -3,7 +3,7 @@ package com.dbsys.rs.client;
 import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.client.tableModel.ApotekerTableModel;
-import com.dbsys.rs.client.tableModel.BhpTableModel;
+import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
@@ -865,8 +865,8 @@ public class FrameAdmin extends javax.swing.JFrame {
         public void onTableClick() throws ServiceException {
             int row = tblBhp.getSelectedRow();
 
-            BhpTableModel tableModel = (BhpTableModel)tblBhp.getModel();
-            model = tableModel.getBhp(row);
+            BarangTableModel tableModel = (BarangTableModel)tblBhp.getModel();
+            model = (BahanHabisPakai) tableModel.getBarang(row);
 
             txtBhpKode.setText(model.getKode());
             txtBhpNama.setText(model.getNama());
@@ -905,13 +905,7 @@ public class FrameAdmin extends javax.swing.JFrame {
                 throw new ServiceException("Silahkan masukan kata kunci.");
             
             List<Barang> list = bhpService.cari(keyword, BahanHabisPakai.class);
-            List<BahanHabisPakai> listBhp = new ArrayList<>();
-            for (Barang barang : list) {
-                if (barang instanceof BahanHabisPakai)
-                    listBhp.add((BahanHabisPakai) barang);
-            }
-
-            BhpTableModel tableModel = new BhpTableModel(listBhp);
+            BarangTableModel tableModel = new BarangTableModel(list);
             tblBhp.setModel(tableModel);
         }
         

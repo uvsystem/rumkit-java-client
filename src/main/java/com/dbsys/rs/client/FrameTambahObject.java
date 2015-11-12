@@ -1,6 +1,6 @@
 package com.dbsys.rs.client;
 
-import com.dbsys.rs.client.tableModel.BhpTableModel;
+import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -122,19 +122,13 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     
     private void cariBhp(String keyword) throws ServiceException {
         List<Barang> list = bhpService.cari(keyword, BahanHabisPakai.class);
-        List<BahanHabisPakai> listBhp = new ArrayList<>();
-        for (Barang barang : list) {
-            if (barang instanceof BahanHabisPakai)
-                listBhp.add((BahanHabisPakai) barang);
-        }
-        
-        BhpTableModel tableModel = new BhpTableModel(listBhp);
+        BarangTableModel tableModel = new BarangTableModel(list);
         tblCari.setModel(tableModel);
     }
     
     private BahanHabisPakai getBhp(int index) {
-        BhpTableModel tableModel = (BhpTableModel)tblCari.getModel();
-        return tableModel.getBhp(index);
+        BarangTableModel tableModel = (BarangTableModel)tblCari.getModel();
+        return (BahanHabisPakai) tableModel.getBarang(index);
     }
     
     private Pemakaian getPemakaianBhp() {
