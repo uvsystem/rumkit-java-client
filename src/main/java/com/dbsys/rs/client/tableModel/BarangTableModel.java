@@ -8,9 +8,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Deddy Christoper Kakunsi
  */
-public final class BarangTableModel extends AbstractTableModel {
-    private final List<Barang> list;
+public class BarangTableModel extends AbstractTableModel {
+    protected List<Barang> list;
 
+    public BarangTableModel() {
+        super();
+    }
+    
     public BarangTableModel(List<Barang> list) {
         super();
         this.list = list;

@@ -1,23 +1,23 @@
 package com.dbsys.rs.client.tableModel;
 
+import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Deddy Christoper Kakunsi
  */
-public final class ObatTableModel extends AbstractTableModel {
-    private List<ObatFarmasi> list;
+public final class ObatTableModel extends BarangTableModel {
 
     public ObatTableModel(List<ObatFarmasi> list) {
         super();
-        setList(list);
-    }
-    
-    public void setList(List<ObatFarmasi> list) {
-        this.list = list;
+        List<Barang> listBarang = new ArrayList<>();
+        for (Barang barang : list)
+            listBarang.add(barang);
+        
+        this.list = listBarang;
     }
 
     @Override
@@ -29,30 +29,26 @@ public final class ObatTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 4;
     }
     
     @Override
     public String getColumnName(int column){
-        switch(column){
-            case 0:return "KODE";
-            case 1:return "NAMA";
-            default: return "";
-        }
+        if (column == 3)
+            return "KETERANGAN";
+        return super.getColumnName(column);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         ObatFarmasi obat = getObat(rowIndex);
         
-        switch(columnIndex) {
-            case 0: return obat.getKode();
-            case 1: return obat.getNama();
-            default: return "";
-        }
+        if (columnIndex == 3)
+            return obat.getKeterangan();
+        return super.getValueAt(rowIndex, columnIndex);
     }
 
     public ObatFarmasi getObat(int row) {
-        return list.get(row);
+        return (ObatFarmasi) super.getBarang(row);
     }
 }
