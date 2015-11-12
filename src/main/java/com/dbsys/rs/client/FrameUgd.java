@@ -2,7 +2,6 @@ package com.dbsys.rs.client;
 
 import com.dbsys.rs.client.tableModel.PasienTableModel;
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
-import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -15,11 +14,9 @@ import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.PelayananTemporal;
-import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Tindakan;
 import java.awt.Color;
@@ -33,7 +30,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, TindakanTableFrame {
+public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame {
 
     private final PendudukService pendudukService = PendudukService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
@@ -65,7 +62,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         lblPendaftaran.setVisible(true);
         scrollPenduduk.setVisible(true);
         
-        panePasien.setVisible(false);
+        pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
         
         pnlHome.setVisible(false);
@@ -100,35 +97,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         
         PelayananTableModel tableModel = (PelayananTableModel)tblTindakan.getModel();
         return tableModel.getPelayanan(index);
-    }
-    
-    @Override
-    public void reloadTableBhp() {
-        try {
-            loadBhp(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-            tblBhp.setModel(new PemakaianTableModel(null));
-        }
-    }
-    
-    private void loadBhp(Pasien pasien) throws ServiceException {
-        if (pasien == null)
-            return;
-
-        List<Pemakaian> listPemakaian = pemakaianBhpService.getByPasien(pasien.getId());
-        PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
-        tblBhp.setModel(tableModel);
-    }
-    
-    private Pemakaian getPemakaianBhp() throws ComponentSelectionException {
-        int index = tblBhp.getSelectedRow();
-        
-        if (index < 0)
-            throw new ComponentSelectionException("Silahkan memilih data pada tabel terlebih dahulu");
-        
-        PemakaianTableModel tableModel = (PemakaianTableModel)tblBhp.getModel();
-        return tableModel.getPemakaian(index);
     }
 
     private void reloadHome() {
@@ -200,6 +168,12 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         txtBiayaTambahan = new javax.swing.JTextField();
         btnPasienKeluar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        pnlTindakan = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTindakan = new javax.swing.JTable();
+        btnTindakanSimpan = new javax.swing.JButton();
+        btnTindakanUpdate = new javax.swing.JButton();
+        btnTindakanHapus = new javax.swing.JButton();
         pnlHome = new javax.swing.JPanel();
         scrollPasien = new javax.swing.JScrollPane();
         tblPasien = new javax.swing.JTable();
@@ -209,19 +183,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         cbKelas = new javax.swing.JComboBox();
         btnMasuk = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
-        panePasien = new javax.swing.JTabbedPane();
-        pnlTindakan = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTindakan = new javax.swing.JTable();
-        btnTindakanSimpan = new javax.swing.JButton();
-        btnTindakanUpdate = new javax.swing.JButton();
-        btnTindakanHapus = new javax.swing.JButton();
-        pnlBhp = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblBhp = new javax.swing.JTable();
-        btnBhpTambah = new javax.swing.JButton();
-        btnBhpUpdate = new javax.swing.JButton();
-        btnBhpHapus = new javax.swing.JButton();
         scrollPenduduk = new javax.swing.JScrollPane();
         tblPenduduk = new javax.swing.JTable();
         lblPendaftaran = new javax.swing.JLabel();
@@ -348,6 +309,59 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlTindakan.setLayout(null);
+
+        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTindakanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTindakan);
+
+        pnlTindakan.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 40, 690, 510);
+
+        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanSimpanActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanSimpan);
+        btnTindakanSimpan.setBounds(710, 40, 90, 35);
+
+        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanUpdateActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanUpdate);
+        btnTindakanUpdate.setBounds(710, 80, 90, 35);
+
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanHapusActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanHapus);
+        btnTindakanHapus.setBounds(710, 120, 90, 35);
+
+        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
+
         pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHome.setLayout(null);
 
@@ -370,7 +384,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         scrollPasien.setViewportView(tblPasien);
 
         pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 80, 820, 470);
+        scrollPasien.setBounds(10, 80, 790, 470);
 
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pasien Masuk"));
         pnlMasuk.setLayout(null);
@@ -379,11 +393,11 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlMasuk.add(jLabel2);
         jLabel2.setBounds(30, 20, 90, 20);
         pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(140, 20, 160, 20);
+        txtPasienMasuk.setBounds(140, 20, 160, 25);
 
         cbKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "NONE", "VVIP", "VIP", "I", "II", "III", "ICU" }));
         pnlMasuk.add(cbKelas);
-        cbKelas.setBounds(540, 20, 160, 20);
+        cbKelas.setBounds(510, 20, 160, 25);
 
         btnMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -392,123 +406,16 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
             }
         });
         pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(720, 15, 90, 35);
+        btnMasuk.setBounds(690, 15, 90, 35);
 
         jLabel27.setText("Kelas");
         pnlMasuk.add(jLabel27);
-        jLabel27.setBounds(420, 20, 90, 14);
+        jLabel27.setBounds(390, 20, 90, 14);
 
         pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 10, 820, 60);
+        pnlMasuk.setBounds(10, 10, 790, 60);
 
-        getContentPane().add(pnlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 840, 560));
-
-        panePasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panePasienMouseClicked(evt);
-            }
-        });
-
-        pnlTindakan.setLayout(null);
-
-        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTindakanMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblTindakan);
-
-        pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 11, 720, 510);
-
-        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanSimpanActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanSimpan);
-        btnTindakanSimpan.setBounds(740, 10, 90, 35);
-
-        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
-        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanUpdateActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(740, 50, 90, 35);
-
-        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
-        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanHapusActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(740, 90, 90, 35);
-
-        panePasien.addTab("TINDAKAN", pnlTindakan);
-
-        pnlBhp.setLayout(null);
-
-        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tblBhp);
-
-        pnlBhp.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 11, 720, 510);
-
-        btnBhpTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnBhpTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpTambahActionPerformed(evt);
-            }
-        });
-        pnlBhp.add(btnBhpTambah);
-        btnBhpTambah.setBounds(740, 10, 90, 35);
-
-        btnBhpUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
-        btnBhpUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpUpdateActionPerformed(evt);
-            }
-        });
-        pnlBhp.add(btnBhpUpdate);
-        btnBhpUpdate.setBounds(740, 50, 90, 35);
-
-        btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
-        btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBhpHapusActionPerformed(evt);
-            }
-        });
-        pnlBhp.add(btnBhpHapus);
-        btnBhpHapus.setBounds(740, 90, 90, 35);
-
-        panePasien.addTab("BAHAN HABIS PAKAI", pnlBhp);
-
-        getContentPane().add(panePasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 840, 560));
+        getContentPane().add(pnlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -528,11 +435,11 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         });
         scrollPenduduk.setViewportView(tblPenduduk);
 
-        getContentPane().add(scrollPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 840, 560));
+        getContentPane().add(scrollPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
         lblPendaftaran.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPendaftaran.setText("DAFTAR PASIEN / REKAM MEDIK");
-        getContentPane().add(lblPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 180, -1));
+        getContentPane().add(lblPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 180, -1));
 
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pasien"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -643,7 +550,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlPasienDetail.add(jSeparator2);
         jSeparator2.setBounds(0, 62, 400, 10);
 
-        getContentPane().add(pnlPasienDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 400, 400));
+        getContentPane().add(pnlPasienDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 400, 400));
 
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Ruangan"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
@@ -699,7 +606,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlHomeDetail.add(txtJumlahPasienKelas2);
         txtJumlahPasienKelas2.setBounds(120, 230, 250, 20);
 
-        getContentPane().add(pnlHomeDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 400, 300));
+        getContentPane().add(pnlHomeDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 400, 300));
 
         pnlPendaftaranCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         pnlPendaftaranCari.setLayout(null);
@@ -717,7 +624,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlPendaftaranCari.add(txtKeyword);
         txtKeyword.setBounds(170, 20, 210, 20);
 
-        getContentPane().add(pnlPendaftaranCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 400, 60));
+        getContentPane().add(pnlPendaftaranCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 400, 60));
 
         pnlPendaftaranDetailPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Rekam Medik"));
         pnlPendaftaranDetailPenduduk.setBackground(new Color(0,0,0,20));
@@ -806,7 +713,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlPendaftaranDetailPenduduk.add(btnPendudukClean);
         btnPendudukClean.setBounds(300, 270, 80, 30);
 
-        getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 255, 400, 320));
+        getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 300, 400, 320));
 
         pnlPendaftaranDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detail Pendaftaran Pasien"));
         pnlPendaftaranDetail.setLayout(null);
@@ -855,7 +762,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         pnlPendaftaranDetail.add(btnCetakStatus);
         btnCetakStatus.setBounds(280, 120, 95, 30);
 
-        getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 580, 400, 170));
+        getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 630, 400, 170));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
@@ -896,7 +803,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
                 btnPendaftaranActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 130, 120, 50));
+        getContentPane().add(btnPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 180, 120, 50));
 
         btnPasien.setText("PASIEN");
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -904,7 +811,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
                 btnPasienActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 130, 120, 50));
+        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 180, 120, 50));
 
         btnRuangan.setText("RUANGAN");
         btnRuangan.addActionListener(new java.awt.event.ActionListener() {
@@ -912,7 +819,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
                 btnRuanganActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, 120, 50));
+        getContentPane().add(btnRuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 120, 50));
 
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pendaftaran_Bg.jpg"))); // NOI18N
         getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
@@ -1030,7 +937,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         lblPendaftaran.setVisible(false);
         scrollPenduduk.setVisible(false);
         
-        panePasien.setVisible(true);
+        pnlTindakan.setVisible(true);
         pnlPasienDetail.setVisible(true);
         
         pnlHome.setVisible(false);
@@ -1044,7 +951,7 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
         lblPendaftaran.setVisible(false);
         scrollPenduduk.setVisible(false);
         
-        panePasien.setVisible(false);
+        pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
         
         pnlHome.setVisible(true);
@@ -1079,54 +986,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnTindakanUpdateActionPerformed
-
-    private void btnBhpHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpHapusActionPerformed
-        try {
-            Pemakaian pemakaianBhp = getPemakaianBhp();
-
-            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pemakaian %s pada tanggal %s",
-                pemakaianBhp.getBarang().getNama(), pemakaianBhp.getTanggal()));
-
-            if (JOptionPane.YES_OPTION == pilihan) {
-                JOptionPane.showMessageDialog(this, "Belum bisa");
-            }
-        } catch (ComponentSelectionException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnBhpHapusActionPerformed
-
-    private void btnBhpTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpTambahActionPerformed
-        new FrameTambahObject(this, BahanHabisPakai.class, pasien).setVisible(true);
-    }//GEN-LAST:event_btnBhpTambahActionPerformed
-
-    private void btnBhpUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBhpUpdateActionPerformed
-        try {
-            Pemakaian pemakaianBhp = getPemakaianBhp();
-
-            new FrameTambahObject(this, pasien, pemakaianBhp).setVisible(true);
-        } catch (ComponentSelectionException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnBhpUpdateActionPerformed
-
-    private void panePasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panePasienMouseClicked
-        Integer index = panePasien.getSelectedIndex();
-
-        if (pasien == null)
-            index = -1;
-
-        try {
-            switch(index) {
-                case 0: loadTindakan(pasien);
-                    break;
-                case 1: loadBhp(pasien);
-                    break;
-                default: break;
-            }
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_panePasienMouseClicked
 
     private void tblTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTindakanMouseClicked
         // TODO add your handling code here:
@@ -1226,9 +1085,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
-    private javax.swing.JButton btnBhpHapus;
-    private javax.swing.JButton btnBhpTambah;
-    private javax.swing.JButton btnBhpUpdate;
     private javax.swing.JButton btnCetakStatus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMasuk;
@@ -1284,7 +1140,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1292,8 +1147,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JLabel lblOperator;
     private javax.swing.JLabel lblPendaftaran;
     private javax.swing.JLabel lblUnit;
-    private javax.swing.JTabbedPane panePasien;
-    private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlHomeDetail;
     private javax.swing.JPanel pnlMasuk;
@@ -1304,7 +1157,6 @@ public class FrameUgd extends javax.swing.JFrame implements BhpTableFrame, Tinda
     private javax.swing.JPanel pnlTindakan;
     private javax.swing.JScrollPane scrollPasien;
     private javax.swing.JScrollPane scrollPenduduk;
-    private javax.swing.JTable tblBhp;
     private javax.swing.JTable tblPasien;
     private javax.swing.JTable tblPenduduk;
     private javax.swing.JTable tblTindakan;
