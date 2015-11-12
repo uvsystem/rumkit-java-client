@@ -2,7 +2,7 @@ package com.dbsys.rs.client;
 
 import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.KategoriTableModel;
-import com.dbsys.rs.client.tableModel.PerawatTableModel;
+import com.dbsys.rs.client.tableModel.PegawaiTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.KategoriService;
@@ -299,8 +299,8 @@ public class FrameCari extends JFrame {
             DokterTableModel tableModel = (DokterTableModel)tblCari.getModel();
             pegawai = tableModel.getDokter(index);
         } else if (cls.equals(Perawat.class)) {
-            PerawatTableModel tableModel = (PerawatTableModel)tblCari.getModel();
-            pegawai = tableModel.getPerawat(index);
+            PegawaiTableModel tableModel = (PegawaiTableModel)tblCari.getModel();
+            pegawai = tableModel.getPegawai(index);
         }
 
         ((TindakanFrame)frame).setPegawaiForPelayanan(pegawai);
@@ -359,12 +359,7 @@ public class FrameCari extends JFrame {
             }
             
             List<Perawat> listPerawat = new ArrayList<>();
-            for (Pegawai pegawai : list) {
-                if (pegawai instanceof Perawat)
-                    listPerawat.add((Perawat) pegawai);
-            }
-            
-            PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
+            PegawaiTableModel tableModel = new PegawaiTableModel(list);
             tblCari.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

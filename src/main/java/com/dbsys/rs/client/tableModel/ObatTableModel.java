@@ -2,7 +2,6 @@ package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.ObatFarmasi;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,11 +12,8 @@ public final class ObatTableModel extends BarangTableModel {
 
     public ObatTableModel(List<ObatFarmasi> list) {
         super();
-        List<Barang> listBarang = new ArrayList<>();
         for (Barang barang : list)
-            listBarang.add(barang);
-        
-        this.list = listBarang;
+            this.list.add(barang);
     }
 
     @Override
@@ -49,6 +45,6 @@ public final class ObatTableModel extends BarangTableModel {
     }
 
     public ObatFarmasi getObat(int row) {
-        return (ObatFarmasi) super.getBarang(row);
+        return (ObatFarmasi) getBarang(row);
     }
 }

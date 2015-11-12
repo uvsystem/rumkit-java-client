@@ -2,14 +2,12 @@ package com.dbsys.rs.client;
 
 import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
-import com.dbsys.rs.client.tableModel.ApotekerTableModel;
+import com.dbsys.rs.client.tableModel.PegawaiTableModel;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
 import com.dbsys.rs.client.tableModel.PasienTableModel;
-import com.dbsys.rs.client.tableModel.PekerjaTableModel;
-import com.dbsys.rs.client.tableModel.PerawatTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -395,8 +393,8 @@ public class FrameAdmin extends javax.swing.JFrame {
         public void onTableClick() {
             int row = tbl_perawat.getSelectedRow();
 
-            PerawatTableModel tableModel = (PerawatTableModel)tbl_perawat.getModel();
-            model = tableModel.getPerawat(row);
+            PegawaiTableModel tableModel = (PegawaiTableModel)tbl_perawat.getModel();
+            model = (Perawat) tableModel.getPegawai(row);
 
             txt_perawat_kode.setText(model.getKode());
             txt_perawat_nip.setText(model.getNip());
@@ -427,13 +425,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         @Override
         public void onLoad() throws ServiceException {
             List<Pegawai> list = perawatService.getAll(Perawat.class);
-            List<Perawat> listPerawat = new ArrayList<>();
-            for (Pegawai pegawai : list) {
-                if (pegawai instanceof Perawat)
-                    listPerawat.add((Perawat) pegawai);
-            }
-            
-            PerawatTableModel tableModel = new PerawatTableModel(listPerawat);
+            PegawaiTableModel tableModel = new PegawaiTableModel(list);
             tbl_perawat.setModel(tableModel);
         }
 
@@ -485,8 +477,8 @@ public class FrameAdmin extends javax.swing.JFrame {
         public void onTableClick() {
             int row = tbl_perawat.getSelectedRow();
 
-            ApotekerTableModel tableModel = (ApotekerTableModel)tbl_apoteker.getModel();
-            model = tableModel.getApoteker(row);
+            PegawaiTableModel tableModel = (PegawaiTableModel)tbl_apoteker.getModel();
+            model = (Apoteker) tableModel.getPegawai(row);
 
             txtApotekerKode.setText(model.getKode());
             txtApotekerNip.setText(model.getNip());
@@ -517,13 +509,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         @Override
         public void onLoad() throws ServiceException {
             List<Pegawai> list = apotekerService.getAll(Apoteker.class);
-            List<Apoteker> listApoteker = new ArrayList<>();
-            for (Pegawai pegawai : list) {
-                if (pegawai instanceof Apoteker)
-                    listApoteker.add((Apoteker) pegawai);
-            }
-
-            ApotekerTableModel tableModel = new ApotekerTableModel(listApoteker );
+            PegawaiTableModel tableModel = new PegawaiTableModel(list);
             tbl_apoteker.setModel(tableModel);
         }
 
@@ -575,8 +561,8 @@ public class FrameAdmin extends javax.swing.JFrame {
         public void onTableClick() throws ServiceException {
             int row = tbl_perawat.getSelectedRow();
 
-            PekerjaTableModel tableModel = (PekerjaTableModel)tbl_adm.getModel();
-            model = tableModel.getPekerja(row);
+            PegawaiTableModel tableModel = (PegawaiTableModel)tbl_adm.getModel();
+            model = (Pekerja) tableModel.getPegawai(row);
 
             txtPekerjaKode.setText(model.getKode());
             txtPekerjaNip.setText(model.getNip());
@@ -607,13 +593,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         @Override
         public void onLoad() throws ServiceException {
             List<Pegawai> list = pekerjaService.getAll(Pekerja.class);
-            List<Pekerja> listPekerja = new ArrayList<>();
-            for (Pegawai pegawai : list) {
-                if (pegawai instanceof Pekerja)
-                    listPekerja.add((Pekerja) pegawai);
-            }
-
-            PekerjaTableModel tableModel = new PekerjaTableModel(listPekerja);
+            PegawaiTableModel tableModel = new PegawaiTableModel(list);
             tbl_adm.setModel(tableModel);
         }
 
