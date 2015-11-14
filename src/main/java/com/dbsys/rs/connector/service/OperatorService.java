@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
  */
 public class OperatorService extends AbstractService {
 
-	private static OperatorService instance;
+    private static OperatorService instance;
 	
     private OperatorService() {
         super();
@@ -33,16 +33,19 @@ public class OperatorService extends AbstractService {
     
     public static OperatorService getInstance() {
     	if (instance == null)
-    		instance = new OperatorService();
-    	return instance;
+            instance = new OperatorService();
+
+        return instance;
     }
     
     public static OperatorService getInstance(String host) {
     	if (instance == null)
-    		instance = new OperatorService();
-    	if (!instance.getHost().equals(host))
-    		instance.setHost(host);
-    	return instance;
+            instance = new OperatorService();
+
+        if (!instance.getHost().equals(host))
+            instance.setHost(host);
+
+        return instance;
     }
     
     public Operator simpan(Operator operator) throws ServiceException {
@@ -50,8 +53,8 @@ public class OperatorService extends AbstractService {
         
         ResponseEntity<EntityRestMessage<Operator>> response;
         response = restTemplate.exchange("{accountService}/operator", HttpMethod.POST, entity, 
-        		new ParameterizedTypeReference<EntityRestMessage<Operator>>() {}, 
-        		accountService);
+                new ParameterizedTypeReference<EntityRestMessage<Operator>>() {}, 
+                accountService);
 
         EntityRestMessage<Operator> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))

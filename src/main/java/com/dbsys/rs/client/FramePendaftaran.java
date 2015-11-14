@@ -8,7 +8,6 @@ import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.Tanggungan;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Penduduk;
 import java.awt.Color;
@@ -364,7 +363,7 @@ public class FramePendaftaran extends javax.swing.JFrame {
         String kode = txtPasienNomor.getText();
         
         try {
-            Pasien pasien = pasienService.daftar(penduduk.getId(), Penanggung.valueOf(tanggungan), DateUtil.getDate(tanggalMasuk), kode);
+            Pasien pasien = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), DateUtil.getDate(tanggalMasuk), kode);
             JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
             
             txtPasienNomor.setText(pasien.getKode());

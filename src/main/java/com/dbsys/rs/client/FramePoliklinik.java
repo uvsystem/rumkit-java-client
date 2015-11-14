@@ -65,7 +65,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         if (pasien == null)
             return;
 
-        List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien.getId());
+        List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien);
         PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
         tblTindakan.setModel(tableModel);
     }

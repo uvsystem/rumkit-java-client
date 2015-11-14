@@ -44,7 +44,7 @@ public class PemakaianService extends AbstractService {
 		HttpEntity<Pemakaian> entity = new HttpEntity<>(pemakaian, getHeaders());
 		
 		ResponseEntity<EntityRestMessage<Pemakaian>> response;
-		response = restTemplate.exchange("{usageService}", HttpMethod.POST, entity, 
+		response = restTemplate.exchange("{usageService}/pemakaian", HttpMethod.POST, entity, 
 				new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, 
 				usageService);
 		
@@ -58,7 +58,7 @@ public class PemakaianService extends AbstractService {
 		HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 		
 		ResponseEntity<EntityRestMessage<Pemakaian>> response;
-		response = restTemplate.exchange("{usageService}/{id}", HttpMethod.GET, entity, 
+		response = restTemplate.exchange("{usageService}/pemakaian/{id}", HttpMethod.GET, entity, 
 				new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, 
 				usageService, id);
 		
@@ -72,7 +72,7 @@ public class PemakaianService extends AbstractService {
 		HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 		
 		ResponseEntity<ListEntityRestMessage<Pemakaian>> response;
-		response = restTemplate.exchange("{usageService}/pasien/{idPasien}", HttpMethod.GET, entity, 
+		response = restTemplate.exchange("{usageService}/pemakaian/pasien/{idPasien}", HttpMethod.GET, entity, 
 				new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, 
 				usageService, idPasien);
 		

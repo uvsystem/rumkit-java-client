@@ -85,7 +85,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (pasien == null)
             return null;
 
-        List<Pelayanan> list = pelayananService.getByPasien(pasien.getId());
+        List<Pelayanan> list = pelayananService.getByPasien(pasien);
         PelayananTableModel tableModel = new PelayananTableModel(list);
         tblTindakan.setModel(tableModel);
         
@@ -587,7 +587,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pasienService.bayar(pasien.getId(), Long.valueOf(jumlah));
+            pasienService.bayar(pasien, Long.valueOf(jumlah));
             JOptionPane.showMessageDialog(this, "Pembayaran pasien berhasil. Silahkan cetak struk pembayaran.");
             loadData();
          } catch (ServiceException ex) {
@@ -634,7 +634,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pasien = pasienService.keluar(pasien.getId(), Pasien.KeadaanPasien.valueOf(keadaan));
+            pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.LUNAS);
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

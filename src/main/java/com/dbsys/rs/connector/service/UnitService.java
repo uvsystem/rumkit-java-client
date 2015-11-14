@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
  */
 public class UnitService extends  AbstractService {
 
-	private static UnitService instance;
+    private static UnitService instance;
 	
     private UnitService() {
         super();
@@ -32,16 +32,19 @@ public class UnitService extends  AbstractService {
     
     public static UnitService getInstance() {
     	if (instance == null)
-    		instance = new UnitService();
-    	return instance;
+            instance = new UnitService();
+
+        return instance;
     }
     
     public static UnitService getInstance(String host) {
     	if (instance == null)
-    		instance = new UnitService(host);
-    	if (!instance.getHost().equals(host))
-    		instance.setHost(host);
-    	return instance;
+            instance = new UnitService(host);
+
+        if (!instance.getHost().equals(host))
+            instance.setHost(host);
+
+        return instance;
     }
     
     public Unit simpan(Unit unit) throws ServiceException {
@@ -49,8 +52,8 @@ public class UnitService extends  AbstractService {
         
         ResponseEntity<EntityRestMessage<Unit>> response;
         response = restTemplate.exchange("{accountService}/unit", HttpMethod.POST, entity, 
-        		new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
-        		accountService);
+                new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
+                accountService);
         
         EntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -63,8 +66,8 @@ public class UnitService extends  AbstractService {
         
         ResponseEntity<EntityRestMessage<Unit>> response;
         response = restTemplate.exchange("{accountService}/unit/{id}", HttpMethod.GET, entity, 
-        		new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
-        		accountService, id);
+                new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
+                accountService, id);
         
         EntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -77,8 +80,8 @@ public class UnitService extends  AbstractService {
         
         ResponseEntity<ListEntityRestMessage<Unit>> response;
         response = restTemplate.exchange("{accountService}/unit", HttpMethod.GET, entity, 
-        		new ParameterizedTypeReference<ListEntityRestMessage<Unit>>() {}, 
-        		accountService);
+                new ParameterizedTypeReference<ListEntityRestMessage<Unit>>() {}, 
+                accountService);
         
         ListEntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))

@@ -69,7 +69,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
     }
     
     private List<Pasien> loadPasienPerawatan() throws ServiceException {
-        List<Pasien> list = pasienService.getByUnit(TokenHolder.getIdUnit());
+        List<Pasien> list = pasienService.getByUnit(TokenHolder.getUnit());
         PasienTableModel tableModel = new PasienTableModel(list);
         tblPasien.setModel(tableModel);
         
@@ -113,7 +113,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
         if (pasien == null)
             return;
 
-        List<Pelayanan> list = pelayananService.getByPasien(pasien.getId());
+        List<Pelayanan> list = pelayananService.getByPasien(pasien);
 
         PelayananTableModel tableModel = new PelayananTableModel(list);
         tblTindakan.setModel(tableModel);
