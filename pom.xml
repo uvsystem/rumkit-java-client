@@ -93,6 +93,6 @@
   	<jackson.version>2.4.2</jackson.version>
 	<junit.version>4.11</junit.version>
 	<itext.version>2.1.7</itext.version>
-        <rumkit-library.version>0.5.0-SNAPSHOT</rumkit-library.version>
+        <rumkit-library.version>0.5.2-SNAPSHOT</rumkit-library.version>
     </properties>
 </project>

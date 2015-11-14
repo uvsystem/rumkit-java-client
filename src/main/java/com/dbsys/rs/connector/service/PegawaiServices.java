@@ -9,10 +9,20 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.adapter.ApotekerAdapter;
+import com.dbsys.rs.connector.adapter.DokterAdapter;
+import com.dbsys.rs.connector.adapter.PegawaiAdapter;
+import com.dbsys.rs.connector.adapter.PekerjaAdapter;
+import com.dbsys.rs.connector.adapter.PerawatAdapter;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
+import com.dbsys.rs.lib.entity.Apoteker;
+import com.dbsys.rs.lib.entity.Dokter;
 import com.dbsys.rs.lib.entity.Pegawai;
+import com.dbsys.rs.lib.entity.Pekerja;
+import com.dbsys.rs.lib.entity.Perawat;
+import java.util.ArrayList;
 
 public class PegawaiServices extends AbstractService {
 
@@ -41,72 +51,93 @@ public class PegawaiServices extends AbstractService {
     }
 
     public Pegawai simpan(Pegawai pegawai) throws ServiceException {
-        HttpEntity<Pegawai> entity = new HttpEntity<>(pegawai, getHeaders());
+        PegawaiAdapter pegawaiAdapter;
 
-        ResponseEntity<EntityRestMessage<Pegawai>> response;
+        if (pegawai instanceof Dokter) {
+            pegawaiAdapter = new DokterAdapter((Dokter) pegawai);
+        } else if (pegawai instanceof Perawat) {
+            pegawaiAdapter = new PerawatAdapter((Perawat) pegawai);
+        } else if (pegawai instanceof Apoteker) {
+            pegawaiAdapter = new ApotekerAdapter((Apoteker) pegawai);
+        } else if (pegawai instanceof Pekerja) {
+            pegawaiAdapter = new PekerjaAdapter((Pekerja) pegawai);
+        } else {
+            pegawaiAdapter = new PegawaiAdapter(pegawai);
+        }
+
+        HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(pegawaiAdapter, getHeaders());
+
+        ResponseEntity<EntityRestMessage<PegawaiAdapter>> response;
         response = restTemplate.exchange("{hrService}/pegawai", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pegawai>>() {}, 
+                new ParameterizedTypeReference<EntityRestMessage<PegawaiAdapter>>() {}, 
                 hrService);
 
-        EntityRestMessage<Pegawai> message = response.getBody();
+        EntityRestMessage<PegawaiAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getModel();
+        return message.getModel().getPegawai();
     }
 
     public List<Pegawai> getAll() throws ServiceException {
-        HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Pegawai>> resposen;
+        ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
         resposen = restTemplate.exchange("{hrService}/pegawai", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Pegawai>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
                 hrService);
 
-        ListEntityRestMessage<Pegawai> message = resposen.getBody();
+        ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Pegawai> getAll(Class cls) throws ServiceException {
-        HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Pegawai>> resposen;
+        ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
         resposen = restTemplate.exchange("{hrService}/pegawai/class/{class}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Pegawai>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
                 hrService, cls.getSimpleName());
 
-        ListEntityRestMessage<Pegawai> message = resposen.getBody();
+        ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Pegawai> cari(String keyword) throws ServiceException {
-        HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Pegawai>> resposen;
+        ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
         resposen = restTemplate.exchange("{hrService}/pegawai/keyword/{keyword}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Pegawai>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
                 hrService, keyword);
 
-        ListEntityRestMessage<Pegawai> message = resposen.getBody();
+        ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Pegawai> cari(String keyword, Class cls) throws ServiceException {
-        HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Pegawai>> resposen;
+        ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
         resposen = restTemplate.exchange("{hrService}/pegawai/keyword/{keyword}/class/{class}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Pegawai>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
                 hrService, keyword, cls.getSimpleName());
 
-        ListEntityRestMessage<Pegawai> message = resposen.getBody();
+        ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
+    }
+    
+    private List<Pegawai> getList(List<PegawaiAdapter> listAdapter) {
+        List<Pegawai> list = new ArrayList<>();
+        for (PegawaiAdapter pegawaiAdapter : listAdapter)
+            list.add(pegawaiAdapter.getPegawai());
+        return list;
     }
 }

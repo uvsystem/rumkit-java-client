@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Pegawai;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +15,7 @@ public class PegawaiTableModel extends DefaultTableModel {
 
     public PegawaiTableModel() {
         super();
+        this.list = new ArrayList<>();
     }
     
     public PegawaiTableModel(List<Pegawai> list){
