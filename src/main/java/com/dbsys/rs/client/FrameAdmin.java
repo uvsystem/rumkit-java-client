@@ -49,7 +49,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameAdmin extends javax.swing.JFrame {
+public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private final UnitEventController unitEventController;
     private final OperatorEventController operatorEventController;
     private final DokterEventController dokterEventController;
@@ -93,7 +93,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         lbl_status.setText(nama);
     }
 
-    public void setUnitForOperator(Unit unit){
+    public void setUnit(Unit unit){
         unitEventController.setModel(unit);
         txt_admin_operator_unit.setText(unit.getNama());
     }
@@ -1780,7 +1780,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 5, 350, 30));
+        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 16, 350, 25));
 
         txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

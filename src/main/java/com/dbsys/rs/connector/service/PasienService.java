@@ -13,11 +13,13 @@ import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.EntityRestMessage;
+import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pasien.KeadaanPasien;
+import com.dbsys.rs.lib.entity.Pasien.Pendaftaran;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Unit;
 
@@ -47,13 +49,13 @@ public class PasienService extends AbstractService {
         return instance;
     }
 
-    public Pasien daftar(Penduduk penduduk, Penanggung penanggung, Date tanggal, String kode) throws ServiceException {
+    public Pasien daftar(Penduduk penduduk, Penanggung penanggung, Date tanggal, String kode, Pendaftaran pendaftaran, Kelas kelas, Unit tujuan) throws ServiceException {
         HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<Pasien>> response;
-        response = restTemplate.exchange("{patientService}/pasien/penduduk/{idPenduduk}/penangung/{penanggung}/tanggal/{tanggal}/kode/{kode}", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{patientService}/pasien/penduduk/{idPenduduk}/penanggung/{penanggung}/tanggal/{tanggal}/kode/{kode}/pendaftaran/{pendaftaran}/kelas/{kelas}/tujuan/{tujuan}", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Pasien>>() {}, 
-                patientService, penduduk.getId(), penanggung, tanggal, verifyString(kode));
+                patientService, penduduk.getId(), penanggung, tanggal, verifyString(kode), pendaftaran, kelas, tujuan.getId());
 
         EntityRestMessage<Pasien> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

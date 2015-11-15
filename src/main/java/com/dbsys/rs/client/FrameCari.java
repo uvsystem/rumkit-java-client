@@ -283,7 +283,7 @@ public class FrameCari extends JFrame {
         UnitTableModel model = (UnitTableModel)tblCari.getModel();
         Unit unit = model.getUnit(row);
 
-        ((FrameAdmin)frame).setUnitForOperator(unit);
+        ((UnitFrame)frame).setUnit(unit);
     }
     
     private void pilihKategori(){

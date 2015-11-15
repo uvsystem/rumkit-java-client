@@ -634,7 +634,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.LUNAS);
+            pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.KELUAR);
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
