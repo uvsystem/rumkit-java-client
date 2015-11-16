@@ -11,12 +11,15 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.adapter.PelayananAdapter;
+import com.dbsys.rs.connector.adapter.PelayananTemporalAdapter;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.PelayananTemporal;
+import java.util.ArrayList;
 
 public class PelayananService extends AbstractService {
 
@@ -45,70 +48,86 @@ public class PelayananService extends AbstractService {
     }
 
     public Pelayanan simpan(Pelayanan pelayanan) throws ServiceException {
-        HttpEntity<Pelayanan> entity = new HttpEntity<>(pelayanan, getHeaders());
+        PelayananAdapter pelayananAdapter;
+        if (pelayanan instanceof PelayananTemporal) {
+            pelayananAdapter = new PelayananTemporalAdapter((PelayananTemporal) pelayanan);
+        } else if (pelayanan instanceof Pelayanan) {
+            pelayananAdapter = new PelayananAdapter(pelayanan);
+        } else {
+            throw new ServiceException("Class tidak terdaftar");
+        }
+        
+        HttpEntity<PelayananAdapter> entity = new HttpEntity<>(pelayananAdapter, getHeaders());
 
-        ResponseEntity<EntityRestMessage<Pelayanan>> response;
+        ResponseEntity<EntityRestMessage<PelayananAdapter>> response;
         response = restTemplate.exchange("{serveService}/pelayanan", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pelayanan>>() {}, 
+                new ParameterizedTypeReference<EntityRestMessage<PelayananAdapter>>() {}, 
                 serveService);
 
-        EntityRestMessage<Pelayanan> message = response.getBody();
+        EntityRestMessage<PelayananAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getModel();
+        return message.getModel().getPelayanan();
     }
 
     public void masukSal(PelayananTemporal pelayanan) throws ServiceException {
-        HttpEntity<PelayananTemporal> entity = new HttpEntity<>(pelayanan, getHeaders());
+        HttpEntity<PelayananTemporalAdapter> entity = new HttpEntity<>(new PelayananTemporalAdapter(pelayanan), getHeaders());
 
-        ResponseEntity<EntityRestMessage<PelayananTemporal>> response;
+        ResponseEntity<EntityRestMessage<PelayananTemporalAdapter>> response;
         response = restTemplate.exchange("{serveService}/pelayanan/temporal", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<PelayananTemporal>>() {}, 
+                new ParameterizedTypeReference<EntityRestMessage<PelayananTemporalAdapter>>() {}, 
                 serveService);
 
-        EntityRestMessage<PelayananTemporal> message = response.getBody();
+        EntityRestMessage<PelayananTemporalAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
     }
 
     public void keluarSal(Long idPasien, Date tanggal, Time jam, Long tambahan, String keterangan) throws ServiceException {
-        HttpEntity<PelayananTemporal> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PelayananTemporalAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<EntityRestMessage<PelayananTemporal>> response;
+        ResponseEntity<EntityRestMessage<PelayananTemporalAdapter>> response;
         response = restTemplate.exchange("{serveService}/pelayanan/temporal/{idPasien}/tanggal/{tanggal}/jam/{jam}/tambahan/{tambahan}/keterangan/{keterangan}", HttpMethod.PUT, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<PelayananTemporal>>() {}, 
+                new ParameterizedTypeReference<EntityRestMessage<PelayananTemporalAdapter>>() {}, 
                 serveService, idPasien, tanggal, jam, tambahan, keterangan);
 
-        EntityRestMessage<PelayananTemporal> message = response.getBody();
+        EntityRestMessage<PelayananTemporalAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
     }
 
     public Pelayanan getById(Long id) throws ServiceException {
-            HttpEntity<Pelayanan> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PelayananAdapter> entity = new HttpEntity<>(getHeaders());
 
-            ResponseEntity<EntityRestMessage<Pelayanan>> response;
-            response = restTemplate.exchange("{serveService}/pelayanan/{id}", HttpMethod.GET, entity, 
-                            new ParameterizedTypeReference<EntityRestMessage<Pelayanan>>() {}, 
-                            serveService, id);
+        ResponseEntity<EntityRestMessage<PelayananAdapter>> response;
+        response = restTemplate.exchange("{serveService}/pelayanan/{id}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<PelayananAdapter>>() {}, 
+                serveService, id);
 
-            EntityRestMessage<Pelayanan> message = response.getBody();
-            if (message.getTipe().equals(Type.ERROR))
-                    throw new ServiceException(message.getMessage());
-            return message.getModel();
+        EntityRestMessage<PelayananAdapter> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getModel().getPelayanan();
     }
 
     public List<Pelayanan> getByPasien(Pasien pasien) throws ServiceException {
-        HttpEntity<Pelayanan> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<PelayananAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Pelayanan>> response;
+        ResponseEntity<ListEntityRestMessage<PelayananAdapter>> response;
         response = restTemplate.exchange("{serveService}/pelayanan/pasien/{idPasien}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pelayanan>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<PelayananAdapter>>() {}, 
                 serveService, pasien.getId());
 
-        ListEntityRestMessage<Pelayanan> message = response.getBody();
+        ListEntityRestMessage<PelayananAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
+    }
+    
+    private List<Pelayanan> getList(List<PelayananAdapter> listAdapter) {
+        List<Pelayanan> list = new ArrayList<>();
+        for (PelayananAdapter pelayananAdapter : listAdapter)
+            list.add(pelayananAdapter.getPelayanan());
+        return list;
     }
 }

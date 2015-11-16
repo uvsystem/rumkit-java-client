@@ -43,6 +43,7 @@ public class FrameLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USER LOGIN");
+        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);

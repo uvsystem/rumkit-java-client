@@ -93,6 +93,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         lbl_status.setText(nama);
     }
 
+    @Override
     public void setUnit(Unit unit){
         unitEventController.setModel(unit);
         txt_admin_operator_unit.setText(unit.getNama());
@@ -1151,8 +1152,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         btnResetTindakan = new javax.swing.JButton();
         pnlBarang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tabBhp = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
+        tabBarang = new javax.swing.JTabbedPane();
+        pnlObat = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblObat = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -1175,7 +1176,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         txtObatKeyword = new javax.swing.JTextField();
         btnTambahObat = new javax.swing.JButton();
         btnClearObat = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
+        pnlBhp = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tblBhp = new javax.swing.JTable();
         jPanel13 = new javax.swing.JPanel();
@@ -1544,13 +1545,13 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         pnlBarang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, -1));
 
-        tabBhp.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabBhpMouseClicked(evt);
+                tabBarangMouseClicked(evt);
             }
         });
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlObat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1570,7 +1571,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane1.setViewportView(tblObat);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1015, 320));
+        pnlObat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1015, 320));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1611,7 +1612,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel6.setText("SATUAN");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 90, -1));
 
-        jPanel5.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 408, 1010, 143));
+        pnlObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 408, 1010, 143));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1631,7 +1632,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jPanel2.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 350, 25));
 
-        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 60));
+        pnlObat.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 60));
 
         btnTambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnTambahObat.addActionListener(new java.awt.event.ActionListener() {
@@ -1639,7 +1640,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnTambahObatActionPerformed(evt);
             }
         });
-        jPanel5.add(btnTambahObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 80, 40));
+        pnlObat.add(btnTambahObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 80, 40));
 
         btnClearObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
         btnClearObat.addActionListener(new java.awt.event.ActionListener() {
@@ -1647,11 +1648,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnClearObatActionPerformed(evt);
             }
         });
-        jPanel5.add(btnClearObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 80, 40));
+        pnlObat.add(btnClearObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 80, 40));
 
-        tabBhp.addTab("OBAT", jPanel5);
+        tabBarang.addTab("OBAT", pnlObat);
 
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlBhp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblBhp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1671,7 +1672,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane10.setViewportView(tblBhp);
 
-        jPanel12.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1010, 340));
+        pnlBhp.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1010, 340));
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1706,7 +1707,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         txtBhpSatuan.setToolTipText("");
         jPanel13.add(txtBhpSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 350, 25));
 
-        jPanel12.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 1015, 120));
+        pnlBhp.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 1015, 120));
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1726,7 +1727,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel83.setText("KATA KUNCI");
         jPanel17.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, -1));
 
-        jPanel12.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 60));
+        pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 60));
 
         btnTambahBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnTambahBhp.addActionListener(new java.awt.event.ActionListener() {
@@ -1734,7 +1735,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnTambahBhpActionPerformed(evt);
             }
         });
-        jPanel12.add(btnTambahBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 80, 40));
+        pnlBhp.add(btnTambahBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 80, 40));
 
         btnClearBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
         btnClearBhp.addActionListener(new java.awt.event.ActionListener() {
@@ -1742,11 +1743,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnClearBhpActionPerformed(evt);
             }
         });
-        jPanel12.add(btnClearBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 20, 80, 40));
+        pnlBhp.add(btnClearBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 20, 80, 40));
 
-        tabBhp.addTab("BARANG HABIS PAKAI", jPanel12);
+        tabBarang.addTab("BARANG HABIS PAKAI", pnlBhp);
 
-        pnlBarang.add(tabBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1040, 590));
+        pnlBarang.add(tabBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1040, 590));
 
         getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
@@ -1780,7 +1781,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 16, 350, 25));
+        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 350, 25));
 
         txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1795,7 +1796,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel10.add(cb_admin_operator_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 350, 25));
 
         jLabel49.setText("NAMA");
-        jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 16, 90, -1));
+        jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
 
         jLabel27.setText("UNIT");
         jPanel10.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 43, 90, -1));
@@ -2802,6 +2803,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             pendudukEventController.onSearch();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            PendudukTableModel tableModel = new PendudukTableModel(null);
+            tblPenduduk.setModel(tableModel);
         }
     }//GEN-LAST:event_txtPendudukKeywordFocusLost
 
@@ -2830,6 +2833,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             obatEventController.onSearch();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            BarangTableModel tableModel = new BarangTableModel(null);
+            tblObat.setModel(tableModel);
         }
     }//GEN-LAST:event_txtObatKeywordFocusLost
 
@@ -2866,6 +2871,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             bhpEventController.onSearch();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            BarangTableModel tableModel = new BarangTableModel(null);
+            tblBhp.setModel(tableModel);
         }
     }//GEN-LAST:event_txtBhpKeywordFocusLost
 
@@ -2881,8 +2888,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         bhpEventController.onCleanForm();
     }//GEN-LAST:event_btnClearBhpActionPerformed
 
-    private void tabBhpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabBhpMouseClicked
-        int index = tabBhp.getSelectedIndex();
+    private void tabBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabBarangMouseClicked
+        int index = tabBarang.getSelectedIndex();
         
         try {
             switch(index) {
@@ -2895,7 +2902,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_tabBhpMouseClicked
+    }//GEN-LAST:event_tabBarangMouseClicked
 
     private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
         int i = evt.getKeyCode();
@@ -2935,6 +2942,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             tindakanEventController.onSearch();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            TindakanTableModel tableModel = new TindakanTableModel(null);
+            tblTindakan.setModel(tableModel);
         }
     }//GEN-LAST:event_txtTindakanKeywordFocusLost
 
@@ -2998,6 +3007,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             pasienEventController.onSearch();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            PasienTableModel tableModel = new PasienTableModel(null);
+            tblPasien.setModel(tableModel);
         }
     }//GEN-LAST:event_txtPasienKeywordFocusLost
 
@@ -3163,7 +3174,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -3179,7 +3189,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -3199,13 +3208,15 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbl_status;
     private javax.swing.JPanel pnlBarang;
+    private javax.swing.JPanel pnlBhp;
+    private javax.swing.JPanel pnlObat;
     private javax.swing.JPanel pnlOperator;
     private javax.swing.JPanel pnlPasien;
     private javax.swing.JPanel pnlPegawai;
     private javax.swing.JPanel pnlPenduduk;
     private javax.swing.JPanel pnlTindakan;
     private javax.swing.JPanel pnlUnit;
-    private javax.swing.JTabbedPane tabBhp;
+    private javax.swing.JTabbedPane tabBarang;
     private javax.swing.JPanel tab_administrasi;
     private javax.swing.JPanel tab_apoteker;
     private javax.swing.JPanel tab_dokter;

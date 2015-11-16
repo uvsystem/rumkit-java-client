@@ -35,7 +35,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame {
         initComponents();
         setSize(1280, 800);
         
-        paneBarang.setVisible(false);
+        paneBarang.setVisible(true);
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
