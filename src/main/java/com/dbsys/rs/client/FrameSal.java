@@ -762,7 +762,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        dialogKeluar.setBounds(0, 0, 280, 160);
+        dialogKeluar.setSize(280, 160);
 
         txtBiayaTambahan.setText("0");
         txtKeterangan.setText("-");
