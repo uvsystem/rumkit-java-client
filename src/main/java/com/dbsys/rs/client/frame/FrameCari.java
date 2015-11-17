@@ -1,5 +1,8 @@
-package com.dbsys.rs.client;
+package com.dbsys.rs.client.frame;
 
+import com.dbsys.rs.client.EventController;
+import com.dbsys.rs.client.TindakanFrame;
+import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.KategoriTableModel;
 import com.dbsys.rs.client.tableModel.PegawaiTableModel;

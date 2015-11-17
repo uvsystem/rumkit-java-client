@@ -1,5 +1,6 @@
-package com.dbsys.rs.client;
+package com.dbsys.rs.client.frame;
 
+import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;

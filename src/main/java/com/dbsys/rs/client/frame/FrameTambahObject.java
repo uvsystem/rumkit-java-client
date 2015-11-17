@@ -1,5 +1,10 @@
-package com.dbsys.rs.client;
+package com.dbsys.rs.client.frame;
 
+import com.dbsys.rs.client.BhpTableFrame;
+import com.dbsys.rs.client.EventController;
+import com.dbsys.rs.client.ObatTableFrame;
+import com.dbsys.rs.client.TindakanFrame;
+import com.dbsys.rs.client.TindakanTableFrame;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;

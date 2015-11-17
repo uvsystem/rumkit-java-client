@@ -1,5 +1,7 @@
-package com.dbsys.rs.client;
+package com.dbsys.rs.client.frame;
 
+import com.dbsys.rs.client.EventController;
+import com.dbsys.rs.client.UnitFrame;
 import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.client.tableModel.PegawaiTableModel;

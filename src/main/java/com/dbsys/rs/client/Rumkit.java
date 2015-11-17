@@ -1,5 +1,6 @@
 package com.dbsys.rs.client;
 
+import com.dbsys.rs.client.frame.FrameLogin;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.ExceptionPdfView;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;

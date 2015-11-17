@@ -1,5 +1,8 @@
-package com.dbsys.rs.client;
+package com.dbsys.rs.client.frame;
 
+import com.dbsys.rs.client.ComponentSelectionException;
+import com.dbsys.rs.client.EventController;
+import com.dbsys.rs.client.TindakanTableFrame;
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
