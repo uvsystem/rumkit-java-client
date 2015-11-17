@@ -3,16 +3,22 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
+import com.dbsys.rs.client.tableModel.StokTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.BarangService;
+import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Barang;
+import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Unit;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,7 +30,10 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private final BarangService barangService = BarangService.getInstance(EventController.host);
     private final StokService stokService = StokService.getInstance(EventController.host);
     
+    private final PasienService pasienService = PasienService.getInstance(EventController.host);
+    
     private Barang barang;
+    private Pasien pasien;
     
     // digunakan oleh StokInternal
     private Unit unit;
@@ -40,6 +49,13 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
+    }
+    
+    @Override
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+        
+        txtInternalStokUnit.setText(unit.getNama());
     }
 
     private void setDetailBarangEksternal(Barang barang) {
@@ -67,13 +83,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         
         this.barang = barang;
     }
-    
-    @Override
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-        
-        txtInternalStokUnit.setText(unit.getNama());
-    }
 
     private void setDetailBarangInternal(Barang barang) {
         if (barang == null) {
@@ -99,6 +108,57 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         tblInternal.removeAll();
         
         this.barang = barang;
+    }
+
+    private void setDetailBarangKembali(Barang barang) {
+        if (barang == null) {
+            barang = new Barang();
+
+            this.txtKembaliHarga.setText(null);
+            this.txtKembaliTanggungan.setText(null);
+            this.txtKembaliJumlah.setText(null);
+        } else {
+            this.txtKembaliHarga.setText(barang.getHarga().toString());
+            this.txtKembaliTanggungan.setText(barang.getPenanggung().toString());
+            this.txtKembaliJumlah.setText(barang.getJumlah().toString());
+        }
+        
+        this.txtKembaliKode.setText(barang.getKode());
+        this.txtKembaliNama.setText(barang.getNama());
+        this.txtKembaliSatuan.setText(barang.getSatuan());
+
+        this.txtKembaliStokJumlah.setText("0");
+        this.txtKembaliStokTanggal.setText(DateUtil.getDate().toString());
+        this.txtKembaliStokJam.setText(DateUtil.getTime().toString());
+        
+        this.barang = barang;
+    }
+
+    private void setDetailBarangKembali(Stok stok) {
+        if (stok == null)
+            stok = new Stok();
+
+        Barang b = stok.getBarang();
+        
+        if (b == null) {
+            b = new Barang();
+
+            this.txtKembaliHarga.setText(null);
+            this.txtKembaliTanggungan.setText(null);
+            this.txtKembaliJumlah.setText(null);
+        } else {
+            this.txtKembaliHarga.setText(b.getHarga().toString());
+            this.txtKembaliTanggungan.setText(b.getPenanggung().toString());
+            this.txtKembaliJumlah.setText(b.getJumlah().toString());
+        }
+        
+        this.txtKembaliKode.setText(b.getKode());
+        this.txtKembaliNama.setText(b.getNama());
+        this.txtKembaliSatuan.setText(b.getSatuan());
+
+        this.txtKembaliStokJumlah.setText(stok.getJumlah().toString());
+        this.txtKembaliStokTanggal.setText(stok.getTanggal().toString());
+        this.txtKembaliStokJam.setText(stok.getJam().toString());
     }
 
     private void reloadTableEksternal() {
@@ -136,6 +196,40 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             tblInternal.setModel(tableModel);
             
             setDetailBarangInternal(null);
+        }        
+    }
+    
+    private void reloadTableKembali(String keyword) {
+        if (keyword.equals(""))
+            return;
+        
+        List<Barang> list = null;
+        try {
+            list = barangService.cari(keyword);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            BarangTableModel tableModel = new BarangTableModel(list);
+            tblKembali.setModel(tableModel);
+            
+            setDetailBarangKembali((Barang) null);
+        }        
+    }
+    
+    private void reloadNomorKembali(String nomor) {
+        if (nomor.equals(""))
+            return;
+        
+        List<Stok> list = new ArrayList<>();
+        try {
+            list = stokService.stokKembali(nomor);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            StokTableModel tableModel = new StokTableModel(list);
+            tblKembali.setModel(tableModel);
+            
+            setDetailBarangKembali((Stok) null);
         }        
     }
     
@@ -210,12 +304,12 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel36 = new javax.swing.JLabel();
         pnlStokKembali = new javax.swing.JPanel();
         pnlInternalDetail1 = new javax.swing.JPanel();
-        txtInternalKode1 = new javax.swing.JTextField();
-        txtInternalNama1 = new javax.swing.JTextField();
-        txtInternalHarga1 = new javax.swing.JTextField();
-        txtInternalTanggungan1 = new javax.swing.JTextField();
-        txtInternalSatuan1 = new javax.swing.JTextField();
-        txtInternalJumlah1 = new javax.swing.JTextField();
+        txtKembaliKode = new javax.swing.JTextField();
+        txtKembaliNama = new javax.swing.JTextField();
+        txtKembaliHarga = new javax.swing.JTextField();
+        txtKembaliTanggungan = new javax.swing.JTextField();
+        txtKembaliSatuan = new javax.swing.JTextField();
+        txtKembaliJumlah = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -226,11 +320,9 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        txtInternalStokTanggal1 = new javax.swing.JTextField();
-        txtInternalStokJam1 = new javax.swing.JTextField();
-        txtInternalStokJumlah1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKembaliStokTanggal = new javax.swing.JTextField();
+        txtKembaliStokJam = new javax.swing.JTextField();
+        txtKembaliStokJumlah = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblKembali = new javax.swing.JTable();
         txtKembaliKeyword = new javax.swing.JTextField();
@@ -239,8 +331,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel1 = new javax.swing.JLabel();
         txtNomorPasienKembali = new javax.swing.JTextField();
         txtNamaPasienKembali = new javax.swing.JTextField();
-        btnEksternalStokMasuk1 = new javax.swing.JButton();
-        btnEksternalStokReset1 = new javax.swing.JButton();
+        btnKembaliStokMasuk = new javax.swing.JButton();
+        btnKembaliStokReset = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtNomorKembali = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -568,31 +663,31 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlInternalDetail1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalDetail1.setLayout(null);
 
-        txtInternalKode1.setEditable(false);
-        pnlInternalDetail1.add(txtInternalKode1);
-        txtInternalKode1.setBounds(130, 10, 430, 25);
+        txtKembaliKode.setEditable(false);
+        pnlInternalDetail1.add(txtKembaliKode);
+        txtKembaliKode.setBounds(130, 10, 430, 25);
 
-        txtInternalNama1.setEditable(false);
-        pnlInternalDetail1.add(txtInternalNama1);
-        txtInternalNama1.setBounds(130, 40, 430, 25);
+        txtKembaliNama.setEditable(false);
+        pnlInternalDetail1.add(txtKembaliNama);
+        txtKembaliNama.setBounds(130, 40, 430, 25);
 
-        txtInternalHarga1.setEditable(false);
-        txtInternalHarga1.setToolTipText("");
-        pnlInternalDetail1.add(txtInternalHarga1);
-        txtInternalHarga1.setBounds(130, 70, 430, 25);
+        txtKembaliHarga.setEditable(false);
+        txtKembaliHarga.setToolTipText("");
+        pnlInternalDetail1.add(txtKembaliHarga);
+        txtKembaliHarga.setBounds(130, 70, 430, 25);
 
-        txtInternalTanggungan1.setEditable(false);
-        txtInternalTanggungan1.setToolTipText("");
-        pnlInternalDetail1.add(txtInternalTanggungan1);
-        txtInternalTanggungan1.setBounds(130, 100, 430, 25);
+        txtKembaliTanggungan.setEditable(false);
+        txtKembaliTanggungan.setToolTipText("");
+        pnlInternalDetail1.add(txtKembaliTanggungan);
+        txtKembaliTanggungan.setBounds(130, 100, 430, 25);
 
-        txtInternalSatuan1.setEditable(false);
-        pnlInternalDetail1.add(txtInternalSatuan1);
-        txtInternalSatuan1.setBounds(130, 160, 430, 25);
+        txtKembaliSatuan.setEditable(false);
+        pnlInternalDetail1.add(txtKembaliSatuan);
+        txtKembaliSatuan.setBounds(130, 160, 430, 25);
 
-        txtInternalJumlah1.setEditable(false);
-        pnlInternalDetail1.add(txtInternalJumlah1);
-        txtInternalJumlah1.setBounds(130, 130, 430, 25);
+        txtKembaliJumlah.setEditable(false);
+        pnlInternalDetail1.add(txtKembaliJumlah);
+        txtKembaliJumlah.setBounds(130, 130, 430, 25);
 
         jLabel34.setText("Kode");
         pnlInternalDetail1.add(jLabel34);
@@ -635,21 +730,15 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel43.setText("Jumlah");
         pnlInternalStok1.add(jLabel43);
         jLabel43.setBounds(20, 70, 90, 25);
-        pnlInternalStok1.add(txtInternalStokTanggal1);
-        txtInternalStokTanggal1.setBounds(130, 10, 430, 25);
-        pnlInternalStok1.add(txtInternalStokJam1);
-        txtInternalStokJam1.setBounds(130, 40, 430, 25);
-        pnlInternalStok1.add(txtInternalStokJumlah1);
-        txtInternalStokJumlah1.setBounds(130, 70, 430, 25);
-
-        jLabel2.setText("No. Kembali");
-        pnlInternalStok1.add(jLabel2);
-        jLabel2.setBounds(20, 100, 90, 25);
-        pnlInternalStok1.add(jTextField1);
-        jTextField1.setBounds(130, 100, 430, 25);
+        pnlInternalStok1.add(txtKembaliStokTanggal);
+        txtKembaliStokTanggal.setBounds(130, 10, 430, 25);
+        pnlInternalStok1.add(txtKembaliStokJam);
+        txtKembaliStokJam.setBounds(130, 40, 430, 25);
+        pnlInternalStok1.add(txtKembaliStokJumlah);
+        txtKembaliStokJumlah.setBounds(130, 70, 430, 25);
 
         pnlStokKembali.add(pnlInternalStok1);
-        pnlInternalStok1.setBounds(630, 330, 590, 140);
+        pnlInternalStok1.setBounds(630, 330, 590, 110);
 
         tblKembali.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -678,11 +767,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokKembali.add(txtKembaliKeyword);
-        txtKembaliKeyword.setBounds(120, 40, 280, 25);
+        txtKembaliKeyword.setBounds(540, 40, 280, 25);
 
         jLabel44.setText("KATA KUNCI");
         pnlStokKembali.add(jLabel44);
-        jLabel44.setBounds(20, 40, 90, 25);
+        jLabel44.setBounds(440, 40, 90, 25);
 
         jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
         pnlStokKembali.add(jLabel45);
@@ -691,30 +780,52 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel1.setText("NO. PASIEN");
         pnlStokKembali.add(jLabel1);
         jLabel1.setBounds(20, 10, 90, 25);
+
+        txtNomorPasienKembali.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomorPasienKembaliFocusLost(evt);
+            }
+        });
         pnlStokKembali.add(txtNomorPasienKembali);
         txtNomorPasienKembali.setBounds(120, 10, 280, 25);
 
         txtNamaPasienKembali.setEditable(false);
         pnlStokKembali.add(txtNamaPasienKembali);
-        txtNamaPasienKembali.setBounds(410, 10, 280, 25);
+        txtNamaPasienKembali.setBounds(540, 10, 280, 25);
 
-        btnEksternalStokMasuk1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
-        btnEksternalStokMasuk1.addActionListener(new java.awt.event.ActionListener() {
+        btnKembaliStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
+        btnKembaliStokMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEksternalStokMasuk1ActionPerformed(evt);
+                btnKembaliStokMasukActionPerformed(evt);
             }
         });
-        pnlStokKembali.add(btnEksternalStokMasuk1);
-        btnEksternalStokMasuk1.setBounds(1020, 490, 100, 40);
+        pnlStokKembali.add(btnKembaliStokMasuk);
+        btnKembaliStokMasuk.setBounds(1020, 490, 100, 40);
 
-        btnEksternalStokReset1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
-        btnEksternalStokReset1.addActionListener(new java.awt.event.ActionListener() {
+        btnKembaliStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnKembaliStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEksternalStokReset1ActionPerformed(evt);
+                btnKembaliStokResetActionPerformed(evt);
             }
         });
-        pnlStokKembali.add(btnEksternalStokReset1);
-        btnEksternalStokReset1.setBounds(1130, 490, 90, 39);
+        pnlStokKembali.add(btnKembaliStokReset);
+        btnKembaliStokReset.setBounds(1130, 490, 90, 39);
+
+        jLabel2.setText("NAMA PASIEN");
+        pnlStokKembali.add(jLabel2);
+        jLabel2.setBounds(440, 10, 90, 25);
+
+        txtNomorKembali.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomorKembaliFocusLost(evt);
+            }
+        });
+        pnlStokKembali.add(txtNomorKembali);
+        txtNomorKembali.setBounds(120, 40, 280, 25);
+
+        jLabel4.setText("NO. KEMBALI");
+        pnlStokKembali.add(jLabel4);
+        jLabel4.setBounds(20, 40, 90, 25);
 
         paneBarang.addTab("KEMBALI DARI PASIEN", pnlStokKembali);
 
@@ -885,35 +996,80 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void tblKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKembaliMouseClicked
-        // TODO add your handling code here:
+        Integer index = tblKembali.getSelectedRow();
+        
+        TableModel tableModel = tblKembali.getModel();
+        
+        if (tableModel instanceof BarangTableModel) {
+            BarangTableModel barangTableModel = (BarangTableModel) tableModel;
+            barang = barangTableModel.getBarang(index);
+            setDetailBarangKembali(barang);
+        } else if (tableModel instanceof StokTableModel) {
+            StokTableModel stokTableModel = (StokTableModel) tableModel;
+            Stok stok = stokTableModel.getStok(index);
+            setDetailBarangKembali(stok);
+        }
     }//GEN-LAST:event_tblKembaliMouseClicked
 
     private void txtKembaliKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKembaliKeywordFocusLost
-        // TODO add your handling code here:
+        String keyword = txtKembaliKeyword.getText();
+        reloadTableKembali(keyword);
     }//GEN-LAST:event_txtKembaliKeywordFocusLost
 
-    private void btnEksternalStokMasuk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokMasuk1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEksternalStokMasuk1ActionPerformed
+    private void btnKembaliStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokMasukActionPerformed
+        String jumlah = txtKembaliStokJumlah.getText();
+        String tanggal = txtKembaliStokTanggal.getText();
+        String jam = txtKembaliStokJam.getText();
+        String nomorKembali = txtNomorKembali.getText();
+        
+        try {
+            stokService.kembali(barang, Long.valueOf(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam), pasien, nomorKembali);
+            JOptionPane.showMessageDialog(this, "Berhasil");
+            
+            setDetailBarangKembali((Barang) null);
+            
+            String nomor = txtNomorKembali.getText();
+            reloadNomorKembali(nomor);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnKembaliStokMasukActionPerformed
 
-    private void btnEksternalStokReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokReset1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEksternalStokReset1ActionPerformed
+    private void btnKembaliStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokResetActionPerformed
+        setDetailBarangKembali((Barang) null);
+    }//GEN-LAST:event_btnKembaliStokResetActionPerformed
 
     private void txtInternalStokUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInternalStokUnitMouseClicked
         FrameCari frameCari = new FrameCari(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtInternalStokUnitMouseClicked
 
+    private void txtNomorPasienKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliFocusLost
+        String kode = txtNomorPasienKembali.getText();
+        
+        try {
+            pasien = pasienService.get(kode);
+            
+            txtNamaPasienKembali.setText(pasien.getNama());
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtNomorPasienKembaliFocusLost
+
+    private void txtNomorKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorKembaliFocusLost
+        String nomor = txtNomorKembali.getText();
+        reloadNomorKembali(nomor);
+    }//GEN-LAST:event_txtNomorKembaliFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnEksternalStokKeluar;
     private javax.swing.JButton btnEksternalStokMasuk;
-    private javax.swing.JButton btnEksternalStokMasuk1;
     private javax.swing.JButton btnEksternalStokReset;
-    private javax.swing.JButton btnEksternalStokReset1;
     private javax.swing.JButton btnInternalStokKeluar;
     private javax.swing.JButton btnInternalStokReset;
+    private javax.swing.JButton btnKembaliStokMasuk;
+    private javax.swing.JButton btnKembaliStokReset;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -944,6 +1100,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -958,7 +1115,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
     private javax.swing.JLabel lblUnit;
@@ -986,27 +1142,28 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JTextField txtEksternalStokTanggal;
     private javax.swing.JTextField txtEksternalTanggungan;
     private javax.swing.JTextField txtInternalHarga;
-    private javax.swing.JTextField txtInternalHarga1;
     private javax.swing.JTextField txtInternalJumlah;
-    private javax.swing.JTextField txtInternalJumlah1;
     private javax.swing.JTextField txtInternalKeyword;
     private javax.swing.JTextField txtInternalKode;
-    private javax.swing.JTextField txtInternalKode1;
     private javax.swing.JTextField txtInternalNama;
-    private javax.swing.JTextField txtInternalNama1;
     private javax.swing.JTextField txtInternalSatuan;
-    private javax.swing.JTextField txtInternalSatuan1;
     private javax.swing.JTextField txtInternalStokJam;
-    private javax.swing.JTextField txtInternalStokJam1;
     private javax.swing.JTextField txtInternalStokJumlah;
-    private javax.swing.JTextField txtInternalStokJumlah1;
     private javax.swing.JTextField txtInternalStokTanggal;
-    private javax.swing.JTextField txtInternalStokTanggal1;
     private javax.swing.JTextField txtInternalStokUnit;
     private javax.swing.JTextField txtInternalTanggungan;
-    private javax.swing.JTextField txtInternalTanggungan1;
+    private javax.swing.JTextField txtKembaliHarga;
+    private javax.swing.JTextField txtKembaliJumlah;
     private javax.swing.JTextField txtKembaliKeyword;
+    private javax.swing.JTextField txtKembaliKode;
+    private javax.swing.JTextField txtKembaliNama;
+    private javax.swing.JTextField txtKembaliSatuan;
+    private javax.swing.JTextField txtKembaliStokJam;
+    private javax.swing.JTextField txtKembaliStokJumlah;
+    private javax.swing.JTextField txtKembaliStokTanggal;
+    private javax.swing.JTextField txtKembaliTanggungan;
     private javax.swing.JTextField txtNamaPasienKembali;
+    private javax.swing.JTextField txtNomorKembali;
     private javax.swing.JTextField txtNomorPasienKembali;
     // End of variables declaration//GEN-END:variables
 }

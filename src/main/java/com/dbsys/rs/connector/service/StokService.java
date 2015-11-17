@@ -110,13 +110,14 @@ public class StokService extends AbstractService {
         simpan(stok);
     }
     
-    public void kembali(Barang barang, Long jumlah, Date tanggal, Time jam, Pasien pasien) throws ServiceException {
+    public void kembali(Barang barang, Long jumlah, Date tanggal, Time jam, Pasien pasien, String nomor) throws ServiceException {
         StokKembali stok = new StokKembali();
         stok.setBarang(barang);
         stok.setTanggal(tanggal);
         stok.setJam(jam);
         stok.setJumlah(jumlah);
         stok.setPasien(pasien);
+        stok.setNomor(nomor);
 
         simpan(stok);
     }
@@ -153,6 +154,19 @@ public class StokService extends AbstractService {
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/pasien/{pasien}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, pasien.getId());
+
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return getList(message.getList());
+    }
+
+    public List<Stok> stokKembali(String nomor) throws ServiceException {
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
+        resposen = restTemplate.exchange("{inventoryService}/stok/nomor/{nomor}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, nomor);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))

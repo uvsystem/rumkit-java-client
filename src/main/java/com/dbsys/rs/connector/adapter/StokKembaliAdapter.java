@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public final class StokKembaliAdapter extends StokAdapter{
     
     private Pasien pasien;
+    private String nomor;
 
     public StokKembaliAdapter() {
         super("KEMBALI");
@@ -29,6 +30,14 @@ public final class StokKembaliAdapter extends StokAdapter{
     public void setPasien(Pasien pasien) {
         this.pasien = pasien;
     }
+
+    public String getNomor() {
+        return nomor;
+    }
+
+    public void setNomor(String nomor) {
+        this.nomor = nomor;
+    }
     
     @Override
     @JsonIgnore
@@ -41,6 +50,7 @@ public final class StokKembaliAdapter extends StokAdapter{
         stok.setBarang(barang);
         stok.setJenis(jenis);
         stok.setPasien(pasien);
+        stok.setNomor(nomor);
         
         return stok;
     }
@@ -58,5 +68,6 @@ public final class StokKembaliAdapter extends StokAdapter{
         setBarang(stok.getBarang());
         setJenis(stok.getJenis());
         setPasien(stok.getPasien());
+        setNomor(stok.getNomor());
     }
 }

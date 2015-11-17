@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
-    private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
+    private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
 
     private Pasien pasien;
@@ -69,7 +69,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
     }
 
     private void loadTableResep(Pasien pasien) throws ServiceException {
-        List<Pemakaian> list = pemakaianObatService.getByPasien(pasien.getId());
+        List<Pemakaian> list = pemakaianService.getByPasien(pasien.getId());
         PemakaianTableModel tableModel = new PemakaianTableModel(list);
         tblResep.setModel(tableModel);
     }
@@ -241,6 +241,12 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
         pnlResep.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR OBAT PASIEN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlResep.setLayout(null);
+
+        txtResepNomor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtResepNomorFocusLost(evt);
+            }
+        });
         pnlResep.add(txtResepNomor);
         txtResepNomor.setBounds(160, 40, 530, 25);
 
@@ -352,6 +358,21 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void txtResepNomorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtResepNomorFocusLost
+        String nomor = txtResepNomor.getText();
+        List<Pemakaian> list = null;        
+        
+        try {
+            list = pemakaianService.getByNomor(nomor);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+            PemakaianTableModel tableModel = new PemakaianTableModel(list);
+            tblResep.setModel(tableModel);
+        }
+        
+    }//GEN-LAST:event_txtResepNomorFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

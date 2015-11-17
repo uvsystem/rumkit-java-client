@@ -6,16 +6,20 @@ import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
+import com.dbsys.rs.client.tableModel.StokTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.PemakaianService;
+import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.Stok;
+import com.dbsys.rs.lib.entity.StokKembali;
 import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -32,15 +36,16 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
-    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
-    private final PemakaianService pemakaianObatService = PemakaianService.getInstance(EventController.host);
+    private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
+    private final StokService stokService = StokService.getInstance(EventController.host);
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     
     private Pasien pasien;
     private Long total = 0L;
     private List<Pelayanan> listPelayanan;
-    private List<Pemakaian> listPemakaianBhp;
-    private List<Pemakaian> listPemakaianObat;
+    private List<Pemakaian> listPemakaian;
+    private List<Stok> listStokKembali;
+    
     private List<Tagihan> listTagihan;
     
     /**
@@ -82,37 +87,13 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtPendudukTelepon.setText(pasien.getTelepon());
     }
     
-    private List<Pelayanan> loadTabelTindakan(final Pasien pasien) throws ServiceException {
+    private List<Stok> loadStokKembali(final Pasien pasien) throws ServiceException {
         if (pasien == null)
             return null;
 
-        List<Pelayanan> list = pelayananService.getByPasien(pasien);
-        PelayananTableModel tableModel = new PelayananTableModel(list);
-        tblTindakan.setModel(tableModel);
-        
-        return list;
-    }
-    
-    private List<Pemakaian> loadTabelBhp(final Pasien pasien) throws ServiceException {
-        if (pasien == null)
-            return null;
-
-        List<Pemakaian> list = pemakaianBhpService.getByPasien(pasien.getId());
-
-        PemakaianTableModel tableModel = new PemakaianTableModel(list);
-        tblBhp.setModel(tableModel);
-        
-        return list;
-    }
-    
-    private List<Pemakaian> loadTabelObat(final Pasien pasien) throws ServiceException {
-        if (pasien == null)
-            return null;
-
-        List<Pemakaian> list = pemakaianObatService.getByPasien(pasien.getId());
-
-        PemakaianTableModel tableModel = new PemakaianTableModel(list);
-        tblObat.setModel(tableModel);
+        List<Stok> list = stokService.stokKembali(pasien);
+        StokTableModel tableModel = new StokTableModel(list);
+        tblStokKembali.setModel(tableModel);
         
         return list;
     }
@@ -129,30 +110,28 @@ public class FramePembayaran extends javax.swing.JFrame {
             setDetailPasien(pasien);
             
             try {
-                listPelayanan = loadTabelTindakan(pasien);
+                listPelayanan = pelayananService.getByPasien(pasien);
                 for (Pelayanan pelayanan : listPelayanan)
                     total += pelayanan.hitungTagihan();
             } catch (ServiceException ex) {}
             
             try {
-                listPemakaianBhp = loadTabelBhp(pasien);
-                for (Pemakaian pemakaian : listPemakaianBhp)
+                listPemakaian = pemakaianService.getByPasien(pasien.getId());
+                for (Pemakaian pemakaian : listPemakaian)
                     total += pemakaian.hitungTagihan();
             } catch (ServiceException ex) {}
             
             try {
-                listPemakaianObat = loadTabelObat(pasien);
-                for (Pemakaian pemakaian : listPemakaianObat)
-                    total += pemakaian.hitungTagihan();
+                listStokKembali = loadStokKembali(pasien);
+                for (Stok stok : listStokKembali)
+                    total -= ((StokKembali)stok).hitungPengembalian();
             } catch (ServiceException ex) {}
 
             TagihanTableModel tableModel = new TagihanTableModel(null);
             tableModel.addListPelayanan(listPelayanan);
-            tableModel.addListPemakaian(listPemakaianBhp);
-            tableModel.addListPemakaian(listPemakaianObat);
+            tableModel.addListPemakaian(listPemakaian);
             
             listTagihan = tableModel.getList();
-            
             tblSemua.setModel(tableModel);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -182,18 +161,12 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
         tabData = new javax.swing.JTabbedPane();
-        pnlSummary = new javax.swing.JPanel();
+        pnlTagihan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSemua = new javax.swing.JTable();
-        pnlTindakan = new javax.swing.JPanel();
-        scrollTindakan = new javax.swing.JScrollPane();
-        tblTindakan = new javax.swing.JTable();
-        pnlBhp = new javax.swing.JPanel();
-        scrollBhp = new javax.swing.JScrollPane();
-        tblBhp = new javax.swing.JTable();
-        pnlObat = new javax.swing.JPanel();
+        pnlStok = new javax.swing.JPanel();
         scrollObat = new javax.swing.JScrollPane();
-        tblObat = new javax.swing.JTable();
+        tblStokKembali = new javax.swing.JTable();
         pnlDetail = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -247,7 +220,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         jLabel1.setText("Nomor Pasien");
         pnlPencarian.add(jLabel1);
-        jLabel1.setBounds(30, 30, 90, 14);
+        jLabel1.setBounds(20, 30, 90, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -255,7 +228,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlPencarian.add(txtKeyword);
-        txtKeyword.setBounds(140, 30, 240, 20);
+        txtKeyword.setBounds(130, 30, 240, 25);
 
         getContentPane().add(pnlPencarian);
         pnlPencarian.setBounds(860, 100, 400, 70);
@@ -273,26 +246,26 @@ public class FramePembayaran extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblSemua);
 
-        javax.swing.GroupLayout pnlSummaryLayout = new javax.swing.GroupLayout(pnlSummary);
-        pnlSummary.setLayout(pnlSummaryLayout);
-        pnlSummaryLayout.setHorizontalGroup(
-            pnlSummaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSummaryLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlTagihanLayout = new javax.swing.GroupLayout(pnlTagihan);
+        pnlTagihan.setLayout(pnlTagihanLayout);
+        pnlTagihanLayout.setHorizontalGroup(
+            pnlTagihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTagihanLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlSummaryLayout.setVerticalGroup(
-            pnlSummaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSummaryLayout.createSequentialGroup()
+        pnlTagihanLayout.setVerticalGroup(
+            pnlTagihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTagihanLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        tabData.addTab("SEMUA", pnlSummary);
+        tabData.addTab("TAGIHAN", pnlTagihan);
 
-        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
+        tblStokKembali.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -303,90 +276,26 @@ public class FramePembayaran extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollTindakan.setViewportView(tblTindakan);
+        scrollObat.setViewportView(tblStokKembali);
 
-        javax.swing.GroupLayout pnlTindakanLayout = new javax.swing.GroupLayout(pnlTindakan);
-        pnlTindakan.setLayout(pnlTindakanLayout);
-        pnlTindakanLayout.setHorizontalGroup(
-            pnlTindakanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTindakanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlTindakanLayout.setVerticalGroup(
-            pnlTindakanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTindakanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tabData.addTab("TINDAKAN", pnlTindakan);
-
-        tblBhp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        scrollBhp.setViewportView(tblBhp);
-
-        javax.swing.GroupLayout pnlBhpLayout = new javax.swing.GroupLayout(pnlBhp);
-        pnlBhp.setLayout(pnlBhpLayout);
-        pnlBhpLayout.setHorizontalGroup(
-            pnlBhpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBhpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollBhp, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlBhpLayout.setVerticalGroup(
-            pnlBhpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBhpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollBhp, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tabData.addTab("BAHAN HABIS PAKAI", pnlBhp);
-
-        tblObat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        scrollObat.setViewportView(tblObat);
-
-        javax.swing.GroupLayout pnlObatLayout = new javax.swing.GroupLayout(pnlObat);
-        pnlObat.setLayout(pnlObatLayout);
-        pnlObatLayout.setHorizontalGroup(
-            pnlObatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlObatLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlStokLayout = new javax.swing.GroupLayout(pnlStok);
+        pnlStok.setLayout(pnlStokLayout);
+        pnlStokLayout.setHorizontalGroup(
+            pnlStokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStokLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollObat, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlObatLayout.setVerticalGroup(
-            pnlObatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlObatLayout.createSequentialGroup()
+        pnlStokLayout.setVerticalGroup(
+            pnlStokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStokLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollObat, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        tabData.addTab("OBAT", pnlObat);
+        tabData.addTab("STOK KEMBALI", pnlStok);
 
         getContentPane().add(tabData);
         tabData.setBounds(10, 180, 840, 580);
@@ -396,93 +305,93 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         jLabel5.setText("No. Rekam Medik");
         pnlDetail.add(jLabel5);
-        jLabel5.setBounds(30, 30, 90, 14);
+        jLabel5.setBounds(20, 30, 90, 25);
 
         jLabel6.setText("Nama Pasien");
         pnlDetail.add(jLabel6);
-        jLabel6.setBounds(30, 60, 90, 14);
+        jLabel6.setBounds(20, 60, 90, 25);
 
         jLabel7.setText("NIK");
         pnlDetail.add(jLabel7);
-        jLabel7.setBounds(30, 90, 90, 14);
+        jLabel7.setBounds(20, 90, 90, 25);
 
         jLabel8.setText("Tanggal Lahir");
         pnlDetail.add(jLabel8);
-        jLabel8.setBounds(30, 120, 90, 14);
+        jLabel8.setBounds(20, 120, 90, 25);
 
         jLabel9.setText("Golongan Darah");
         pnlDetail.add(jLabel9);
-        jLabel9.setBounds(30, 150, 90, 14);
+        jLabel9.setBounds(20, 150, 90, 25);
 
         jLabel10.setText("Agama");
         pnlDetail.add(jLabel10);
-        jLabel10.setBounds(30, 180, 90, 14);
+        jLabel10.setBounds(20, 180, 90, 25);
 
         jLabel11.setText("Jenis Kelamin");
         pnlDetail.add(jLabel11);
-        jLabel11.setBounds(30, 210, 90, 14);
+        jLabel11.setBounds(20, 210, 90, 25);
 
         jLabel12.setText("Telepon");
         pnlDetail.add(jLabel12);
-        jLabel12.setBounds(30, 240, 90, 14);
+        jLabel12.setBounds(20, 240, 90, 25);
 
         txtPendudukKode.setEditable(false);
         pnlDetail.add(txtPendudukKode);
-        txtPendudukKode.setBounds(140, 30, 240, 20);
+        txtPendudukKode.setBounds(130, 30, 240, 25);
 
         txtPendudukNama.setEditable(false);
         pnlDetail.add(txtPendudukNama);
-        txtPendudukNama.setBounds(140, 60, 240, 20);
+        txtPendudukNama.setBounds(130, 60, 240, 25);
 
         txtPendudukNik.setEditable(false);
         pnlDetail.add(txtPendudukNik);
-        txtPendudukNik.setBounds(140, 90, 240, 20);
+        txtPendudukNik.setBounds(130, 90, 240, 25);
 
         txtPendudukTanggalLahir.setEditable(false);
         pnlDetail.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(140, 120, 240, 20);
+        txtPendudukTanggalLahir.setBounds(130, 120, 240, 25);
 
         txtPendudukDarah.setEditable(false);
         pnlDetail.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(140, 150, 240, 20);
+        txtPendudukDarah.setBounds(130, 150, 240, 25);
 
         txtPendudukAgama.setEditable(false);
         pnlDetail.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(140, 180, 240, 20);
+        txtPendudukAgama.setBounds(130, 180, 240, 25);
 
         txtPendudukKelamin.setEditable(false);
         pnlDetail.add(txtPendudukKelamin);
-        txtPendudukKelamin.setBounds(140, 210, 240, 20);
+        txtPendudukKelamin.setBounds(130, 210, 240, 25);
 
         txtPendudukTelepon.setEditable(false);
         pnlDetail.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(140, 240, 240, 20);
+        txtPendudukTelepon.setBounds(130, 240, 240, 25);
         pnlDetail.add(jSeparator2);
         jSeparator2.setBounds(0, 270, 400, 10);
 
         jLabel13.setText("Tanggungan");
         pnlDetail.add(jLabel13);
-        jLabel13.setBounds(30, 290, 90, 14);
+        jLabel13.setBounds(20, 290, 90, 25);
 
         jLabel14.setText("Tanggal Masuk");
         pnlDetail.add(jLabel14);
-        jLabel14.setBounds(30, 320, 90, 14);
+        jLabel14.setBounds(20, 320, 90, 25);
 
         jLabel18.setText("Keadaan Pasien");
         pnlDetail.add(jLabel18);
-        jLabel18.setBounds(30, 350, 90, 14);
+        jLabel18.setBounds(20, 350, 90, 25);
 
         txtPasienTanggungan.setEditable(false);
         pnlDetail.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(140, 290, 240, 20);
+        txtPasienTanggungan.setBounds(130, 290, 240, 25);
 
         txtPasienTanggalMasuk.setEditable(false);
         pnlDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(140, 320, 240, 20);
+        txtPasienTanggalMasuk.setBounds(130, 320, 240, 25);
 
         cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI" }));
         pnlDetail.add(cbPasienKeadaan);
-        cbPasienKeadaan.setBounds(140, 350, 240, 20);
+        cbPasienKeadaan.setBounds(130, 350, 240, 25);
 
         btnPasienKeluar.setText("PASIEN KELUAR");
         btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -491,25 +400,25 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnPasienKeluar);
-        btnPasienKeluar.setBounds(270, 380, 110, 30);
+        btnPasienKeluar.setBounds(260, 380, 110, 30);
         pnlDetail.add(jSeparator3);
         jSeparator3.setBounds(0, 420, 400, 10);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("TOTAL");
         pnlDetail.add(jLabel15);
-        jLabel15.setBounds(30, 430, 90, 15);
+        jLabel15.setBounds(20, 430, 90, 15);
 
         lblTagihan.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblTagihan.setText("Rp 00.000.000.000");
         pnlDetail.add(lblTagihan);
-        lblTagihan.setBounds(10, 450, 350, 40);
+        lblTagihan.setBounds(20, 450, 350, 40);
 
         jLabel16.setText("Pembayaran");
         pnlDetail.add(jLabel16);
-        jLabel16.setBounds(30, 500, 90, 14);
+        jLabel16.setBounds(20, 500, 90, 25);
         pnlDetail.add(txtPasienCicilan);
-        txtPasienCicilan.setBounds(140, 500, 240, 20);
+        txtPasienCicilan.setBounds(130, 500, 240, 25);
 
         btnCetak.setText("CETAK");
         btnCetak.addActionListener(new java.awt.event.ActionListener() {
@@ -518,7 +427,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnCetak);
-        btnCetak.setBounds(140, 530, 110, 40);
+        btnCetak.setBounds(130, 530, 110, 40);
 
         btnBayar.setText("BAYAR");
         btnBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -527,7 +436,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         pnlDetail.add(btnBayar);
-        btnBayar.setBounds(270, 530, 110, 40);
+        btnBayar.setBounds(260, 530, 110, 40);
 
         getContentPane().add(pnlDetail);
         pnlDetail.setBounds(860, 180, 400, 580);
@@ -674,20 +583,14 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel lblOperator;
     private javax.swing.JLabel lblTagihan;
     private javax.swing.JLabel lblUnit;
-    private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlDetail;
-    private javax.swing.JPanel pnlObat;
     private javax.swing.JPanel pnlPencarian;
-    private javax.swing.JPanel pnlSummary;
-    private javax.swing.JPanel pnlTindakan;
-    private javax.swing.JScrollPane scrollBhp;
+    private javax.swing.JPanel pnlStok;
+    private javax.swing.JPanel pnlTagihan;
     private javax.swing.JScrollPane scrollObat;
-    private javax.swing.JScrollPane scrollTindakan;
     private javax.swing.JTabbedPane tabData;
-    private javax.swing.JTable tblBhp;
-    private javax.swing.JTable tblObat;
     private javax.swing.JTable tblSemua;
-    private javax.swing.JTable tblTindakan;
+    private javax.swing.JTable tblStokKembali;
     private javax.swing.JTextField txtKeyword;
     private javax.swing.JTextField txtPasienCicilan;
     private javax.swing.JTextField txtPasienTanggalMasuk;

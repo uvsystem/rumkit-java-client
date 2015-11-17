@@ -16,6 +16,8 @@
                     <archive>
                         <manifest>
                             <mainClass>com.dbsys.rs.client.Rumkit</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>
                 </configuration>
