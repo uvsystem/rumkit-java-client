@@ -11,8 +11,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.adapter.StokAdapter;
+import com.dbsys.rs.connector.adapter.StokEksternalAdapter;
+import com.dbsys.rs.connector.adapter.StokInternalAdapter;
+import com.dbsys.rs.connector.adapter.StokKembaliAdapter;
+import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.Pasien;
@@ -21,6 +25,7 @@ import com.dbsys.rs.lib.entity.StokEksternal;
 import com.dbsys.rs.lib.entity.StokInternal;
 import com.dbsys.rs.lib.entity.StokKembali;
 import com.dbsys.rs.lib.entity.Unit;
+import java.util.ArrayList;
 
 public class StokService extends AbstractService {
 	
@@ -48,17 +53,28 @@ public class StokService extends AbstractService {
         return instance;
     }
 
-    public void simpan(Stok stok) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(stok, getHeaders());
+    public Stok simpan(Stok stok) throws ServiceException {
+        StokAdapter stokAdapter;
+        if (stok instanceof StokEksternal) {
+            stokAdapter = new StokEksternalAdapter((StokEksternal) stok);
+        } else if (stok instanceof StokInternal) {
+            stokAdapter = new StokInternalAdapter((StokInternal) stok);
+        } else if (stok instanceof StokKembali) {
+            stokAdapter = new StokKembaliAdapter((StokKembali) stok);
+        } else {
+            stokAdapter = new StokAdapter(stok);
+        }
+        
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(stokAdapter, getHeaders());
 
-        ResponseEntity<RestMessage> response;
+        ResponseEntity<EntityRestMessage<StokAdapter>> response;
         response = restTemplate.exchange("{inventoryService}/stok", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, 
-                inventoryService);
+                new ParameterizedTypeReference<EntityRestMessage<StokAdapter>>() {}, inventoryService);
 
-        RestMessage message = response.getBody();
+        EntityRestMessage<StokAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
+        return message.getModel().getStok();
     }
     
     public void masuk(Barang barang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
@@ -106,86 +122,87 @@ public class StokService extends AbstractService {
     }
 
     public List<Stok> stokMasuk(Date awal, Date akhir) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/masuk/{awal}/to/{akhir}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, awal, akhir);
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Stok> stokKeluar(Date awal, Date akhir) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/keluar/{awal}/to/{akhir}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, awal, akhir);
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Stok> stokKembali(Pasien pasien) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/pasien/{pasien}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, pasien.getId());
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, pasien.getId());
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
     
     public List<Stok> stokKembali(Date awal, Date akhir) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/pasien", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, awal, akhir);
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Stok> stokUnit(Date awal, Date akhir, Unit unit) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/unit/{unit}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, awal, akhir, unit.getId());
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir, unit.getId());
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
     }
 
     public List<Stok> stokUnit(Date awal, Date akhir) throws ServiceException {
-        HttpEntity<Stok> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<Stok>> resposen;
+        ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
         resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/unit", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<Stok>>() {}, 
-                inventoryService, awal, akhir);
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
 
-        ListEntityRestMessage<Stok> message = resposen.getBody();
+        ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
                 throw new ServiceException(message.getMessage());
-        return message.getList();
+        return getList(message.getList());
+    }
+    
+    private List<Stok> getList(List<StokAdapter> listAdapter) {
+        List<Stok> list = new ArrayList<>();
+        for (StokAdapter stokAdapter : listAdapter)
+            list.add(stokAdapter.getStok());
+        return list;
     }
 }

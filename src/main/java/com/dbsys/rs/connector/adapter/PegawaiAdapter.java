@@ -13,16 +13,16 @@ import java.sql.Date;
  * @author Deddy Christoper Kakunsi
  */
 @JsonTypeInfo(
-	use = JsonTypeInfo.Id.NAME,
-	include = JsonTypeInfo.As.PROPERTY,
-	property = "tipe"
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "tipe"
 )
 @JsonSubTypes({
-	@JsonSubTypes.Type(value = DokterAdapter.class, name = "DOKTER"),
-	@JsonSubTypes.Type(value = PerawatAdapter.class, name = "PERAWAT"),
-	@JsonSubTypes.Type(value = ApotekerAdapter.class, name = "APOTEKER"),
-	@JsonSubTypes.Type(value = PekerjaAdapter.class, name = "PEKERJA"),
-	@JsonSubTypes.Type(value = PegawaiAdapter.class, name = "PEGAWAI")
+    @JsonSubTypes.Type(value = DokterAdapter.class, name = "DOKTER"),
+    @JsonSubTypes.Type(value = PerawatAdapter.class, name = "PERAWAT"),
+    @JsonSubTypes.Type(value = ApotekerAdapter.class, name = "APOTEKER"),
+    @JsonSubTypes.Type(value = PekerjaAdapter.class, name = "PEKERJA"),
+    @JsonSubTypes.Type(value = PegawaiAdapter.class, name = "PEGAWAI")
 })
 public class PegawaiAdapter {
 

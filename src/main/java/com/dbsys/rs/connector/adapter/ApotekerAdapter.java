@@ -29,15 +29,4 @@ public final class ApotekerAdapter extends PegawaiAdapter {
         
         return apoteker;
     }
-    
-    @Override
-    public void setPegawai(Pegawai pegawai) {
-        setPegawai((Apoteker) pegawai);
-    }
-    
-    public void setPegawai(Apoteker apoteker) {
-        setId(apoteker.getId());
-        setNip(apoteker.getNip());
-        setPenduduk(apoteker.getPenduduk());
-    }
 }

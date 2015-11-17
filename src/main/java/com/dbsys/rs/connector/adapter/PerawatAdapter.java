@@ -29,15 +29,4 @@ public final class PerawatAdapter extends PegawaiAdapter {
         
         return perawat;
     }
-    
-    @Override
-    public void setPegawai(Pegawai pegawai) {
-        setPegawai((Perawat) pegawai);
-    }
-    
-    public void setPegawai(Perawat perawat) {
-        setId(perawat.getId());
-        setNip(perawat.getNip());
-        setPenduduk(perawat.getPenduduk());
-    }
 }
