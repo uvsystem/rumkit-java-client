@@ -1,8 +1,11 @@
 package com.dbsys.rs.connector;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -54,9 +57,14 @@ public abstract class AbstractService {
         String password = TokenHolder.getKode();
         String auth = String.format("%s:%s", username, password);
         byte[] base64 = Base64.getEncoder().encode(auth.getBytes());
+
+        List<MediaType> acceptableMediaTypes = new ArrayList<>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
         
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", String.format("Basic %s", new String(base64)));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(acceptableMediaTypes);
         
         return headers;
     }

@@ -48,7 +48,7 @@ public final class TagihanTableModel extends DefaultTableModel {
     
     @Override
     public Object getValueAt(int row, int column){
-        Tagihan tagihan = getTindakan(row);
+        Tagihan tagihan = getTagihan(row);
         
         switch(column){
             case 0: return tagihan.getNama();
@@ -61,8 +61,17 @@ public final class TagihanTableModel extends DefaultTableModel {
             default: return "";
         }
     }
-    public Tagihan getTindakan(int index){
+    
+    public Tagihan getTagihan(int index){
         return list.get(index);
+    }
+    
+    public void addTagihan(Tagihan tagihan) {
+        list.add(tagihan);
+    }
+    
+    public void removeTagihan(Tagihan tagihan) {
+        list.remove(tagihan);
     }
 
     public List<Tagihan> getList() {
@@ -89,5 +98,22 @@ public final class TagihanTableModel extends DefaultTableModel {
 
         for (Pemakaian pemakaian : list)
             this.list.add(pemakaian);
+    }
+    
+    public Long getTotal() {
+        Long total = 0L;
+        for (Tagihan tagihan : list)
+            total += tagihan.hitungTagihan();
+        return total;
+    }
+    
+    public TagihanTableModel filter(Tagihan.StatusTagihan status) {
+        List<Tagihan> listBaru = new ArrayList<>();
+        for (Tagihan tagihan : list) {
+            if (status.equals(tagihan.getStatus()))
+                listBaru.add(tagihan);
+        }
+        
+        return new TagihanTableModel(listBaru);
     }
 }

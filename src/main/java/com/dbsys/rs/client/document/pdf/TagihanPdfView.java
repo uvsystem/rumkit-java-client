@@ -1,6 +1,9 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.lib.entity.Pelayanan;
+import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.Pembayaran;
 import com.dbsys.rs.lib.entity.Tagihan;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -9,6 +12,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPTable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +21,29 @@ import java.util.Map;
  * @author Deddy Christoper Kakunsi
  */
 public class TagihanPdfView extends  AbstractPdfView {
+
+    @Override
+    public Document create(Map<String, Object> model, Document doc) throws DocumentException {
+        doc.newPage();
+
+        Pembayaran pembayaran = (Pembayaran) model.get("pembayaran");
+        Pasien pasien = pembayaran.getPasien();
+        
+        List<Tagihan> list = new ArrayList<>();
+        for (Pelayanan pelayanan : pembayaran.getListPelayanan())
+            list.add(pelayanan);
+        for (Pemakaian pemakaian : pembayaran.getListPemakaian())
+            list.add(pemakaian);
+
+        Paragraph paragraph = new Paragraph();
+        createTitle(paragraph);
+        createContent(paragraph, pasien);
+        createContent(paragraph, list);
+
+        doc.add(paragraph);
+        
+        return doc;
+    }
 
     @Override
     protected void createTitle(Paragraph paragraph) throws DocumentException {
@@ -29,23 +56,6 @@ public class TagihanPdfView extends  AbstractPdfView {
     @Override
     public Document newDocument() {
         return new Document(PageSize.A4);
-    }
-
-    @Override
-    public Document create(Map<String, Object> model, Document doc) throws DocumentException {
-        doc.newPage();
-        
-        List<Tagihan> list = (List<Tagihan>) model.get("list");
-        Pasien pasien = (Pasien) model.get("pasien");
-
-        Paragraph paragraph = new Paragraph();
-        createTitle(paragraph);
-        createContent(paragraph, pasien);
-        createContent(paragraph, list);
-
-        doc.add(paragraph);
-        
-        return doc;
     }
 
     private void createContent(Paragraph paragraph, Pasien pasien) {
