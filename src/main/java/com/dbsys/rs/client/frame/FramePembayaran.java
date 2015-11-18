@@ -4,8 +4,6 @@ import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
-import com.dbsys.rs.client.tableModel.PelayananTableModel;
-import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.client.tableModel.StokTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
 import com.dbsys.rs.connector.ServiceException;

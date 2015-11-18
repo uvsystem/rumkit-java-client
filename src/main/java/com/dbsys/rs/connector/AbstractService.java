@@ -16,6 +16,7 @@ public abstract class AbstractService {
     protected String hrService;
     protected String inventoryService;
     protected String patientService;
+    protected String paymentService;
     protected String treatmentService;
     protected String usageService;
     protected String serveService;
@@ -42,6 +43,7 @@ public abstract class AbstractService {
         this.hrService = String.format("%s/rumkit-hr-service", host);
         this.inventoryService = String.format("%s/rumkit-inventory-service", host);
         this.patientService = String.format("%s/rumkit-patient-service", host);
+        this.paymentService = String.format("%s/rumkit-payment-service", host);
         this.treatmentService = String.format("%s/rumkit-treatment-service", host);
         this.usageService = String.format("%s/rumkit-usage-service", host);
         this.serveService = String.format("%s/rumkit-serve-service", host);
