@@ -208,9 +208,9 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnPasienKeluar = new javax.swing.JButton();
         pnlPembayaran = new javax.swing.JPanel();
         lblTagihan = new javax.swing.JLabel();
-        btnCetakPembayaran = new javax.swing.JButton();
         btnBayar = new javax.swing.JButton();
         btnCetakTagihan = new javax.swing.JButton();
+        btnCetakPembayaran = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -539,21 +539,13 @@ public class FramePembayaran extends javax.swing.JFrame {
         lblTagihan.setText("Rp 00.000.000.000");
         pnlPembayaran.add(lblTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, -1));
 
-        btnCetakPembayaran.setText("CETAK");
-        btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakPembayaranActionPerformed(evt);
-            }
-        });
-        pnlPembayaran.add(btnCetakPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 65, -1, -1));
-
         btnBayar.setText("BAYAR");
         btnBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBayarActionPerformed(evt);
             }
         });
-        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 65, -1, -1));
+        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 65, -1, -1));
 
         getContentPane().add(pnlPembayaran);
         pnlPembayaran.setBounds(860, 500, 400, 100);
@@ -566,6 +558,15 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         getContentPane().add(btnCetakTagihan);
         btnCetakTagihan.setBounds(1130, 710, 130, 50);
+
+        btnCetakPembayaran.setText("CETAK STRUK");
+        btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPembayaranActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCetakPembayaran);
+        btnCetakPembayaran.setBounds(995, 710, 120, 50);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
         getContentPane().add(lblBackground);

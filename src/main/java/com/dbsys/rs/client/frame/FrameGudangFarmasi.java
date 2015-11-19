@@ -14,6 +14,7 @@ import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Barang;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Stok;
+import com.dbsys.rs.lib.entity.StokKembali;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.ArrayList;
 import java.util.List;
@@ -1051,6 +1052,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             pasien = pasienService.get(kode);
             
             txtNamaPasienKembali.setText(pasien.getNama());
+            txtNomorKembali.setText(StokKembali.createKode());
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

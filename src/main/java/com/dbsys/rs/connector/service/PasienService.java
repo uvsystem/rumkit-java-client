@@ -16,6 +16,7 @@ import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.Penanggung;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pasien.KeadaanPasien;
@@ -160,5 +161,17 @@ public class PasienService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getList();
+    }
+
+    public void ubahKelas(Pasien pasien, Kelas kelas) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{patientService}/pasien/{id}/kelas/{kelas}", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, patientService, pasien.getId(), kelas);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
 }

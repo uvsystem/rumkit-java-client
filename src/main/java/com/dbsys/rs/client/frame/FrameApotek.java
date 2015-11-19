@@ -332,6 +332,8 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);
             loadTableResep(pasien);
+            
+            txtResepNomor.setText(Pemakaian.createKode());
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

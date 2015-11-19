@@ -41,6 +41,8 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
+        
+        resetForm();
     }
     
     @Override
@@ -48,6 +50,26 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         tujuan = unit;
         
         txtPasienTujuan.setText(tujuan.getNama());
+    }
+    
+    private void resetForm() {
+        penduduk = null;
+        tujuan = null;
+        
+        txtPendudukKode.setText(Penduduk.createKode());
+        txtPendudukNik.setText(null);
+        txtPendudukNama.setText(null);
+        cbPendudukKelamin.setSelectedIndex(0);
+        txtPendudukTanggalLahir.setText(null);
+        txtPendudukDarah.setText(null);
+        txtPendudukAgama.setText(null);
+        txtPendudukTelepon.setText(null);
+        
+        txtPasienNomor.setText(null);
+        txtPasienTanggalMasuk.setText(null);
+        txtPasienTujuan.setText(null);
+        cbPasienKelas.setSelectedIndex(0);
+        cbPasienTanggungan.setSelectedIndex(0);
     }
 
     /**
@@ -96,7 +118,6 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         cbPasienKelas = new javax.swing.JComboBox();
         cbPasienTanggungan = new javax.swing.JComboBox();
         btnPasienTambah = new javax.swing.JButton();
-        btnCetakStatus = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -198,7 +219,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         pnlDetail.add(btnPendudukClean);
         btnPendudukClean.setBounds(300, 270, 80, 30);
 
-        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 400, 310));
+        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 400, 310));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,7 +261,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         pnlCari.add(txtKeyword);
         txtKeyword.setBounds(170, 25, 210, 25);
 
-        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 400, 60));
+        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, 400, 60));
 
         pnlPendaftaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPendaftaran.setLayout(null);
@@ -298,18 +319,9 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         pnlPendaftaran.add(btnPasienTambah);
-        btnPasienTambah.setBounds(170, 210, 80, 30);
+        btnPasienTambah.setBounds(300, 180, 80, 30);
 
-        btnCetakStatus.setText("Cetak Status");
-        btnCetakStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakStatusActionPerformed(evt);
-            }
-        });
-        pnlPendaftaran.add(btnCetakStatus);
-        btnCetakStatus.setBounds(280, 210, 95, 30);
-
-        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 490, 400, 260));
+        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, 400, 220));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
@@ -355,26 +367,12 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         txtPendudukDarah.setText(penduduk.getDarah());
         txtPendudukAgama.setText(penduduk.getAgama());
         txtPendudukTelepon.setText(penduduk.getTelepon());
+        
+        txtPasienNomor.setText(Pasien.createKode());
     }//GEN-LAST:event_tblPendudukMouseClicked
 
     private void btnPendudukCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukCleanActionPerformed
-        penduduk = null;
-        tujuan = null;
-        
-        txtPendudukKode.setText(null);
-        txtPendudukNik.setText(null);
-        txtPendudukNama.setText(null);
-        cbPendudukKelamin.setSelectedIndex(0);
-        txtPendudukTanggalLahir.setText(null);
-        txtPendudukDarah.setText(null);
-        txtPendudukAgama.setText(null);
-        txtPendudukTelepon.setText(null);
-        
-        txtPasienNomor.setText(null);
-        txtPasienTanggalMasuk.setText(null);
-        txtPasienTujuan.setText(null);
-        cbPasienKelas.setSelectedIndex(0);
-        cbPasienTanggungan.setSelectedIndex(0);
+        resetForm();
     }//GEN-LAST:event_btnPendudukCleanActionPerformed
 
     private void btnPendudukSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukSimpanActionPerformed
@@ -424,10 +422,6 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         }
     }//GEN-LAST:event_btnPasienTambahActionPerformed
 
-    private void btnCetakStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakStatusActionPerformed
-        JOptionPane.showMessageDialog(this, "Cetak Status Pasien belum");
-    }//GEN-LAST:event_btnCetakStatusActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         try {
             tokenService.lock(TokenHolder.getKode());
@@ -462,7 +456,6 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
-    private javax.swing.JButton btnCetakStatus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendudukClean;
