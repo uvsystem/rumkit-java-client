@@ -66,14 +66,14 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pnlPemakaian.setVisible(false);
         pnlPelayanan.setVisible(false);
         
-        txtPemakaianTanggal.setText(DateUtil.getDate().toString());
-        
         if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class) || clsDomain.equals(Barang.class)) {
             setSize(500, 580);
             pnlPemakaian.setVisible(true);
+            txtPemakaianTanggal.setText(DateUtil.getDate().toString());
         } else if (clsDomain.equals(Tindakan.class)) {
             setSize(500, 700);
             pnlPelayanan.setVisible(true);
+            txtPelayananTanggal.setText(DateUtil.getDate().toString());
         }
     }
 
@@ -87,6 +87,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPemakaianJumlah.setText(pemakaian.getJumlah().toString());
         txtPemakaianTanggal.setText(pemakaian.getTanggal().toString());
         txtPemakaianKeterangan.setText(pemakaian.getKeterangan());
+        txtPemakaianSatuan.setText(pemakaian.getBarang().getSatuan());
     }
 
     FrameTambahObject(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
@@ -101,9 +102,12 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPelayananJumlah.setText(pelayanan.getJumlah().toString());
         txtPelayananTanggal.setText(pelayanan.getTanggal().toString());
         txtPelayananKeterangan.setText(pelayanan.getKeterangan());
+        txtPelayananSatuan.setText(tindakan.getSatuan().toString());
         
-        if (pelaksana != null)
+        if (pelaksana != null) {
             txtPelayananPelaksana.setText(pelaksana.getNama());
+            cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipe());
+        }
     }
 
     FrameTambahObject(JFrame frame, Pasien pasien, String nomorResep) {

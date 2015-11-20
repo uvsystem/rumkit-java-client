@@ -1035,8 +1035,10 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s",
                 pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));
 
-            if (JOptionPane.YES_OPTION == pilihan)
+            if (JOptionPane.YES_OPTION == pilihan) {
                 pelayananService.hapus(pelayanan);
+                reloadTable();
+            }
         } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

@@ -461,8 +461,10 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin akan menghapus pemakaian obat/bhp '%s' ?", 
                     pemakaian.getBarang().getNama()));
 
-            if (JOptionPane.YES_OPTION == pilihan)
+            if (JOptionPane.YES_OPTION == pilihan) {
                 pemakaianService.hapus(pemakaian);
+                loadTableResep(pasien);
+            }
         } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

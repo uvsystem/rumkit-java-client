@@ -114,7 +114,6 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             return;
 
         List<Pelayanan> list = pelayananService.getByPasien(pasien);
-
         PelayananTableModel tableModel = new PelayananTableModel(list);
         tblTindakan.setModel(tableModel);
     }
@@ -749,6 +748,8 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             
             loadTindakan(pasien);
         } catch (ServiceException ex) {
+            PelayananTableModel tableModel = new PelayananTableModel(null);
+            tblTindakan.setModel(tableModel);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtPasienKodeFocusLost
@@ -774,8 +775,10 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin akan menghapus pelayanan %s pada tanggal %s", 
                     pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));
 
-            if (JOptionPane.YES_OPTION == pilihan)
+            if (JOptionPane.YES_OPTION == pilihan) {
                 pelayananService.hapus(pelayanan);
+                reloadTable();
+            }
         } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
