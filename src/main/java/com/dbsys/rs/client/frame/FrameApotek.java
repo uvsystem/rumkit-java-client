@@ -1,7 +1,7 @@
 package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.EventController;
-import com.dbsys.rs.client.ObatTableFrame;
+import com.dbsys.rs.client.BarangTableFrame;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
+public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
@@ -63,19 +63,31 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         txtPasienAgama.setText(pasien.getAgama());
         txtPasienTelepon.setText(pasien.getTelepon());
         
-        tblResep.removeAll();
-        
         this.pasien = pasien;
     }
 
-    private void loadTableResep(Pasien pasien) throws ServiceException {
+    private List<Pemakaian> loadTableResep(Pasien pasien) throws ServiceException {
         List<Pemakaian> list = pemakaianService.getByPasien(pasien.getId());
         PemakaianTableModel tableModel = new PemakaianTableModel(list);
+
+        tblResep.removeAll();
         tblResep.setModel(tableModel);
+        
+        return list;
+    }
+    
+    private List<Pemakaian> loadTableResep(String nomorPasien) throws ServiceException {
+        List<Pemakaian> list = pemakaianService.getByNomor(nomorPasien);
+        PemakaianTableModel tableModel = new PemakaianTableModel(list);
+
+        tblResep.removeAll();
+        tblResep.setModel(tableModel);
+
+        return list;
     }
     
     @Override
-    public void reloadTableObat() {
+    public void reloadTable() {
         try {
             loadTableResep(pasien);
         } catch (ServiceException ex) {}
@@ -128,6 +140,8 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnResep = new javax.swing.JButton();
+        btnPasien = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,7 +151,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
+        pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlCari.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,96 +159,96 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
                 txtPasienKodeFocusLost(evt);
             }
         });
-        pnlCari.add(txtPasienKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 210, 25));
+        pnlCari.add(txtPasienKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 250, 25));
 
         jLabel2.setText("No. Pasien");
-        pnlCari.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, -1));
+        pnlCari.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         getContentPane().add(pnlCari);
         pnlCari.setBounds(860, 140, 400, 60);
 
-        pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Pasien"));
+        pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
 
         jLabel3.setText("NIK");
         pnlPasien.add(jLabel3);
-        jLabel3.setBounds(20, 30, 140, 14);
+        jLabel3.setBounds(20, 30, 90, 25);
 
         jLabel4.setText("Nama");
         pnlPasien.add(jLabel4);
-        jLabel4.setBounds(20, 60, 140, 14);
+        jLabel4.setBounds(20, 60, 90, 25);
 
         jLabel5.setText("Kelamin");
         pnlPasien.add(jLabel5);
-        jLabel5.setBounds(20, 90, 140, 14);
+        jLabel5.setBounds(20, 90, 90, 25);
 
         jLabel7.setText("Agama");
         pnlPasien.add(jLabel7);
-        jLabel7.setBounds(20, 180, 140, 14);
+        jLabel7.setBounds(20, 180, 90, 25);
 
         jLabel8.setText("Telepon");
         pnlPasien.add(jLabel8);
-        jLabel8.setBounds(20, 210, 140, 14);
+        jLabel8.setBounds(20, 210, 90, 25);
 
         jLabel9.setText("Gol. Darah");
         pnlPasien.add(jLabel9);
-        jLabel9.setBounds(20, 150, 140, 14);
+        jLabel9.setBounds(20, 150, 90, 25);
 
         jLabel10.setText("Tanggal Masuk");
         pnlPasien.add(jLabel10);
-        jLabel10.setBounds(20, 300, 140, 14);
+        jLabel10.setBounds(20, 300, 90, 25);
 
         jLabel11.setText("Tanggal Lahir");
         pnlPasien.add(jLabel11);
-        jLabel11.setBounds(20, 120, 140, 14);
+        jLabel11.setBounds(20, 120, 90, 25);
 
         jLabel12.setText("Tanggungan");
         pnlPasien.add(jLabel12);
-        jLabel12.setBounds(20, 240, 140, 14);
+        jLabel12.setBounds(20, 240, 90, 25);
 
         jLabel13.setText("Status Rawat");
         pnlPasien.add(jLabel13);
-        jLabel13.setBounds(20, 270, 140, 14);
+        jLabel13.setBounds(20, 270, 90, 25);
 
         txtPasienNik.setEditable(false);
         pnlPasien.add(txtPasienNik);
-        txtPasienNik.setBounds(170, 30, 210, 25);
+        txtPasienNik.setBounds(130, 30, 250, 25);
 
         txtPasienNama.setEditable(false);
         pnlPasien.add(txtPasienNama);
-        txtPasienNama.setBounds(170, 60, 210, 25);
+        txtPasienNama.setBounds(130, 60, 250, 25);
 
         txtPasienKelamin.setEditable(false);
         pnlPasien.add(txtPasienKelamin);
-        txtPasienKelamin.setBounds(170, 90, 210, 25);
+        txtPasienKelamin.setBounds(130, 90, 250, 25);
 
         txtPasienTanggalLahir.setEditable(false);
         pnlPasien.add(txtPasienTanggalLahir);
-        txtPasienTanggalLahir.setBounds(170, 120, 210, 25);
+        txtPasienTanggalLahir.setBounds(130, 120, 250, 25);
 
         txtPasienGolonganDarah.setEditable(false);
         pnlPasien.add(txtPasienGolonganDarah);
-        txtPasienGolonganDarah.setBounds(170, 150, 210, 25);
+        txtPasienGolonganDarah.setBounds(130, 150, 250, 25);
 
         txtPasienAgama.setEditable(false);
         pnlPasien.add(txtPasienAgama);
-        txtPasienAgama.setBounds(170, 180, 210, 25);
+        txtPasienAgama.setBounds(130, 180, 250, 25);
 
         txtPasienTelepon.setEditable(false);
         pnlPasien.add(txtPasienTelepon);
-        txtPasienTelepon.setBounds(170, 210, 210, 25);
+        txtPasienTelepon.setBounds(130, 210, 250, 25);
 
         txtPasienTanggungan.setEditable(false);
         pnlPasien.add(txtPasienTanggungan);
-        txtPasienTanggungan.setBounds(170, 240, 210, 25);
+        txtPasienTanggungan.setBounds(130, 240, 250, 25);
 
         txtPasienStatusRawat.setEditable(false);
         pnlPasien.add(txtPasienStatusRawat);
-        txtPasienStatusRawat.setBounds(170, 270, 210, 25);
+        txtPasienStatusRawat.setBounds(130, 270, 250, 25);
 
         txtPasienTanggalMasuk.setEditable(false);
         pnlPasien.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(170, 300, 210, 25);
+        txtPasienTanggalMasuk.setBounds(130, 300, 250, 25);
 
         getContentPane().add(pnlPasien);
         pnlPasien.setBounds(860, 210, 400, 340);
@@ -315,6 +329,24 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
+        btnResep.setText("CETAK RESEP");
+        btnResep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResepActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnResep);
+        btnResep.setBounds(990, 560, 130, 40);
+
+        btnPasien.setText("CETAK PEMAKAIAN");
+        btnPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPasien);
+        btnPasien.setBounds(1133, 560, 130, 40);
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Farmasi_Bg.jpg"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 1280, 800);
@@ -324,6 +356,7 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
         String keyword = txtPasienKode.getText();
+        txtResepNomor.setText(Pemakaian.createKode());
         
         if (keyword.equals(""))
             return;
@@ -332,8 +365,6 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);
             loadTableResep(pasien);
-            
-            txtResepNomor.setText(Pemakaian.createKode());
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -363,23 +394,49 @@ public class FrameApotek extends javax.swing.JFrame implements ObatTableFrame {
 
     private void txtResepNomorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtResepNomorFocusLost
         String nomor = txtResepNomor.getText();
-        List<Pemakaian> list = null;        
-        
+        if (nomor == null || nomor.equals(""))
+            return;
+
         try {
-            list = pemakaianService.getByNomor(nomor);
+            loadTableResep(nomor);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-            PemakaianTableModel tableModel = new PemakaianTableModel(list);
-            tblResep.setModel(tableModel);
+        }
+    }//GEN-LAST:event_txtResepNomorFocusLost
+
+    private void btnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan mencari data pasien terlebih dahulu");
+            return;
         }
         
-    }//GEN-LAST:event_txtResepNomorFocusLost
+        try {
+            List<Pemakaian> list = loadTableResep(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPasienActionPerformed
+
+    private void btnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepActionPerformed
+        String nomorResep = txtResepNomor.getText();
+        if (nomorResep.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari menggunakan nomor resep terlebih dahulu");
+            return;
+        }
+        
+        try {
+            List<Pemakaian> list = loadTableResep(nomorResep);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnResepActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;
+    private javax.swing.JButton btnPasien;
+    private javax.swing.JButton btnResep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

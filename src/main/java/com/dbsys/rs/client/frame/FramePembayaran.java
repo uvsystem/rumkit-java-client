@@ -114,16 +114,15 @@ public class FramePembayaran extends javax.swing.JFrame {
             List<Pemakaian> listPemakaian = null;
             try {
                 listPemakaian = pemakaianService.getByPasien(pasien.getId());
-            } catch (ServiceException ex) {
-                throw ex;
-            }
+            } catch (ServiceException ex) {}
             
             try {
                 listStokKembali = stokService.stokKembali(pasien);
+            } catch (ServiceException ex) {
+                listStokKembali = null;
+            } finally {
                 StokTableModel tableModel = new StokTableModel(listStokKembali);
                 tblStokKembali.setModel(tableModel);
-            } catch (ServiceException ex) {
-                throw ex;
             }
 
             TagihanTableModel tableModel = new TagihanTableModel(null);
@@ -263,14 +262,14 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblMenunggak);
 
-        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 457));
+        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 450));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setText("TAGIHAN");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, 90, 25));
-        jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 15, 560, 25));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+        jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
 
         btnBayarTagihan.setText("BAYAR");
         btnBayarTagihan.addActionListener(new java.awt.event.ActionListener() {
@@ -278,7 +277,7 @@ public class FramePembayaran extends javax.swing.JFrame {
                 btnBayarTagihanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 15, 90, 25));
+        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 90, 25));
 
         pnlMenunggak.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
@@ -306,12 +305,12 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         pnlBayar.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 450));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBATALAN MEMBAYAR TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setText("TAGIHAN");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, 90, 25));
-        jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 15, 560, 25));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+        jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
 
         btnBatalTagihan.setText("BATAL");
         btnBatalTagihan.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +318,7 @@ public class FramePembayaran extends javax.swing.JFrame {
                 btnBatalTagihanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 15, 90, 25));
+        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 90, 25));
 
         pnlBayar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 

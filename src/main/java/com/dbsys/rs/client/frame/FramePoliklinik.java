@@ -75,7 +75,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     }
     
     @Override
-    public void reloadTableTindakan() {
+    public void reloadTable() {
         try {
             loadTabelTindakan(pasien);
         } catch (ServiceException ex) {}

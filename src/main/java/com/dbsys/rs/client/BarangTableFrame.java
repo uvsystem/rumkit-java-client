@@ -4,8 +4,8 @@ package com.dbsys.rs.client;
  *
  * @author Deddy Christoper Kakunsi
  */
-public interface ObatTableFrame {
+public interface BarangTableFrame {
     
-    void reloadTableObat();
+    void reloadTable();
     
 }

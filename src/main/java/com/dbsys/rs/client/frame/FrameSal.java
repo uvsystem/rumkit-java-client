@@ -120,7 +120,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
     }
     
     @Override
-    public void reloadTableTindakan() {
+    public void reloadTable() {
         try {
             loadTindakan(pasien);
         } catch (ServiceException ex) {

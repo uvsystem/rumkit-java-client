@@ -6,6 +6,6 @@ package com.dbsys.rs.client;
  */
 public interface TindakanTableFrame {
     
-    void reloadTableTindakan();
+    void reloadTable();
     
 }
