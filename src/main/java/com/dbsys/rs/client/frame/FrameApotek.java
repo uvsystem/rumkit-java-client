@@ -2,6 +2,7 @@ package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.BarangTableFrame;
+import com.dbsys.rs.client.ComponentSelectionException;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -11,6 +12,8 @@ import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -92,6 +95,16 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             loadTableResep(pasien);
         } catch (ServiceException ex) {}
     }
+    
+    private Pemakaian getPemakaian() throws ComponentSelectionException {
+        int index = tblResep.getSelectedRow();
+        
+        if (index < 0)
+            throw new ComponentSelectionException("Silahkan memilih data pada tabel terlebih dahulu");
+        
+        PemakaianTableModel tableModel = (PemakaianTableModel) tblResep.getModel();
+        return tableModel.getPemakaian(index);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,6 +145,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResep = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnHapus = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel31 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -287,11 +301,20 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         jScrollPane1.setViewportView(tblResep);
 
         pnlResep.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 90, 790, 510);
+        jScrollPane1.setBounds(20, 90, 790, 470);
 
         jLabel1.setText("Nomor Resep");
         pnlResep.add(jLabel1);
         jLabel1.setBounds(20, 40, 130, 25);
+
+        btnHapus.setText("HAPUS");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+        pnlResep.add(btnHapus);
+        btnHapus.setBounds(730, 570, 80, 30);
 
         getContentPane().add(pnlResep);
         pnlResep.setBounds(20, 140, 830, 620);
@@ -431,8 +454,23 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         }
     }//GEN-LAST:event_btnResepActionPerformed
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        try {
+            Pemakaian pemakaian = getPemakaian();
+
+            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin akan menghapus pemakaian obat/bhp '%s' ?", 
+                    pemakaian.getBarang().getNama()));
+
+            if (JOptionPane.YES_OPTION == pilihan)
+                pemakaianService.hapus(pemakaian);
+        } catch (ComponentSelectionException | ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;
     private javax.swing.JButton btnPasien;

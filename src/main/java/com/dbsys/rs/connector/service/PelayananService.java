@@ -15,6 +15,7 @@ import com.dbsys.rs.connector.adapter.PelayananAdapter;
 import com.dbsys.rs.connector.adapter.PelayananTemporalAdapter;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
@@ -108,6 +109,18 @@ public class PelayananService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getModel().getPelayanan();
+    }
+
+    public void hapus(Pelayanan pelayanan) throws ServiceException {
+        HttpEntity<Pelayanan> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{serveService}/pelayanan/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, serveService, pelayanan.getId());
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
 
     public List<Pelayanan> getByPasien(Pasien pasien) throws ServiceException {

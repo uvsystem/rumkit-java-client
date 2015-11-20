@@ -11,6 +11,7 @@ import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Pemakaian;
 
@@ -51,6 +52,18 @@ public class PemakaianService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getModel();
+    }
+    
+    public void hapus(Pemakaian pemakaian) throws ServiceException {
+        HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{usageService}/pemakaian/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, usageService, pemakaian.getId());
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
 
     public Pemakaian getById(Long id) throws ServiceException {

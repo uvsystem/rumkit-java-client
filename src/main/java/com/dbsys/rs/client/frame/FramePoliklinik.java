@@ -8,7 +8,6 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
@@ -26,7 +25,6 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
-    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
 
     private Pasien pasien;
@@ -406,13 +404,12 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         try {
             Pelayanan pelayanan = getPelayanan();
 
-            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s", 
+            int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s?", 
                     pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));
 
-            if (JOptionPane.YES_OPTION == pilihan) {
-                JOptionPane.showMessageDialog(this, "Belum bisa");
-            }
-        } catch (ComponentSelectionException ex) {
+            if (JOptionPane.YES_OPTION == pilihan)
+                pelayananService.hapus(pelayanan);
+        } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnTindakanHapusActionPerformed
