@@ -369,6 +369,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         txtPendudukTelepon.setText(penduduk.getTelepon());
         
         txtPasienNomor.setText(Pasien.createKode());
+        txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
     }//GEN-LAST:event_tblPendudukMouseClicked
 
     private void btnPendudukCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukCleanActionPerformed

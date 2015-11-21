@@ -76,7 +76,10 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     public void reloadTable() {
         try {
             loadTabelTindakan(pasien);
-        } catch (ServiceException ex) {}
+        } catch (ServiceException ex) {
+            PelayananTableModel tableModel = new PelayananTableModel(null);
+            tblTindakan.setModel(tableModel);
+        }
     }
     
     private Pelayanan getPelayanan() throws ComponentSelectionException {
