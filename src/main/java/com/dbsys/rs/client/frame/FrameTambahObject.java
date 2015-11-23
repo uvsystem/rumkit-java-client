@@ -4,6 +4,7 @@ import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.BarangTableFrame;
 import com.dbsys.rs.client.TindakanFrame;
 import com.dbsys.rs.client.TindakanTableFrame;
+import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -23,6 +24,7 @@ import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,7 +33,7 @@ import javax.swing.JOptionPane;
  *
  * @author Acer One 10
  */
-public class FrameTambahObject extends JFrame implements  TindakanFrame {
+public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFrame {
 
     private final JFrame frame;
     private final Class<?> clsDomain;
@@ -50,9 +52,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     private Pelayanan pelayanan;
     private Tindakan tindakan;
     private Pegawai pelaksana;
+    private Unit unit;
     
     /**
      * Creates new form FrameTambahObject
+     * 
      * @param frame
      * @param clsDomain
      * @param pasien
@@ -72,11 +76,21 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             txtPemakaianTanggal.setText(DateUtil.getDate().toString());
         } else if (clsDomain.equals(Tindakan.class)) {
             setSize(500, 700);
+            this.unit = TokenHolder.getUnit();
+
             pnlPelayanan.setVisible(true);
+            txtPelayananUnit.setText(unit.getNama());
             txtPelayananTanggal.setText(DateUtil.getDate().toString());
         }
     }
 
+    /**
+     * Constructor untuk update pemakaian.
+     * 
+     * @param frame
+     * @param pasien
+     * @param pemakaian 
+     */
     FrameTambahObject(JFrame frame, Pasien pasien, Pemakaian pemakaian) {
         this(frame, Barang.class, pasien);
         this.pemakaian = pemakaian;
@@ -90,11 +104,19 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         txtPemakaianSatuan.setText(pemakaian.getBarang().getSatuan());
     }
 
+    /**
+     * Constructor untuk update pelayanan.
+     * 
+     * @param frame
+     * @param pasien
+     * @param pelayanan 
+     */
     FrameTambahObject(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
         this(frame, Tindakan.class, pasien);
         this.pelayanan = pelayanan;
         this.tindakan = pelayanan.getTindakan();
         this.pelaksana = pelayanan.getPelaksana();
+        this.unit = pelayanan.getUnit();
 
         txtPelayananTindakanNama.setText(tindakan.getNama());
         txtPelayananTindakanKelas.setText(tindakan.getKelas().toString());
@@ -108,11 +130,28 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
             txtPelayananPelaksana.setText(pelaksana.getNama());
             cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipe());
         }
+        
+        if (unit != null)
+            txtPelayananUnit.setText(unit.getNama());
     }
 
+    /**
+     * Constructor untuk penambahan barang.
+     * 
+     * @param frame
+     * @param pasien
+     * @param nomorResep 
+     */
     FrameTambahObject(JFrame frame, Pasien pasien, String nomorResep) {
         this(frame, Barang.class, pasien);
         this.nomorResep = nomorResep;
+    }
+
+    @Override
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+        
+        txtPelayananUnit.setText(unit.getNama());
     }
     
     @Override
@@ -168,7 +207,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         return tableModel.getTindakan(index);
     }
     
-    private Pelayanan getPelayananTindakan() {
+    private Pelayanan getPelayanan() {
         if (pelayanan == null)
             pelayanan = new Pelayanan();
         
@@ -185,7 +224,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pelayanan.setKeterangan(txtPemakaianKeterangan.getText());
         pelayanan.setTanggal(DateUtil.getDate(tanggal));
         pelayanan.setPasien(pasien);
-        pelayanan.setUnit(TokenHolder.getToken().getOperator().getUnit());
+        pelayanan.setUnit(this.unit);
         pelayanan.setPelaksana(pelaksana);
         
         return pelayanan;
@@ -225,6 +264,8 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         cbPelayananTipePelaksana = new javax.swing.JComboBox();
         txtPelayananPelaksana = new javax.swing.JTextField();
         txtPelayananSatuan = new javax.swing.JTextField();
+        txtPelayananUnit = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
         pnlPemakaian = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -246,8 +287,9 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jLabel1.setLabelFor(txtKeyword);
-        jLabel1.setText("Kata Kunci");
+        jLabel1.setText("KATA KUNCI");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(20, 95, 80, 20);
 
@@ -298,18 +340,18 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         jLabel15.setText("Keterangan");
         pnlPelayanan.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 90, 25));
 
-        jLabel16.setText("Tanggal");
-        pnlPelayanan.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 90, 25));
+        jLabel16.setText("Unit");
+        pnlPelayanan.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 90, 25));
 
         jLabel22.setText("Pelaksana");
-        pnlPelayanan.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 90, 25));
+        pnlPelayanan.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 90, 25));
 
         jLabel7.setText("Tipe Pelaksana");
-        pnlPelayanan.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 90, 25));
+        pnlPelayanan.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 90, 25));
 
         jLabel17.setText("Kelas Tindakan");
         pnlPelayanan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 25));
-        pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 460, 10));
+        pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 460, 10));
         pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 460, 10));
 
         txtPelayananTindakanNama.setEditable(false);
@@ -323,20 +365,31 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         cbPelayananTipePelaksana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "DOKTER", "PERAWAT" }));
-        pnlPelayanan.add(cbPelayananTipePelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 270, 25));
+        pnlPelayanan.add(cbPelayananTipePelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 270, 25));
 
         txtPelayananPelaksana.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPelayananPelaksanaMouseClicked(evt);
             }
         });
-        pnlPelayanan.add(txtPelayananPelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 270, 25));
+        pnlPelayanan.add(txtPelayananPelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 270, 25));
 
         txtPelayananSatuan.setEditable(false);
         pnlPelayanan.add(txtPelayananSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 270, 25));
 
+        txtPelayananUnit.setEditable(false);
+        txtPelayananUnit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPelayananUnitMouseClicked(evt);
+            }
+        });
+        pnlPelayanan.add(txtPelayananUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 270, 25));
+
+        jLabel19.setText("Tanggal");
+        pnlPelayanan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 90, 25));
+
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 460, 360);
+        pnlPelayanan.setBounds(20, 290, 460, 390);
 
         pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -412,7 +465,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
 
                 ((BarangTableFrame)frame).reloadTable();
             } else if (clsDomain.equals(Tindakan.class)) {
-                pelayanan = getPelayananTindakan();
+                pelayanan = getPelayanan();
                 pelayananService.simpan(pelayanan);
                 
                 ((TindakanTableFrame)frame).reloadTable();
@@ -463,6 +516,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
         }
     }//GEN-LAST:event_txtKeywordFocusLost
 
+    private void txtPelayananUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPelayananUnitMouseClicked
+        FrameCari cari = new FrameCari(this,Unit.class);
+        cari.setVisible(true);
+    }//GEN-LAST:event_txtPelayananUnitMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox cbPelayananTipePelaksana;
@@ -474,6 +532,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -498,6 +557,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame {
     private javax.swing.JTextField txtPelayananTanggal;
     private javax.swing.JTextField txtPelayananTindakanKelas;
     private javax.swing.JTextField txtPelayananTindakanNama;
+    private javax.swing.JTextField txtPelayananUnit;
     private javax.swing.JTextField txtPemakaianBarang;
     private javax.swing.JTextField txtPemakaianBiayaTambahan;
     private javax.swing.JTextField txtPemakaianJumlah;
