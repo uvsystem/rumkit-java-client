@@ -75,7 +75,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
             pnlPemakaian.setVisible(true);
             txtPemakaianTanggal.setText(DateUtil.getDate().toString());
         } else if (clsDomain.equals(Tindakan.class)) {
-            setSize(500, 700);
+            setSize(500, 750);
             this.unit = TokenHolder.getUnit();
 
             pnlPelayanan.setVisible(true);

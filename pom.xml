@@ -85,11 +85,13 @@
             <version>${itext.version}</version>
         </dependency>
 
+        <!--
         <dependency>
                 <groupId>net.sourceforge.jdatepicker</groupId>
                 <artifactId>jdatepicker</artifactId>
                 <version>${jdatepicker.version}</version>
         </dependency>
+        -->
 
     </dependencies>
     
