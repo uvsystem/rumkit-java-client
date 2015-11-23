@@ -406,6 +406,13 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     private void btnTindakanHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanHapusActionPerformed
         try {
             Pelayanan pelayanan = getPelayanan();
+            
+            if (!TokenHolder.getUnit().equals(pelayanan.getUnit())) {
+                JOptionPane.showMessageDialog(this, 
+                        String.format("Maaf anda tidak bisa menghapus pelayanan %s yang berasal dari unit %s. Anda hanya bisa menghapus pelayanan dari unit %s", 
+                                pelayanan.getTindakan().getNama(), pelayanan.getNamaUnit(), TokenHolder.getNamaUnit()));
+                return;
+            }
 
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s?", 
                     pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));

@@ -179,6 +179,12 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         txtBiayaTambahan = new javax.swing.JTextField();
         btnKeluar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        pnlTindakan = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTindakan = new javax.swing.JTable();
+        btnTindakanSimpan = new javax.swing.JButton();
+        btnTindakanUpdate = new javax.swing.JButton();
+        btnTindakanHapus = new javax.swing.JButton();
         pnlHome = new javax.swing.JPanel();
         scrollPasien = new javax.swing.JScrollPane();
         tblPasien = new javax.swing.JTable();
@@ -190,12 +196,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         jLabel2 = new javax.swing.JLabel();
         txtPasienMasuk = new javax.swing.JTextField();
         btnPasienMasuk = new javax.swing.JButton();
-        pnlTindakan = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTindakan = new javax.swing.JTable();
-        btnTindakanSimpan = new javax.swing.JButton();
-        btnTindakanUpdate = new javax.swing.JButton();
-        btnTindakanHapus = new javax.swing.JButton();
         scrollPenduduk = new javax.swing.JScrollPane();
         tblPenduduk = new javax.swing.JTable();
         pnlPasienDetail = new javax.swing.JPanel();
@@ -286,7 +286,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         btnRuangan = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
-        dialogKeluar.setUndecorated(false);
+        dialogKeluar.setUndecorated(true);
         dialogKeluar.setResizable(false);
         dialogKeluar.getContentPane().setLayout(null);
 
@@ -326,6 +326,59 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlTindakan.setLayout(null);
+
+        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTindakanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTindakan);
+
+        pnlTindakan.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 40, 690, 510);
+
+        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanSimpanActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanSimpan);
+        btnTindakanSimpan.setBounds(710, 40, 90, 35);
+
+        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanUpdateActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanUpdate);
+        btnTindakanUpdate.setBounds(710, 80, 90, 35);
+
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTindakanHapusActionPerformed(evt);
+            }
+        });
+        pnlTindakan.add(btnTindakanHapus);
+        btnTindakanHapus.setBounds(710, 120, 90, 35);
+
+        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
         pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHome.setLayout(null);
@@ -394,59 +447,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlMasuk.setBounds(10, 10, 390, 60);
 
         getContentPane().add(pnlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
-
-        pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
-        pnlTindakan.setLayout(null);
-
-        tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTindakanMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblTindakan);
-
-        pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 40, 690, 510);
-
-        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanSimpanActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanSimpan);
-        btnTindakanSimpan.setBounds(710, 40, 90, 35);
-
-        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
-        btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanUpdateActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(710, 80, 90, 35);
-
-        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
-        btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTindakanHapusActionPerformed(evt);
-            }
-        });
-        pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(710, 120, 90, 35);
-
-        getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1031,6 +1031,13 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private void btnTindakanHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanHapusActionPerformed
         try {
             Pelayanan pelayanan = getPelayanan();
+            
+            if (!TokenHolder.getUnit().equals(pelayanan.getUnit())) {
+                JOptionPane.showMessageDialog(this, 
+                        String.format("Maaf anda tidak bisa menghapus pelayanan %s yang berasal dari unit %s. Anda hanya bisa menghapus pelayanan dari unit %s", 
+                                pelayanan.getTindakan().getNama(), pelayanan.getNamaUnit(), TokenHolder.getNamaUnit()));
+                return;
+            }
 
             int pilihan = JOptionPane.showConfirmDialog(this, String.format("Anda yakin ingin menghapus pelayanan %s pada tanggal %s",
                 pelayanan.getTindakan().getNama(), pelayanan.getTanggal()));
