@@ -397,6 +397,13 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         try {
             Pelayanan pelayanan = getPelayanan();
             
+            if (!TokenHolder.getUnit().equals(pelayanan.getUnit())) {
+                JOptionPane.showMessageDialog(this, 
+                        String.format("Maaf anda tidak bisa mengubah pelayanan %s yang berasal dari unit %s. Anda hanya bisa mengubah pelayanan dari unit %s", 
+                                pelayanan.getTindakan().getNama(), pelayanan.getNamaUnit(), TokenHolder.getNamaUnit()));
+                return;
+            }
+            
             new FrameTambahObject(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
