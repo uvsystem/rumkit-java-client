@@ -103,7 +103,7 @@ public final class TagihanTableModel extends DefaultTableModel {
     public Long getTotal() {
         Long total = 0L;
         for (Tagihan tagihan : list)
-            total += tagihan.hitungTagihan();
+            total += tagihan.getTagihanCounted();
         return total;
     }
     

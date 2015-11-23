@@ -113,12 +113,14 @@ public class FrameLogin extends javax.swing.JFrame {
                 new FramePendaftaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.LOKET_PEMBAYARAN)) {
                 new FramePembayaran().setVisible(true);
-            } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
-                new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.APOTEK_FARMASI)) {
                 new FrameApotek().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
                 new FrameGudangFarmasi().setVisible(true);
+            } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
+                new FrameSal().setVisible(true);
+            } else if (token.getTipe().equals(Unit.TipeUnit.ICU)) {
+                new FrameSal().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {
                 new FrameUgd().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.POLIKLINIK)) {
