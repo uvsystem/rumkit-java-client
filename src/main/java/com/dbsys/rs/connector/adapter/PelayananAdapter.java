@@ -104,18 +104,12 @@ public class PelayananAdapter extends Tagihan {
     @Override
     @JsonIgnore
     public String getNama() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPelayanan().getNama();
     }
 
     @Override
     @JsonIgnore
     public Long getTagihan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    @JsonIgnore
-    public Long getCustomTagihan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPelayanan().getTagihan();
     }
 }

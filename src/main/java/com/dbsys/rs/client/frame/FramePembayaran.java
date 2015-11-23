@@ -664,7 +664,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private void btnBatalTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalTagihanActionPerformed
         Tagihan tagihan = getTagihan(tblBayar);
 
-        total -= tagihan.hitungTagihan();
+        total -= tagihan.getTagihanCounted();
         String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
         lblTagihan.setText(String.format("Rp %s", totalString));
         
@@ -682,7 +682,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private void btnBayarTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarTagihanActionPerformed
         Tagihan tagihan = getTagihan(tblMenunggak);
         
-        total += tagihan.hitungTagihan();
+        total += tagihan.getTagihanCounted();
         String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
         lblTagihan.setText(String.format("Rp %s", totalString));
         
