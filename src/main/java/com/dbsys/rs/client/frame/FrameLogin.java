@@ -16,13 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class FrameLogin extends javax.swing.JFrame {
 
+    private FrameUtama frameUtama;
+    
     /**
      * Creates new form login
+     * @param frameUtama
      */
-    public FrameLogin() {
+    public FrameLogin(FrameUtama frameUtama) {
         initComponents();
         this.setSize(250, 160);
         this.setLocationRelativeTo(null);
+        this.frameUtama = frameUtama;
     }
 
     /**
@@ -90,7 +94,10 @@ public class FrameLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        System.exit(0);
+        this.dispose();
+        if (frameUtama == null)
+            frameUtama = new FrameUtama();
+        frameUtama.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -132,6 +139,7 @@ public class FrameLogin extends javax.swing.JFrame {
             }
             
             this.dispose();
+            frameUtama.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

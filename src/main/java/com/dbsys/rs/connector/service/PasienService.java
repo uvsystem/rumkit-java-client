@@ -174,4 +174,15 @@ public class PasienService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
     }
+
+    public List<Pasien> cariGuest(String keyword) throws ServiceException {
+        ResponseEntity<ListEntityRestMessage<Pasien>> response;
+        response = restTemplate.exchange("{patientService}/pasien/keyword/{keyword}/guest", HttpMethod.GET, null, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pasien>>() {}, patientService, keyword);
+
+        ListEntityRestMessage<Pasien> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
 }

@@ -973,7 +973,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

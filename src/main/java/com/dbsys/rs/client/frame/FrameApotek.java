@@ -68,7 +68,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     }
 
     private List<Pemakaian> loadTableResep(Pasien pasien) throws ServiceException {
-        List<Pemakaian> list = pemakaianService.getByPasien(pasien.getId());
+        List<Pemakaian> list = pemakaianService.getByPasien(pasien);
         PemakaianTableModel tableModel = new PemakaianTableModel(list);
 
         tblResep.removeAll();
@@ -406,7 +406,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

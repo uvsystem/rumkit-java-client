@@ -1,9 +1,9 @@
 package com.dbsys.rs.client;
 
-import com.dbsys.rs.client.frame.FrameLogin;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.ExceptionPdfView;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.frame.FrameUtama;
 import com.dbsys.rs.lib.entity.Dokter;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class Rumkit {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
@@ -35,7 +35,7 @@ public class Rumkit {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                FrameLogin frm = new FrameLogin();
+                FrameUtama frm = new FrameUtama();
                 frm.setVisible(true);
             }
         });

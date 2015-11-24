@@ -310,7 +310,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 40, 690, 530);
+        jScrollPane1.setBounds(20, 40, 670, 520);
 
         btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +319,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             }
         });
         pnlTindakan.add(btnTindakanTambah);
-        btnTindakanTambah.setBounds(720, 40, 80, 30);
+        btnTindakanTambah.setBounds(710, 40, 80, 30);
 
         btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +328,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             }
         });
         pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(720, 80, 80, 30);
+        btnTindakanUpdate.setBounds(710, 80, 80, 30);
 
         btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +337,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
             }
         });
         pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(720, 120, 80, 30);
+        btnTindakanHapus.setBounds(710, 120, 80, 30);
 
         getContentPane().add(pnlTindakan);
         pnlTindakan.setBounds(20, 180, 810, 580);
@@ -802,7 +802,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

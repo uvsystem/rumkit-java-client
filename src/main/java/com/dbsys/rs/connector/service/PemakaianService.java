@@ -13,6 +13,7 @@ import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
+import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
 
 public class PemakaianService extends AbstractService {
@@ -79,12 +80,12 @@ public class PemakaianService extends AbstractService {
         return message.getModel();
     }
 
-    public List<Pemakaian> getByPasien(Long idPasien) throws ServiceException {
+    public List<Pemakaian> getByPasien(Pasien pasien) throws ServiceException {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pemakaian>> response;
         response = restTemplate.exchange("{usageService}/pemakaian/pasien/{idPasien}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, usageService, idPasien);
+                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, usageService, pasien.getId());
 
         ListEntityRestMessage<Pemakaian> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

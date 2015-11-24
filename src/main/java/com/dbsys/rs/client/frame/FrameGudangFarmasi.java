@@ -1432,7 +1432,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

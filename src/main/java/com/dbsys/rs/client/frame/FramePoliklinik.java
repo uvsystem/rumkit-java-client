@@ -382,7 +382,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

@@ -113,7 +113,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             
             List<Pemakaian> listPemakaian = null;
             try {
-                listPemakaian = pemakaianService.getByPasien(pasien.getId());
+                listPemakaian = pemakaianService.getByPasien(pasien);
             } catch (ServiceException ex) {}
             
             try {
@@ -634,7 +634,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

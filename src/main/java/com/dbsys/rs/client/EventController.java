@@ -10,6 +10,7 @@ import com.dbsys.rs.connector.ServiceException;
 public interface EventController<T> {
     
     String host = "http://localhost:8080";
+    // String host = "https://core-unitedvision.whelastic.net";
     
     T getModel();
     

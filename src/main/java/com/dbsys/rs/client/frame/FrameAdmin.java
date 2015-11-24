@@ -10,6 +10,8 @@ import com.dbsys.rs.client.tableModel.DokterTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.OperatorTableModel;
 import com.dbsys.rs.client.tableModel.PasienTableModel;
+import com.dbsys.rs.client.tableModel.PelayananTableModel;
+import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.client.tableModel.TindakanTableModel;
 import com.dbsys.rs.client.tableModel.UnitTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -18,6 +20,8 @@ import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.OperatorService;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PegawaiServices;
+import com.dbsys.rs.connector.service.PelayananService;
+import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
@@ -36,6 +40,8 @@ import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pegawai;
 import com.dbsys.rs.lib.entity.Pekerja;
+import com.dbsys.rs.lib.entity.Pelayanan;
+import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
 import com.dbsys.rs.lib.entity.Perawat;
@@ -65,20 +71,16 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private final PasienEventController pasienEventController;
 
     private final TokenService tokenService = TokenService.getInstance(EventController.host);
+    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+    private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
     
     /**
      * Creates new form admin
      */
     public FrameAdmin() {
         initComponents();
+        resetPanelVisibility();
         
-        pnlTindakan.setVisible(false);
-        pnlUnit.setVisible(false);
-        pnlBarang.setVisible(false);
-        pnlPenduduk.setVisible(false);
-        pnlPegawai.setVisible(false);
-        pnlOperator.setVisible(false);
-
         unitEventController = new UnitEventController();
         operatorEventController = new OperatorEventController();
         dokterEventController = new DokterEventController();
@@ -93,6 +95,18 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         
         String nama = TokenHolder.getNamaOperator();
         lbl_status.setText(nama);
+    }
+    
+    private void resetPanelVisibility() {
+        pnlBarang.setVisible(false);
+        pnlOperator.setVisible(false);
+        pnlPasien.setVisible(false);
+        pnlPegawai.setVisible(false);
+        pnlPelayanan.setVisible(false);
+        pnlPemakaian.setVisible(false);
+        pnlPenduduk.setVisible(false);
+        pnlTindakan.setVisible(false);
+        pnlUnit.setVisible(false);
     }
 
     @Override
@@ -158,13 +172,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
+            resetPanelVisibility();
             pnlUnit.setVisible(true);
-            pnlBarang.setVisible(false);
-            pnlPenduduk.setVisible(false);
-            pnlPegawai.setVisible(false);
-            pnlOperator.setVisible(false);
-            pnlPasien.setVisible(false);
 
             List<Unit> listUnit = unitservice.getAll();
             UnitTableModel tableModel = new UnitTableModel(listUnit);
@@ -236,13 +245,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
-            pnlUnit.setVisible(false);
-            pnlBarang.setVisible(false);
-            pnlPenduduk.setVisible(false);
-            pnlPegawai.setVisible(false);
+            resetPanelVisibility();
             pnlOperator.setVisible(true);
-            pnlPasien.setVisible(false);
 
             List<Operator> listOperator = operatorService.getAll();
             OperatorTableModel tableModel = new OperatorTableModel(listOperator);
@@ -329,13 +333,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
-            pnlUnit.setVisible(false);
-            pnlBarang.setVisible(false);
-            pnlPenduduk.setVisible(false);
+            resetPanelVisibility();
             pnlPegawai.setVisible(true);
-            pnlOperator.setVisible(false);
-            pnlPasien.setVisible(false);
 
             List<Pegawai> list = dokterService.getAll(Dokter.class);
             List<Dokter> listDokter = new ArrayList<>();
@@ -674,13 +673,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
-            pnlUnit.setVisible(false);
-            pnlBarang.setVisible(false);
+            resetPanelVisibility();
             pnlPenduduk.setVisible(true);
-            pnlPegawai.setVisible(false);
-            pnlOperator.setVisible(false);
-            pnlPasien.setVisible(false);
 
            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode rekam medik");
          }
@@ -768,13 +762,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
-            pnlUnit.setVisible(false);
+            resetPanelVisibility();
             pnlBarang.setVisible(true);
-            pnlPenduduk.setVisible(false);
-            pnlPegawai.setVisible(false);
-            pnlOperator.setVisible(false);
-            pnlPasien.setVisible(false);
 
             JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode obat");
         }
@@ -965,13 +954,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
+            resetPanelVisibility();
             pnlTindakan.setVisible(true);
-            pnlUnit.setVisible(false);
-            pnlBarang.setVisible(false);
-            pnlPenduduk.setVisible(false);
-            pnlPegawai.setVisible(false);
-            pnlOperator.setVisible(false);
-            pnlPasien.setVisible(false);
 
             JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode tindakan");
         }
@@ -1079,12 +1063,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void onLoad() throws ServiceException {
-            pnlTindakan.setVisible(false);
-            pnlUnit.setVisible(false);
-            pnlBarang.setVisible(false);
-            pnlPenduduk.setVisible(false);
-            pnlPegawai.setVisible(false);
-            pnlOperator.setVisible(false);
+            resetPanelVisibility();
             pnlPasien.setVisible(true);
 
             JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/nomor rekam medik/nik/nomor pasie.");
@@ -1105,6 +1084,10 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             PasienTableModel tableModel = new PasienTableModel(listPasien);
             tblPasien.setModel(tableModel);
         }
+        
+        public Pasien getByKode(String kode) throws ServiceException {
+            return pasienService.get(kode);
+        }
     }
     
     /**
@@ -1116,6 +1099,18 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlPemakaian = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tblPemakaian = new javax.swing.JTable();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel90 = new javax.swing.JLabel();
+        txtNomorPasienPemakaian = new javax.swing.JTextField();
+        pnlPelayanan = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tblPelayanan = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel88 = new javax.swing.JLabel();
+        txtNomorPasienPelayanan = new javax.swing.JTextField();
         pnlOperator = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -1397,12 +1392,14 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         btnTindakan = new javax.swing.JButton();
         btnPenduduk = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
+        btnPelayanan = new javax.swing.JButton();
+        btnPemakaian = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel89 = new javax.swing.JLabel();
         lbl_status = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
-        jLabel90 = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Rumah Sakit Liun Kendage Tahuna");
@@ -1411,6 +1408,80 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR OBAT & BHP YANG SUDAH DIPAKAI", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPemakaian.setLayout(null);
+
+        tblPemakaian.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane13.setViewportView(tblPemakaian);
+
+        pnlPemakaian.add(jScrollPane13);
+        jScrollPane13.setBounds(20, 100, 1020, 510);
+
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel90.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jLabel90.setText("NOMOR PASIEN");
+        jPanel12.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
+
+        txtNomorPasienPemakaian.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomorPasienPemakaianFocusLost(evt);
+            }
+        });
+        jPanel12.add(txtNomorPasienPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 360, 25));
+
+        pnlPemakaian.add(jPanel12);
+        jPanel12.setBounds(20, 20, 510, 60);
+
+        getContentPane().add(pnlPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
+
+        pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPelayanan.setLayout(null);
+
+        tblPelayanan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane12.setViewportView(tblPelayanan);
+
+        pnlPelayanan.add(jScrollPane12);
+        jScrollPane12.setBounds(20, 100, 1020, 510);
+
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel88.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jLabel88.setText("NOMOR PASIEN");
+        jPanel5.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
+
+        txtNomorPasienPelayanan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomorPasienPelayananFocusLost(evt);
+            }
+        });
+        jPanel5.add(txtNomorPasienPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 360, 25));
+
+        pnlPelayanan.add(jPanel5);
+        jPanel5.setBounds(20, 20, 510, 60);
+
+        getContentPane().add(pnlPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1060, 630));
 
         pnlOperator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlOperator.setBackground(new Color(0,0,0,20));
@@ -2601,6 +2672,22 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 490, 130, 51));
 
+        btnPelayanan.setText("PELAYANAN");
+        btnPelayanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPelayananActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 550, 130, 51));
+
+        btnPemakaian.setText("PEMAKAIAN");
+        btnPemakaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPemakaianActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 610, 130, 51));
+
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
@@ -2622,10 +2709,10 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jToolBar1.add(btnLogout);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 1270, 30));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 1280, 30));
 
-        jLabel90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
-        getContentPane().add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2985,7 +3072,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameLogin().setVisible(true);
+            new FrameUtama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3043,6 +3130,50 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnSimpanTindakanActionPerformed
+
+    private void btnPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPelayananActionPerformed
+        resetPanelVisibility();
+        pnlPelayanan.setVisible(true);
+    }//GEN-LAST:event_btnPelayananActionPerformed
+
+    private void btnPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPemakaianActionPerformed
+        resetPanelVisibility();
+        pnlPemakaian.setVisible(true);
+    }//GEN-LAST:event_btnPemakaianActionPerformed
+
+    private void txtNomorPasienPelayananFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienPelayananFocusLost
+        String nomorPasien = txtNomorPasienPelayanan.getText();
+
+        if (nomorPasien == null || nomorPasien.equals(""))
+            return;
+        
+        try {
+            Pasien pasien = pasienEventController.getByKode(nomorPasien);
+            List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien);
+            
+            PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
+            tblPelayanan.setModel(tableModel);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtNomorPasienPelayananFocusLost
+
+    private void txtNomorPasienPemakaianFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienPemakaianFocusLost
+        String nomorPasien = txtNomorPasienPemakaian.getText();
+
+        if (nomorPasien == null || nomorPasien.equals(""))
+            return;
+        
+        try {
+            Pasien pasien = pasienEventController.getByKode(nomorPasien);
+            List<Pemakaian> listPemakaian = pemakaianService.getByPasien(pasien);
+            
+            PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
+            tblPemakaian.setModel(tableModel);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtNomorPasienPemakaianFocusLost
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;
@@ -3054,6 +3185,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JButton btnPasienEdit;
     private javax.swing.JButton btnPasienSimpan;
     private javax.swing.JButton btnPegawai;
+    private javax.swing.JButton btnPelayanan;
+    private javax.swing.JButton btnPemakaian;
     private javax.swing.JButton btnPenduduk;
     private javax.swing.JButton btnPendudukEdit;
     private javax.swing.JButton btnPendudukSimpan;
@@ -3180,6 +3313,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
@@ -3194,6 +3328,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -3209,6 +3344,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -3216,6 +3352,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3226,6 +3364,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lbl_status;
     private javax.swing.JPanel pnlBarang;
     private javax.swing.JPanel pnlBhp;
@@ -3233,6 +3372,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JPanel pnlOperator;
     private javax.swing.JPanel pnlPasien;
     private javax.swing.JPanel pnlPegawai;
+    private javax.swing.JPanel pnlPelayanan;
+    private javax.swing.JPanel pnlPemakaian;
     private javax.swing.JPanel pnlPenduduk;
     private javax.swing.JPanel pnlTindakan;
     private javax.swing.JPanel pnlUnit;
@@ -3245,6 +3386,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JTable tblBhp;
     private javax.swing.JTable tblObat;
     private javax.swing.JTable tblPasien;
+    private javax.swing.JTable tblPelayanan;
+    private javax.swing.JTable tblPemakaian;
     private javax.swing.JTable tblPenduduk;
     private javax.swing.JTable tblTindakan;
     private javax.swing.JTable tbl_adm;
@@ -3267,6 +3410,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JTextField txtBhpKode;
     private javax.swing.JTextField txtBhpNama;
     private javax.swing.JTextField txtBhpSatuan;
+    private javax.swing.JTextField txtNomorPasienPelayanan;
+    private javax.swing.JTextField txtNomorPasienPemakaian;
     private javax.swing.JTextField txtObatHarga;
     private javax.swing.JTextField txtObatJumlah;
     private javax.swing.JTextField txtObatKeterangan;
