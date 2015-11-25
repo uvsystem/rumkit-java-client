@@ -3,6 +3,9 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.BarangTableFrame;
 import com.dbsys.rs.client.ComponentSelectionException;
+import com.dbsys.rs.client.document.DocumentException;
+import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.PemakaianPdfView;
 import com.dbsys.rs.client.tableModel.PemakaianTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
@@ -11,7 +14,9 @@ import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +30,11 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
 
     private Pasien pasien;
+    
+    /**
+     * Digunakan untuk cetak
+     */
+    private List<Pemakaian> listPemakaian;
 
     /**
      * Creates new FrameFarmasi
@@ -104,6 +114,25 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         return tableModel.getPemakaian(index);
     }
 
+    private void printPemakaian() {
+        if (listPemakaian == null) {
+            JOptionPane.showMessageDialog(this, "Silahakn cari pemakaian menggunakan nomor resep/kode pasien");
+            return;
+        }
+        
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        
+        PemakaianPdfView pdfView = new PemakaianPdfView();
+        Map<String, Object> model = new HashMap<>();
+        model.put("list", listPemakaian);
+        
+        try {
+            pdfProcessor.generate(pdfView, model, "E://print//pemakaian2.pdf");
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +181,6 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
-        btnResep = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
@@ -283,7 +311,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             }
         });
         pnlResep.add(btnObatTambah);
-        btnObatTambah.setBounds(700, 37, 100, 30);
+        btnObatTambah.setBounds(710, 40, 100, 30);
 
         tblResep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -350,15 +378,6 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        btnResep.setText("CETAK RESEP");
-        btnResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResepActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnResep);
-        btnResep.setBounds(990, 560, 130, 40);
-
         btnPasien.setText("CETAK PEMAKAIAN");
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +404,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         try {
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);
-            loadTableResep(pasien);
+            listPemakaian = loadTableResep(pasien);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -419,7 +438,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             return;
 
         try {
-            loadTableResep(nomor);
+            listPemakaian = loadTableResep(nomor);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -431,26 +450,8 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             return;
         }
         
-        try {
-            List<Pemakaian> list = loadTableResep(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+        printPemakaian();
     }//GEN-LAST:event_btnPasienActionPerformed
-
-    private void btnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepActionPerformed
-        String nomorResep = txtResepNomor.getText();
-        if (nomorResep.equals("")) {
-            JOptionPane.showMessageDialog(this, "Silahkan cari menggunakan nomor resep terlebih dahulu");
-            return;
-        }
-        
-        try {
-            List<Pemakaian> list = loadTableResep(nomorResep);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnResepActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         try {
@@ -474,7 +475,6 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;
     private javax.swing.JButton btnPasien;
-    private javax.swing.JButton btnResep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

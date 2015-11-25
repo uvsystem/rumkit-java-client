@@ -1,8 +1,8 @@
 package com.dbsys.rs.client;
 
 import com.dbsys.rs.client.document.DocumentException;
-import com.dbsys.rs.client.document.pdf.ExceptionPdfView;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.PemakaianPdfView;
 import com.dbsys.rs.client.frame.FrameUtama;
 import com.dbsys.rs.lib.entity.Dokter;
 import java.util.HashMap;
@@ -21,6 +21,7 @@ public class Rumkit {
     public static void main(String args[]) {
         setLookAndFeel();
         run();
+        // testPdf();
     }
     
     private static void setLookAndFeel() {
@@ -42,13 +43,13 @@ public class Rumkit {
     }
     
     private static void testPdf() {
-        ExceptionPdfView pdfView = new ExceptionPdfView();
+        PemakaianPdfView pdfView = new PemakaianPdfView();
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Test Jadi");
         
         PdfProcessor pdfProcessor = new PdfProcessor();
         try {
-            pdfProcessor.generate(pdfView, model, "E:\\test.pdf");
+            pdfProcessor.generate(pdfView, model, "E:\\print\\test.pdf");
         } catch (DocumentException ex) {
             System.out.println(ex);
         }
