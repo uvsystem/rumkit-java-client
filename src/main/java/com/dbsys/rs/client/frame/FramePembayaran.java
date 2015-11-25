@@ -3,6 +3,7 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.StokTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
@@ -44,9 +45,11 @@ public class FramePembayaran extends javax.swing.JFrame {
     
     private Pasien pasien;
     private Pembayaran pembayaran;
+    private boolean isPrintPembayaranAvailable;
     private Long total;
 
     private List<Stok> listStokKembali;
+    private List<Tagihan> listTagihan;
 
     /**
      * Creates new form FramePembayaran
@@ -132,6 +135,8 @@ public class FramePembayaran extends javax.swing.JFrame {
             tblSemua.setModel(tableModel);
             tblMenunggak.setModel(tableModel.filter(Tagihan.StatusTagihan.MENUNGGAK));
             tblBayar.setModel(new TagihanTableModel(null));
+            
+            listTagihan = tableModel.getList();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
@@ -577,6 +582,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
         loadData();
         btnCetakTagihan.requestFocus();
+        isPrintPembayaranAvailable = false;
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void btnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarActionPerformed
@@ -606,25 +612,33 @@ public class FramePembayaran extends javax.swing.JFrame {
         }
         
         try {
-            pembayaran.generateKode();
+            String kodePembayaran = pembayaran.generateKode();
+            pembayaran.setKode(kodePembayaran);
             pembayaranService.bayar(pembayaran);
             loadData();
 
-            JOptionPane.showMessageDialog(this, "Pembayaran pasien berhasil. Silahkan cetak struk pembayaran.");
+            isPrintPembayaranAvailable = true;
+            JOptionPane.showMessageDialog(this, String.format("Pembayaran pasien berhasil dengan kode pembayaran = '%s'.\nSilahkan cetak struk pembayaran.", pembayaran.getKode()));
          } catch (ServiceException ex) {
+            isPrintPembayaranAvailable = false;
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnBayarActionPerformed
 
     private void btnCetakPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPembayaranActionPerformed
+        if (!isPrintPembayaranAvailable || pembayaran == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan melakukan pembayaran dahulu");
+            return;
+        }
+            
         PdfProcessor pdfProcessor = new PdfProcessor();
         
-        TagihanPdfView pdfView = new TagihanPdfView();
+        PembayaranPdfView pdfView = new PembayaranPdfView();
         Map<String, Object> model = new HashMap<>();
         model.put("pembayaran", pembayaran);
         
         try {
-            pdfProcessor.generate(pdfView, model, "E://test.pdf");
+            pdfProcessor.generate(pdfView, model, "E://print//pembayaran.pdf");
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -712,7 +726,23 @@ public class FramePembayaran extends javax.swing.JFrame {
     }//GEN-LAST:event_tblBayarMouseClicked
 
     private void btnCetakTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakTagihanActionPerformed
-        // TODO add your handling code here:
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari data pasien dahulu");
+            return;
+        }
+            
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        
+        TagihanPdfView pdfView = new TagihanPdfView();
+        Map<String, Object> model = new HashMap<>();
+        model.put("pasien", pasien);
+        model.put("listTagihan", listTagihan);
+        
+        try {
+            pdfProcessor.generate(pdfView, model, "E://print//tagihan.pdf");
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnCetakTagihanActionPerformed
 
     private void tabDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabDataMouseClicked
