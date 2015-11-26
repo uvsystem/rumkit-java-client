@@ -51,15 +51,15 @@ public class StokKembaliPdfView extends  AbstractPdfView {
     }
 
     private void createContent(Paragraph paragraph, Pasien pasien) {
-        float columnWidths[] = {5f, 5f, 5f, 5f};
+        float columnWidths[] = {4f, 6f, 4f, 6f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "No. Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getKode()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getKode()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "No. Medrek", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getKodePenduduk()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getKodePenduduk()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Nama Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getNama()), align, 1, fontContent, Rectangle.NO_BORDER);
@@ -94,8 +94,8 @@ public class StokKembaliPdfView extends  AbstractPdfView {
             total += pengembalian;
         }
 
-        insertCell(table, "Total Pengembalian", Element.ALIGN_RIGHT, 3, fontHeader, Rectangle.BOX);
-        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Total Pengembalian", Element.ALIGN_RIGHT, 3, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

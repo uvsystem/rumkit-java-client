@@ -16,6 +16,7 @@ import com.dbsys.rs.connector.service.PembayaranService;
 import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
 import com.dbsys.rs.lib.entity.Pemakaian;
@@ -274,6 +275,8 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         jLabel17.setText("TAGIHAN");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+
+        txtTagihanBayar.setEditable(false);
         jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
 
         btnBayarTagihan.setText("BAYAR");
@@ -315,6 +318,8 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         jLabel19.setText("TAGIHAN");
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+
+        txtTagihanBatal.setEditable(false);
         jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
 
         btnBatalTagihan.setText("BATAL");
@@ -591,7 +596,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             return;
         }
         
-        if (total.equals(0L)) {
+        if (total.equals(0L) && Penanggung.UMUM.equals(pasien.getPenanggung())) {
             JOptionPane.showMessageDialog(this, "Silahkan masukan jumlah pembayaran.");
             return;
         }
@@ -638,7 +643,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         model.put("pembayaran", pembayaran);
         
         try {
-            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
+            pdfProcessor.generate(pdfView, model, String.format("E://print//pembayaran-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -669,7 +674,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         
         try {
             pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.KELUAR);
-            JOptionPane.showMessageDialog(this, "Berhasil! Silahkan mengisi pembayaran.");
+            JOptionPane.showMessageDialog(this, "Berhasil!");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -739,7 +744,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         model.put("listTagihan", listTagihan);
         
         try {
-            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
+            pdfProcessor.generate(pdfView, model, String.format("E://print//tagihan-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

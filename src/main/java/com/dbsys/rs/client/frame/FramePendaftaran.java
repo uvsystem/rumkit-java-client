@@ -40,7 +40,6 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         initComponents();
         
         lblOperator.setText(TokenHolder.getNamaOperator());
-        txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
         
         resetForm();
     }
@@ -65,8 +64,8 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         txtPendudukAgama.setText(null);
         txtPendudukTelepon.setText(null);
         
-        txtPasienNomor.setText(null);
-        txtPasienTanggalMasuk.setText(null);
+        txtPasienNomor.setText(Pasien.createKode());
+        txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
         txtPasienTujuan.setText(null);
         cbPasienKelas.setSelectedIndex(0);
         cbPasienTanggungan.setSelectedIndex(0);

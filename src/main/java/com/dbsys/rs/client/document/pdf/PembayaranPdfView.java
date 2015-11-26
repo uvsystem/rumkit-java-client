@@ -62,24 +62,27 @@ public class PembayaranPdfView extends  AbstractPdfView {
     private void createContent(Paragraph paragraph, Pembayaran pembayaran) {
         Pasien pasien = pembayaran.getPasien();
         
-        float columnWidths[] = {5f, 5f, 5f, 5f};
+        float columnWidths[] = {4f, 6f, 4f, 6f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "No. Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", pasien.getKode()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", pasien.getKode()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "No. Pembayaran", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", pembayaran.getKode()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", pembayaran.getKode()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Nama Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format(": %s", pasien.getNama()), align, 1, fontContent, Rectangle.NO_BORDER);
 
-        insertCell(table, "Tanggal Pembayaran", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Tgl. Pembayaran", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format(": %s", pembayaran.getTanggal()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "No. Medrek", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", pasien.getKodePenduduk()), align, 3, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", pasien.getKodePenduduk()), align, 1, fontContent, Rectangle.NO_BORDER);
+
+        insertCell(table, "Tanggungan", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", pasien.getPenanggung()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
         addEmptyLine(paragraph, 1);
@@ -96,16 +99,21 @@ public class PembayaranPdfView extends  AbstractPdfView {
         table.setHeaderRows(1);
 
         Float total = 0F;
+        Float totalTagihan = 0F;
         for (Tagihan tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
             
-            total += tagihan.getTagihan();
+            total += tagihan.getTagihanCounted();
+            totalTagihan += tagihan.getTagihan();
         }
 
-        insertCell(table, "Total", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Total Tagihan Pasien", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format(": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+
+        insertCell(table, "Total Tagihan UMUM + BPJS", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", totalTagihan.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

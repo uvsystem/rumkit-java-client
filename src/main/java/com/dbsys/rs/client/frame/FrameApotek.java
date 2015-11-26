@@ -12,6 +12,7 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TokenService;
+import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import java.util.HashMap;
@@ -100,7 +101,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     @Override
     public void reloadTable() {
         try {
-            loadTableResep(pasien);
+            listPemakaian = loadTableResep(pasien);
         } catch (ServiceException ex) {}
     }
     
@@ -127,7 +128,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         model.put("list", listPemakaian);
         
         try {
-            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
+            pdfProcessor.generate(pdfView, model, String.format("E://print//pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

@@ -40,7 +40,7 @@ public class TagihanPdfView extends  AbstractPdfView {
     @Override
     protected void createTitle(Paragraph paragraph) throws DocumentException {
         paragraph.add(new Paragraph("Rumah Sakit Umum Daerah Liun Kendage", fontTitle));
-        paragraph.add(new Paragraph("Struk Tagihan", fontSubTitle));
+        paragraph.add(new Paragraph("DAFTAR TAGIHAN", fontSubTitle));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         addEmptyLine(paragraph, 1);
     }
@@ -51,15 +51,15 @@ public class TagihanPdfView extends  AbstractPdfView {
     }
 
     private void createContent(Paragraph paragraph, Pasien pasien) {
-        float columnWidths[] = {5f, 5f, 5f, 5f};
+        float columnWidths[] = {4f, 6f, 4f, 6f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "No. Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getKode()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getKode()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "No. Medrek", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getKodePenduduk()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getKodePenduduk()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Nama Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getNama()), align, 1, fontContent, Rectangle.NO_BORDER);
@@ -90,6 +90,7 @@ public class TagihanPdfView extends  AbstractPdfView {
         table.setHeaderRows(1);
 
         Float total = 0F;
+        Float totalTagihan = 0F;
         for (Tagihan tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getNamaUnit(), align, 1, fontContent, Rectangle.BOX);
@@ -97,11 +98,15 @@ public class TagihanPdfView extends  AbstractPdfView {
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
             
-            total += tagihan.getTagihan();
+            total += tagihan.getTagihanCounted();
+            totalTagihan += tagihan.getTagihan();
         }
 
-        insertCell(table, "Total", Element.ALIGN_RIGHT, 5, fontHeader, Rectangle.BOX);
-        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Total Tagihan Pasien", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+
+        insertCell(table, "Total Tagihan UMUM + BPJS", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", totalTagihan.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

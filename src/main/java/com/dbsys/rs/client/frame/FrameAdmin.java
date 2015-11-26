@@ -646,6 +646,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             model.setKelamin(Kelamin.valueOf(kelamin));
 
             pendudukService.simpan(model);
+            
+            onSearch();
         }
 
         @Override
@@ -690,14 +692,14 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void onDelete() throws ServiceException {
             pendudukService.hapus(model);
-            onLoad();
+            onSearch();
         }
         
         public void onSearch() throws ServiceException {
             onCleanForm();
             String keyword = txtPendudukKeyword.getText();
             if (keyword.equals(""))
-                throw new ServiceException("Silahkan masukan kata kunci.");
+                return;
             
             List<Penduduk> listPenduduk = pendudukService.cari(keyword);
             PendudukTableModel tableModel = new PendudukTableModel(listPenduduk);
@@ -736,6 +738,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             model.setSatuan(txtObatSatuan.getText());
 
             obatService.simpan(model);
+
+            onSearch();
         }
 
         @Override
@@ -776,14 +780,14 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void onDelete() throws ServiceException {
             obatService.hapus(model);
-            onLoad();
+            onSearch();
         }
         
         public void onSearch() throws ServiceException {
             onCleanForm();
             String keyword = txtObatKeyword.getText();
             if (keyword.equals(""))
-                throw new ServiceException("Silahkan masukan kata kunci.");
+                return;
             
             List<Barang> list = obatService.cari(keyword);
             List<ObatFarmasi> listObat = new ArrayList<>();
@@ -829,6 +833,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             model.setSatuan(txtBhpSatuan.getText());
 
             bhpService.simpan(model);
+
+            onSearch();
         }
 
         @Override
@@ -866,14 +872,14 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void onDelete() throws ServiceException {
             bhpService.hapus(model);
-            onLoad();
+            onSearch();
         }
         
         public void onSearch() throws ServiceException {
             onCleanForm();
             String keyword = txtBhpKeyword.getText();
             if (keyword.equals(""))
-                throw new ServiceException("Silahkan masukan kata kunci.");
+                return;
             
             List<Barang> list = bhpService.cari(keyword, BahanHabisPakai.class);
             BarangTableModel tableModel = new BarangTableModel(list);
@@ -925,6 +931,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             model.setKategori(kategori);
             
             tindakanService.simpan(model);
+
+            onSearch();
         }
 
         @Override
@@ -970,14 +978,14 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void onDelete() throws ServiceException {
             tindakanService.hapus(model);
-            onLoad();
+            onSearch();
         }
         
         public void onSearch() throws ServiceException {
             onCleanForm();
             String keyword = txtTindakanKeyword.getText();
             if (keyword.equals(""))
-                throw new ServiceException("Silahkan masukan kata kunci.");
+                return;
             
             List<Tindakan> list = tindakanService.cari(keyword);
             TindakanTableModel tableModel = new TindakanTableModel(list);
