@@ -33,7 +33,8 @@ public class PemakaianPdfView extends  AbstractPdfView {
 
         doc.add(paragraph);
 
-        System.out.println("OK");
+        name = String.format("pemakaian-%s", pasien.getKode());
+        
         return doc;
     }
 

@@ -31,6 +31,8 @@ public class TagihanPdfView extends  AbstractPdfView {
         createContent(paragraph, list);
 
         doc.add(paragraph);
+
+        name = String.format("tagihan-%s", pasien.getKode());
         
         return doc;
     }

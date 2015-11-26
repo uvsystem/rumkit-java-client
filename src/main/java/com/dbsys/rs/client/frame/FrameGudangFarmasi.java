@@ -290,7 +290,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         model.put("listKembali", list);
         
         try {
-            pdfProcessor.generate(pdfView, model, "E://print//stok-kembali.pdf");
+            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

@@ -31,6 +31,8 @@ public class StokKembaliPdfView extends  AbstractPdfView {
         createContent(paragraph, list);
 
         doc.add(paragraph);
+
+        name = String.format("pengembalian-%s", pasien.getKode());
         
         return doc;
     }

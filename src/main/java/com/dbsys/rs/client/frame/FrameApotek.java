@@ -127,7 +127,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         model.put("list", listPemakaian);
         
         try {
-            pdfProcessor.generate(pdfView, model, "E://print//pemakaian2.pdf");
+            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

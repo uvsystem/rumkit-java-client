@@ -638,7 +638,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         model.put("pembayaran", pembayaran);
         
         try {
-            pdfProcessor.generate(pdfView, model, "E://print//pembayaran.pdf");
+            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -739,7 +739,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         model.put("listTagihan", listTagihan);
         
         try {
-            pdfProcessor.generate(pdfView, model, "E://print//tagihan.pdf");
+            pdfProcessor.generate(pdfView, model, String.format("E://print//%s.pdf", pdfView.getName()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

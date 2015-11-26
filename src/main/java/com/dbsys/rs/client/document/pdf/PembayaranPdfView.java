@@ -21,7 +21,7 @@ import java.util.Map;
  * @author Deddy Christoper Kakunsi
  */
 public class PembayaranPdfView extends  AbstractPdfView {
-
+    
     @Override
     public Document create(Map<String, Object> model, Document doc) throws DocumentException {
         doc.newPage();
@@ -40,6 +40,8 @@ public class PembayaranPdfView extends  AbstractPdfView {
         createContent(paragraph, list);
 
         doc.add(paragraph);
+        
+        name = String.format("pembayaran-%s", pembayaran.getKode());
         
         return doc;
     }

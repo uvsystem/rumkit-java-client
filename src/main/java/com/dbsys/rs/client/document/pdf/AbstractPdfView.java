@@ -36,9 +36,17 @@ public abstract class AbstractPdfView extends AbstractDocumentView {
     protected float tablePercentage = 98f;
 
     protected float minimumCellHeight = 10f;
+    
+    protected String name;
 
     protected abstract void createTitle(Paragraph paragraph) throws DocumentException;
     public abstract Document newDocument();
+
+    public String getName() {
+        if (name == null || name.equals(""))
+            name = "test";
+        return name;
+    }
 
     protected void decorateDocument(Document doc, String title) {
         doc.addAuthor("UnitedVision");
