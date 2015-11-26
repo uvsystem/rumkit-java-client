@@ -38,8 +38,8 @@ public class FrameUtama extends javax.swing.JFrame {
         txtKeyword = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPasien = new javax.swing.JTable();
-        btnLogin = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -59,7 +59,7 @@ public class FrameUtama extends javax.swing.JFrame {
                 txtKeywordFocusLost(evt);
             }
         });
-        pnlUtama.add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 490, 25));
+        pnlUtama.add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 1090, 25));
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,16 +74,9 @@ public class FrameUtama extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblPasien);
 
-        pnlUtama.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1200, 510));
+        pnlUtama.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1200, 470));
 
-        btnLogin.setText("LOGIN");
-        btnLogin.setToolTipText("");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        pnlUtama.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 20, 100, 30));
+        getContentPane().add(pnlUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1240, 560));
 
         btnKeluar.setText("KELUAR");
         btnKeluar.setToolTipText("");
@@ -92,9 +85,16 @@ public class FrameUtama extends javax.swing.JFrame {
                 btnKeluarActionPerformed(evt);
             }
         });
-        pnlUtama.add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, 100, 30));
+        getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 750, 100, 30));
 
-        getContentPane().add(pnlUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1240, 600));
+        btnLogin.setText("LOGIN");
+        btnLogin.setToolTipText("");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 750, 100, 30));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
