@@ -1,8 +1,7 @@
 package com.dbsys.rs.client.document.pdf;
 
-import static com.dbsys.rs.client.document.pdf.AbstractPdfView.addEmptyLine;
 import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.StokKembali;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -17,13 +16,13 @@ import java.util.Map;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class PemakaianPdfView extends  AbstractPdfView {
+public class StokKembaliPdfView extends  AbstractPdfView {
 
     @Override
     public Document create(Map<String, Object> model, Document doc) throws DocumentException {
         doc.newPage();
 
-        List<Pemakaian> list = (List<Pemakaian>) model.get("list");
+        List<StokKembali> list = (List<StokKembali>) model.get("listKembali");
         Pasien pasien = list.get(0).getPasien();
 
         Paragraph paragraph = new Paragraph();
@@ -32,22 +31,21 @@ public class PemakaianPdfView extends  AbstractPdfView {
         createContent(paragraph, list);
 
         doc.add(paragraph);
-
-        System.out.println("OK");
+        
         return doc;
-    }
-
-    @Override
-    public Document newDocument() {
-        return new Document(PageSize.A4);
     }
 
     @Override
     protected void createTitle(Paragraph paragraph) throws DocumentException {
         paragraph.add(new Paragraph("Rumah Sakit Umum Daerah Liun Kendage", fontTitle));
-        paragraph.add(new Paragraph("DAFTAR PEMAKAIAN OBAT/BHP", fontSubTitle));
+        paragraph.add(new Paragraph("DAFTAR OBAT KEMBALI", fontSubTitle));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         addEmptyLine(paragraph, 1);
+    }
+
+    @Override
+    public Document newDocument() {
+        return new Document(PageSize.A4);
     }
 
     private void createContent(Paragraph paragraph, Pasien pasien) {
@@ -71,28 +69,30 @@ public class PemakaianPdfView extends  AbstractPdfView {
         addEmptyLine(paragraph, 1);
     }
     
-    private void createContent(Paragraph paragraph, List<Pemakaian> list) {
+    private void createContent(Paragraph paragraph, List<StokKembali> list) {
         float columnWidths[] = {8f, 6f, 3f, 3f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "Obat/BHP", align, 1, fontHeader, Rectangle.BOX);
-        insertCell(table, "Nomor Resep", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Nomor Pengembalian", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Jumlah", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Biaya", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
         Float total = 0F;
-        for (Pemakaian pemakaian : list) {
-            insertCell(table, pemakaian.getBarang().getNama(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pemakaian.getNomorResep(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pemakaian.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pemakaian.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+        for (StokKembali stok : list) {
+            Long pengembalian = stok.hitungPengembalian();
             
-            total += pemakaian.getTagihan();
+            insertCell(table, stok.getBarang().getNama(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, stok.getNomor(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, stok.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, pengembalian.toString(), align, 1, fontContent, Rectangle.BOX);
+            
+            total += pengembalian;
         }
 
-        insertCell(table, "Total", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.BOX);
+        insertCell(table, "Total Pengembalian", Element.ALIGN_RIGHT, 3, fontHeader, Rectangle.BOX);
         insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.BOX);
 
         paragraph.add(table);

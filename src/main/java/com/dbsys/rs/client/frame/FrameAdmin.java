@@ -1700,6 +1700,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPemakaian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPemakaianMouseClicked(evt);
+            }
+        });
         jScrollPane13.setViewportView(tblPemakaian);
 
         pnlPemakaian.add(jScrollPane13);
@@ -1760,6 +1765,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPelayanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPelayananMouseClicked(evt);
+            }
+        });
         jScrollPane12.setViewportView(tblPelayanan);
 
         pnlPelayanan.add(jScrollPane12);
@@ -3489,6 +3499,22 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnPemakaianHapusActionPerformed
+
+    private void tblPelayananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPelayananMouseClicked
+        try {
+            pelayananEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblPelayananMouseClicked
+
+    private void tblPemakaianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPemakaianMouseClicked
+        try {
+            pemakaianEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblPemakaianMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApotekerHapus;

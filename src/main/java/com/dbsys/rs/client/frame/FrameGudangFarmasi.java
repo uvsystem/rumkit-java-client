@@ -3,6 +3,9 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.EventController;
 import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.UnitFrame;
+import com.dbsys.rs.client.document.DocumentException;
+import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.StokKembaliPdfView;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
 import com.dbsys.rs.client.tableModel.StokKembaliTableModel;
@@ -23,7 +26,9 @@ import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.StokKembali;
 import com.dbsys.rs.lib.entity.Unit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
@@ -47,6 +52,9 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     
     // digunakan oleh StokInternal
     private Unit unit;
+    
+    // Digunakan oleh StokKembali
+    private List<Stok> listKembali;
 
     /**
      * Creates new FrameFarmasi
@@ -209,6 +217,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         }        
     }
     
+    /**
+     * Cari barang.
+     * 
+     * @param keyword 
+     */
     private void reloadTableKembali(String keyword) {
         if (keyword.equals(""))
             return;
@@ -230,13 +243,13 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         if (pasien == null)
             return;
         
-        List<Stok> list = new ArrayList<>();
         try {
-            list = stokService.stokKembali(pasien);
+            listKembali = stokService.stokKembali(pasien);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            listKembali = new ArrayList<>();
         } finally {
-            StokKembaliTableModel tableModel = new StokKembaliTableModel(list);
+            StokKembaliTableModel tableModel = new StokKembaliTableModel(listKembali);
             tblKembali.setModel(tableModel);
             
             setDetailBarangKembali((Barang) null);
@@ -247,19 +260,42 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         if (nomor.equals(""))
             return;
         
-        List<Stok> list = new ArrayList<>();
         try {
-            list = stokService.stokKembali(nomor);
+            listKembali = stokService.stokKembali(nomor);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
+            listKembali = new ArrayList<>();
         } finally {
-            StokTableModel tableModel = new StokTableModel(list);
+            StokTableModel tableModel = new StokTableModel(listKembali);
             tblKembali.setModel(tableModel);
             
             setDetailBarangKembali((Barang) null);
         }        
     }
 
+    private void printStokKembali() {
+        if (listKembali == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari stok kembali berdasarkan pasien atau nomor kembali.");
+            return;
+        }
+        
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        
+        List<StokKembali> list = new ArrayList<>();
+        for (Stok stok : listKembali)
+            list.add((StokKembali) stok);
+        
+        StokKembaliPdfView pdfView = new StokKembaliPdfView();
+        Map<String, Object> model = new HashMap<>();
+        model.put("listKembali", list);
+        
+        try {
+            pdfProcessor.generate(pdfView, model, "E://print//stok-kembali.pdf");
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
     private class ObatEventController implements EventController<ObatFarmasi> {
         private final BarangService obatService = BarangService.getInstance(host);
         private ObatFarmasi model;
@@ -535,9 +571,9 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         txtNamaPasienKembali = new javax.swing.JTextField();
         btnKembaliStokMasuk = new javax.swing.JButton();
         btnKembaliStokReset = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         txtNomorKembali = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnCetakNomor = new javax.swing.JButton();
         pnlObat = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblObat = new javax.swing.JTable();
@@ -1004,7 +1040,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jScrollPane4.setViewportView(tblKembali);
 
         pnlStokKembali.add(jScrollPane4);
-        jScrollPane4.setBounds(20, 80, 1200, 240);
+        jScrollPane4.setBounds(20, 110, 1200, 210);
 
         txtKembaliKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1012,11 +1048,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokKembali.add(txtKembaliKeyword);
-        txtKembaliKeyword.setBounds(540, 40, 280, 25);
+        txtKembaliKeyword.setBounds(120, 70, 390, 25);
 
         jLabel44.setText("KATA KUNCI");
         pnlStokKembali.add(jLabel44);
-        jLabel44.setBounds(440, 40, 90, 25);
+        jLabel44.setBounds(20, 70, 90, 25);
 
         jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
         pnlStokKembali.add(jLabel45);
@@ -1032,11 +1068,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokKembali.add(txtNomorPasienKembali);
-        txtNomorPasienKembali.setBounds(120, 10, 280, 25);
+        txtNomorPasienKembali.setBounds(120, 10, 390, 25);
 
         txtNamaPasienKembali.setEditable(false);
         pnlStokKembali.add(txtNamaPasienKembali);
-        txtNamaPasienKembali.setBounds(540, 10, 280, 25);
+        txtNamaPasienKembali.setBounds(520, 10, 420, 25);
 
         btnKembaliStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
         btnKembaliStokMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -1056,21 +1092,26 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokKembali.add(btnKembaliStokReset);
         btnKembaliStokReset.setBounds(1130, 490, 90, 39);
 
-        jLabel2.setText("NAMA PASIEN");
-        pnlStokKembali.add(jLabel2);
-        jLabel2.setBounds(440, 10, 90, 25);
-
         txtNomorKembali.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNomorKembaliFocusLost(evt);
             }
         });
         pnlStokKembali.add(txtNomorKembali);
-        txtNomorKembali.setBounds(120, 40, 280, 25);
+        txtNomorKembali.setBounds(120, 40, 390, 25);
 
         jLabel4.setText("NO. KEMBALI");
         pnlStokKembali.add(jLabel4);
         jLabel4.setBounds(20, 40, 90, 25);
+
+        btnCetakNomor.setText("CETAK");
+        btnCetakNomor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakNomorActionPerformed(evt);
+            }
+        });
+        pnlStokKembali.add(btnCetakNomor);
+        btnCetakNomor.setBounds(910, 490, 100, 40);
 
         paneBarang.addTab("STOK KEMBALI DARI PASIEN", pnlStokKembali);
 
@@ -1594,8 +1635,13 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         bhpEventController.onCleanForm();
     }//GEN-LAST:event_btnClearBhpActionPerformed
 
+    private void btnCetakNomorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakNomorActionPerformed
+        printStokKembali();
+    }//GEN-LAST:event_btnCetakNomorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnCetakNomor;
     private javax.swing.JButton btnClearBhp;
     private javax.swing.JButton btnClearObat;
     private javax.swing.JButton btnEksternalStokKeluar;
@@ -1620,7 +1666,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
