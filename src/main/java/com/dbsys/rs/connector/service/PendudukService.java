@@ -11,6 +11,7 @@ import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Penduduk;
 
@@ -54,15 +55,14 @@ public class PendudukService extends AbstractService {
         return message.getModel();
     }
 
-    public void hapus(Long id) throws ServiceException {
+    public void hapus(Penduduk penduduk) throws ServiceException {
         HttpEntity<Penduduk> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<EntityRestMessage<Penduduk>> response;
+        ResponseEntity<RestMessage> response;
         response = restTemplate.exchange("{patientService}/penduduk/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Penduduk>>() {}, 
-                patientService, id);
+                new ParameterizedTypeReference<RestMessage>() {}, patientService, penduduk.getId());
 
-        EntityRestMessage<Penduduk> message = response.getBody();
+        RestMessage message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
     }

@@ -16,6 +16,7 @@ import com.dbsys.rs.connector.adapter.PekerjaAdapter;
 import com.dbsys.rs.connector.adapter.PerawatAdapter;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Apoteker;
 import com.dbsys.rs.lib.entity.Dokter;
@@ -132,6 +133,18 @@ public class PegawaiServices extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return getList(message.getList());
+    }
+
+    public void hapus(Pegawai pegawai) throws ServiceException {
+        HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> resposen;
+        resposen = restTemplate.exchange("{hrService}/pegawai/{id}", HttpMethod.DELETE, entity,
+                new ParameterizedTypeReference<RestMessage>() {}, hrService, pegawai.getId());
+
+        RestMessage message = resposen.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
     
     private List<Pegawai> getList(List<PegawaiAdapter> listAdapter) {

@@ -14,6 +14,7 @@ import com.dbsys.rs.connector.adapter.BarangAdapter;
 import com.dbsys.rs.connector.adapter.ObatAdapter;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.BahanHabisPakai;
 import com.dbsys.rs.lib.entity.Barang;
@@ -123,6 +124,18 @@ public class BarangService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return getList(message.getList());
+    }
+
+    public void hapus(Barang barang) throws ServiceException {
+        HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> resposen;
+        resposen = restTemplate.exchange("{inventoryService}/barang/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, inventoryService, barang.getId());
+
+        RestMessage message = resposen.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
     
     private List<Barang> getList(List<BarangAdapter> listAdapter) {

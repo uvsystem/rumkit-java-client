@@ -62,11 +62,11 @@ public class OperatorService extends AbstractService {
         return message.getModel();
     }
     
-    public void hapus(Long id) throws ServiceException {
+    public void hapus(Operator operator) throws ServiceException {
         HttpEntity<Operator> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{accountService}/operator/{id}", HttpMethod.DELETE, entity, RestMessage.class, accountService, id);
+        response = restTemplate.exchange("{accountService}/operator/{id}", HttpMethod.DELETE, entity, RestMessage.class, accountService, operator.getId());
 
         RestMessage message = response.getBody();
         if (!message.getTipe().equals(Type.SUCCESS))

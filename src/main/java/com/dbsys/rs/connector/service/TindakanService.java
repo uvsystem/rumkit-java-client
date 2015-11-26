@@ -12,6 +12,7 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.ListEntityRestMessage;
+import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
 import com.dbsys.rs.lib.entity.Tindakan;
 
@@ -95,5 +96,17 @@ public class TindakanService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getList();
+    }
+
+    public void hapus(Tindakan tindakan) throws ServiceException {
+        HttpEntity<Tindakan> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> resposen;
+        resposen = restTemplate.exchange("{treatmentService}/tindakan/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, treatmentService, tindakan.getId());
+
+        RestMessage message = resposen.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
 }

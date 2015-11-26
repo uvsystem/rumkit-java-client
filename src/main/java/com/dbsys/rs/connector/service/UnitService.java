@@ -88,4 +88,16 @@ public class UnitService extends  AbstractService {
             throw new ServiceException(message.getMessage());
         return message.getList();
     }
+
+    public void hapus(Unit unit) throws ServiceException {
+        HttpEntity<Unit> entity = new HttpEntity<>(getHeaders());
+        
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{accountService}/unit/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, accountService, unit.getId());
+        
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(RestMessage.Type.ERROR))
+            throw new ServiceException(message.getMessage());
+    }
 }
