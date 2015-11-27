@@ -167,6 +167,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         txtTagihanBayar = new javax.swing.JTextField();
         btnBayarTagihan = new javax.swing.JButton();
+        btnBayarSemuaTagihan = new javax.swing.JButton();
         pnlBayar = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblBayar = new javax.swing.JTable();
@@ -174,6 +175,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtTagihanBatal = new javax.swing.JTextField();
         btnBatalTagihan = new javax.swing.JButton();
+        btnBatalSemuaTagihan = new javax.swing.JButton();
         pnlSemua = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSemua = new javax.swing.JTable();
@@ -277,7 +279,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         txtTagihanBayar.setEditable(false);
-        jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
+        jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 470, 25));
 
         btnBayarTagihan.setText("BAYAR");
         btnBayarTagihan.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +287,15 @@ public class FramePembayaran extends javax.swing.JFrame {
                 btnBayarTagihanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 90, 25));
+        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 90, 25));
+
+        btnBayarSemuaTagihan.setText("SEMUA");
+        btnBayarSemuaTagihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBayarSemuaTagihanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBayarSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 90, 25));
 
         pnlMenunggak.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
@@ -320,7 +330,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         txtTagihanBatal.setEditable(false);
-        jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 560, 25));
+        jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 470, 25));
 
         btnBatalTagihan.setText("BATAL");
         btnBatalTagihan.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +338,15 @@ public class FramePembayaran extends javax.swing.JFrame {
                 btnBatalTagihanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 90, 25));
+        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 90, 25));
+
+        btnBatalSemuaTagihan.setText("SEMUA");
+        btnBatalSemuaTagihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalSemuaTagihanActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBatalSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 90, 25));
 
         pnlBayar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
@@ -762,9 +780,37 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_tblStokKembaliMouseClicked
 
+    private void btnBayarSemuaTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarSemuaTagihanActionPerformed
+        TagihanTableModel menunggaknTableModel = (TagihanTableModel) tblMenunggak.getModel();
+        TagihanTableModel bayarTableModel = (TagihanTableModel) tblBayar.getModel();
+        
+        for (Tagihan tagihan : menunggaknTableModel.getList()) {
+            bayarTableModel.addTagihan(tagihan);
+            menunggaknTableModel.removeTagihan(tagihan);
+        }
+        
+        menunggaknTableModel.fireTableDataChanged();
+        bayarTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_btnBayarSemuaTagihanActionPerformed
+
+    private void btnBatalSemuaTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalSemuaTagihanActionPerformed
+        TagihanTableModel bayarTableModel = (TagihanTableModel) tblBayar.getModel();
+        TagihanTableModel menunggakTableModel = (TagihanTableModel) tblMenunggak.getModel();
+        
+        for (Tagihan tagihan : bayarTableModel.getList()) {
+            menunggakTableModel.addTagihan(tagihan);
+            bayarTableModel.removeTagihan(tagihan);
+        }
+        
+        bayarTableModel.fireTableDataChanged();
+        menunggakTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_btnBatalSemuaTagihanActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBatalSemuaTagihan;
     private javax.swing.JButton btnBatalTagihan;
     private javax.swing.JButton btnBayar;
+    private javax.swing.JButton btnBayarSemuaTagihan;
     private javax.swing.JButton btnBayarTagihan;
     private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnCetakTagihan;
