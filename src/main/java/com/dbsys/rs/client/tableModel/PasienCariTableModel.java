@@ -1,7 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.PelayananTemporal;
+import com.dbsys.rs.lib.entity.Unit;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -51,9 +51,9 @@ public class PasienCariTableModel extends AbstractTableModel {
             case 0: return pasien.getNama();
             case 1: return pasien.getTipePerawatan();
             case 2: 
-                PelayananTemporal tmp = pasien.getPerawatan();
-                if (tmp != null)
-                    return tmp.getUnit().getNama();
+                Unit ruangPerawatan = pasien.getRuangPerawatan();
+                if (ruangPerawatan != null)
+                    return ruangPerawatan.getNama();
                 return "";
             default: return "";
         }

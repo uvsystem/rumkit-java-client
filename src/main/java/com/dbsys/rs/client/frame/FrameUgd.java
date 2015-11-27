@@ -2,6 +2,7 @@ package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.ComponentSelectionException;
 import com.dbsys.rs.client.EventController;
+import com.dbsys.rs.client.PasienTableFrame;
 import com.dbsys.rs.client.TindakanTableFrame;
 import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.tableModel.PasienTableModel;
@@ -34,7 +35,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, UnitFrame {
+public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, PasienTableFrame, UnitFrame {
 
     private final PendudukService pendudukService = PendudukService.getInstance(EventController.host);
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
@@ -74,7 +75,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     }
     
     @Override
-    public void reloadTable() {
+    public void reloadTableTindakan() {
         try {
             loadTindakan(pasien);
         } catch (ServiceException ex) {
@@ -103,7 +104,8 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         return tableModel.getPelayanan(index);
     }
 
-    private void reloadHome() {
+    @Override
+    public void reloadTablePasien() {
         List<Pasien> list = null;
         try {
             list = loadPasienPerawatan();
@@ -172,13 +174,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dialogKeluar = new javax.swing.JDialog();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        txtKeterangan = new javax.swing.JTextField();
-        txtBiayaTambahan = new javax.swing.JTextField();
-        btnKeluar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         pnlTindakan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTindakan = new javax.swing.JTable();
@@ -285,40 +280,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         btnPasien = new javax.swing.JButton();
         btnRuangan = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
-
-        dialogKeluar.setUndecorated(true);
-        dialogKeluar.setResizable(false);
-        dialogKeluar.getContentPane().setLayout(null);
-
-        jLabel3.setText("Biaya Tambahan");
-        dialogKeluar.getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 20, 80, 14);
-
-        jLabel28.setText("Keterangan");
-        dialogKeluar.getContentPane().add(jLabel28);
-        jLabel28.setBounds(20, 60, 60, 14);
-        dialogKeluar.getContentPane().add(txtKeterangan);
-        txtKeterangan.setBounds(120, 60, 140, 20);
-        dialogKeluar.getContentPane().add(txtBiayaTambahan);
-        txtBiayaTambahan.setBounds(120, 20, 140, 20);
-
-        btnKeluar.setText("Pasien Keluar");
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
-            }
-        });
-        dialogKeluar.getContentPane().add(btnKeluar);
-        btnKeluar.setBounds(163, 90, 97, 30);
-
-        jButton1.setText("Batal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        dialogKeluar.getContentPane().add(jButton1);
-        jButton1.setBounds(70, 90, 57, 30);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Rumah Sakit Liun Kendage Tahuna");
@@ -1025,7 +986,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlHome.setVisible(true);
         pnlHomeDetail.setVisible(true);
         
-        reloadHome();
+        reloadTablePasien();
     }//GEN-LAST:event_btnRuanganActionPerformed
 
     private void btnTindakanHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanHapusActionPerformed
@@ -1044,7 +1005,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
 
             if (JOptionPane.YES_OPTION == pilihan) {
                 pelayananService.hapus(pelayanan);
-                reloadTable();
+                reloadTableTindakan();
             }
         } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -1134,35 +1095,11 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             pelayananService.masukSal(pelayanan);
 
             JOptionPane.showMessageDialog(this, "Berhasil!");
-            reloadHome();
+            reloadTablePasien();
         } catch (ServiceException | ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnPasienMasukActionPerformed
-
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        dialogKeluar.setVisible(false);
-
-        Integer index = tblPasien.getSelectedRow();
-        PasienTableModel tableModel = (PasienTableModel)tblPasien.getModel();
-
-        Pasien p = tableModel.getPasien(index);
-        String tambahan = txtBiayaTambahan.getText();
-        String keterangan = txtKeterangan.getText();
-
-        try {
-            pelayananService.keluarSal(p.getId(), DateUtil.getDate(), DateUtil.getTime(), Long.valueOf(tambahan), keterangan);
-
-            JOptionPane.showMessageDialog(this, "Berhasil!");
-            reloadHome();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnKeluarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dialogKeluar.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPasienTujuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasienTujuanMouseClicked
         FrameCari frameCari = new FrameCari(this, Unit.class);
@@ -1170,18 +1107,22 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     }//GEN-LAST:event_txtPasienTujuanMouseClicked
 
     private void btnPasienKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienKeluarActionPerformed
-        dialogKeluar.setSize(280, 160);
-
-        txtBiayaTambahan.setText("0");
-        txtKeterangan.setText("-");
-
-        dialogKeluar.setVisible(true);
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan memilih pasien dari tabel");
+            return;
+        }
+        
+        try {
+            FramePasienKeluar frame = new FramePasienKeluar(pasien, this);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnPasienKeluarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JButton btnCetakStatus;
-    private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasien;
     private javax.swing.JButton btnPasienKeluar;
@@ -1197,8 +1138,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JComboBox cbPasienKelas;
     private javax.swing.JComboBox cbPasienTanggungan;
     private javax.swing.JComboBox cbPendudukKelamin;
-    private javax.swing.JDialog dialogKeluar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1219,9 +1158,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1259,14 +1196,12 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JTable tblPasien;
     private javax.swing.JTable tblPenduduk;
     private javax.swing.JTable tblTindakan;
-    private javax.swing.JTextField txtBiayaTambahan;
     private javax.swing.JTextField txtJumlahPasien;
     private javax.swing.JTextField txtJumlahPasienKelas1;
     private javax.swing.JTextField txtJumlahPasienKelas2;
     private javax.swing.JTextField txtJumlahPasienKelas3;
     private javax.swing.JTextField txtJumlahPasienVip;
     private javax.swing.JTextField txtJumlahPasienVvip;
-    private javax.swing.JTextField txtKeterangan;
     private javax.swing.JTextField txtKeyword;
     private javax.swing.JTextField txtPasienAgama;
     private javax.swing.JTextField txtPasienDarah;

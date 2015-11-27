@@ -99,7 +99,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     }
     
     @Override
-    public void reloadTable() {
+    public void reloadTableBarang() {
         try {
             listPemakaian = loadTableResep(pasien);
         } catch (ServiceException ex) {}

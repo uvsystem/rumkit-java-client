@@ -73,7 +73,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     }
     
     @Override
-    public void reloadTable() {
+    public void reloadTableTindakan() {
         try {
             loadTabelTindakan(pasien);
         } catch (ServiceException ex) {
@@ -426,7 +426,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
 
             if (JOptionPane.YES_OPTION == pilihan) {
                 pelayananService.hapus(pelayanan);
-                reloadTable();
+                reloadTableTindakan();
             }
         } catch (ComponentSelectionException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

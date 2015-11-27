@@ -84,13 +84,13 @@ public class PelayananService extends AbstractService {
             throw new ServiceException(message.getMessage());
     }
 
-    public void keluarSal(Long idPasien, Date tanggal, Time jam, Long tambahan, String keterangan) throws ServiceException {
+    public void keluarSal(Pasien pasien, Date tanggal, Time jam, Long tambahan, String keterangan) throws ServiceException {
         HttpEntity<PelayananTemporalAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<PelayananTemporalAdapter>> response;
         response = restTemplate.exchange("{serveService}/pelayanan/temporal/{idPasien}/tanggal/{tanggal}/jam/{jam}/tambahan/{tambahan}/keterangan/{keterangan}", HttpMethod.PUT, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PelayananTemporalAdapter>>() {}, 
-                serveService, idPasien, tanggal, jam, tambahan, keterangan);
+                serveService, pasien.getId(), tanggal, jam, tambahan, keterangan);
 
         EntityRestMessage<PelayananTemporalAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

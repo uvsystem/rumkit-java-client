@@ -24,6 +24,7 @@ import com.dbsys.rs.lib.entity.Pembayaran;
 import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Tagihan;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -142,11 +143,25 @@ public class FramePembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
             total = 0L;
-            String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
-            lblTagihan.setText(String.format("Rp %s", totalString));
+            setTotalLabel(total);
         }
     }
 
+    private void setTotalLabel(Long total) {
+        String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
+        lblTagihan.setText(String.format("Rp %s", totalString));
+    }
+    
+    private void addTotal(Long totalAdd) {
+        total += totalAdd;
+        setTotalLabel(total);
+    }
+    
+    private void substractTotal(Long totalSubstract) {
+        total -= totalSubstract;
+        setTotalLabel(total);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -700,10 +715,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnBatalTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalTagihanActionPerformed
         Tagihan tagihan = getTagihan(tblBayar);
-
-        total -= tagihan.getTagihanCounted();
-        String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
-        lblTagihan.setText(String.format("Rp %s", totalString));
+        substractTotal(tagihan.getTagihanCounted());
         
         TagihanTableModel tableModelMenunggak = getTagihanTableModel(tblMenunggak);
         tableModelMenunggak.addTagihan(tagihan);
@@ -718,10 +730,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnBayarTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarTagihanActionPerformed
         Tagihan tagihan = getTagihan(tblMenunggak);
-        
-        total += tagihan.getTagihanCounted();
-        String totalString = NumberFormat.getNumberInstance(Locale.US).format(total);
-        lblTagihan.setText(String.format("Rp %s", totalString));
+        addTotal(tagihan.getTagihanCounted());
         
         TagihanTableModel tableModelMenunggak = getTagihanTableModel(tblMenunggak);
         tableModelMenunggak.removeTagihan(tagihan);
@@ -781,29 +790,39 @@ public class FramePembayaran extends javax.swing.JFrame {
     }//GEN-LAST:event_tblStokKembaliMouseClicked
 
     private void btnBayarSemuaTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarSemuaTagihanActionPerformed
-        TagihanTableModel menunggaknTableModel = (TagihanTableModel) tblMenunggak.getModel();
+        TagihanTableModel menunggakTableModel = (TagihanTableModel) tblMenunggak.getModel();
         TagihanTableModel bayarTableModel = (TagihanTableModel) tblBayar.getModel();
-        
-        for (Tagihan tagihan : menunggaknTableModel.getList()) {
+
+        for (int i = (menunggakTableModel.getList().size() - 1); i >= 0; i--) {
+            Tagihan tagihan = menunggakTableModel.getTagihan(i);
             bayarTableModel.addTagihan(tagihan);
-            menunggaknTableModel.removeTagihan(tagihan);
+            menunggakTableModel.removeTagihan(tagihan);
+
+            total += tagihan.getTagihanCounted();
         }
-        
-        menunggaknTableModel.fireTableDataChanged();
+
         bayarTableModel.fireTableDataChanged();
+        menunggakTableModel.fireTableDataChanged();
+        setTotalLabel(total);
+        btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_btnBayarSemuaTagihanActionPerformed
 
     private void btnBatalSemuaTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalSemuaTagihanActionPerformed
         TagihanTableModel bayarTableModel = (TagihanTableModel) tblBayar.getModel();
         TagihanTableModel menunggakTableModel = (TagihanTableModel) tblMenunggak.getModel();
-        
-        for (Tagihan tagihan : bayarTableModel.getList()) {
+
+        for (int i = (bayarTableModel.getList().size() - 1); i >= 0; i--) {
+            Tagihan tagihan = bayarTableModel.getTagihan(i);
             menunggakTableModel.addTagihan(tagihan);
             bayarTableModel.removeTagihan(tagihan);
+
+            total -= tagihan.getTagihanCounted();
         }
-        
+
         bayarTableModel.fireTableDataChanged();
         menunggakTableModel.fireTableDataChanged();
+        setTotalLabel(total);
+        btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_btnBatalSemuaTagihanActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

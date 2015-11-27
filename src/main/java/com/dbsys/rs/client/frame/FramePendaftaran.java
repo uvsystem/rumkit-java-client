@@ -122,6 +122,8 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         lblOperator = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        btnCariPasien = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -343,6 +345,13 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         jToolBar1.add(btnLogout);
+        jToolBar1.add(jSeparator2);
+
+        btnCariPasien.setText("CARI PASIEN");
+        btnCariPasien.setFocusable(false);
+        btnCariPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCariPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCariPasien);
 
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 1280, 40));
 
@@ -456,6 +465,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
+    private javax.swing.JButton btnCariPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendudukClean;
@@ -481,6 +491,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperator;
     private javax.swing.JPanel pnlCari;

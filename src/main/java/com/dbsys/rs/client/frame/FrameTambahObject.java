@@ -463,12 +463,12 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
                 pemakaian = getPemakaian();
                 pemakaianService.simpan(pemakaian);
 
-                ((BarangTableFrame)frame).reloadTable();
+                ((BarangTableFrame)frame).reloadTableBarang();
             } else if (clsDomain.equals(Tindakan.class)) {
                 pelayanan = getPelayanan();
                 pelayananService.simpan(pelayanan);
                 
-                ((TindakanTableFrame)frame).reloadTable();
+                ((TindakanTableFrame)frame).reloadTableTindakan();
             }
             
             this.dispose();
