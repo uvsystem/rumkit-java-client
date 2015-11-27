@@ -9,12 +9,24 @@ import java.util.List;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class DokterTableModel extends PegawaiTableModel {
+public final class DokterTableModel extends PegawaiTableModel {
+    
+    public DokterTableModel(){
+        super();
+    }
     
     public DokterTableModel(List<Dokter> list){
         super();
+        setList(list);
+    }
+    
+    public void setList(List<Dokter> list) {
         for (Pegawai pegawai : list)
             this.list.add(pegawai);
+    }
+    
+    public void setListPegawai(List<Pegawai> list) {
+        this.list = list;
     }
     
     @Override

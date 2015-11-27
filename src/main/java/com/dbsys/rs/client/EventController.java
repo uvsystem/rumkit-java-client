@@ -26,4 +26,6 @@ public interface EventController<T> {
     
     void onDelete() throws ServiceException;
     
+    void setComponentEnabled(boolean enabled);
+    
 }

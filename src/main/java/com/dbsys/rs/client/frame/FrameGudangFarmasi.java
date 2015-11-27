@@ -385,7 +385,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             ObatTableModel tableModel = new ObatTableModel(listObat);
             tblObat.setModel(tableModel);
         }
-        
+
+        @Override
+        public void setComponentEnabled(boolean enabled) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 
     private class BhpEventController implements EventController<BahanHabisPakai> {
@@ -468,7 +472,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             BarangTableModel tableModel = new BarangTableModel(list);
             tblBhp.setModel(tableModel);
         }
-        
+
+        @Override
+        public void setComponentEnabled(boolean enabled) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
     
     /**

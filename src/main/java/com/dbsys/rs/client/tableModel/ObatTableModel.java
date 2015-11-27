@@ -10,10 +10,22 @@ import java.util.List;
  */
 public final class ObatTableModel extends BarangTableModel {
 
+    public ObatTableModel() {
+        super();
+    }
+    
     public ObatTableModel(List<ObatFarmasi> list) {
         super();
+        setList(list);
+    }
+    
+    public void setList(List<ObatFarmasi> list) {
         for (Barang barang : list)
             this.list.add(barang);
+    }
+    
+    public void setListBarang(List<Barang> list) {
+        this.list = list;
     }
 
     @Override
