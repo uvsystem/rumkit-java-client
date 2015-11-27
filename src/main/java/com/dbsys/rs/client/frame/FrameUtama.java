@@ -5,6 +5,7 @@ import com.dbsys.rs.client.tableModel.PasienCariTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.lib.entity.Pasien;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -107,13 +108,17 @@ public class FrameUtama extends javax.swing.JFrame {
         
         if (keyword == null || keyword.equals(""))
             return;
+
+        List<Pasien> list = null;
         
         try {
-            List<Pasien> list = pasienService.cariGuest(keyword);
+            list = pasienService.cariGuest(keyword);
+        } catch (ServiceException ex) {
+            list = new ArrayList<>();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
             PasienCariTableModel tableModel = new PasienCariTableModel(list);
             tblPasien.setModel(tableModel);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtKeywordFocusLost
 

@@ -212,11 +212,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void setModel(Operator operator) {
             if (operator != null) {
-                txt_op_nama.setText(model.getNama());
-                txt_op_uname.setText(model.getUsername());
-                txt_op_pass.setText(model.getPassword());
-                txt_admin_operator_unit.setText(model.getUnit().getNama());
-                cb_admin_operator_role.setSelectedItem(model.getRole().toString());
+                txt_op_nama.setText(operator.getNama());
+                txt_op_uname.setText(operator.getUsername());
+                txt_op_pass.setText(operator.getPassword());
+                txt_admin_operator_unit.setText(operator.getUnit().getNama());
+                cb_admin_operator_role.setSelectedItem(operator.getRole().toString());
             } else {
                 txt_op_nama.setText(null);
                 txt_op_uname.setText(null);
@@ -379,6 +379,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         }
 
         @Override
+        public void setModel(Pegawai t) {
+            setModel((Dokter) t);
+        }
+        
+        @Override
         public void onTableClick() {
             int row = tbl_dokter.getSelectedRow();
 
@@ -469,6 +474,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         }
 
         @Override
+        public void setModel(Pegawai t) {
+            setModel((Perawat) t);
+        }
+
+        @Override
         public void onTableClick() {
             int row = tbl_perawat.getSelectedRow();
 
@@ -552,6 +562,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             }
             
             super.setModel(apoteker);
+        }
+
+        @Override
+        public void setModel(Pegawai t) {
+            setModel((Apoteker) t);
         }
 
         @Override
@@ -641,6 +656,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         }
 
         @Override
+        public void setModel(Pegawai t) {
+            setModel((Pekerja) t);
+        }
+
+        @Override
         public void onTableClick() throws ServiceException {
             int row = tbl_adm.getSelectedRow();
 
@@ -686,22 +706,22 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void setModel(Penduduk t) {
             if (t != null) {
-                txtPendudukKode.setText(model.getKode());
-                txtPendudukNama.setText(model.getNama());
-                txtPendudukNik.setText(model.getNik());
-                txtPendudukLahir.setText(model.getTanggalLahir().toString());
-                txtPendudukTelepon.setText(model.getTelepon());
-                txtPendudukAgama.setText(model.getAgama());
-                txtPendudukDarah.setText(model.getDarah());
-                cbPendudukKelamin.setSelectedItem(model.getKelamin().toString());
+                txtPendudukKode.setText(t.getKode());
+                txtPendudukNama.setText(t.getNama());
+                txtPendudukNik.setText(t.getNik());
+                txtPendudukLahir.setText(t.getTanggalLahir().toString());
+                txtPendudukTelepon.setText(t.getTelepon());
+                txtPendudukAgama.setText(t.getAgama());
+                txtPendudukDarah.setText(t.getDarah());
+                cbPendudukKelamin.setSelectedItem(t.getKelamin().toString());
             } else {
                 txtPendudukKode.setText(Penduduk.createKode());
-                txtPendudukNama.setText("");
-                txtPendudukNik.setText("");
-                txtPendudukLahir.setText("");
-                txtPendudukTelepon.setText("");
-                txtPendudukAgama.setText("");
-                txtPendudukDarah.setText("");
+                txtPendudukNama.setText(null);
+                txtPendudukNik.setText(null);
+                txtPendudukLahir.setText(null);
+                txtPendudukTelepon.setText(null);
+                txtPendudukAgama.setText(null);
+                txtPendudukDarah.setText(null);
                 cbPendudukKelamin.setSelectedIndex(0);
             }
             
@@ -751,8 +771,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             resetPanelVisibility();
             pnlPenduduk.setVisible(true);
             onCleanForm();
-
-            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode rekam medik");
          }
 
         @Override
@@ -868,6 +886,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         }
 
         @Override
+        public void setModel(Barang t) {
+            setModel((ObatFarmasi) t);
+        }
+
+        @Override
         public void onTableClick() throws ServiceException {
             int row = tblObat.getSelectedRow();
 
@@ -882,8 +905,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             resetPanelVisibility();
             pnlBarang.setVisible(true);
             setComponentEnabled(true);
-
-            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode obat");
         }
         
         @Override
@@ -892,7 +913,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             if (keyword.equals(""))
                 return;
             
-            List<Barang> list = barangService.cari(keyword);
+            List<Barang> list = barangService.cari(keyword, ObatFarmasi.class);
 
             ObatTableModel tableModel = new ObatTableModel();
             tableModel.setListBarang(list);
@@ -956,6 +977,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         }
 
         @Override
+        public void setModel(Barang t) {
+            setModel((BahanHabisPakai) t);
+        }
+
+        @Override
         public void onTableClick() throws ServiceException {
             int row = tblBhp.getSelectedRow();
 
@@ -968,7 +994,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         @Override
         public void onLoad() throws ServiceException {
             onCleanForm();
-            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode bhp");
         }
 
         @Override
@@ -1010,7 +1035,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             if (t != null) {
                 txtTindakanKode.setText(t.getKode());
                 txtTindakanNama.setText(t.getNama());
-                txtTindakanKategori.setText(kategori.getNama());
+                txtTindakanKategori.setText(t.getKategori().getNama());
                 txtTindakanKeterangan.setText(t.getKeterangan());
                 txtTindakanTarif.setText(t.getTarif().toString());
                 cbTindakanKelas.setSelectedItem(t.getKelas().toString());
@@ -1084,8 +1109,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             resetPanelVisibility();
             pnlTindakan.setVisible(true);
             onCleanForm();
-
-            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/kode tindakan");
         }
 
         @Override
@@ -1204,8 +1227,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             resetPanelVisibility();
             pnlPasien.setVisible(true);
             setComponentEnabled(true);
-
-            JOptionPane.showMessageDialog(null, "Silahkan cari menggunakan nama/nomor rekam medik/nik/nomor pasie.");
         }
 
         @Override
@@ -1301,14 +1322,13 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 return;
 
             Pasien pasien = pasienEventController.getByKode(nomorPasien);
-            
-            txtPelayananNamaPasien.setText(pasien.getNama());
 
             List<Pelayanan> listPelayanan = pelayananService.getByPasien(pasien);
             PelayananTableModel tableModel = new PelayananTableModel(listPelayanan);
             tblPelayanan.setModel(tableModel);
 
             onCleanForm();
+            txtPelayananNamaPasien.setText(pasien.getNama());
         }
 
         @Override
@@ -1374,13 +1394,12 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
             Pasien pasien = pasienEventController.getByKode(nomorPasien);
 
-            txtPemakaianNamaPasien.setText(pasien.getNama());
-
             List<Pemakaian> listPemakaian = pemakaianService.getByPasien(pasien);
             PemakaianTableModel tableModel = new PemakaianTableModel(listPemakaian);
             tblPemakaian.setModel(tableModel);
 
             onCleanForm();
+            txtPemakaianNamaPasien.setText(pasien.getNama());
         }
 
         @Override
@@ -1981,7 +2000,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI", "LARI" }));
         jPanel19.add(cbPasienKeadaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 350, 25));
 
-        cbPasienStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "OPEN", "PAID", "UNPAID" }));
+        cbPasienStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PERAWATAN", "KELUAR" }));
         jPanel19.add(cbPasienStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 350, 25));
         jPanel19.add(txtPasienCicilan, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 350, 25));
 
