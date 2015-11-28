@@ -12,7 +12,6 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
@@ -41,7 +40,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private final PasienService pasienService = PasienService.getInstance(EventController.host);
     private final TokenService tokenService= TokenService.getInstance(EventController.host);
     private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
-    private final PemakaianService pemakaianBhpService = PemakaianService.getInstance(EventController.host);
     private final TindakanService tindakanService = TindakanService.getInstance(EventController.host);
 
     private Penduduk penduduk;
@@ -72,26 +70,29 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         
         pnlHome.setVisible(false);
         pnlHomeDetail.setVisible(false);
+        
+        txtPendudukKode.setText(Penduduk.createKode());
+        txtPasienNomor.setText(Pasien.createKode());
     }
     
     @Override
     public void reloadTableTindakan() {
-        try {
-            loadTindakan(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-            tblTindakan.setModel(new PelayananTableModel(null));
-        }
+        loadTindakan(pasien);
     }
 
-    private void loadTindakan(Pasien pasien) throws ServiceException {
+    private void loadTindakan(Pasien pasien) {
         if (pasien == null)
             return;
 
-        List<Pelayanan> list = pelayananService.getByPasien(pasien);
-
-        PelayananTableModel tableModel = new PelayananTableModel(list);
-        tblTindakan.setModel(tableModel);
+        List<Pelayanan> list = null;
+        try {
+            list = pelayananService.getByPasien(pasien);
+        } catch (ServiceException ex) {
+            list = new ArrayList<>();
+        } finally {
+            PelayananTableModel tableModel = new PelayananTableModel(list);
+            tblTindakan.setModel(tableModel);
+        }
     }
     
     private Pelayanan getPelayanan() throws ComponentSelectionException {
@@ -193,32 +194,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         btnPasienMasuk = new javax.swing.JButton();
         scrollPenduduk = new javax.swing.JScrollPane();
         tblPenduduk = new javax.swing.JTable();
-        pnlPasienDetail = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        txtPasienKode = new javax.swing.JTextField();
-        txtPasienNik = new javax.swing.JTextField();
-        txtPasienNama = new javax.swing.JTextField();
-        txtPasienTanggalLahir = new javax.swing.JTextField();
-        txtPasienDarah = new javax.swing.JTextField();
-        txtPasienAgama = new javax.swing.JTextField();
-        txtPasienTelepon = new javax.swing.JTextField();
-        txtPasienKelamin = new javax.swing.JTextField();
-        txtPasienStatus = new javax.swing.JTextField();
-        txtPasienTanggalMasukDetail = new javax.swing.JTextField();
-        txtPasienTanggungan = new javax.swing.JTextField();
-        txtPasienKelas = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         pnlPendaftaranCari = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
@@ -253,6 +228,32 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         cbPasienKelas = new javax.swing.JComboBox();
         cbPasienTanggungan = new javax.swing.JComboBox();
         btnPasienTambah = new javax.swing.JButton();
+        pnlPasienDetail = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        txtPasienKode = new javax.swing.JTextField();
+        txtPasienNik = new javax.swing.JTextField();
+        txtPasienNama = new javax.swing.JTextField();
+        txtPasienTanggalLahir = new javax.swing.JTextField();
+        txtPasienDarah = new javax.swing.JTextField();
+        txtPasienAgama = new javax.swing.JTextField();
+        txtPasienTelepon = new javax.swing.JTextField();
+        txtPasienKelamin = new javax.swing.JTextField();
+        txtPasienStatus = new javax.swing.JTextField();
+        txtPasienTanggalMasukDetail = new javax.swing.JTextField();
+        txtPasienTanggungan = new javax.swing.JTextField();
+        txtPasienKelas = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
         pnlHomeDetail = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -428,7 +429,174 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
 
         getContentPane().add(scrollPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
-        pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pnlPendaftaranCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPendaftaranCari.setLayout(null);
+        pnlPendaftaranCari.setBackground(new Color(0, 0, 0, 20));
+
+        jLabel13.setText("Kata Kunci");
+        pnlPendaftaranCari.add(jLabel13);
+        jLabel13.setBounds(20, 25, 140, 25);
+
+        txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKeywordFocusLost(evt);
+            }
+        });
+        pnlPendaftaranCari.add(txtKeyword);
+        txtKeyword.setBounds(170, 25, 210, 25);
+
+        getContentPane().add(pnlPendaftaranCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 400, 60));
+
+        pnlPendaftaranDetailPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPendaftaranDetailPenduduk.setBackground(new Color(0,0,0,20));
+        pnlPendaftaranDetailPenduduk.setLayout(null);
+
+        jLabel4.setText("NOMOR");
+        pnlPendaftaranDetailPenduduk.add(jLabel4);
+        jLabel4.setBounds(20, 30, 140, 25);
+
+        jLabel5.setText("NIK");
+        pnlPendaftaranDetailPenduduk.add(jLabel5);
+        jLabel5.setBounds(20, 60, 140, 25);
+
+        jLabel6.setText("NAMA");
+        pnlPendaftaranDetailPenduduk.add(jLabel6);
+        jLabel6.setBounds(20, 90, 140, 25);
+
+        jLabel7.setText("KELAMIN");
+        pnlPendaftaranDetailPenduduk.add(jLabel7);
+        jLabel7.setBounds(20, 120, 140, 25);
+
+        jLabel8.setText("TANGGAL LAHIR");
+        pnlPendaftaranDetailPenduduk.add(jLabel8);
+        jLabel8.setBounds(20, 150, 140, 25);
+
+        jLabel9.setText("GOL. DARAH");
+        pnlPendaftaranDetailPenduduk.add(jLabel9);
+        jLabel9.setBounds(20, 180, 140, 25);
+
+        jLabel10.setText("AGAMA");
+        pnlPendaftaranDetailPenduduk.add(jLabel10);
+        jLabel10.setBounds(20, 210, 140, 25);
+
+        jLabel11.setText("TELEPON");
+        pnlPendaftaranDetailPenduduk.add(jLabel11);
+        jLabel11.setBounds(20, 240, 140, 25);
+
+        txtPendudukKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukKode);
+        txtPendudukKode.setBounds(120, 30, 250, 25);
+
+        txtPendudukNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukNik);
+        txtPendudukNik.setBounds(120, 60, 250, 25);
+
+        txtPendudukNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukNama);
+        txtPendudukNama.setBounds(120, 90, 250, 25);
+
+        cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
+        cbPendudukKelamin.setBorder(null);
+        pnlPendaftaranDetailPenduduk.add(cbPendudukKelamin);
+        cbPendudukKelamin.setBounds(120, 120, 250, 25);
+
+        txtPendudukTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukTanggalLahir);
+        txtPendudukTanggalLahir.setBounds(120, 150, 250, 25);
+
+        txtPendudukDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukDarah);
+        txtPendudukDarah.setBounds(120, 180, 250, 25);
+
+        txtPendudukAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukAgama);
+        txtPendudukAgama.setBounds(120, 210, 250, 25);
+
+        txtPendudukTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetailPenduduk.add(txtPendudukTelepon);
+        txtPendudukTelepon.setBounds(120, 240, 250, 25);
+
+        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendudukSimpanActionPerformed(evt);
+            }
+        });
+        pnlPendaftaranDetailPenduduk.add(btnPendudukSimpan);
+        btnPendudukSimpan.setBounds(210, 270, 80, 30);
+
+        btnPendudukClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnPendudukClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendudukCleanActionPerformed(evt);
+            }
+        });
+        pnlPendaftaranDetailPenduduk.add(btnPendudukClean);
+        btnPendudukClean.setBounds(300, 270, 80, 30);
+
+        getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 310));
+
+        pnlPendaftaranDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPendaftaranDetail.setLayout(null);
+        pnlPendaftaranDetail.setBackground(new Color(0,0,0,20));
+
+        jLabel37.setText("TANGGAL MASUK");
+        pnlPendaftaranDetail.add(jLabel37);
+        jLabel37.setBounds(20, 60, 90, 25);
+
+        jLabel38.setText("UNIT TUJUAN");
+        pnlPendaftaranDetail.add(jLabel38);
+        jLabel38.setBounds(20, 90, 90, 25);
+
+        jLabel16.setText("NOMOR PASIEN");
+        pnlPendaftaranDetail.add(jLabel16);
+        jLabel16.setBounds(20, 30, 140, 25);
+
+        jLabel15.setText("KELAS");
+        pnlPendaftaranDetail.add(jLabel15);
+        jLabel15.setBounds(20, 120, 90, 25);
+
+        jLabel12.setText("TANGGUNGAN");
+        pnlPendaftaranDetail.add(jLabel12);
+        jLabel12.setBounds(20, 150, 90, 25);
+
+        txtPasienNomor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetail.add(txtPasienNomor);
+        txtPasienNomor.setBounds(120, 30, 250, 25);
+
+        txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPendaftaranDetail.add(txtPasienTanggalMasuk);
+        txtPasienTanggalMasuk.setBounds(120, 60, 250, 25);
+
+        txtPasienTujuan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPasienTujuanMouseClicked(evt);
+            }
+        });
+        pnlPendaftaranDetail.add(txtPasienTujuan);
+        txtPasienTujuan.setBounds(120, 90, 250, 25);
+
+        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
+        pnlPendaftaranDetail.add(cbPasienKelas);
+        cbPasienKelas.setBounds(120, 120, 250, 25);
+
+        cbPasienTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
+        cbPasienTanggungan.setBorder(null);
+        pnlPendaftaranDetail.add(cbPasienTanggungan);
+        cbPasienTanggungan.setBounds(120, 150, 250, 25);
+
+        btnPasienTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPasienTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienTambahActionPerformed(evt);
+            }
+        });
+        pnlPendaftaranDetail.add(btnPasienTambah);
+        btnPasienTambah.setBounds(290, 190, 80, 30);
+
+        getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 400, 240));
+
+        pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
 
@@ -545,176 +713,9 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPasienDetail.add(jSeparator2);
         jSeparator2.setBounds(0, 62, 400, 10);
 
-        getContentPane().add(pnlPasienDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 400, 430));
+        getContentPane().add(pnlPasienDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 430));
 
-        pnlPendaftaranCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pnlPendaftaranCari.setLayout(null);
-        pnlPendaftaranCari.setBackground(new Color(0, 0, 0, 20));
-
-        jLabel13.setText("Kata Kunci");
-        pnlPendaftaranCari.add(jLabel13);
-        jLabel13.setBounds(20, 25, 140, 25);
-
-        txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtKeywordFocusLost(evt);
-            }
-        });
-        pnlPendaftaranCari.add(txtKeyword);
-        txtKeyword.setBounds(170, 25, 210, 25);
-
-        getContentPane().add(pnlPendaftaranCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 400, 60));
-
-        pnlPendaftaranDetailPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pnlPendaftaranDetailPenduduk.setBackground(new Color(0,0,0,20));
-        pnlPendaftaranDetailPenduduk.setLayout(null);
-
-        jLabel4.setText("NOMOR");
-        pnlPendaftaranDetailPenduduk.add(jLabel4);
-        jLabel4.setBounds(20, 30, 140, 25);
-
-        jLabel5.setText("NIK");
-        pnlPendaftaranDetailPenduduk.add(jLabel5);
-        jLabel5.setBounds(20, 60, 140, 25);
-
-        jLabel6.setText("NAMA");
-        pnlPendaftaranDetailPenduduk.add(jLabel6);
-        jLabel6.setBounds(20, 90, 140, 25);
-
-        jLabel7.setText("KELAMIN");
-        pnlPendaftaranDetailPenduduk.add(jLabel7);
-        jLabel7.setBounds(20, 120, 140, 25);
-
-        jLabel8.setText("TANGGAL LAHIR");
-        pnlPendaftaranDetailPenduduk.add(jLabel8);
-        jLabel8.setBounds(20, 150, 140, 25);
-
-        jLabel9.setText("GOL. DARAH");
-        pnlPendaftaranDetailPenduduk.add(jLabel9);
-        jLabel9.setBounds(20, 180, 140, 25);
-
-        jLabel10.setText("AGAMA");
-        pnlPendaftaranDetailPenduduk.add(jLabel10);
-        jLabel10.setBounds(20, 210, 140, 25);
-
-        jLabel11.setText("TELEPON");
-        pnlPendaftaranDetailPenduduk.add(jLabel11);
-        jLabel11.setBounds(20, 240, 140, 25);
-
-        txtPendudukKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukKode);
-        txtPendudukKode.setBounds(120, 30, 250, 25);
-
-        txtPendudukNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukNik);
-        txtPendudukNik.setBounds(120, 60, 250, 25);
-
-        txtPendudukNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukNama);
-        txtPendudukNama.setBounds(120, 90, 250, 25);
-
-        cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
-        cbPendudukKelamin.setBorder(null);
-        pnlPendaftaranDetailPenduduk.add(cbPendudukKelamin);
-        cbPendudukKelamin.setBounds(120, 120, 250, 25);
-
-        txtPendudukTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(120, 150, 250, 25);
-
-        txtPendudukDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(120, 180, 250, 25);
-
-        txtPendudukAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(120, 210, 250, 25);
-
-        txtPendudukTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(120, 240, 250, 25);
-
-        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukSimpanActionPerformed(evt);
-            }
-        });
-        pnlPendaftaranDetailPenduduk.add(btnPendudukSimpan);
-        btnPendudukSimpan.setBounds(210, 270, 80, 30);
-
-        btnPendudukClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
-        btnPendudukClean.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukCleanActionPerformed(evt);
-            }
-        });
-        pnlPendaftaranDetailPenduduk.add(btnPendudukClean);
-        btnPendudukClean.setBounds(300, 270, 80, 30);
-
-        getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 170, 400, 320));
-
-        pnlPendaftaranDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pnlPendaftaranDetail.setLayout(null);
-        pnlPendaftaranDetail.setBackground(new Color(0,0,0,20));
-
-        jLabel37.setText("TANGGAL MASUK");
-        pnlPendaftaranDetail.add(jLabel37);
-        jLabel37.setBounds(20, 60, 90, 25);
-
-        jLabel38.setText("UNIT TUJUAN");
-        pnlPendaftaranDetail.add(jLabel38);
-        jLabel38.setBounds(20, 90, 90, 25);
-
-        jLabel16.setText("NOMOR PASIEN");
-        pnlPendaftaranDetail.add(jLabel16);
-        jLabel16.setBounds(20, 30, 140, 25);
-
-        jLabel15.setText("KELAS");
-        pnlPendaftaranDetail.add(jLabel15);
-        jLabel15.setBounds(20, 120, 90, 25);
-
-        jLabel12.setText("TANGGUNGAN");
-        pnlPendaftaranDetail.add(jLabel12);
-        jLabel12.setBounds(20, 150, 90, 25);
-
-        txtPasienNomor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetail.add(txtPasienNomor);
-        txtPasienNomor.setBounds(120, 30, 250, 25);
-
-        txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(120, 60, 250, 25);
-
-        txtPasienTujuan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPasienTujuanMouseClicked(evt);
-            }
-        });
-        pnlPendaftaranDetail.add(txtPasienTujuan);
-        txtPasienTujuan.setBounds(120, 90, 250, 25);
-
-        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
-        pnlPendaftaranDetail.add(cbPasienKelas);
-        cbPasienKelas.setBounds(120, 120, 250, 25);
-
-        cbPasienTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
-        cbPasienTanggungan.setBorder(null);
-        pnlPendaftaranDetail.add(cbPasienTanggungan);
-        cbPasienTanggungan.setBounds(120, 150, 250, 25);
-
-        btnPasienTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
-        btnPasienTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPasienTambahActionPerformed(evt);
-            }
-        });
-        pnlPendaftaranDetail.add(btnPasienTambah);
-        btnPasienTambah.setBounds(290, 190, 80, 30);
-
-        getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 400, 240));
-
-        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Ruangan"));
+        pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA RUUANGAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlHomeDetail.setLayout(null);
 
@@ -768,7 +769,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlHomeDetail.add(txtJumlahPasienKelas2);
         txtJumlahPasienKelas2.setBounds(120, 230, 250, 20);
 
-        getContentPane().add(pnlHomeDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 400, 300));
+        getContentPane().add(pnlHomeDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 300));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
@@ -852,6 +853,8 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         txtPendudukDarah.setText(penduduk.getDarah());
         txtPendudukAgama.setText(penduduk.getAgama());
         txtPendudukTelepon.setText(penduduk.getTelepon());
+        
+        txtPasienNomor.setText(Pasien.createKode());
     }//GEN-LAST:event_tblPendudukMouseClicked
 
     private void btnPendudukCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukCleanActionPerformed
@@ -943,6 +946,8 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             
             PendudukTableModel tableModel = new PendudukTableModel(list);
             tblPenduduk.setModel(tableModel);
+            
+            txtPasienNomor.setText(Pasien.createKode());
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

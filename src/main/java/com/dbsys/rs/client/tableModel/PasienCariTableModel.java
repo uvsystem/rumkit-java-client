@@ -30,15 +30,16 @@ public class PasienCariTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
     
     @Override
     public String getColumnName(int column){
         switch(column){
-            case 0: return "NAMA";
-            case 1: return "PERAWATAN";
-            case 2: return "RUANG PERAWATAN";
+            case 0: return "KODE";
+            case 1: return "NAMA";
+            case 2: return "PERAWATAN";
+            case 3: return "RUANG PERAWATAN";
             default: return "";
         }
     }
@@ -48,9 +49,10 @@ public class PasienCariTableModel extends AbstractTableModel {
         Pasien pasien = getPasien(rowIndex);
         
         switch(columnIndex) {
-            case 0: return pasien.getNama();
-            case 1: return pasien.getTipePerawatan();
-            case 2: 
+            case 0: return pasien.getKode();
+            case 1: return pasien.getNama();
+            case 2: return pasien.getTipePerawatan();
+            case 3: 
                 Unit ruangPerawatan = pasien.getRuangPerawatan();
                 if (ruangPerawatan != null)
                     return ruangPerawatan.getNama();

@@ -15,6 +15,7 @@ import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,12 +79,16 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         this.pasien = pasien;
     }
 
-    private List<Pemakaian> loadTableResep(Pasien pasien) throws ServiceException {
-        List<Pemakaian> list = pemakaianService.getByPasien(pasien);
-        PemakaianTableModel tableModel = new PemakaianTableModel(list);
-
-        tblResep.removeAll();
-        tblResep.setModel(tableModel);
+    private List<Pemakaian> loadTableResep(Pasien pasien) {
+        List<Pemakaian> list = null;
+        try {
+            list = pemakaianService.getByPasien(pasien);
+        } catch (ServiceException ex) {
+            list = new ArrayList<>();
+        } finally {
+            PemakaianTableModel tableModel = new PemakaianTableModel(list);
+            tblResep.setModel(tableModel);
+        }
         
         return list;
     }
@@ -100,9 +105,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     
     @Override
     public void reloadTableBarang() {
-        try {
-            listPemakaian = loadTableResep(pasien);
-        } catch (ServiceException ex) {}
+        listPemakaian = loadTableResep(pasien);
     }
     
     private Pemakaian getPemakaian() throws ComponentSelectionException {
@@ -206,7 +209,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         pnlCari.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         getContentPane().add(pnlCari);
-        pnlCari.setBounds(860, 140, 400, 60);
+        pnlCari.setBounds(860, 180, 400, 60);
 
         pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
@@ -292,7 +295,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         txtPasienTanggalMasuk.setBounds(130, 300, 250, 25);
 
         getContentPane().add(pnlPasien);
-        pnlPasien.setBounds(860, 210, 400, 340);
+        pnlPasien.setBounds(860, 250, 400, 340);
 
         pnlResep.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR OBAT PASIEN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlResep.setLayout(null);
@@ -303,7 +306,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             }
         });
         pnlResep.add(txtResepNomor);
-        txtResepNomor.setBounds(160, 40, 530, 25);
+        txtResepNomor.setBounds(160, 25, 530, 25);
 
         btnObatTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -312,7 +315,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             }
         });
         pnlResep.add(btnObatTambah);
-        btnObatTambah.setBounds(710, 40, 100, 30);
+        btnObatTambah.setBounds(710, 23, 100, 30);
 
         tblResep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -328,11 +331,11 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         jScrollPane1.setViewportView(tblResep);
 
         pnlResep.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 90, 790, 470);
+        jScrollPane1.setBounds(20, 70, 790, 450);
 
         jLabel1.setText("Nomor Resep");
         pnlResep.add(jLabel1);
-        jLabel1.setBounds(20, 40, 130, 25);
+        jLabel1.setBounds(20, 25, 130, 25);
 
         btnHapus.setText("HAPUS");
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -341,10 +344,10 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             }
         });
         pnlResep.add(btnHapus);
-        btnHapus.setBounds(730, 570, 80, 30);
+        btnHapus.setBounds(730, 530, 80, 30);
 
         getContentPane().add(pnlResep);
-        pnlResep.setBounds(20, 140, 830, 620);
+        pnlResep.setBounds(20, 180, 830, 580);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
