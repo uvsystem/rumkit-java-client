@@ -285,7 +285,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblMenunggak);
 
-        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 450));
+        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 21, 790, 450));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -312,7 +312,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         jPanel1.add(btnBayarSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 90, 25));
 
-        pnlMenunggak.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
+        pnlMenunggak.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 800, 60));
 
         tabData.addTab("TAGIHAN MENUNGGAK", pnlMenunggak);
 
@@ -531,6 +531,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         jToolBar1.add(lblOperator);
 
         jLabel3.setText("  -  ");
+        jLabel3.setMaximumSize(new java.awt.Dimension(25, 14));
         jToolBar1.add(jLabel3);
 
         jLabel4.setText("UNIT : ");
@@ -538,11 +539,14 @@ public class FramePembayaran extends javax.swing.JFrame {
 
         lblUnit.setText("jLabel5");
         jToolBar1.add(lblUnit);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

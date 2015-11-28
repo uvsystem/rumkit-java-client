@@ -254,7 +254,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         getContentPane().add(pnlMain);
         pnlMain.setBounds(860, 180, 400, 70);
 
-        pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PELAYANAN TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlTindakan.setLayout(null);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
@@ -271,7 +271,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 40, 670, 520);
+        jScrollPane1.setBounds(20, 40, 680, 520);
 
         btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -325,16 +325,16 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         scrollPasien.setViewportView(tblPasien);
 
         pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(10, 100, 790, 390);
+        scrollPasien.setBounds(20, 100, 770, 380);
 
         pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN KELUAR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlKeluar.setLayout(null);
 
         jLabel13.setText("No. Pasien");
         pnlKeluar.add(jLabel13);
-        jLabel13.setBounds(10, 20, 90, 25);
+        jLabel13.setBounds(20, 20, 90, 25);
         pnlKeluar.add(txtPasienKeluar);
-        txtPasienKeluar.setBounds(100, 20, 200, 25);
+        txtPasienKeluar.setBounds(110, 20, 200, 25);
 
         btnKeluar.setText("KELUAR");
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -343,19 +343,19 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             }
         });
         pnlKeluar.add(btnKeluar);
-        btnKeluar.setBounds(310, 20, 73, 25);
+        btnKeluar.setBounds(320, 20, 73, 25);
 
         pnlHome.add(pnlKeluar);
-        pnlKeluar.setBounds(410, 30, 390, 60);
+        pnlKeluar.setBounds(380, 490, 410, 70);
 
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN MASUK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlMasuk.setLayout(null);
 
         jLabel2.setText("No. Pasien");
         pnlMasuk.add(jLabel2);
-        jLabel2.setBounds(10, 20, 90, 25);
+        jLabel2.setBounds(20, 20, 90, 25);
         pnlMasuk.add(txtPasienMasuk);
-        txtPasienMasuk.setBounds(100, 20, 200, 25);
+        txtPasienMasuk.setBounds(110, 20, 560, 25);
 
         btnMasuk.setText("MASUK");
         btnMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -364,10 +364,10 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             }
         });
         pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(310, 20, 73, 25);
+        btnMasuk.setBounds(680, 20, 73, 25);
 
         pnlHome.add(pnlMasuk);
-        pnlMasuk.setBounds(10, 30, 390, 60);
+        pnlMasuk.setBounds(20, 30, 770, 60);
 
         pnlKelas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlKelas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -376,7 +376,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlKelas.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 90, 25));
 
         cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
-        pnlKelas.add(cbPasienKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 25, 200, 25));
+        pnlKelas.add(cbPasienKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 25, 140, 25));
 
         btnSimpanKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnSimpanKelas.addActionListener(new java.awt.event.ActionListener() {
@@ -384,10 +384,10 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
                 btnSimpanKelasActionPerformed(evt);
             }
         });
-        pnlKelas.add(btnSimpanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 23, 80, 30));
+        pnlKelas.add(btnSimpanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 23, 80, 30));
 
         pnlHome.add(pnlKelas);
-        pnlKelas.setBounds(10, 500, 400, 70);
+        pnlKelas.setBounds(20, 490, 350, 70);
 
         getContentPane().add(pnlHome);
         pnlHome.setBounds(20, 180, 810, 580);
@@ -578,7 +578,9 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         lblOperator.setText("jLabel31");
         jToolBar1.add(lblOperator);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(" - ");
+        jLabel1.setMaximumSize(new java.awt.Dimension(25, 14));
         jToolBar1.add(jLabel1);
 
         jLabel18.setText("UNIT :");
@@ -586,11 +588,14 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
 
         lblUnit.setText("jLabel1");
         jToolBar1.add(lblUnit);
+
+        jSeparator2.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator2);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

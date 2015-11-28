@@ -355,7 +355,9 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         lblOperator.setText("jLabel32");
         jToolBar1.add(lblOperator);
 
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText(" - ");
+        jLabel32.setMaximumSize(new java.awt.Dimension(25, 14));
         jToolBar1.add(jLabel32);
 
         jLabel33.setText("UNIT: ");
@@ -363,11 +365,14 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
 
         lblUnit.setText("jLabel34");
         jToolBar1.add(lblUnit);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -333,11 +333,14 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
 
         lblOperator.setText("jLabel1");
         jToolBar1.add(lblOperator);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,11 +348,14 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         jToolBar1.add(btnLogout);
+
+        jSeparator2.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator2);
 
         btnCariPasien.setText("CARI PASIEN");
         btnCariPasien.setFocusable(false);
         btnCariPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCariPasien.setMaximumSize(new java.awt.Dimension(120, 21));
         btnCariPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnCariPasien);
 

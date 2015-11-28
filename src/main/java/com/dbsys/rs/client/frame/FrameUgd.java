@@ -310,7 +310,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 40, 690, 510);
+        jScrollPane1.setBounds(20, 30, 670, 510);
 
         btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
         btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +319,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             }
         });
         pnlTindakan.add(btnTindakanSimpan);
-        btnTindakanSimpan.setBounds(710, 40, 90, 35);
+        btnTindakanSimpan.setBounds(700, 30, 90, 35);
 
         btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +328,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             }
         });
         pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(710, 80, 90, 35);
+        btnTindakanUpdate.setBounds(700, 70, 90, 35);
 
         btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +337,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             }
         });
         pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(710, 120, 90, 35);
+        btnTindakanHapus.setBounds(700, 110, 90, 35);
 
         getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
@@ -790,7 +790,9 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         lblOperator.setText("OPERATOR");
         jToolBar1.add(lblOperator);
 
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText(" - ");
+        jLabel35.setMaximumSize(new java.awt.Dimension(25, 14));
         jToolBar1.add(jLabel35);
 
         jLabel36.setText("UNIT : ");
@@ -798,11 +800,14 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
 
         lblUnit.setText("UNIT");
         jToolBar1.add(lblUnit);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
