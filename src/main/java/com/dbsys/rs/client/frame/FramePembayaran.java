@@ -5,6 +5,7 @@ import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
+import com.dbsys.rs.client.tableModel.StokKembaliTableModel;
 import com.dbsys.rs.client.tableModel.StokTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -126,7 +127,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             } catch (ServiceException ex) {
                 listStokKembali = null;
             } finally {
-                StokTableModel tableModel = new StokTableModel(listStokKembali);
+                StokKembaliTableModel tableModel = new StokKembaliTableModel(listStokKembali);
                 tblStokKembali.setModel(tableModel);
             }
 

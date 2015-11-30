@@ -785,6 +785,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
 
         try {
             pasienService.ubahKelas(pasien, Kelas.valueOf(kelas));
+            reloadTablePasien();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
