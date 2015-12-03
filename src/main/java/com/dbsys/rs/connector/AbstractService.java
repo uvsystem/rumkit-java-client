@@ -13,8 +13,12 @@ import org.springframework.web.client.RestTemplate;
  * @author Deddy Christoper Kakunsi
  */
 public abstract class AbstractService {
+    
     protected final RestTemplate restTemplate;
+    
+    public static final String defaultHost = "";
     protected String host;
+
     protected String accountService;
     protected String hrService;
     protected String inventoryService;
