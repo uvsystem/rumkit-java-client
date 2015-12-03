@@ -22,10 +22,12 @@ public class PembayaranService extends AbstractService {
 
     private PembayaranService() {
         super();
+        service = String.format("%s/rumkit-payment-service", getHost());
     }
 
     private PembayaranService(String host) {
         super(host);
+        service = String.format("%s/rumkit-payment-service", getHost());
     }
 
     public static PembayaranService getInstance() {
@@ -46,8 +48,8 @@ public class PembayaranService extends AbstractService {
         HttpEntity<Pembayaran> entity = new HttpEntity<>(pembayaran, getHeaders());
 
         ResponseEntity<EntityRestMessage<Pembayaran>> response;
-        response = restTemplate.exchange("{paymentService}/pembayaran", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pembayaran>>() {}, paymentService);
+        response = restTemplate.exchange("{service}/pembayaran", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Pembayaran>>() {}, service);
 
         EntityRestMessage<Pembayaran> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -59,8 +61,8 @@ public class PembayaranService extends AbstractService {
         HttpEntity<Pembayaran> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<Pembayaran>> response;
-        response = restTemplate.exchange("{paymentService}/pembayaran/{kode}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pembayaran>>() {}, paymentService, kode);
+        response = restTemplate.exchange("{service}/pembayaran/{kode}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Pembayaran>>() {}, service, kode);
 
         EntityRestMessage<Pembayaran> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -72,8 +74,8 @@ public class PembayaranService extends AbstractService {
         HttpEntity<Pembayaran> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pembayaran>> response;
-        response = restTemplate.exchange("{paymentService}/pembayaran/pasien{kode}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pembayaran>>() {}, paymentService, pasien.getId());
+        response = restTemplate.exchange("{service}/pembayaran/pasien{kode}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pembayaran>>() {}, service, pasien.getId());
 
         ListEntityRestMessage<Pembayaran> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -85,8 +87,8 @@ public class PembayaranService extends AbstractService {
         HttpEntity<Pembayaran> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pembayaran>> response;
-        response = restTemplate.exchange("{paymentService}/pembayaran/{awal}/to/{akhir}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pembayaran>>() {}, paymentService, awal, akhir);
+        response = restTemplate.exchange("{service}/pembayaran/{awal}/to/{akhir}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pembayaran>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<Pembayaran> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

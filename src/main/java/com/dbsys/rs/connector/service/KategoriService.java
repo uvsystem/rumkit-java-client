@@ -20,10 +20,12 @@ public class KategoriService extends AbstractService {
 
     private KategoriService() {
         super();
+        service = String.format("%s/rumkit-treatment-service", getHost());
     }
 
     private KategoriService(String host) {
         super(host);
+        service = String.format("%s/rumkit-treatment-service", getHost());
     }
 
     public static KategoriService getInstance() {
@@ -44,9 +46,9 @@ public class KategoriService extends AbstractService {
         HttpEntity<KategoriTindakan> entity = new HttpEntity<>(kategori, getHeaders());
 
         ResponseEntity<EntityRestMessage<KategoriTindakan>> response;
-        response = restTemplate.exchange("{treatmentService}/kategori", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/kategori", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<KategoriTindakan>>() {},
-                treatmentService);
+                service);
 
         EntityRestMessage<KategoriTindakan> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -58,9 +60,9 @@ public class KategoriService extends AbstractService {
         HttpEntity<KategoriTindakan> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<KategoriTindakan>> response;
-        response = restTemplate.exchange("{treatmentService}/kategori/{id}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/kategori/{id}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<KategoriTindakan>>() {},
-                treatmentService, id);
+                service, id);
 
         EntityRestMessage<KategoriTindakan> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -72,9 +74,9 @@ public class KategoriService extends AbstractService {
         HttpEntity<KategoriTindakan> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<KategoriTindakan>> response;
-        response = restTemplate.exchange("{treatmentService}/kategori", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/kategori", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<KategoriTindakan>>() {},
-                treatmentService);
+                service);
 
         ListEntityRestMessage<KategoriTindakan> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

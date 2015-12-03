@@ -23,10 +23,12 @@ public class TokenService extends AbstractService {
 	
     private TokenService(){
         super();
+        service = String.format("%s/rumkit-account-service", getHost());
     }
 	
     private TokenService(String host){
         super(host);
+        service = String.format("%s/rumkit-account-service", getHost());
     }
     
     public static TokenService getInstance() {
@@ -50,9 +52,9 @@ public class TokenService extends AbstractService {
         HttpEntity<Credential> entity = new HttpEntity<>(credential);
         
         ResponseEntity<EntityRestMessage<Token>> response;
-        response = restTemplate.exchange("{accountService}/token", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/token", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Token>>(){}, 
-                accountService);
+                service);
 
         EntityRestMessage<Token> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -62,7 +64,7 @@ public class TokenService extends AbstractService {
     
     public void lock(String kode) throws ServiceException {
         ResponseEntity<RestMessage> message;
-        message = restTemplate.exchange("{accountService}/token/{kode}", HttpMethod.PUT, HttpEntity.EMPTY, RestMessage.class, accountService, kode);
+        message = restTemplate.exchange("{service}/token/{kode}", HttpMethod.PUT, HttpEntity.EMPTY, RestMessage.class, service, kode);
         
         if (!message.getBody().getTipe().equals(Type.SUCCESS))
             throw new ServiceException(message.getBody().getMessage());

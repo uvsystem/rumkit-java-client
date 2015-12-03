@@ -24,10 +24,12 @@ public class UnitService extends  AbstractService {
 	
     private UnitService() {
         super();
+        service = String.format("%s/rumkit-account-service", getHost());
     }
 	
     private UnitService(String host) {
         super(host);
+        service = String.format("%s/rumkit-account-service", getHost());
     }
     
     public static UnitService getInstance() {
@@ -51,9 +53,9 @@ public class UnitService extends  AbstractService {
         HttpEntity<Unit> entity = new HttpEntity<>(unit, getHeaders());
         
         ResponseEntity<EntityRestMessage<Unit>> response;
-        response = restTemplate.exchange("{accountService}/unit", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/unit", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
-                accountService);
+                service);
         
         EntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -65,9 +67,9 @@ public class UnitService extends  AbstractService {
         HttpEntity<Unit> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<EntityRestMessage<Unit>> response;
-        response = restTemplate.exchange("{accountService}/unit/{id}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/unit/{id}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Unit>>() {}, 
-                accountService, id);
+                service, id);
         
         EntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -79,9 +81,9 @@ public class UnitService extends  AbstractService {
         HttpEntity<Unit> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<ListEntityRestMessage<Unit>> response;
-        response = restTemplate.exchange("{accountService}/unit", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/unit", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<Unit>>() {}, 
-                accountService);
+                service);
         
         ListEntityRestMessage<Unit> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -93,8 +95,8 @@ public class UnitService extends  AbstractService {
         HttpEntity<Unit> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{accountService}/unit/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, accountService, unit.getId());
+        response = restTemplate.exchange("{service}/unit/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, unit.getId());
         
         RestMessage message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))

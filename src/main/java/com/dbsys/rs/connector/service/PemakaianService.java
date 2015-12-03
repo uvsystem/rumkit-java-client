@@ -22,10 +22,12 @@ public class PemakaianService extends AbstractService {
 
     private PemakaianService() {
         super();
+        service = String.format("%s/rumkit-usage-service", getHost());
     }
 
     private PemakaianService(String host) {
         super(host);
+        service = String.format("%s/rumkit-usage-service", getHost());
     }
 
     public static PemakaianService getInstance() {
@@ -46,8 +48,8 @@ public class PemakaianService extends AbstractService {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(pemakaian, getHeaders());
 
         ResponseEntity<EntityRestMessage<Pemakaian>> response;
-        response = restTemplate.exchange("{usageService}/pemakaian", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, usageService);
+        response = restTemplate.exchange("{service}/pemakaian", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, service);
 
         EntityRestMessage<Pemakaian> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -59,8 +61,8 @@ public class PemakaianService extends AbstractService {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{usageService}/pemakaian/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, usageService, pemakaian.getId());
+        response = restTemplate.exchange("{service}/pemakaian/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, pemakaian.getId());
 
         RestMessage message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -71,8 +73,8 @@ public class PemakaianService extends AbstractService {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<Pemakaian>> response;
-        response = restTemplate.exchange("{usageService}/pemakaian/{id}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, usageService, id);
+        response = restTemplate.exchange("{service}/pemakaian/{id}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Pemakaian>>() {}, service, id);
 
         EntityRestMessage<Pemakaian> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -84,8 +86,8 @@ public class PemakaianService extends AbstractService {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pemakaian>> response;
-        response = restTemplate.exchange("{usageService}/pemakaian/pasien/{idPasien}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, usageService, pasien.getId());
+        response = restTemplate.exchange("{service}/pemakaian/pasien/{idPasien}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, service, pasien.getId());
 
         ListEntityRestMessage<Pemakaian> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -97,8 +99,8 @@ public class PemakaianService extends AbstractService {
         HttpEntity<Pemakaian> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pemakaian>> response;
-        response = restTemplate.exchange("{usageService}/pemakaian/nomor/{nomor}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, usageService, nomor);
+        response = restTemplate.exchange("{service}/pemakaian/nomor/{nomor}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pemakaian>>() {}, service, nomor);
 
         ListEntityRestMessage<Pemakaian> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

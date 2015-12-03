@@ -25,10 +25,12 @@ public class OperatorService extends AbstractService {
 	
     private OperatorService() {
         super();
+        service = String.format("%s/rumkit-account-service", getHost());
     }
 	
     private OperatorService(String host) {
         super(host);
+        service = String.format("%s/rumkit-account-service", getHost());
     }
     
     public static OperatorService getInstance() {
@@ -52,9 +54,9 @@ public class OperatorService extends AbstractService {
         HttpEntity<Operator> entity = new HttpEntity<>(operator, getHeaders());
         
         ResponseEntity<EntityRestMessage<Operator>> response;
-        response = restTemplate.exchange("{accountService}/operator", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/operator", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Operator>>() {}, 
-                accountService);
+                service);
 
         EntityRestMessage<Operator> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))
@@ -66,7 +68,7 @@ public class OperatorService extends AbstractService {
         HttpEntity<Operator> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{accountService}/operator/{id}", HttpMethod.DELETE, entity, RestMessage.class, accountService, operator.getId());
+        response = restTemplate.exchange("{service}/operator/{id}", HttpMethod.DELETE, entity, RestMessage.class, service, operator.getId());
 
         RestMessage message = response.getBody();
         if (!message.getTipe().equals(Type.SUCCESS))
@@ -77,9 +79,9 @@ public class OperatorService extends AbstractService {
         HttpEntity<Operator> entity = new HttpEntity<>(getHeaders());
         
         ResponseEntity<ListEntityRestMessage<Operator>> response;
-        response = restTemplate.exchange("{accountService}/operator", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/operator", HttpMethod.GET, entity, 
         		new ParameterizedTypeReference<ListEntityRestMessage<Operator>>() {}, 
-        		accountService);
+        		service);
         
         ListEntityRestMessage<Operator> message = response.getBody();
         if (message.getTipe().equals(RestMessage.Type.ERROR))

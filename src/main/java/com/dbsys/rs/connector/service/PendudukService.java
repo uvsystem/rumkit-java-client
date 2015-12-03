@@ -21,10 +21,12 @@ public class PendudukService extends AbstractService {
 
     private PendudukService() {
         super();
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     private PendudukService(String host) {
         super(host);
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     public static PendudukService getInstance() {
@@ -45,9 +47,9 @@ public class PendudukService extends AbstractService {
         HttpEntity<Penduduk> entity = new HttpEntity<>(penduduk, getHeaders());
 
         ResponseEntity<EntityRestMessage<Penduduk>> response;
-        response = restTemplate.exchange("{patientService}/penduduk", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/penduduk", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Penduduk>>() {}, 
-                patientService);
+                service);
 
         EntityRestMessage<Penduduk> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -59,8 +61,8 @@ public class PendudukService extends AbstractService {
         HttpEntity<Penduduk> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{patientService}/penduduk/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, patientService, penduduk.getId());
+        response = restTemplate.exchange("{service}/penduduk/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, penduduk.getId());
 
         RestMessage message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -71,9 +73,9 @@ public class PendudukService extends AbstractService {
         HttpEntity<Penduduk> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<Penduduk>> response;
-        response = restTemplate.exchange("{patientService}/penduduk/{id}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/penduduk/{id}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<Penduduk>>() {}, 
-                patientService, id);
+                service, id);
 
         EntityRestMessage<Penduduk> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -85,9 +87,9 @@ public class PendudukService extends AbstractService {
         HttpEntity<Penduduk> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Penduduk>> response;
-        response = restTemplate.exchange("{patientService}/penduduk/keyword/{keyword}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/penduduk/keyword/{keyword}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<Penduduk>>() {}, 
-                patientService, keyword);
+                service, keyword);
 
         ListEntityRestMessage<Penduduk> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -99,9 +101,9 @@ public class PendudukService extends AbstractService {
         HttpEntity<Penduduk> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Penduduk>> response;
-        response = restTemplate.exchange("{patientService}/penduduk", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/penduduk", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<Penduduk>>() {}, 
-                patientService);
+                service);
 
         ListEntityRestMessage<Penduduk> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

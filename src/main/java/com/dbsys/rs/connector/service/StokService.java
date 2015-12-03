@@ -33,10 +33,12 @@ public class StokService extends AbstractService {
 
     private StokService() {
         super();
+        service = String.format("%s/rumkit-inventory-service", getHost());
     }
 
     private StokService(String host) {
         super(host);
+        service = String.format("%s/rumkit-inventory-service", getHost());
     }
 
     public static StokService getInstance() {
@@ -68,8 +70,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(stokAdapter, getHeaders());
 
         ResponseEntity<EntityRestMessage<StokAdapter>> response;
-        response = restTemplate.exchange("{inventoryService}/stok", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<StokAdapter>>() {}, inventoryService);
+        response = restTemplate.exchange("{service}/stok", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<StokAdapter>>() {}, service);
 
         EntityRestMessage<StokAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -126,8 +128,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/masuk/{awal}/to/{akhir}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
+        resposen = restTemplate.exchange("{service}/stok/masuk/{awal}/to/{akhir}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -139,8 +141,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/keluar/{awal}/to/{akhir}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
+        resposen = restTemplate.exchange("{service}/stok/keluar/{awal}/to/{akhir}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -152,8 +154,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/pasien/{pasien}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, pasien.getId());
+        resposen = restTemplate.exchange("{service}/stok/pasien/{pasien}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, pasien.getId());
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -165,8 +167,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/nomor/{nomor}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, nomor);
+        resposen = restTemplate.exchange("{service}/stok/nomor/{nomor}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, nomor);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -178,8 +180,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/pasien", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/pasien", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -191,8 +193,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/unit/{unit}", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir, unit.getId());
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/unit/{unit}", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, awal, akhir, unit.getId());
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -204,8 +206,8 @@ public class StokService extends AbstractService {
         HttpEntity<StokAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/stok/{awal}/to/{akhir}/unit", HttpMethod.GET, entity,
-                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, inventoryService, awal, akhir);
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/unit", HttpMethod.GET, entity,
+                new ParameterizedTypeReference<ListEntityRestMessage<StokAdapter>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))

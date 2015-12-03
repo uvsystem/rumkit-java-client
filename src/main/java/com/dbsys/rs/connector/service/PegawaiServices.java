@@ -31,10 +31,12 @@ public class PegawaiServices extends AbstractService {
 
     private PegawaiServices() {
         super();
+        service = String.format("%s/rumkit-hr-service", getHost());
     }
 
     private PegawaiServices(String host) {
         super(host);
+        service = String.format("%s/rumkit-hr-service", getHost());
     }
 
     public static PegawaiServices getInstance() {
@@ -69,9 +71,9 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(pegawaiAdapter, getHeaders());
 
         ResponseEntity<EntityRestMessage<PegawaiAdapter>> response;
-        response = restTemplate.exchange("{hrService}/pegawai", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/pegawai", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PegawaiAdapter>>() {}, 
-                hrService);
+                service);
 
         EntityRestMessage<PegawaiAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -83,9 +85,9 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
-        resposen = restTemplate.exchange("{hrService}/pegawai", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/pegawai", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
-                hrService);
+                service);
 
         ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -97,9 +99,9 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
-        resposen = restTemplate.exchange("{hrService}/pegawai/class/{class}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/pegawai/class/{class}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
-                hrService, cls.getSimpleName());
+                service, cls.getSimpleName());
 
         ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -111,9 +113,9 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
-        resposen = restTemplate.exchange("{hrService}/pegawai/keyword/{keyword}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/pegawai/keyword/{keyword}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
-                hrService, keyword);
+                service, keyword);
 
         ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -125,9 +127,9 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<PegawaiAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<PegawaiAdapter>> resposen;
-        resposen = restTemplate.exchange("{hrService}/pegawai/keyword/{keyword}/class/{class}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/pegawai/keyword/{keyword}/class/{class}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<PegawaiAdapter>>() {}, 
-                hrService, keyword, cls.getSimpleName());
+                service, keyword, cls.getSimpleName());
 
         ListEntityRestMessage<PegawaiAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -139,8 +141,8 @@ public class PegawaiServices extends AbstractService {
         HttpEntity<Pegawai> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<RestMessage> resposen;
-        resposen = restTemplate.exchange("{hrService}/pegawai/{id}", HttpMethod.DELETE, entity,
-                new ParameterizedTypeReference<RestMessage>() {}, hrService, pegawai.getId());
+        resposen = restTemplate.exchange("{service}/pegawai/{id}", HttpMethod.DELETE, entity,
+                new ParameterizedTypeReference<RestMessage>() {}, service, pegawai.getId());
 
         RestMessage message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))

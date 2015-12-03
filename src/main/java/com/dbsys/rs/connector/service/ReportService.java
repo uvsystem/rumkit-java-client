@@ -20,14 +20,15 @@ import org.springframework.http.ResponseEntity;
 public class ReportService extends AbstractService {
     
     private static ReportService instance;
-    private final String service = String.format("%s/report", host);
     
     public ReportService() {
         super();
+        service = String.format("%s/report", getHost());
     }
     
     public ReportService(String host) {
         super(host);
+        service = String.format("%s/report", getHost());
     }
 
     public static ReportService getInstance() {

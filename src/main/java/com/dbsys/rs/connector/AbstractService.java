@@ -16,28 +16,19 @@ public abstract class AbstractService {
     
     protected final RestTemplate restTemplate;
     
-    public static final String defaultHost = "";
-    protected String host;
-
-    protected String accountService;
-    protected String hrService;
-    protected String inventoryService;
-    protected String patientService;
-    protected String paymentService;
-    protected String treatmentService;
-    protected String usageService;
-    protected String serveService;
+    private String host;
+    protected String service;
 
     protected AbstractService() {
         super();
         this.restTemplate = new RestTemplate();
-        setHost("http://localhost:8080");
+        this.host = "http://localhost:8080";
     }
 
     protected AbstractService(String host) {
         super();
         this.restTemplate = new RestTemplate();
-        setHost(host);
+        this.host = host;
     }
     
     public String getHost() {
@@ -46,14 +37,6 @@ public abstract class AbstractService {
     
     public void setHost(String host) {
         this.host = host;
-        this.accountService = String.format("%s/rumkit-account-service", host);
-        this.hrService = String.format("%s/rumkit-hr-service", host);
-        this.inventoryService = String.format("%s/rumkit-inventory-service", host);
-        this.patientService = String.format("%s/rumkit-patient-service", host);
-        this.paymentService = String.format("%s/rumkit-payment-service", host);
-        this.treatmentService = String.format("%s/rumkit-treatment-service", host);
-        this.usageService = String.format("%s/rumkit-usage-service", host);
-        this.serveService = String.format("%s/rumkit-serve-service", host);
     }
     
     protected HttpHeaders getHeaders() {

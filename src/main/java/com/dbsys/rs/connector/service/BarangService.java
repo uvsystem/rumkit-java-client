@@ -27,10 +27,12 @@ public class BarangService extends AbstractService {
 
     private BarangService() {
         super();
+        service = String.format("%s/rumkit-inventory-service", getHost());
     }
 
     private BarangService(String host) {
         super(host);
+        service = String.format("%s/rumkit-inventory-service", getHost());
     }
 
     public static BarangService getInstance() {
@@ -60,9 +62,9 @@ public class BarangService extends AbstractService {
         HttpEntity<BarangAdapter> entity = new HttpEntity<>(barangAdapter, getHeaders());
 
         ResponseEntity<EntityRestMessage<BarangAdapter>> response;
-        response = restTemplate.exchange("{inventoryService}/barang", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/barang", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<BarangAdapter>>() {}, 
-                inventoryService);
+                service);
 
         EntityRestMessage<BarangAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -74,9 +76,9 @@ public class BarangService extends AbstractService {
         HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<BarangAdapter>> response;
-        response = restTemplate.exchange("{inventoryService}/barang", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/barang", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
-                inventoryService);
+                service);
 
         ListEntityRestMessage<BarangAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -88,9 +90,9 @@ public class BarangService extends AbstractService {
         HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<BarangAdapter>> response;
-        response = restTemplate.exchange("{inventoryService}/barang/class/{class}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/barang/class/{class}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
-                inventoryService, cls.getSimpleName());
+                service, cls.getSimpleName());
 
         ListEntityRestMessage<BarangAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -102,9 +104,9 @@ public class BarangService extends AbstractService {
         HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<BarangAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/barang/keyword/{keyword}", HttpMethod.GET, entity, 
+        resposen = restTemplate.exchange("{service}/barang/keyword/{keyword}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
-                inventoryService, keyword);
+                service, keyword);
 
         ListEntityRestMessage<BarangAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -116,9 +118,9 @@ public class BarangService extends AbstractService {
         HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<BarangAdapter>> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/barang/keyword/{keyword}/class/{class}", HttpMethod.GET, entity, 
+        resposen = restTemplate.exchange("{service}/barang/keyword/{keyword}/class/{class}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
-                inventoryService, keyword, cls.getSimpleName());
+                service, keyword, cls.getSimpleName());
 
         ListEntityRestMessage<BarangAdapter> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -130,8 +132,8 @@ public class BarangService extends AbstractService {
         HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<RestMessage> resposen;
-        resposen = restTemplate.exchange("{inventoryService}/barang/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, inventoryService, barang.getId());
+        resposen = restTemplate.exchange("{service}/barang/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, barang.getId());
 
         RestMessage message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))

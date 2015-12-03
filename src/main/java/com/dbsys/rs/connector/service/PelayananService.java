@@ -28,10 +28,12 @@ public class PelayananService extends AbstractService {
 
     private PelayananService() {
         super();
+        service = String.format("%s/rumkit-serve-service", getHost());
     }
 
     private PelayananService(String host) {
         super(host);
+        service = String.format("%s/rumkit-serve-service", getHost());
     }
 
     public static PelayananService getInstance() {
@@ -61,9 +63,9 @@ public class PelayananService extends AbstractService {
         HttpEntity<PelayananAdapter> entity = new HttpEntity<>(pelayananAdapter, getHeaders());
 
         ResponseEntity<EntityRestMessage<PelayananAdapter>> response;
-        response = restTemplate.exchange("{serveService}/pelayanan", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/pelayanan", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PelayananAdapter>>() {}, 
-                serveService);
+                service);
 
         EntityRestMessage<PelayananAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -75,9 +77,9 @@ public class PelayananService extends AbstractService {
         HttpEntity<PelayananTemporalAdapter> entity = new HttpEntity<>(new PelayananTemporalAdapter(pelayanan), getHeaders());
 
         ResponseEntity<EntityRestMessage<PelayananTemporalAdapter>> response;
-        response = restTemplate.exchange("{serveService}/pelayanan/temporal", HttpMethod.POST, entity, 
+        response = restTemplate.exchange("{service}/pelayanan/temporal", HttpMethod.POST, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PelayananTemporalAdapter>>() {}, 
-                serveService);
+                service);
 
         EntityRestMessage<PelayananTemporalAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -88,9 +90,9 @@ public class PelayananService extends AbstractService {
         HttpEntity<PelayananTemporalAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<PelayananTemporalAdapter>> response;
-        response = restTemplate.exchange("{serveService}/pelayanan/temporal/{idPasien}/tanggal/{tanggal}/jam/{jam}/tambahan/{tambahan}/keterangan/{keterangan}", HttpMethod.PUT, entity, 
+        response = restTemplate.exchange("{service}/pelayanan/temporal/{idPasien}/tanggal/{tanggal}/jam/{jam}/tambahan/{tambahan}/keterangan/{keterangan}", HttpMethod.PUT, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PelayananTemporalAdapter>>() {}, 
-                serveService, pasien.getId(), tanggal, jam, tambahan, keterangan);
+                service, pasien.getId(), tanggal, jam, tambahan, keterangan);
 
         EntityRestMessage<PelayananTemporalAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -101,9 +103,9 @@ public class PelayananService extends AbstractService {
         HttpEntity<PelayananAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<EntityRestMessage<PelayananAdapter>> response;
-        response = restTemplate.exchange("{serveService}/pelayanan/{id}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/pelayanan/{id}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<EntityRestMessage<PelayananAdapter>>() {}, 
-                serveService, id);
+                service, id);
 
         EntityRestMessage<PelayananAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -115,8 +117,8 @@ public class PelayananService extends AbstractService {
         HttpEntity<Pelayanan> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<RestMessage> response;
-        response = restTemplate.exchange("{serveService}/pelayanan/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, serveService, pelayanan.getId());
+        response = restTemplate.exchange("{service}/pelayanan/{id}", HttpMethod.DELETE, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, pelayanan.getId());
 
         RestMessage message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
@@ -127,9 +129,9 @@ public class PelayananService extends AbstractService {
         HttpEntity<PelayananAdapter> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<PelayananAdapter>> response;
-        response = restTemplate.exchange("{serveService}/pelayanan/pasien/{idPasien}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/pelayanan/pasien/{idPasien}", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<PelayananAdapter>>() {}, 
-                serveService, pasien.getId());
+                service, pasien.getId());
 
         ListEntityRestMessage<PelayananAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
