@@ -2,7 +2,6 @@ package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.UnitFrame;
-import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.client.tableModel.PegawaiTableModel;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
@@ -71,7 +70,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private final PelayananEventController pelayananEventController;
     private final PemakaianEventController pemakaianEventController;
 
-    private final TokenService tokenService = TokenService.getInstance(EventController.host);
+    private final TokenService tokenService = TokenService.getInstance();
     
     /**
      * Creates new form admin
@@ -122,7 +121,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
     
     private class UnitEventController implements EventController<Unit> {
-        private final UnitService unitservice = UnitService.getInstance(host);
+        private final UnitService unitservice = UnitService.getInstance();
         private Unit model;
 
         @Override
@@ -201,7 +200,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
 
     private class OperatorEventController implements EventController<Operator> {
-        private final OperatorService operatorService = OperatorService.getInstance(host);
+        private final OperatorService operatorService = OperatorService.getInstance();
         private Operator model;
 
         @Override
@@ -291,7 +290,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
     
     private abstract class PegawaiEventController implements EventController<Pegawai> {
-        protected final PegawaiServices pegawaiService = PegawaiServices.getInstance(host);
+        protected final PegawaiServices pegawaiService = PegawaiServices.getInstance();
         private Pegawai model;
 
         @Override
@@ -695,7 +694,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
 
     private class PendudukEventController implements EventController<Penduduk> {
-        private final PendudukService pendudukService = PendudukService.getInstance(host);
+        private final PendudukService pendudukService = PendudukService.getInstance();
         private Penduduk model;
 
         @Override
@@ -805,7 +804,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
 
     private abstract class BarangEventController implements EventController<Barang> {
-        protected final BarangService barangService = BarangService.getInstance(host);
+        protected final BarangService barangService = BarangService.getInstance();
         private Barang model;
 
         @Override
@@ -1021,7 +1020,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
     
     private class TindakanEventController implements EventController<Tindakan> {
-        private final TindakanService tindakanService = TindakanService.getInstance(host);
+        private final TindakanService tindakanService = TindakanService.getInstance();
         private Tindakan model;
         private KategoriTindakan kategori;
 
@@ -1142,7 +1141,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
 
     private class PasienEventController implements EventController<Pasien> {
-        private final PasienService pasienService = PasienService.getInstance(host);
+        private final PasienService pasienService = PasienService.getInstance();
         private Pasien model;
         
         @Override
@@ -1273,7 +1272,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
     
     private class PelayananEventController implements EventController<Pelayanan> {
-        private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+        private final PelayananService pelayananService = PelayananService.getInstance();
         private Pelayanan model;
         
         @Override
@@ -1344,7 +1343,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }
     
     private class PemakaianEventController implements EventController<Pemakaian> {
-        private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
+        private final PemakaianService pemakaianService = PemakaianService.getInstance();
         private Pemakaian model;
 
         @Override

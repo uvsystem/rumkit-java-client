@@ -1,6 +1,5 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.BarangTableFrame;
 import com.dbsys.rs.client.TindakanFrame;
 import com.dbsys.rs.client.TindakanTableFrame;
@@ -38,10 +37,10 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
     private final JFrame frame;
     private final Class<?> clsDomain;
     
-    private final BarangService barangService = BarangService.getInstance(EventController.host);
-    private final PemakaianService pemakaianService = PemakaianService.getInstance(EventController.host);
-    private final TindakanService tindakanService = TindakanService.getInstance(EventController.host);
-    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+    private final BarangService barangService = BarangService.getInstance();
+    private final PemakaianService pemakaianService = PemakaianService.getInstance();
+    private final TindakanService tindakanService = TindakanService.getInstance();
+    private final PelayananService pelayananService = PelayananService.getInstance();
 
     private final Pasien pasien;
 

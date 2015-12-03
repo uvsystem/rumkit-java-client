@@ -1,6 +1,5 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.tableModel.PasienCariTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class FrameUtama extends javax.swing.JFrame {
 
-    private final PasienService pasienService = PasienService.getInstance(EventController.host);
+    private final PasienService pasienService = PasienService.getInstance();
     
     /**
      * Creates new form FrameUtama

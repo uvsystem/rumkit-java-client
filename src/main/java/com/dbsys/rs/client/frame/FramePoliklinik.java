@@ -1,7 +1,6 @@
 package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.ComponentSelectionException;
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.TindakanTableFrame;
 import com.dbsys.rs.client.tableModel.PelayananTableModel;
 import com.dbsys.rs.connector.ServiceException;
@@ -23,9 +22,9 @@ import javax.swing.JOptionPane;
  */
 public class FramePoliklinik extends javax.swing.JFrame implements TindakanTableFrame {
 
-    private final TokenService tokenService = TokenService.getInstance(EventController.host);
-    private final PasienService pasienService = PasienService.getInstance(EventController.host);
-    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+    private final TokenService tokenService = TokenService.getInstance();
+    private final PasienService pasienService = PasienService.getInstance();
+    private final PelayananService pelayananService = PelayananService.getInstance();
 
     private Pasien pasien;
     

@@ -1,6 +1,5 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.TokenService;
@@ -101,7 +100,7 @@ public class FrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        TokenService tokenservice = TokenService.getInstance(EventController.host);
+        TokenService tokenservice = TokenService.getInstance();
         
         String username = txt_login_uname.getText();
         String pass = String.valueOf(txt_login_pass.getPassword());

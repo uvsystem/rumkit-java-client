@@ -1,7 +1,6 @@
 package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.EventController;
-import static com.dbsys.rs.client.EventController.host;
 import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
@@ -38,11 +37,11 @@ import javax.swing.table.TableModel;
  */
 public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
-    private final TokenService tokenService = TokenService.getInstance(EventController.host);
-    private final BarangService barangService = BarangService.getInstance(EventController.host);
-    private final StokService stokService = StokService.getInstance(EventController.host);
+    private final TokenService tokenService = TokenService.getInstance();
+    private final BarangService barangService = BarangService.getInstance();
+    private final StokService stokService = StokService.getInstance();
     
-    private final PasienService pasienService = PasienService.getInstance(EventController.host);
+    private final PasienService pasienService = PasienService.getInstance();
     
     private final ObatEventController obatEventController = new ObatEventController();
     private final BhpEventController bhpEventController = new BhpEventController();
@@ -297,7 +296,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }
     
     private class ObatEventController implements EventController<ObatFarmasi> {
-        private final BarangService obatService = BarangService.getInstance(host);
+        private final BarangService obatService = BarangService.getInstance();
         private ObatFarmasi model;
 
         @Override
@@ -393,7 +392,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }
 
     private class BhpEventController implements EventController<BahanHabisPakai> {
-        private final BarangService bhpService = BarangService.getInstance(host);
+        private final BarangService bhpService = BarangService.getInstance();
         private BahanHabisPakai model;
 
         @Override

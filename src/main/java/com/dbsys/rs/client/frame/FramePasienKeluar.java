@@ -1,6 +1,5 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.PasienTableFrame;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PelayananService;
@@ -14,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class FramePasienKeluar extends javax.swing.JFrame {
 
-    private final PelayananService pelayananService = PelayananService.getInstance(EventController.host);
+    private final PelayananService pelayananService = PelayananService.getInstance();
     private Pasien pasien;
     
     private final PasienTableFrame frame;

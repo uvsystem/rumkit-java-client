@@ -1,6 +1,5 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.TindakanFrame;
 import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.tableModel.DokterTableModel;
@@ -57,23 +56,23 @@ public class FrameCari extends JFrame {
         disableTambah();
         
         if (cls.equals(Unit.class)){
-            unitService = UnitService.getInstance(EventController.host);
+            unitService = UnitService.getInstance();
             txtKeyword.setEnabled(false);
 
             loadTableUnit();
         } else if (cls.equals(KategoriTindakan.class)) {
-            kategoriService = KategoriService.getInstance(EventController.host);
+            kategoriService = KategoriService.getInstance();
             txtKeyword.setEnabled(false);
             chkTambah.setVisible(true);
             pnlKategori.setVisible(true);
 
             loadTableKategori();
         } else if (cls.equals(Dokter.class)) {
-            dokterService = PegawaiServices.getInstance(EventController.host);
+            dokterService = PegawaiServices.getInstance();
 
             loadTableDokter(null);
         } else if (cls.equals(Perawat.class)) {
-            perawatService = PegawaiServices.getInstance(EventController.host);
+            perawatService = PegawaiServices.getInstance();
 
             loadTablePerawat(null);
         }
