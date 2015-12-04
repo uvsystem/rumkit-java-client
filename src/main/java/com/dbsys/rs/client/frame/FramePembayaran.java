@@ -22,8 +22,8 @@ import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Pembayaran;
 import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Tagihan;
+import com.dbsys.rs.lib.entity.Unit;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -232,6 +232,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnBayar = new javax.swing.JButton();
         btnCetakTagihan = new javax.swing.JButton();
         btnCetakPembayaran = new javax.swing.JButton();
+        btnRekapUnit = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -284,7 +285,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblMenunggak);
 
-        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 21, 790, 450));
+        pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, 800, 450));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -613,6 +614,15 @@ public class FramePembayaran extends javax.swing.JFrame {
         getContentPane().add(btnCetakPembayaran);
         btnCetakPembayaran.setBounds(995, 710, 120, 50);
 
+        btnRekapUnit.setText("REKAP UNIT");
+        btnRekapUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapUnitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRekapUnit);
+        btnRekapUnit.setBounds(860, 710, 120, 50);
+
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 1280, 800);
@@ -828,6 +838,15 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_btnBatalSemuaTagihanActionPerformed
 
+    private void btnRekapUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapUnitActionPerformed
+        try {
+            FrameRekap frame = new FrameRekap(this, Unit.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapUnitActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
     private javax.swing.JButton btnBatalTagihan;
@@ -838,6 +857,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnCetakTagihan;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
+    private javax.swing.JButton btnRekapUnit;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

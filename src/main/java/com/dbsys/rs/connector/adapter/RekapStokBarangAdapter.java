@@ -69,4 +69,12 @@ public class RekapStokBarangAdapter {
     public void setJumlahPemakaian(Long jumlahPemakaian) {
         this.jumlahPemakaian = jumlahPemakaian;
     }
+    
+    public Long getTotalMasuk() {
+        return jumlahMasuk + jumlahKembali;
+    }
+    
+    public Long getTotalKeluar() {
+        return jumlahKeluar + jumlahResep + jumlahSupply;
+    }
 }
