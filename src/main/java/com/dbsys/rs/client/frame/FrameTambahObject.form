@@ -39,7 +39,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="95" width="80" height="20"/>
+          <AbsoluteConstraints x="20" y="90" width="80" height="25"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -49,7 +49,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="95" width="260" height="25"/>
+          <AbsoluteConstraints x="110" y="90" width="280" height="25"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -454,7 +454,7 @@
     <Component class="javax.swing.JButton" name="btnSimpan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/btn_simpan small.png"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/btn_simpan.png"/>
         </Property>
       </Properties>
       <Events>
@@ -462,7 +462,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="380" y="90" width="100" height="-1"/>
+          <AbsoluteConstraints x="400" y="90" width="80" height="25"/>
         </Constraint>
       </Constraints>
     </Component>

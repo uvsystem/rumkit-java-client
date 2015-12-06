@@ -516,7 +516,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         btnEksternalStokMasuk = new javax.swing.JButton();
         btnEksternalStokReset = new javax.swing.JButton();
         btnEksternalStokKeluar = new javax.swing.JButton();
-        jLabel35 = new javax.swing.JLabel();
         pnlStokInternal = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtInternalKeyword = new javax.swing.JTextField();
@@ -546,7 +545,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         tblInternal = new javax.swing.JTable();
         btnInternalStokReset = new javax.swing.JButton();
         btnInternalStokKeluar = new javax.swing.JButton();
-        jLabel36 = new javax.swing.JLabel();
         pnlStokKembali = new javax.swing.JPanel();
         pnlInternalDetail1 = new javax.swing.JPanel();
         txtKembaliKode = new javax.swing.JTextField();
@@ -572,7 +570,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         tblKembali = new javax.swing.JTable();
         txtKembaliKeyword = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNomorPasienKembali = new javax.swing.JTextField();
         txtNamaPasienKembali = new javax.swing.JTextField();
@@ -789,10 +786,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokEksternal.add(btnEksternalStokKeluar);
         btnEksternalStokKeluar.setBounds(1050, 470, 80, 30);
 
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
-        pnlStokEksternal.add(jLabel35);
-        jLabel35.setBounds(1110, 10, 110, 30);
-
         paneBarang.addTab("STOK KELUAR / MASUK", pnlStokEksternal);
 
         pnlStokInternal.setLayout(null);
@@ -940,10 +933,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokInternal.add(btnInternalStokKeluar);
         btnInternalStokKeluar.setBounds(1050, 490, 80, 30);
 
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
-        pnlStokInternal.add(jLabel36);
-        jLabel36.setBounds(1110, 10, 110, 30);
-
         paneBarang.addTab("STOK KE UNIT", pnlStokInternal);
 
         pnlStokKembali.setLayout(null);
@@ -1060,10 +1049,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel44.setText("KATA KUNCI");
         pnlStokKembali.add(jLabel44);
         jLabel44.setBounds(20, 70, 90, 25);
-
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
-        pnlStokKembali.add(jLabel45);
-        jLabel45.setBounds(1110, 10, 110, 30);
 
         jLabel1.setText("NO. PASIEN");
         pnlStokKembali.add(jLabel1);
@@ -1550,6 +1535,8 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
 
     private void txtNomorPasienKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliFocusLost
         String kode = txtNomorPasienKembali.getText();
+        if (kode == null || kode.equals(""))
+            return;
         
         try {
             pasien = pasienService.get(kode);
@@ -1695,8 +1682,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -1706,7 +1691,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;

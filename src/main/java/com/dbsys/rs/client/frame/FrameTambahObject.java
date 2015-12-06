@@ -290,7 +290,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
         jLabel1.setLabelFor(txtKeyword);
         jLabel1.setText("KATA KUNCI");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 95, 80, 20);
+        jLabel1.setBounds(20, 90, 80, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -298,7 +298,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 95, 260, 25);
+        txtKeyword.setBounds(110, 90, 280, 25);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -424,14 +424,14 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
         getContentPane().add(pnlPemakaian);
         pnlPemakaian.setBounds(20, 290, 460, 240);
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(380, 90, 100, 33);
+        btnSimpan.setBounds(400, 90, 80, 25);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pencarian.jpg"))); // NOI18N
         lblBackground.setText("jLabel8");

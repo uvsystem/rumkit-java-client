@@ -71,13 +71,13 @@ public class FramePasienKeluar extends javax.swing.JFrame {
         txtKeterangan.setText("-");
         getContentPane().add(txtKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 160, 25));
 
-        btnPasienKeluar.setText("OK");
+        btnPasienKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienKeluarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasienKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, 30));
+        getContentPane().add(btnPasienKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 80, 25));
 
         jLabel4.setText("Biaya Tambahan");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 25));
