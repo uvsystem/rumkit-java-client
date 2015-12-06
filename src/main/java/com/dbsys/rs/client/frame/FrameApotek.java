@@ -305,16 +305,16 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             }
         });
         pnlResep.add(txtResepNomor);
-        txtResepNomor.setBounds(160, 25, 530, 25);
+        txtResepNomor.setBounds(160, 25, 560, 25);
 
-        btnObatTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btnObatTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnObatTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatTambahActionPerformed(evt);
             }
         });
         pnlResep.add(btnObatTambah);
-        btnObatTambah.setBounds(710, 23, 100, 30);
+        btnObatTambah.setBounds(730, 22, 80, 30);
 
         tblResep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -336,7 +336,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         pnlResep.add(jLabel1);
         jLabel1.setBounds(20, 25, 130, 25);
 
-        btnHapus.setText("HAPUS");
+        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusActionPerformed(evt);
@@ -371,7 +371,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setText("LOGOUT");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
@@ -395,7 +395,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         getContentPane().add(btnPasien);
         btnPasien.setBounds(1133, 560, 130, 40);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Farmasi_Bg.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_apotek.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 1280, 800);
 

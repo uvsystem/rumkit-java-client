@@ -82,7 +82,7 @@
         <Component class="javax.swing.JButton" name="btnTindakanTambah">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_Tambah(small).png"/>
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_tambah.png"/>
             </Property>
           </Properties>
           <Events>
@@ -90,14 +90,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="700" y="30" width="90" height="30"/>
+              <AbsoluteConstraints x="710" y="30" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnTindakanUpdate">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_Update(small).png"/>
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_update.png"/>
             </Property>
           </Properties>
           <Events>
@@ -105,14 +105,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="700" y="70" width="90" height="30"/>
+              <AbsoluteConstraints x="710" y="70" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnTindakanHapus">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_hapus(small).png"/>
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_hapus.png"/>
             </Property>
           </Properties>
           <Events>
@@ -120,7 +120,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="700" y="110" width="90" height="30"/>
+              <AbsoluteConstraints x="710" y="110" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -136,7 +136,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="840" y="180" width="400" height="45"/>
+          <AbsoluteConstraints x="850" y="180" width="400" height="45"/>
         </Constraint>
       </Constraints>
 
@@ -146,7 +146,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="No. Pasien"/>
+            <Property name="text" type="java.lang.String" value="NO. PASIEN"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -184,7 +184,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="840" y="230" width="400" height="440"/>
+          <AbsoluteConstraints x="850" y="230" width="400" height="440"/>
         </Constraint>
       </Constraints>
 
@@ -560,11 +560,13 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLogout">
           <Properties>
-            <Property name="text" type="java.lang.String" value="LOGOUT"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_logout.png"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 21]"/>
+              <Dimension value="[80, 20]"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -577,7 +579,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/poliklinik.jpg"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/bg_poliklinik.png"/>
         </Property>
       </Properties>
       <Constraints>

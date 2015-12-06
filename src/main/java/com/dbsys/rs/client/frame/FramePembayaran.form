@@ -174,27 +174,31 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBayarTagihan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="BAYAR"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/dbsys/rs/client/images/btn_bayar.png"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBayarTagihanActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="600" y="20" width="90" height="25"/>
+                      <AbsoluteConstraints x="610" y="17" width="80" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBayarSemuaTagihan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="SEMUA"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/dbsys/rs/client/images/btn_semua.png"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBayarSemuaTagihanActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="700" y="20" width="90" height="25"/>
+                      <AbsoluteConstraints x="700" y="17" width="80" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -289,27 +293,31 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBatalTagihan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="BATAL"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/dbsys/rs/client/images/btn_batal.png"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalTagihanActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="600" y="20" width="90" height="25"/>
+                      <AbsoluteConstraints x="610" y="17" width="80" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBatalSemuaTagihan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="SEMUA"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/dbsys/rs/client/images/btn_semua.png"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalSemuaTagihanActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="700" y="20" width="90" height="25"/>
+                      <AbsoluteConstraints x="710" y="17" width="80" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -752,14 +760,16 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPasienKeluar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PASIEN KELUAR"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_keluar.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPasienKeluarActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="270" y="50" width="110" height="30"/>
+              <AbsoluteConstraints x="300" y="50" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -803,14 +813,16 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnBayar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="BAYAR"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_bayar.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBayarActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="65" width="-1" height="-1"/>
+              <AbsoluteConstraints x="300" y="60" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -818,47 +830,51 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnCetakTagihan">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CETAK TAGIHAN"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/dbsys/rs/client/images/btn_cetak_tagihan.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCetakTagihanActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1130" y="710" width="130" height="50"/>
+          <AbsoluteConstraints x="1180" y="710" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="btnCetakPembayaran">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CETAK STRUK"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/dbsys/rs/client/images/btn_cetak_pembayaran.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCetakPembayaranActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="995" y="710" width="120" height="50"/>
+          <AbsoluteConstraints x="1090" y="710" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="btnRekapUnit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="REKAP UNIT"/>
+        <Property name="text" type="java.lang.String" value="REKAP"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRekapUnitActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="710" width="120" height="50"/>
+          <AbsoluteConstraints x="1000" y="710" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBackground">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/Admin_Bg.jpg"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/bg_pembayaran.png"/>
         </Property>
       </Properties>
       <Constraints>

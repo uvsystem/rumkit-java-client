@@ -762,32 +762,32 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokEksternal.add(jScrollPane2);
         jScrollPane2.setBounds(20, 50, 1200, 240);
 
-        btnEksternalStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
+        btnEksternalStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_masuk.png"))); // NOI18N
         btnEksternalStokMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEksternalStokMasukActionPerformed(evt);
             }
         });
         pnlStokEksternal.add(btnEksternalStokMasuk);
-        btnEksternalStokMasuk.setBounds(870, 470, 100, 40);
+        btnEksternalStokMasuk.setBounds(960, 470, 80, 30);
 
-        btnEksternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnEksternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnEksternalStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEksternalStokResetActionPerformed(evt);
             }
         });
         pnlStokEksternal.add(btnEksternalStokReset);
-        btnEksternalStokReset.setBounds(1130, 470, 90, 39);
+        btnEksternalStokReset.setBounds(1140, 470, 80, 30);
 
-        btnEksternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
+        btnEksternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnEksternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEksternalStokKeluarActionPerformed(evt);
             }
         });
         pnlStokEksternal.add(btnEksternalStokKeluar);
-        btnEksternalStokKeluar.setBounds(1000, 470, 100, 39);
+        btnEksternalStokKeluar.setBounds(1050, 470, 80, 30);
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
         pnlStokEksternal.add(jLabel35);
@@ -922,23 +922,23 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokInternal.add(jScrollPane3);
         jScrollPane3.setBounds(20, 50, 1200, 270);
 
-        btnInternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnInternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnInternalStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInternalStokResetActionPerformed(evt);
             }
         });
         pnlStokInternal.add(btnInternalStokReset);
-        btnInternalStokReset.setBounds(1130, 490, 80, 39);
+        btnInternalStokReset.setBounds(1140, 490, 80, 30);
 
-        btnInternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangKeluar_Icon.png"))); // NOI18N
+        btnInternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnInternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInternalStokKeluarActionPerformed(evt);
             }
         });
         pnlStokInternal.add(btnInternalStokKeluar);
-        btnInternalStokKeluar.setBounds(1030, 490, 90, 39);
+        btnInternalStokKeluar.setBounds(1050, 490, 80, 30);
 
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/stockBarang_icon.png"))); // NOI18N
         pnlStokInternal.add(jLabel36);
@@ -1081,23 +1081,23 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokKembali.add(txtNamaPasienKembali);
         txtNamaPasienKembali.setBounds(520, 10, 420, 25);
 
-        btnKembaliStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/barangMasuk_Icon.png"))); // NOI18N
+        btnKembaliStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_masuk.png"))); // NOI18N
         btnKembaliStokMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliStokMasukActionPerformed(evt);
             }
         });
         pnlStokKembali.add(btnKembaliStokMasuk);
-        btnKembaliStokMasuk.setBounds(1020, 490, 100, 40);
+        btnKembaliStokMasuk.setBounds(1050, 490, 80, 30);
 
-        btnKembaliStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangReset_Icon.png"))); // NOI18N
+        btnKembaliStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnKembaliStokReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliStokResetActionPerformed(evt);
             }
         });
         pnlStokKembali.add(btnKembaliStokReset);
-        btnKembaliStokReset.setBounds(1130, 490, 90, 39);
+        btnKembaliStokReset.setBounds(1140, 490, 80, 30);
 
         txtNomorKembali.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1111,14 +1111,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokKembali.add(jLabel4);
         jLabel4.setBounds(20, 40, 90, 25);
 
-        btnCetakNomor.setText("CETAK");
+        btnCetakNomor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak.png"))); // NOI18N
         btnCetakNomor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCetakNomorActionPerformed(evt);
             }
         });
         pnlStokKembali.add(btnCetakNomor);
-        btnCetakNomor.setBounds(910, 490, 100, 40);
+        btnCetakNomor.setBounds(960, 490, 80, 30);
 
         paneBarang.addTab("STOK KEMBALI DARI PASIEN", pnlStokKembali);
 
@@ -1201,25 +1201,25 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
                 txtObatKeywordKeyPressed(evt);
             }
         });
-        jPanel2.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 350, 25));
+        jPanel2.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 850, 25));
 
-        pnlObat.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 510, 60));
+        pnlObat.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1010, 60));
 
-        btnTambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTambahObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTambahObatActionPerformed(evt);
             }
         });
-        pnlObat.add(btnTambahObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, 80, 40));
+        pnlObat.add(btnTambahObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 25, 80, 30));
 
-        btnClearObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnClearObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnClearObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearObatActionPerformed(evt);
             }
         });
-        pnlObat.add(btnClearObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 80, 40));
+        pnlObat.add(btnClearObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 25, 80, 30));
 
         paneBarang.addTab("DATA OBAT", pnlObat);
 
@@ -1293,29 +1293,29 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
                 txtBhpKeywordKeyPressed(evt);
             }
         });
-        jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 350, 25));
+        jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 850, 25));
 
         jLabel83.setText("KATA KUNCI");
         jPanel17.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
-        pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 510, 60));
+        pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1010, 60));
 
-        btnTambahBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTambahBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTambahBhp.setBorder(null);
         btnTambahBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTambahBhpActionPerformed(evt);
             }
         });
-        pnlBhp.add(btnTambahBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, 80, 40));
+        pnlBhp.add(btnTambahBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 25, 80, 30));
 
-        btnClearBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Clear Small.png"))); // NOI18N
+        btnClearBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnClearBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearBhpActionPerformed(evt);
             }
         });
-        pnlBhp.add(btnClearBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 80, 40));
+        pnlBhp.add(btnClearBhp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 25, 80, 30));
 
         paneBarang.addTab("DATA BARANG HABIS PAKAI", pnlBhp);
 
@@ -1361,7 +1361,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Farmasi_Bg.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_gudang.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 1280, 800);
 

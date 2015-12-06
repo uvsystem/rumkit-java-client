@@ -59,7 +59,7 @@ public class FrameUtama extends javax.swing.JFrame {
                 txtKeywordFocusLost(evt);
             }
         });
-        pnlUtama.add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 1090, 25));
+        pnlUtama.add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 900, 25));
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,29 +74,29 @@ public class FrameUtama extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblPasien);
 
-        pnlUtama.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1200, 470));
+        pnlUtama.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1010, 510));
 
-        getContentPane().add(pnlUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1240, 560));
+        getContentPane().add(pnlUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1050, 600));
 
-        btnKeluar.setText("KELUAR");
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnKeluar.setToolTipText("");
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 750, 100, 30));
+        getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 220, 130, 30));
 
-        btnLogin.setText("LOGIN");
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_login.png"))); // NOI18N
         btnLogin.setToolTipText("");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, 100, 30));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 180, 130, 30));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_main.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
         pack();
