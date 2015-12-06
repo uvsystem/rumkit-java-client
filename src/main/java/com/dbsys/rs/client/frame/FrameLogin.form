@@ -81,9 +81,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/Cancel Login.png"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="CANCEL"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder/>
@@ -102,9 +100,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLogin">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/Button Login.png"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="LOGIN"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder/>
@@ -124,7 +120,7 @@
     <Component class="javax.swing.JLabel" name="background">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/Login Form.jpg"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/bg_login.jpg"/>
         </Property>
       </Properties>
       <Constraints>

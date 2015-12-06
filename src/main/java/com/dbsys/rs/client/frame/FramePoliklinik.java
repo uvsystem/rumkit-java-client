@@ -171,32 +171,32 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         pnlTindakan.add(jScrollPane1);
         jScrollPane1.setBounds(20, 30, 670, 530);
 
-        btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanTambahActionPerformed(evt);
             }
         });
         pnlTindakan.add(btnTindakanTambah);
-        btnTindakanTambah.setBounds(700, 30, 90, 30);
+        btnTindakanTambah.setBounds(710, 30, 80, 30);
 
-        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanUpdateActionPerformed(evt);
             }
         });
         pnlTindakan.add(btnTindakanUpdate);
-        btnTindakanUpdate.setBounds(700, 70, 90, 30);
+        btnTindakanUpdate.setBounds(710, 70, 80, 30);
 
-        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanHapusActionPerformed(evt);
             }
         });
         pnlTindakan.add(btnTindakanHapus);
-        btnTindakanHapus.setBounds(700, 110, 90, 30);
+        btnTindakanHapus.setBounds(710, 110, 80, 30);
 
         getContentPane().add(pnlTindakan);
         pnlTindakan.setBounds(20, 180, 810, 580);
@@ -204,7 +204,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         pnlCari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlCari.setLayout(null);
 
-        jLabel1.setText("No. Pasien");
+        jLabel1.setText("NO. PASIEN");
         pnlCari.add(jLabel1);
         jLabel1.setBounds(20, 10, 110, 25);
 
@@ -217,7 +217,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         txtPasienKode.setBounds(140, 10, 240, 25);
 
         getContentPane().add(pnlCari);
-        pnlCari.setBounds(840, 180, 400, 45);
+        pnlCari.setBounds(850, 180, 400, 45);
 
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setBackground(new Color(0,0,0,20));
@@ -339,7 +339,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         txtPasienKelas.setBounds(140, 390, 240, 25);
 
         getContentPane().add(pnlDetail);
-        pnlDetail.setBounds(840, 230, 400, 440);
+        pnlDetail.setBounds(850, 230, 400, 440);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -364,10 +364,10 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setText("LOGOUT");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 20));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,7 +379,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1270, 30);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/poliklinik.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_poliklinik.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1280, 800);
 

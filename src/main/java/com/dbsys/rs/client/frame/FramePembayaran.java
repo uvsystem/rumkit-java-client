@@ -296,21 +296,21 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtTagihanBayar.setEditable(false);
         jPanel1.add(txtTagihanBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 470, 25));
 
-        btnBayarTagihan.setText("BAYAR");
+        btnBayarTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_bayar.png"))); // NOI18N
         btnBayarTagihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBayarTagihanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 90, 25));
+        jPanel1.add(btnBayarTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 17, 80, 30));
 
-        btnBayarSemuaTagihan.setText("SEMUA");
+        btnBayarSemuaTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_semua.png"))); // NOI18N
         btnBayarSemuaTagihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBayarSemuaTagihanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBayarSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 90, 25));
+        jPanel1.add(btnBayarSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 17, 80, 30));
 
         pnlMenunggak.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 800, 60));
 
@@ -347,21 +347,21 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtTagihanBatal.setEditable(false);
         jPanel2.add(txtTagihanBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 470, 25));
 
-        btnBatalTagihan.setText("BATAL");
+        btnBatalTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_batal.png"))); // NOI18N
         btnBatalTagihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBatalTagihanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 90, 25));
+        jPanel2.add(btnBatalTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 17, 80, 30));
 
-        btnBatalSemuaTagihan.setText("SEMUA");
+        btnBatalSemuaTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_semua.png"))); // NOI18N
         btnBatalSemuaTagihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBatalSemuaTagihanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBatalSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 90, 25));
+        jPanel2.add(btnBatalSemuaTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 17, 80, 30));
 
         pnlBayar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
@@ -567,13 +567,13 @@ public class FramePembayaran extends javax.swing.JFrame {
         cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI" }));
         pnlKeluar.add(cbPasienKeadaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 250, 25));
 
-        btnPasienKeluar.setText("PASIEN KELUAR");
+        btnPasienKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnPasienKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienKeluarActionPerformed(evt);
             }
         });
-        pnlKeluar.add(btnPasienKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 110, 30));
+        pnlKeluar.add(btnPasienKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 80, 30));
 
         getContentPane().add(pnlKeluar);
         pnlKeluar.setBounds(860, 610, 400, 90);
@@ -585,45 +585,45 @@ public class FramePembayaran extends javax.swing.JFrame {
         lblTagihan.setText("Rp 00.000.000.000");
         pnlPembayaran.add(lblTagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, -1));
 
-        btnBayar.setText("BAYAR");
+        btnBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_bayar.png"))); // NOI18N
         btnBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBayarActionPerformed(evt);
             }
         });
-        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 65, -1, -1));
+        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 80, 30));
 
         getContentPane().add(pnlPembayaran);
         pnlPembayaran.setBounds(860, 500, 400, 100);
 
-        btnCetakTagihan.setText("CETAK TAGIHAN");
+        btnCetakTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak_tagihan.png"))); // NOI18N
         btnCetakTagihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCetakTagihanActionPerformed(evt);
             }
         });
         getContentPane().add(btnCetakTagihan);
-        btnCetakTagihan.setBounds(1130, 710, 130, 50);
+        btnCetakTagihan.setBounds(1180, 710, 80, 30);
 
-        btnCetakPembayaran.setText("CETAK STRUK");
+        btnCetakPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak_pembayaran.png"))); // NOI18N
         btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCetakPembayaranActionPerformed(evt);
             }
         });
         getContentPane().add(btnCetakPembayaran);
-        btnCetakPembayaran.setBounds(995, 710, 120, 50);
+        btnCetakPembayaran.setBounds(1090, 710, 80, 30);
 
-        btnRekapUnit.setText("REKAP UNIT");
+        btnRekapUnit.setText("REKAP");
         btnRekapUnit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRekapUnitActionPerformed(evt);
             }
         });
         getContentPane().add(btnRekapUnit);
-        btnRekapUnit.setBounds(860, 710, 120, 50);
+        btnRekapUnit.setBounds(1000, 710, 80, 30);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_pembayaran.png"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 1280, 800);
 

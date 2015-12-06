@@ -231,7 +231,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlMain.setLayout(null);
 
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SalHome_icon.png"))); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_sal_ruangan.png"))); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -240,7 +240,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlMain.add(btnHome);
         btnHome.setBounds(30, 10, 150, 44);
 
-        btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SalPasien_icon.png"))); // NOI18N
+        btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_sal_pasien.png"))); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(105, 23));
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +272,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlTindakan.add(jScrollPane1);
         jScrollPane1.setBounds(20, 40, 680, 520);
 
-        btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Tambah(small).png"))); // NOI18N
+        btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanTambahActionPerformed(evt);
@@ -281,7 +281,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlTindakan.add(btnTindakanTambah);
         btnTindakanTambah.setBounds(710, 40, 80, 30);
 
-        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_Update(small).png"))); // NOI18N
+        btnTindakanUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnTindakanUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanUpdateActionPerformed(evt);
@@ -290,7 +290,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlTindakan.add(btnTindakanUpdate);
         btnTindakanUpdate.setBounds(710, 80, 80, 30);
 
-        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus(small).png"))); // NOI18N
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanHapusActionPerformed(evt);
@@ -335,14 +335,14 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlKeluar.add(txtPasienKeluar);
         txtPasienKeluar.setBounds(110, 20, 200, 25);
 
-        btnKeluar.setText("KELUAR");
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarActionPerformed(evt);
             }
         });
         pnlKeluar.add(btnKeluar);
-        btnKeluar.setBounds(320, 20, 73, 25);
+        btnKeluar.setBounds(320, 17, 80, 30);
 
         pnlHome.add(pnlKeluar);
         pnlKeluar.setBounds(380, 490, 410, 70);
@@ -356,14 +356,14 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlMasuk.add(txtPasienMasuk);
         txtPasienMasuk.setBounds(110, 20, 560, 25);
 
-        btnMasuk.setText("MASUK");
+        btnMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_masuk.png"))); // NOI18N
         btnMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMasukActionPerformed(evt);
             }
         });
         pnlMasuk.add(btnMasuk);
-        btnMasuk.setBounds(680, 20, 73, 25);
+        btnMasuk.setBounds(680, 17, 80, 30);
 
         pnlHome.add(pnlMasuk);
         pnlMasuk.setBounds(20, 30, 770, 60);
@@ -377,7 +377,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
         pnlKelas.add(cbPasienKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 25, 140, 25));
 
-        btnSimpanKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnSimpanKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpanKelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanKelasActionPerformed(evt);
@@ -395,9 +395,9 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
 
-        jLabel4.setText("No. Pasien");
+        jLabel4.setText("NO. PASIEN");
         pnlPasienDetail.add(jLabel4);
-        jLabel4.setBounds(20, 30, 100, 14);
+        jLabel4.setBounds(20, 30, 100, 25);
 
         jLabel5.setText("NIK");
         pnlPasienDetail.add(jLabel5);
@@ -606,7 +606,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/SAL_Bg.jpg"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_sal.png"))); // NOI18N
         getContentPane().add(jLabel19);
         jLabel19.setBounds(0, 0, 1280, 800);
 

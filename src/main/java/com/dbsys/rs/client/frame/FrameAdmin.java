@@ -1808,15 +1808,15 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel31.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
         txtPemakaianNamaBarang.setEditable(false);
-        jPanel31.add(txtPemakaianNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 790, 25));
+        jPanel31.add(txtPemakaianNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 810, 25));
 
-        btnPemakaianHapus.setText("HAPUS");
+        btnPemakaianHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPemakaianHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPemakaianHapusActionPerformed(evt);
             }
         });
-        jPanel31.add(btnPemakaianHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 17, 100, 30));
+        jPanel31.add(btnPemakaianHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 17, 80, 30));
 
         pnlPemakaian.add(jPanel31);
         jPanel31.setBounds(20, 490, 1050, 70);
@@ -1873,15 +1873,15 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel30.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
         txtPelayananNamaTindakan.setEditable(false);
-        jPanel30.add(txtPelayananNamaTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 790, 25));
+        jPanel30.add(txtPelayananNamaTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 810, 25));
 
-        btnPelayananHapus.setText("HAPUS");
+        btnPelayananHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPelayananHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPelayananHapusActionPerformed(evt);
             }
         });
-        jPanel30.add(btnPelayananHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 17, 100, 30));
+        jPanel30.add(btnPelayananHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 17, 80, 30));
 
         pnlPelayanan.add(jPanel30);
         jPanel30.setBounds(20, 490, 1050, 70);
@@ -2022,39 +2022,39 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPasienSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPasienSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnPasienSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienSimpanActionPerformed(evt);
             }
         });
-        jPanel29.add(btnPasienSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel29.add(btnPasienSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
-        btnPasienReset.setText("RESET");
+        btnPasienReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnPasienReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienResetActionPerformed(evt);
             }
         });
-        jPanel29.add(btnPasienReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel29.add(btnPasienReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 30));
 
-        btnPasienHapus.setText("HAPUS");
+        btnPasienHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPasienHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienHapusActionPerformed(evt);
             }
         });
-        jPanel29.add(btnPasienHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel29.add(btnPasienHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 30));
 
-        btnPasienUbah.setText("UBAH");
+        btnPasienUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnPasienUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienUbahActionPerformed(evt);
             }
         });
-        jPanel29.add(btnPasienUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel29.add(btnPasienUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 30));
 
-        pnlPasien.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 370, 60));
+        pnlPasien.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 370, 50));
 
         getContentPane().add(pnlPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
@@ -2100,7 +2100,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel3.add(txtPendudukAgama, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 350, 25));
         jPanel3.add(txtPendudukTelepon, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 350, 25));
 
-        pnlPenduduk.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 1050, 150));
+        pnlPenduduk.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1050, 150));
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2120,7 +2120,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane2.setViewportView(tblPenduduk);
 
-        pnlPenduduk.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 240));
+        pnlPenduduk.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 310));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2138,45 +2138,45 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtPendudukKeywordKeyPressed(evt);
             }
         });
-        jPanel4.add(txtPendudukKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 900, 25));
+        jPanel4.add(txtPendudukKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 510, 25));
 
-        pnlPenduduk.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1050, 60));
+        pnlPenduduk.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 660, 60));
 
         jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukSimpanActionPerformed(evt);
             }
         });
-        jPanel28.add(btnPendudukSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel28.add(btnPendudukSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnPendudukReset.setText("RESET");
+        btnPendudukReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnPendudukReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukResetActionPerformed(evt);
             }
         });
-        jPanel28.add(btnPendudukReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel28.add(btnPendudukReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnPendudukHapus.setText("HAPUS");
+        btnPendudukHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPendudukHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukHapusActionPerformed(evt);
             }
         });
-        jPanel28.add(btnPendudukHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel28.add(btnPendudukHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnPendudukUbah.setText("UBAH");
+        btnPendudukUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnPendudukUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukUbahActionPerformed(evt);
             }
         });
-        jPanel28.add(btnPendudukUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel28.add(btnPendudukUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlPenduduk.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 370, 60));
+        pnlPenduduk.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 370, 60));
 
         getContentPane().add(pnlPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
@@ -2202,7 +2202,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane3.setViewportView(tblTindakan);
 
-        pnlTindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 240));
+        pnlTindakan.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 310));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2251,7 +2251,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel87.setText("SATUAN");
         jPanel6.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 90, 25));
 
-        pnlTindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 1050, 150));
+        pnlTindakan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1050, 150));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2269,13 +2269,13 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtTindakanKeywordKeyTyped(evt);
             }
         });
-        jPanel7.add(txtTindakanKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 890, 25));
+        jPanel7.add(txtTindakanKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 510, 25));
 
-        pnlTindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1050, 60));
+        pnlTindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 670, 60));
 
         jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnTindakanSimpan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTindakanSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2287,33 +2287,33 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnTindakanSimpanActionPerformed(evt);
             }
         });
-        jPanel27.add(btnTindakanSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel27.add(btnTindakanSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnTindakanReset.setText("RESET");
+        btnTindakanReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnTindakanReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanResetActionPerformed(evt);
             }
         });
-        jPanel27.add(btnTindakanReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel27.add(btnTindakanReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnTindakanHapus.setText("HAPUS");
+        btnTindakanHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnTindakanHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanHapusActionPerformed(evt);
             }
         });
-        jPanel27.add(btnTindakanHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel27.add(btnTindakanHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnTindakanUbah.setText("UBAH");
+        btnTindakanUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnTindakanUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanUbahActionPerformed(evt);
             }
         });
-        jPanel27.add(btnTindakanUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel27.add(btnTindakanUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlTindakan.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 370, 60));
+        pnlTindakan.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 370, 60));
 
         getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
@@ -2347,7 +2347,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane1.setViewportView(tblObat);
 
-        pnlObat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1020, 220));
+        pnlObat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1020, 290));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2382,7 +2382,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel6.setText("SATUAN");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 90, 25));
 
-        pnlObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 1020, 120));
+        pnlObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1020, 120));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2400,46 +2400,46 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtObatKeywordKeyPressed(evt);
             }
         });
-        jPanel2.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 860, 25));
+        jPanel2.add(txtObatKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 480, 25));
 
-        pnlObat.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1020, 60));
+        pnlObat.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 60));
 
         jPanel25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnObatSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnObatSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnObatSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatSimpanActionPerformed(evt);
             }
         });
-        jPanel25.add(btnObatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel25.add(btnObatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnObatReset.setText("RESET");
+        btnObatReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnObatReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatResetActionPerformed(evt);
             }
         });
-        jPanel25.add(btnObatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel25.add(btnObatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnObatHapus.setText("HAPUS");
+        btnObatHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnObatHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatHapusActionPerformed(evt);
             }
         });
-        jPanel25.add(btnObatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel25.add(btnObatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnObatUbah.setText("UBAH");
+        btnObatUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnObatUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObatUbahActionPerformed(evt);
             }
         });
-        jPanel25.add(btnObatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel25.add(btnObatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlObat.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 370, 60));
+        pnlObat.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 370, 60));
 
         tabBarang.addTab("OBAT", pnlObat);
 
@@ -2463,7 +2463,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jScrollPane10.setViewportView(tblBhp);
 
-        pnlBhp.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1020, 220));
+        pnlBhp.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1020, 290));
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2498,7 +2498,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         txtBhpSatuan.setToolTipText("");
         jPanel13.add(txtBhpSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 350, 25));
 
-        pnlBhp.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 1020, 120));
+        pnlBhp.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1020, 120));
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2513,48 +2513,48 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtBhpKeywordKeyPressed(evt);
             }
         });
-        jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 860, 25));
+        jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 480, 25));
 
         jLabel83.setText("KATA KUNCI");
         jPanel17.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 25));
 
-        pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1020, 60));
+        pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 60));
 
         jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBhpSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnBhpSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnBhpSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpSimpanActionPerformed(evt);
             }
         });
-        jPanel26.add(btnBhpSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel26.add(btnBhpSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnBhpReset.setText("RESET");
+        btnBhpReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnBhpReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpResetActionPerformed(evt);
             }
         });
-        jPanel26.add(btnBhpReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel26.add(btnBhpReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnBhpHapus.setText("HAPUS");
+        btnBhpHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnBhpHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpHapusActionPerformed(evt);
             }
         });
-        jPanel26.add(btnBhpHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel26.add(btnBhpHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnBhpUbah.setText("UBAH");
+        btnBhpUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnBhpUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBhpUbahActionPerformed(evt);
             }
         });
-        jPanel26.add(btnBhpUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel26.add(btnBhpUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlBhp.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 370, 60));
+        pnlBhp.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 370, 60));
 
         tabBarang.addTab("BARANG HABIS PAKAI", pnlBhp);
 
@@ -2597,37 +2597,37 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnDokterSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnDokterSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnDokterSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDokterSimpanActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel14.add(btnDokterSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnDokterReset.setText("RESET");
+        btnDokterReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnDokterReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDokterResetMouseClicked(evt);
             }
         });
-        jPanel14.add(btnDokterReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel14.add(btnDokterReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnDokterHapus.setText("HAPUS");
+        btnDokterHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnDokterHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDokterHapusActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel14.add(btnDokterHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnDokterUbah.setText("UBAH");
+        btnDokterUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnDokterUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDokterUbahActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel14.add(btnDokterUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
 
@@ -2744,37 +2744,37 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPerawatSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPerawatSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnPerawatSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerawatSimpanActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel16.add(btnPerawatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnPerawatReset.setText("RESET");
+        btnPerawatReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnPerawatReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerawatResetActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel16.add(btnPerawatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnPerawatHapus.setText("HAPUS");
+        btnPerawatHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPerawatHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerawatHapusActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel16.add(btnPerawatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnPerawatUbah.setText("UBAH");
+        btnPerawatUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnPerawatUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerawatUbahActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel16.add(btnPerawatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         tab_perawat.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
 
@@ -2805,37 +2805,37 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel18.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnApotekerSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnApotekerSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnApotekerSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApotekerSimpanActionPerformed(evt);
             }
         });
-        jPanel18.add(btnApotekerSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel18.add(btnApotekerSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnApotekerReset.setText("RESET");
+        btnApotekerReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnApotekerReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApotekerResetActionPerformed(evt);
             }
         });
-        jPanel18.add(btnApotekerReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel18.add(btnApotekerReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnApotekerHapus.setText("HAPUS");
+        btnApotekerHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnApotekerHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApotekerHapusActionPerformed(evt);
             }
         });
-        jPanel18.add(btnApotekerHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel18.add(btnApotekerHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnApotekerUbah.setText("UBAH");
+        btnApotekerUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnApotekerUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApotekerUbahActionPerformed(evt);
             }
         });
-        jPanel18.add(btnApotekerUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel18.add(btnApotekerUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         tab_apoteker.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
 
@@ -2909,37 +2909,37 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPekerjaSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnPekerjaSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnPekerjaSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPekerjaSimpanActionPerformed(evt);
             }
         });
-        jPanel20.add(btnPekerjaSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 40));
+        jPanel20.add(btnPekerjaSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnPekerjaReset.setText("RESET");
+        btnPekerjaReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnPekerjaReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPekerjaResetActionPerformed(evt);
             }
         });
-        jPanel20.add(btnPekerjaReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 40));
+        jPanel20.add(btnPekerjaReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnPekerjaHapus.setText("HAPUS");
+        btnPekerjaHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPekerjaHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPekerjaHapusActionPerformed(evt);
             }
         });
-        jPanel20.add(btnPekerjaHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 40));
+        jPanel20.add(btnPekerjaHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnPekerjaUbah.setText("UBAH");
+        btnPekerjaUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnPekerjaUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPekerjaUbahActionPerformed(evt);
             }
         });
-        jPanel20.add(btnPekerjaUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 40));
+        jPanel20.add(btnPekerjaUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         tab_administrasi.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
 
@@ -3018,19 +3018,19 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 400, 25));
+        jPanel10.add(txt_op_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 510, 25));
 
         txt_admin_operator_unit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_admin_operator_unitMouseClicked(evt);
             }
         });
-        jPanel10.add(txt_admin_operator_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 400, 25));
-        jPanel10.add(txt_op_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 400, 25));
-        jPanel10.add(txt_op_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 400, 25));
+        jPanel10.add(txt_admin_operator_unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 510, 25));
+        jPanel10.add(txt_op_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 510, 25));
+        jPanel10.add(txt_op_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 510, 25));
 
         cb_admin_operator_role.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "ADMIN", "OPERATOR" }));
-        jPanel10.add(cb_admin_operator_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 400, 25));
+        jPanel10.add(cb_admin_operator_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 510, 25));
 
         jLabel49.setText("NAMA");
         jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
@@ -3047,45 +3047,45 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel31.setText("ROLE");
         jPanel10.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 90, 25));
 
-        pnlOperator.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 550, 180));
+        pnlOperator.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 660, 180));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnOperatorSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnOperatorSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnOperatorSimpan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnOperatorSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperatorSimpanActionPerformed(evt);
             }
         });
-        jPanel11.add(btnOperatorSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+        jPanel11.add(btnOperatorSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnOperatorReset.setText("RESET");
+        btnOperatorReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnOperatorReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperatorResetActionPerformed(evt);
             }
         });
-        jPanel11.add(btnOperatorReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 100, 40));
+        jPanel11.add(btnOperatorReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnOperatorHapus.setText("HAPUS");
+        btnOperatorHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnOperatorHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperatorHapusActionPerformed(evt);
             }
         });
-        jPanel11.add(btnOperatorHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, 40));
+        jPanel11.add(btnOperatorHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnOperatorUbah.setText("UBAH");
+        btnOperatorUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnOperatorUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperatorUbahActionPerformed(evt);
             }
         });
-        jPanel11.add(btnOperatorUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 100, 40));
+        jPanel11.add(btnOperatorUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlOperator.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 500, 450, 60));
+        pnlOperator.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 370, 60));
 
         getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
@@ -3116,11 +3116,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(null);
         jPanel8.add(txt_unit_nama);
-        txt_unit_nama.setBounds(130, 20, 430, 25);
+        txt_unit_nama.setBounds(130, 20, 520, 25);
 
         cb_unit_tipe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "LOKET_PENDAFTARAN", "LOKET_PEMBAYARAN", "POLIKLINIK", "RUANG_PERAWATAN", "APOTEK_FARMASI", "GUDANG_FARMASI", "PENUNJANG_MEDIK", "PENUNJANG_NON_MEDIK", "ICU", "UGD" }));
         jPanel8.add(cb_unit_tipe);
-        cb_unit_tipe.setBounds(130, 50, 430, 25);
+        cb_unit_tipe.setBounds(130, 50, 520, 25);
 
         jLabel29.setText("NAMA");
         jPanel8.add(jLabel29);
@@ -3130,120 +3130,120 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel8.add(jLabel52);
         jLabel52.setBounds(20, 50, 90, 25);
 
-        pnlUnit.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 580, 90));
+        pnlUnit.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 670, 90));
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnUnitSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan small.png"))); // NOI18N
+        btnUnitSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnUnitSimpan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUnitSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnitSimpanActionPerformed(evt);
             }
         });
-        jPanel9.add(btnUnitSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
+        jPanel9.add(btnUnitSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
 
-        btnUnitReset.setText("RESET");
+        btnUnitReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnUnitReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnitResetActionPerformed(evt);
             }
         });
-        jPanel9.add(btnUnitReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 100, 40));
+        jPanel9.add(btnUnitReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
-        btnUnitHapus.setText("HAPUS");
+        btnUnitHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnUnitHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnitHapusActionPerformed(evt);
             }
         });
-        jPanel9.add(btnUnitHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, 40));
+        jPanel9.add(btnUnitHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        btnUnitUbah.setText("UBAH");
+        btnUnitUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnUnitUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnitUbahActionPerformed(evt);
             }
         });
-        jPanel9.add(btnUnitUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 100, 40));
+        jPanel9.add(btnUnitUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
-        pnlUnit.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 500, 450, 60));
+        pnlUnit.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 370, 60));
 
         getContentPane().add(pnlUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
-        btnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/UnitIcon.png"))); // NOI18N
+        btnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_unit.png"))); // NOI18N
         btnUnit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 180, 130, 51));
+        getContentPane().add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 180, 130, 30));
 
-        btnOperator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/OperatorIcon.png"))); // NOI18N
+        btnOperator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_operator.png"))); // NOI18N
         btnOperator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperatorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 240, 130, 51));
+        getContentPane().add(btnOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 220, 130, 30));
 
-        btnPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/PegawaiIcon.png"))); // NOI18N
+        btnPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_pegawai.png"))); // NOI18N
         btnPegawai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPegawaiActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 300, 130, 51));
+        getContentPane().add(btnPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 260, 130, 30));
 
-        btnBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/BarangIcon.png"))); // NOI18N
+        btnBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_barang.png"))); // NOI18N
         btnBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 360, 130, 51));
+        getContentPane().add(btnBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 300, 130, 30));
         btnBarang.getAccessibleContext().setAccessibleName("BHP");
 
-        btnTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/TindakanIcon.png"))); // NOI18N
+        btnTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tindakan.png"))); // NOI18N
         btnTindakan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 420, 130, 51));
+        getContentPane().add(btnTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 340, 130, 30));
 
-        btnPenduduk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/RekamMedikIcon.png"))); // NOI18N
+        btnPenduduk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_medrek.png"))); // NOI18N
         btnPenduduk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendudukActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 480, 130, 51));
+        getContentPane().add(btnPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 380, 130, 30));
 
-        btnPasien.setText("PASIEN");
+        btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_pasien.png"))); // NOI18N
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasienActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 540, 130, 51));
+        getContentPane().add(btnPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 420, 130, 30));
 
-        btnPelayanan.setText("PELAYANAN");
+        btnPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_pelayanan.png"))); // NOI18N
         btnPelayanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPelayananActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 600, 130, 51));
+        getContentPane().add(btnPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 460, 130, 30));
 
-        btnPemakaian.setText("PEMAKAIAN");
+        btnPemakaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_pemakaian.png"))); // NOI18N
         btnPemakaian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPemakaianActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 660, 130, 51));
+        getContentPane().add(btnPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 500, 130, 30));
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -3255,9 +3255,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jToolBar1.add(lbl_status);
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setText("LOGOUT");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(80, 20));
+        btnLogout.setMinimumSize(new java.awt.Dimension(80, 20));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3268,7 +3270,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 1280, 30));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Admin_Bg.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_admin.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
         pack();
