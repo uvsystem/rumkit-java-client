@@ -85,6 +85,12 @@
             <version>${itext.version}</version>
         </dependency>
 
+        <dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${aspectj.version}</version>
+	</dependency>
+
         <!--
         <dependency>
                 <groupId>net.sourceforge.jdatepicker</groupId>
@@ -100,6 +106,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <spring.version>4.0.7.RELEASE</spring.version>
+  	<aspectj.version>1.8.2</aspectj.version>
   	<jackson.version>2.4.2</jackson.version>
 	<junit.version>4.11</junit.version>
 	<itext.version>2.1.7</itext.version>
