@@ -130,7 +130,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         model.put("list", listPemakaian);
         
         try {
-            pdfProcessor.generate(pdfView, model, String.format("E://print//pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
+            pdfProcessor.process(pdfView, model, String.format("E://print//pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -184,7 +184,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
-        btnPasien = new javax.swing.JButton();
+        btnCetakPemakaian = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -386,14 +386,14 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        btnPasien.setText("CETAK PEMAKAIAN");
-        btnPasien.addActionListener(new java.awt.event.ActionListener() {
+        btnCetakPemakaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak.png"))); // NOI18N
+        btnCetakPemakaian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPasienActionPerformed(evt);
+                btnCetakPemakaianActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasien);
-        btnPasien.setBounds(1133, 560, 130, 40);
+        getContentPane().add(btnCetakPemakaian);
+        btnCetakPemakaian.setBounds(1180, 600, 80, 30);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_apotek.png"))); // NOI18N
         getContentPane().add(background);
@@ -452,14 +452,14 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         }
     }//GEN-LAST:event_txtResepNomorFocusLost
 
-    private void btnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienActionPerformed
+    private void btnCetakPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPemakaianActionPerformed
         if (pasien == null) {
             JOptionPane.showMessageDialog(this, "Silahkan mencari data pasien terlebih dahulu");
             return;
         }
         
         printPemakaian();
-    }//GEN-LAST:event_btnPasienActionPerformed
+    }//GEN-LAST:event_btnCetakPemakaianActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         try {
@@ -479,10 +479,10 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnCetakPemakaian;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;
-    private javax.swing.JButton btnPasien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

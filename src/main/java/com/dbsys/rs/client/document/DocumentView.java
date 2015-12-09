@@ -8,8 +8,8 @@ import java.util.Map;
  *
  * @author Deddy Christoper Kakunsi
  */
-public abstract class AbstractDocumentView {
+public interface DocumentView {
 
-    public abstract Document create(Map<String, Object> model, Document doc) throws DocumentException;
+    Document create(Map<String, Object> model, Document doc) throws DocumentException;
     
 }

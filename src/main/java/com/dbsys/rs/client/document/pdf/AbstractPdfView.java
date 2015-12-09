@@ -1,6 +1,6 @@
 package com.dbsys.rs.client.document.pdf;
 
-import com.dbsys.rs.client.document.AbstractDocumentView;
+import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.lib.DateUtil;
 import java.sql.Date;
 
@@ -13,7 +13,7 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
-public abstract class AbstractPdfView extends AbstractDocumentView {
+public abstract class AbstractPdfView implements DocumentView {
     protected int fontTitleSize = 14;
     protected int fontTitleStyle = Font.BOLD;
     protected int fontTitleType = Font.TIMES_ROMAN;

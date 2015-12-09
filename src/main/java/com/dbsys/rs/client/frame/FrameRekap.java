@@ -1,6 +1,6 @@
 package com.dbsys.rs.client.frame;
 
-import com.dbsys.rs.client.document.AbstractDocumentView;
+import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.RekapStokPdfView;
@@ -32,7 +32,7 @@ public class FrameRekap extends JFrame {
     
     private final PdfProcessor pdfProcessor;
     private final Map<String, Object> model;
-    private AbstractDocumentView documentView;
+    private DocumentView documentView;
     
     /**
      * Creates new form FramePasienKeluar
@@ -66,7 +66,7 @@ public class FrameRekap extends JFrame {
         model.put("awal", awal);
         model.put("akhir", akhir);
 
-        pdfProcessor.generate(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
     }
 
     private void rekapStok(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -77,7 +77,7 @@ public class FrameRekap extends JFrame {
         model.put("awal", awal);
         model.put("akhir", akhir);
 
-        pdfProcessor.generate(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
     /**
@@ -108,13 +108,13 @@ public class FrameRekap extends JFrame {
         getContentPane().add(txtTanggalAwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 160, 25));
         getContentPane().add(txtTanggalAkhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 160, 25));
 
-        btnOk.setText("OK");
+        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak.png"))); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, 30));
+        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 80, 30));
 
         jLabel4.setText("Tanggal Awal");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 25));

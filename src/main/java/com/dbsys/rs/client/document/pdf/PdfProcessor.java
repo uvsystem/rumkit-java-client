@@ -1,24 +1,31 @@
 package com.dbsys.rs.client.document.pdf;
 
-import com.dbsys.rs.client.document.AbstractDocumentProcessor;
-import com.dbsys.rs.client.document.AbstractDocumentView;
+import com.dbsys.rs.client.document.DocumentProcessor;
+import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfWriter;
-import java.io.ByteArrayOutputStream;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.IOException;
 import java.util.Map;
 
 /**
  *
  * @author Deddy Christoper Kakunsi
  */
-public class PdfProcessor extends AbstractDocumentProcessor {
+public class PdfProcessor implements DocumentProcessor {
 
     @Override
-    public void generate(AbstractDocumentView view, Map<String, Object> model, String url) throws DocumentException {
+    public void process(DocumentView view, Map<String, Object> model, String url) throws DocumentException {
+        generate(view, model, url);
+        print(url);
+    }
+
+    @Override
+    public void generate(DocumentView view, Map<String, Object> model, String url) throws DocumentException {
         if (!(view instanceof AbstractPdfView))
             throw new DocumentException("Tipe yang dimasukan salah");
 
@@ -34,19 +41,22 @@ public class PdfProcessor extends AbstractDocumentProcessor {
     }
 
     @Override
-    public void print(AbstractDocumentView view, Map<String, Object> model) throws DocumentException {
-        if (!(view instanceof AbstractPdfView))
-            throw new DocumentException("Tipe yang dimasukan salah");
-
-        AbstractPdfView pdfView = (AbstractPdfView) view;
-        Document document = pdfView.newDocument();
-        
+    public void print(String url) throws DocumentException {
         try {
-            PdfWriter.getInstance(document, new PrintStream(new ByteArrayOutputStream()));
-            process(pdfView, model, document);
-        } catch (com.lowagie.text.DocumentException e) {
-            throw new DocumentException(e.getMessage());
-        }
+            File pdfFile = new File(url);
+
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                  throw new DocumentException("AWT tidak didukung");
+                }
+            } else {
+                throw new DocumentException("File tidak ditemukan");
+            }
+	  } catch (IOException | DocumentException e) {
+              throw new DocumentException(e.getMessage());
+	  }
     }
     
     private void process(AbstractPdfView pdfView, Map<String, Object> model, Document document) throws DocumentException {
