@@ -23,12 +23,12 @@ public class ReportService extends AbstractService {
     
     public ReportService() {
         super();
-        service = String.format("%s/report", getHost());
+        service = String.format("%s/rumkit-report-service", getHost());
     }
     
     public ReportService(String host) {
         super(host);
-        service = String.format("%s/report", getHost());
+        service = String.format("%s/rumkit-report-service", getHost());
     }
 
     public static ReportService getInstance() {
