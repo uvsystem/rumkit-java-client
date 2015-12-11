@@ -759,7 +759,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel96">
               <Properties>
-                <Property name="text" type="java.lang.String" value="KATA KUNCI"/>
+                <Property name="text" type="java.lang.String" value="NAMA PASIEN"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1099,7 +1099,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="KATA KUNCI"/>
+                <Property name="text" type="java.lang.String" value="NAMA PASIEN"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1805,7 +1805,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KATA KUNCI"/>
+                        <Property name="text" type="java.lang.String" value="NAMA OBAT"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1911,8 +1911,8 @@
             <Container class="javax.swing.JPanel" name="pnlBhp">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="BARANG HABIS PAKAI">
-                    <Property name="tabTitle" type="java.lang.String" value="BARANG HABIS PAKAI"/>
+                  <JTabbedPaneConstraints tabName="BAHAN HABIS PAKAI">
+                    <Property name="tabTitle" type="java.lang.String" value="BAHAN HABIS PAKAI"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -2122,7 +2122,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel83">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KATA KUNCI"/>
+                        <Property name="text" type="java.lang.String" value="NAMA BAHAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

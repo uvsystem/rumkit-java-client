@@ -2008,7 +2008,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel96.setText("KATA KUNCI");
+        jLabel96.setText("NAMA PASIEN");
         jPanel24.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         txtPasienKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -2125,7 +2125,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setText("KATA KUNCI");
+        jLabel10.setText("NAMA PASIEN");
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         txtPendudukKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -2387,7 +2387,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setText("KATA KUNCI");
+        jLabel3.setText("NAMA OBAT");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 25));
 
         txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -2515,7 +2515,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         });
         jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 480, 25));
 
-        jLabel83.setText("KATA KUNCI");
+        jLabel83.setText("NAMA BAHAN");
         jPanel17.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 25));
 
         pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 60));
@@ -2556,7 +2556,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
         pnlBhp.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 370, 60));
 
-        tabBarang.addTab("BARANG HABIS PAKAI", pnlBhp);
+        tabBarang.addTab("BAHAN HABIS PAKAI", pnlBhp);
 
         pnlBarang.add(tabBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1050, 540));
 
