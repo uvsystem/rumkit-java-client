@@ -24,6 +24,7 @@ import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Tagihan;
 import com.dbsys.rs.lib.entity.Unit;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -123,7 +124,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             try {
                 listStokKembali = stokService.stokKembali(pasien);
             } catch (ServiceException ex) {
-                listStokKembali = null;
+                listStokKembali = new ArrayList<>();
             } finally {
                 StokKembaliTableModel tableModel = new StokKembaliTableModel(listStokKembali);
                 tblStokKembali.setModel(tableModel);

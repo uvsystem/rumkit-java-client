@@ -311,7 +311,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlTindakan.add(jScrollPane1);
         jScrollPane1.setBounds(20, 30, 670, 510);
 
-        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
+        btnTindakanSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTindakanSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTindakanSimpanActionPerformed(evt);
@@ -432,7 +432,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPendaftaranCari.setLayout(null);
         pnlPendaftaranCari.setBackground(new Color(0, 0, 0, 20));
 
-        jLabel13.setText("KATA KUNCI");
+        jLabel13.setText("NAMA PASIEN");
         pnlPendaftaranCari.add(jLabel13);
         jLabel13.setBounds(20, 25, 100, 25);
 
@@ -575,7 +575,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPendaftaranDetail.add(txtPasienTujuan);
         txtPasienTujuan.setBounds(130, 90, 250, 25);
 
-        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
+        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
         pnlPendaftaranDetail.add(cbPasienKelas);
         cbPasienKelas.setBounds(130, 120, 250, 25);
 

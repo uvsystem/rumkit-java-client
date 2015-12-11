@@ -2256,7 +2256,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel20.setText("KATA KUNCI");
+        jLabel20.setText("NAMA TINDAKAN");
         jPanel7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
         txtTindakanKeyword.addFocusListener(new java.awt.event.FocusAdapter() {

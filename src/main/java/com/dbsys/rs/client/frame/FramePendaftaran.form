@@ -356,11 +356,11 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kata Kunci"/>
+            <Property name="text" type="java.lang.String" value="NAMA PASIEN"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="25" width="140" height="25"/>
+              <AbsoluteConstraints x="20" y="25" width="110" height="25"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -370,7 +370,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="170" y="25" width="210" height="25"/>
+              <AbsoluteConstraints x="130" y="25" width="250" height="25"/>
             </Constraint>
           </Constraints>
         </Component>

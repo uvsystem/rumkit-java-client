@@ -247,9 +247,9 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         pnlCari.setLayout(null);
         pnlCari.setBackground(new Color(0, 0, 0, 20));
 
-        jLabel13.setText("Kata Kunci");
+        jLabel13.setText("NAMA PASIEN");
         pnlCari.add(jLabel13);
-        jLabel13.setBounds(20, 25, 140, 25);
+        jLabel13.setBounds(20, 25, 110, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -257,7 +257,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         pnlCari.add(txtKeyword);
-        txtKeyword.setBounds(170, 25, 210, 25);
+        txtKeyword.setBounds(130, 25, 250, 25);
 
         getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, 400, 60));
 

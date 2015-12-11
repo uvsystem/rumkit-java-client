@@ -86,7 +86,7 @@
         <Component class="javax.swing.JButton" name="btnTindakanSimpan">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_simpan.png"/>
+              <Image iconType="3" name="/com/dbsys/rs/client/images/btn_tambah.png"/>
             </Property>
           </Properties>
           <Events>
@@ -346,7 +346,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="KATA KUNCI"/>
+            <Property name="text" type="java.lang.String" value="NAMA PASIEN"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -738,13 +738,14 @@
         <Component class="javax.swing.JComboBox" name="cbPasienKelas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
+              <StringArray count="7">
                 <StringItem index="0" value="- Pilih -"/>
                 <StringItem index="1" value="VVIP"/>
                 <StringItem index="2" value="VIP"/>
                 <StringItem index="3" value="I"/>
                 <StringItem index="4" value="II"/>
                 <StringItem index="5" value="III"/>
+                <StringItem index="6" value="NONE"/>
               </StringArray>
             </Property>
           </Properties>
