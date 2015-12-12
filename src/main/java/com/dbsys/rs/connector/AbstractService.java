@@ -22,7 +22,7 @@ public abstract class AbstractService {
     protected AbstractService() {
         super();
         this.restTemplate = new RestTemplate();
-        // this.host = "http://192.168.0.110:8080";
+        // this.host = "http://222.124.150.12:8080";
         this.host = "http://localhost:8080";
     }
 

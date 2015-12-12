@@ -110,7 +110,7 @@
   	<jackson.version>2.4.2</jackson.version>
 	<junit.version>4.11</junit.version>
 	<itext.version>2.1.7</itext.version>
-        <rumkit-library.version>0.5.2-SNAPSHOT</rumkit-library.version>
+        <rumkit-library.version>0.5.3-SNAPSHOT</rumkit-library.version>
         <jdatepicker.version>1.3.2</jdatepicker.version>
     </properties>
 </project>

@@ -177,6 +177,18 @@ public class PasienService extends AbstractService {
             throw new ServiceException(message.getMessage());
     }
 
+    public void ubahPenanggung(Pasien pasien, Penanggung penanggung) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{service}/pasien/{id}/penanggung/{penanggung}", HttpMethod.PUT, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, pasien.getId(), penanggung);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+    }
+
     public void update(Pasien pasien, Pasien.KeadaanPasien keadaan, Pasien.StatusPasien status) throws ServiceException {
         HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
 
