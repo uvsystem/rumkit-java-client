@@ -3,9 +3,11 @@ package com.dbsys.rs.connector.service;
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.adapter.RekapStokBarangAdapter;
+import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.dbsys.rs.lib.ListEntityRestMessage;
 import com.dbsys.rs.lib.RestMessage.Type;
+import com.dbsys.rs.lib.entity.Pasien;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.core.ParameterizedTypeReference;
@@ -23,7 +25,8 @@ public class ReportService extends AbstractService {
     
     public ReportService() {
         super();
-        service = String.format("%s/rumkit-report-service", getHost());
+//        service = String.format("%s/rumkit-report-service", getHost());
+        service = String.format("%s/report", getHost());
     }
     
     public ReportService(String host) {
@@ -66,6 +69,19 @@ public class ReportService extends AbstractService {
                 new ParameterizedTypeReference<ListEntityRestMessage<RekapStokBarangAdapter>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<RekapStokBarangAdapter> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+    
+    public List<RekapTagihanAdapter> rekapTagihan(Pasien pasien) throws ServiceException {
+        HttpEntity<RekapTagihanAdapter> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<RekapTagihanAdapter>> response;
+        response = restTemplate.exchange("{service}/tagihan/pasien/{pasien}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<RekapTagihanAdapter>>() {}, service, pasien.getId());
+
+        ListEntityRestMessage<RekapTagihanAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getList();

@@ -1,7 +1,8 @@
 package com.dbsys.rs.client.document.pdf;
 
+import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
+import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Tagihan;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -23,7 +24,7 @@ public class TagihanPdfView extends  AbstractPdfView {
         doc.newPage();
 
         Pasien pasien = (Pasien) model.get("pasien");
-        List<Tagihan> list = (List<Tagihan>) model.get("listTagihan");
+        List<RekapTagihanAdapter> list = (List<RekapTagihanAdapter>) model.get("listTagihan");
 
         Paragraph paragraph = new Paragraph();
         createTitle(paragraph);
@@ -58,55 +59,57 @@ public class TagihanPdfView extends  AbstractPdfView {
         insertCell(table, "No. Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getKode()), align, 1, fontContent, Rectangle.NO_BORDER);
 
-        insertCell(table, "No. Medrek", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Tanggungan", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getPenanggung()), align, 1, fontContent, Rectangle.NO_BORDER);
+
+        insertCell(table, "No. Medrek", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getKodePenduduk()), align, 1, fontContent, Rectangle.NO_BORDER);
+
+        insertCell(table, "Tanggal Masuk", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", pasien.getTanggalMasuk()), align, 1, fontContent, Rectangle.NO_BORDER);
 
         insertCell(table, "Nama Pasien", align, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getNama()), align, 1, fontContent, Rectangle.NO_BORDER);
 
-        insertCell(table, "Tanggungan", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getPenanggung()), align, 1, fontContent, Rectangle.NO_BORDER);
-
-        insertCell(table, "Tanggal Masuk", align, 1, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", pasien.getTanggalMasuk()), align, 1, fontContent, Rectangle.NO_BORDER);
-
         insertCell(table, "Tanggal Keluar", Element.ALIGN_RIGHT, 1, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", pasien.getTanggalKeluar()), align, 1, fontContent, Rectangle.NO_BORDER);
+
+        int umur = DateUtil.calculate(pasien.getTanggalLahir(), DateUtil.getDate()) / 365;
+        insertCell(table, "Umur", align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s", umur), align, 1, fontContent, Rectangle.NO_BORDER);
+
+        insertCell(table, "", align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "", align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
         addEmptyLine(paragraph, 1);
     }
     
-    private void createContent(Paragraph paragraph, List<Tagihan> list) {
+    private void createContent(Paragraph paragraph, List<RekapTagihanAdapter> list) {
         float columnWidths[] = {8f, 5f, 4f, 4f, 4f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "Tagihan", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Nama Unit", align, 1, fontHeader, Rectangle.BOX);
-        insertCell(table, "Tanggal", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Jumlah", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Tagihan", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Penanggung", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
         Float total = 0F;
-        Float totalTagihan = 0F;
-        for (Tagihan tagihan : list) {
+        for (RekapTagihanAdapter tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getNamaUnit(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTanggal().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, tagihan.getUnit(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, tagihan.getPenanggung().toString(), align, 1, fontContent, Rectangle.BOX);
             
-            total += tagihan.getTagihanCounted();
-            totalTagihan += tagihan.getTagihan();
+            total += tagihan.getTagihan();
         }
 
-        insertCell(table, "Total Tagihan Pasien", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Sub-Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
         insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
-
-        insertCell(table, "Total Tagihan UMUM + BPJS", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", totalTagihan.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

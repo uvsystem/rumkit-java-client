@@ -8,10 +8,12 @@ import com.dbsys.rs.client.tableModel.StokKembaliTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.PembayaranService;
+import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.lib.DateUtil;
@@ -44,6 +46,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     private final PembayaranService pembayaranService = PembayaranService.getInstance();
     private final StokService stokService = StokService.getInstance();
     private final TokenService tokenService = TokenService.getInstance();
+    private final ReportService reportService = ReportService.getInstance();
     
     private Pasien pasien;
     private Pembayaran pembayaran;
@@ -776,17 +779,18 @@ public class FramePembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Silahkan cari data pasien dahulu");
             return;
         }
-            
-        PdfProcessor pdfProcessor = new PdfProcessor();
         
+        PdfProcessor pdfProcessor = new PdfProcessor();
         TagihanPdfView pdfView = new TagihanPdfView();
-        Map<String, Object> model = new HashMap<>();
-        model.put("pasien", pasien);
-        model.put("listTagihan", listTagihan);
         
         try {
+            List<RekapTagihanAdapter> list = reportService.rekapTagihan(pasien);
+            Map<String, Object> model = new HashMap<>();
+            model.put("pasien", pasien);
+            model.put("listTagihan", list);
+
             pdfProcessor.process(pdfView, model, String.format("E://print//tagihan-%s.pdf", DateUtil.getTime().hashCode()));
-        } catch (DocumentException ex) {
+        } catch (DocumentException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCetakTagihanActionPerformed

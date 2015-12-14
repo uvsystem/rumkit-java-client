@@ -49,6 +49,7 @@ public final class TagihanTableModel extends DefaultTableModel {
     @Override
     public Object getValueAt(int row, int column){
         Tagihan tagihan = getTagihan(row);
+        Long totalTagihan = tagihan.getTagihan();
         
         switch(column){
             case 0: return tagihan.getNama();
@@ -56,7 +57,7 @@ public final class TagihanTableModel extends DefaultTableModel {
             case 2: return tagihan.getTanggal();
             case 3: return tagihan.getJumlah();
             case 4:
-                return NumberFormat.getNumberInstance(Locale.US).format(tagihan.getTagihan());
+                return NumberFormat.getNumberInstance(Locale.US).format(totalTagihan);
             case 5: return tagihan.getPenanggung();
             default: return "";
         }

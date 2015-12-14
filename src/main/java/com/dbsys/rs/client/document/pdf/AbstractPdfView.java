@@ -55,7 +55,7 @@ public abstract class AbstractPdfView implements DocumentView {
     }
 
     protected void insertCell(PdfPTable table, String text, int align, int colspan, Font font, int border){
-        PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
+        PdfPCell cell = new PdfPCell(new Phrase(text, font));
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
         cell.setBorder(border);
