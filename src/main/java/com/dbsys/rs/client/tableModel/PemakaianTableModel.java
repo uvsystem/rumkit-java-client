@@ -20,7 +20,7 @@ public class PemakaianTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 6;
+        return 5;
     }
     
     @Override
@@ -33,12 +33,11 @@ public class PemakaianTableModel extends DefaultTableModel {
     @Override
     public String getColumnName(int column){
         switch(column){
-            case 0: return "NAMA BARANG";
-            case 1: return "NAMA UNIT";
+            case 0: return "NOMOR RESEP";
+            case 1: return "NAMA OBAT/BHP";
             case 2: return "TANGGAL";
             case 3: return "JUMLAH";
             case 4: return "BIAYA";
-            case 5: return "PENANGUNG";
             default: return "";
         }
     }
@@ -48,17 +47,17 @@ public class PemakaianTableModel extends DefaultTableModel {
         Pemakaian pemakaian = getPemakaian(row);
 
         switch(column){
-            case 0: return pemakaian.getBarang().getNama();
-            case 1: return pemakaian.getUnit().getNama();
+            case 0: return pemakaian.getNomorResep();
+            case 1: return pemakaian.getBarang().getNama();
             case 2: return pemakaian.getTanggal();
             case 3: return pemakaian.getJumlah();
             case 4: 
                 String tagihan = NumberFormat.getNumberInstance(Locale.US).format(pemakaian.getTagihan());
                 return tagihan;
-            case 5: return pemakaian.getTanggungan();
             default: return "";
         }
     }
+    
     public Pemakaian getPemakaian(int row){
         return list.get(row);
     }

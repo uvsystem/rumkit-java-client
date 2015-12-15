@@ -9,8 +9,6 @@ import com.dbsys.rs.connector.ServiceException;
  */
 public interface EventController<T> {
     
-    String host = "http://localhost:8080";
-    
     T getModel();
     
     void setModel(T t);
@@ -24,5 +22,7 @@ public interface EventController<T> {
     void onLoad() throws ServiceException;
     
     void onDelete() throws ServiceException;
+    
+    void setComponentEnabled(boolean enabled);
     
 }

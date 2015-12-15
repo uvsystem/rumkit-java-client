@@ -5,6 +5,25 @@
     <artifactId>rumkit-java-client</artifactId>
     <version>1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.dbsys.rs.client.Rumkit</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
 
@@ -38,14 +57,8 @@
 
         <dependency>
             <groupId>com.dbsys.rs</groupId>
-            <artifactId>rumkit-connector</artifactId>
-            <version>0.3.1-SNAPSHOT</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.dbsys.rs</groupId>
             <artifactId>rumkit-library</artifactId>
-            <version>0.4.9-SNAPSHOT</version>
+            <version>${rumkit-library.version}</version>
         </dependency>
         
         <dependency>
@@ -66,6 +79,26 @@
             <version>${junit.version}</version>
 	</dependency>        
 
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${itext.version}</version>
+        </dependency>
+
+        <dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${aspectj.version}</version>
+	</dependency>
+
+        <!--
+        <dependency>
+                <groupId>net.sourceforge.jdatepicker</groupId>
+                <artifactId>jdatepicker</artifactId>
+                <version>${jdatepicker.version}</version>
+        </dependency>
+        -->
+
     </dependencies>
     
     <properties>
@@ -73,7 +106,11 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <spring.version>4.0.7.RELEASE</spring.version>
+  	<aspectj.version>1.8.2</aspectj.version>
   	<jackson.version>2.4.2</jackson.version>
 	<junit.version>4.11</junit.version>
+	<itext.version>2.1.7</itext.version>
+        <rumkit-library.version>0.5.3-SNAPSHOT</rumkit-library.version>
+        <jdatepicker.version>1.3.2</jdatepicker.version>
     </properties>
 </project>
