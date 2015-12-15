@@ -227,6 +227,8 @@ public class FramePembayaran extends javax.swing.JFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnRekapPemakaian = new javax.swing.JButton();
+        btnRekapPelayanan = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -236,7 +238,6 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnBayar = new javax.swing.JButton();
         btnCetakTagihan = new javax.swing.JButton();
         btnCetakPembayaran = new javax.swing.JButton();
-        btnRekapUnit = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -559,6 +560,34 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnLogout);
 
+        btnRekapPemakaian.setText("REKAP PEMAKAIAN");
+        btnRekapPemakaian.setFocusable(false);
+        btnRekapPemakaian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPemakaian.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPemakaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPemakaianActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPemakaian);
+
+        btnRekapPelayanan.setText("REKAP PELAYANAN");
+        btnRekapPelayanan.setFocusable(false);
+        btnRekapPelayanan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPelayanan.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPelayanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPelayananActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPelayanan);
+
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
@@ -617,15 +646,6 @@ public class FramePembayaran extends javax.swing.JFrame {
         });
         getContentPane().add(btnCetakPembayaran);
         btnCetakPembayaran.setBounds(1090, 710, 80, 30);
-
-        btnRekapUnit.setText("REKAP");
-        btnRekapUnit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRekapUnitActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRekapUnit);
-        btnRekapUnit.setBounds(1000, 710, 80, 30);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_pembayaran.png"))); // NOI18N
         getContentPane().add(lblBackground);
@@ -843,15 +863,24 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_btnBatalSemuaTagihanActionPerformed
 
-    private void btnRekapUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapUnitActionPerformed
+    private void btnRekapPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPemakaianActionPerformed
+        try {
+            FrameRekap frame = new FrameRekap(this, Pemakaian.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapPemakaianActionPerformed
+
+    private void btnRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPelayananActionPerformed
         try {
             FrameRekap frame = new FrameRekap(this, Unit.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btnRekapUnitActionPerformed
-
+    }//GEN-LAST:event_btnRekapPelayananActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
     private javax.swing.JButton btnBatalTagihan;
@@ -862,7 +891,8 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnCetakTagihan;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
-    private javax.swing.JButton btnRekapUnit;
+    private javax.swing.JButton btnRekapPelayanan;
+    private javax.swing.JButton btnRekapPemakaian;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

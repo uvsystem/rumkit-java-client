@@ -3,13 +3,20 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.RekapPegawaiPdfView;
+import com.dbsys.rs.client.document.pdf.RekapPemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.RekapStokPdfView;
 import com.dbsys.rs.client.document.pdf.RekapUnitPdfView;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.adapter.RekapPegawaiAdapter;
 import com.dbsys.rs.connector.adapter.RekapStokBarangAdapter;
+import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Unit;
 import java.sql.Date;
@@ -79,6 +86,39 @@ public class FrameRekap extends JFrame {
 
         pdfProcessor.process(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
     }
+
+    private void rekapPemakaian(Date awal, Date akhir) throws ServiceException, DocumentException {
+        documentView = new RekapPemakaianPdfView();
+        
+        List<RekapTagihanAdapter> list = reportService.rekapPemakaian(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("E://print//rekap-pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+
+    private void rekapDokter(Date awal, Date akhir) throws ServiceException, DocumentException {
+        documentView = new RekapPegawaiPdfView();
+        
+        List<RekapPegawaiAdapter> list = reportService.rekapDokter(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("E://print//rekap-dokter-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+
+    private void rekapPerawat(Date awal, Date akhir) throws ServiceException, DocumentException {
+        documentView = new RekapPegawaiPdfView();
+        
+        List<RekapPegawaiAdapter> list = reportService.rekapPerawat(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("E://print//rekap-perawat-%s.pdf", DateUtil.getTime().hashCode()));
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,6 +182,12 @@ public class FrameRekap extends JFrame {
                 rekapUnit(awal, akhir);
             } else if (Stok.class.equals(cls)) {
                 rekapStok(awal, akhir);
+            } else if (Pemakaian.class.equals(cls)) {
+                rekapPemakaian(awal, akhir);
+            } else if (Dokter.class.equals(cls)) {
+                rekapDokter(awal, akhir);
+            } else if (Perawat.class.equals(cls)) {
+                rekapPerawat(awal, akhir);
             }
             
             this.dispose();

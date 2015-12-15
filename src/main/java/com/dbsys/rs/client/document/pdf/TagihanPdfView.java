@@ -94,7 +94,7 @@ public class TagihanPdfView extends  AbstractPdfView {
         insertCell(table, "Nama Unit", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Jumlah", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Tagihan", align, 1, fontHeader, Rectangle.BOX);
-        insertCell(table, "Penanggung", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Tanggungan", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
         Float total = 0F;
@@ -108,8 +108,8 @@ public class TagihanPdfView extends  AbstractPdfView {
             total += tagihan.getTagihan();
         }
 
-        insertCell(table, "Sub-Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

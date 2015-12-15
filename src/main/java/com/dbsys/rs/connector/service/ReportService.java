@@ -2,6 +2,7 @@ package com.dbsys.rs.connector.service;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
+import com.dbsys.rs.connector.adapter.RekapPegawaiAdapter;
 import com.dbsys.rs.connector.adapter.RekapStokBarangAdapter;
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
@@ -25,8 +26,7 @@ public class ReportService extends AbstractService {
     
     public ReportService() {
         super();
-//        service = String.format("%s/rumkit-report-service", getHost());
-        service = String.format("%s/report", getHost());
+        service = String.format("%s/rumkit-report-service", getHost());
     }
     
     public ReportService(String host) {
@@ -82,6 +82,45 @@ public class ReportService extends AbstractService {
                 new ParameterizedTypeReference<ListEntityRestMessage<RekapTagihanAdapter>>() {}, service, pasien.getId());
 
         ListEntityRestMessage<RekapTagihanAdapter> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+    
+    public List<RekapTagihanAdapter> rekapPemakaian(Date awal, Date akhir) throws ServiceException {
+        HttpEntity<RekapTagihanAdapter> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<RekapTagihanAdapter>> response;
+        response = restTemplate.exchange("{service}/tagihan/pemakaian/{awal}/to/{akhir}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<RekapTagihanAdapter>>() {}, service, awal, akhir);
+
+        ListEntityRestMessage<RekapTagihanAdapter> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+
+    public List<RekapPegawaiAdapter> rekapDokter(Date awal, Date akhir) throws ServiceException {
+        HttpEntity<RekapPegawaiAdapter> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<RekapPegawaiAdapter>> response;
+        response = restTemplate.exchange("{service}/pegawai/dokter/{awal}/to/{akhir}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<RekapPegawaiAdapter>>() {}, service, awal, akhir);
+
+        ListEntityRestMessage<RekapPegawaiAdapter> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+
+    public List<RekapPegawaiAdapter> rekapPerawat(Date awal, Date akhir) throws ServiceException {
+        HttpEntity<RekapPegawaiAdapter> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<RekapPegawaiAdapter>> response;
+        response = restTemplate.exchange("{service}/pegawai/perawat/{awal}/to/{akhir}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<RekapPegawaiAdapter>>() {}, service, awal, akhir);
+
+        ListEntityRestMessage<RekapPegawaiAdapter> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getList();

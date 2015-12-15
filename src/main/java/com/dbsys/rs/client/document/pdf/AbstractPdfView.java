@@ -8,10 +8,12 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import java.awt.Color;
 
 public abstract class AbstractPdfView implements DocumentView {
     protected int fontTitleSize = 14;
@@ -40,7 +42,6 @@ public abstract class AbstractPdfView implements DocumentView {
     protected String name;
 
     protected abstract void createTitle(Paragraph paragraph) throws DocumentException;
-    public abstract Document newDocument();
 
     public String getName() {
         if (name == null || name.equals(""))
@@ -66,6 +67,20 @@ public abstract class AbstractPdfView implements DocumentView {
         table.addCell(cell);
     }
 
+
+    protected void insertCell(PdfPTable table, String text, int align, int colspan, Font font, int border, Color backgroundColor){
+        PdfPCell cell = new PdfPCell(new Phrase(text, font));
+        cell.setHorizontalAlignment(align);
+        cell.setColspan(colspan);
+        cell.setBorder(border);
+        cell.setBackgroundColor(backgroundColor);
+
+        if("".equals(text))
+            cell.setMinimumHeight(minimumCellHeight);
+
+        table.addCell(cell);
+    }
+    
     protected void insertCell(PdfPTable table, String text, int align, int colspan, Font font, int border, float minimumCellHeight){
         this.minimumCellHeight = minimumCellHeight;
         insertCell(table, text, align, colspan, font, border);
@@ -79,4 +94,8 @@ public abstract class AbstractPdfView implements DocumentView {
     protected String createTanggal(Date tanggal) {
         return DateUtil.toFormattedStringDate(tanggal, "-");
     }	
+
+    public Document newDocument() {
+        return new Document(PageSize.A4);
+    }
 }

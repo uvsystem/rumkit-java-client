@@ -4,6 +4,7 @@ import com.dbsys.rs.client.EventController;
 import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.RekapBarangPdfView;
 import com.dbsys.rs.client.document.pdf.StokKembaliPdfView;
 import com.dbsys.rs.client.tableModel.BarangTableModel;
 import com.dbsys.rs.client.tableModel.ObatTableModel;
@@ -630,6 +631,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnRekapBarang = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -646,7 +648,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
 
         pnlStokEksternal.setLayout(null);
 
-        jLabel6.setText("KATA KUNCI");
+        jLabel6.setText("NAMA");
         pnlStokEksternal.add(jLabel6);
         jLabel6.setBounds(20, 15, 90, 14);
 
@@ -790,7 +792,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
 
         pnlStokInternal.setLayout(null);
 
-        jLabel22.setText("KATA KUNCI");
+        jLabel22.setText("NAMA");
         pnlStokInternal.add(jLabel22);
         jLabel22.setBounds(20, 10, 90, 25);
 
@@ -1046,7 +1048,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         pnlStokKembali.add(txtKembaliKeyword);
         txtKembaliKeyword.setBounds(120, 70, 390, 25);
 
-        jLabel44.setText("KATA KUNCI");
+        jLabel44.setText("NAMA OBAT/BHP");
         pnlStokKembali.add(jLabel44);
         jLabel44.setBounds(20, 70, 90, 25);
 
@@ -1173,7 +1175,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setText("KATA KUNCI");
+        jLabel12.setText("NAMA OBAT");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
         txtObatKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1280,7 +1282,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         });
         jPanel17.add(txtBhpKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 850, 25));
 
-        jLabel83.setText("KATA KUNCI");
+        jLabel83.setText("NAMA BHP");
         jPanel17.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
         pnlBhp.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1010, 60));
@@ -1342,6 +1344,20 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         jToolBar1.add(btnLogout);
+
+        btnRekapBarang.setText("REKAP OBAT/BHP");
+        btnRekapBarang.setFocusable(false);
+        btnRekapBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapBarang.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapBarang.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapBarang.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapBarang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapBarangActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapBarang);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
@@ -1639,6 +1655,21 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         printStokKembali();
     }//GEN-LAST:event_btnCetakNomorActionPerformed
 
+    private void btnRekapBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapBarangActionPerformed
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        RekapBarangPdfView pdfView = new RekapBarangPdfView();
+        
+        try {
+            List<Barang> list = barangService.getAll();
+            Map<String, Object> model = new HashMap<>();
+            model.put("list", list);
+
+            pdfProcessor.process(pdfView, model, String.format("E://print//rekap-barang-%s-%s.pdf", DateUtil.getDate().hashCode(), DateUtil.getTime().hashCode()));
+        } catch (DocumentException | ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapBarangActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnCetakNomor;
@@ -1652,6 +1683,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JButton btnKembaliStokMasuk;
     private javax.swing.JButton btnKembaliStokReset;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRekapBarang;
     private javax.swing.JButton btnTambahBhp;
     private javax.swing.JButton btnTambahObat;
     private javax.swing.JComboBox cbBhpTanggungan;

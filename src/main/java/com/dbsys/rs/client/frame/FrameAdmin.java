@@ -1602,6 +1602,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         btnDokterReset = new javax.swing.JButton();
         btnDokterHapus = new javax.swing.JButton();
         btnDokterUbah = new javax.swing.JButton();
+        btnRekapDokter = new javax.swing.JButton();
         jPanel21 = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
@@ -1648,6 +1649,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         btnPerawatReset = new javax.swing.JButton();
         btnPerawatHapus = new javax.swing.JButton();
         btnPerawatUbah = new javax.swing.JButton();
+        btnRekapPerawat = new javax.swing.JButton();
         tab_apoteker = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbl_apoteker = new javax.swing.JTable();
@@ -2603,7 +2605,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnDokterSimpanActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
+        jPanel14.add(btnDokterSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         btnDokterReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnDokterReset.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2611,7 +2613,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnDokterResetMouseClicked(evt);
             }
         });
-        jPanel14.add(btnDokterReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
+        jPanel14.add(btnDokterReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 17, 80, 30));
 
         btnDokterHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnDokterHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -2619,7 +2621,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnDokterHapusActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
+        jPanel14.add(btnDokterHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
         btnDokterUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnDokterUbah.addActionListener(new java.awt.event.ActionListener() {
@@ -2627,9 +2629,17 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnDokterUbahActionPerformed(evt);
             }
         });
-        jPanel14.add(btnDokterUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
+        jPanel14.add(btnDokterUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
+        btnRekapDokter.setText("REKAP");
+        btnRekapDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapDokterActionPerformed(evt);
+            }
+        });
+        jPanel14.add(btnRekapDokter, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
+
+        tab_dokter.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 460, 60));
 
         jPanel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2750,7 +2760,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnPerawatSimpanActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
+        jPanel16.add(btnPerawatSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
 
         btnPerawatReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnPerawatReset.addActionListener(new java.awt.event.ActionListener() {
@@ -2758,7 +2768,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnPerawatResetActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
+        jPanel16.add(btnPerawatReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 17, 80, 30));
 
         btnPerawatHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_hapus.png"))); // NOI18N
         btnPerawatHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -2766,7 +2776,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnPerawatHapusActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
+        jPanel16.add(btnPerawatHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 17, 80, 30));
 
         btnPerawatUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
         btnPerawatUbah.addActionListener(new java.awt.event.ActionListener() {
@@ -2774,9 +2784,17 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 btnPerawatUbahActionPerformed(evt);
             }
         });
-        jPanel16.add(btnPerawatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 17, 80, 30));
+        jPanel16.add(btnPerawatUbah, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 17, 80, 30));
 
-        tab_perawat.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 370, 60));
+        btnRekapPerawat.setText("REKAP");
+        btnRekapPerawat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPerawatActionPerformed(evt);
+            }
+        });
+        jPanel16.add(btnRekapPerawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 17, 80, 30));
+
+        tab_perawat.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 460, 60));
 
         tab_pane.addTab("PERAWAT", tab_perawat);
 
@@ -3879,6 +3897,24 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private void btnPasienUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienUbahActionPerformed
         pasienEventController.setComponentEnabled(true);
     }//GEN-LAST:event_btnPasienUbahActionPerformed
+
+    private void btnRekapDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapDokterActionPerformed
+        try {
+            FrameRekap frame = new FrameRekap(this, Dokter.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapDokterActionPerformed
+
+    private void btnRekapPerawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPerawatActionPerformed
+        try {
+            FrameRekap frame = new FrameRekap(this, Perawat.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapPerawatActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApotekerHapus;
@@ -3927,6 +3963,8 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     private javax.swing.JButton btnPerawatReset;
     private javax.swing.JButton btnPerawatSimpan;
     private javax.swing.JButton btnPerawatUbah;
+    private javax.swing.JButton btnRekapDokter;
+    private javax.swing.JButton btnRekapPerawat;
     private javax.swing.JButton btnTindakan;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanReset;
