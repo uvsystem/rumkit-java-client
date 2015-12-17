@@ -458,6 +458,11 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
                 txtPasienKodeFocusLost(evt);
             }
         });
+        txtPasienKode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasienKodeKeyPressed(evt);
+            }
+        });
         pnlPasienDetail.add(txtPasienKode);
         txtPasienKode.setBounds(140, 30, 240, 25);
 
@@ -819,6 +824,11 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnSimpanPenanggungActionPerformed
+
+    private void txtPasienKodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasienKodeKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPasien.requestFocus();
+    }//GEN-LAST:event_txtPasienKodeKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;

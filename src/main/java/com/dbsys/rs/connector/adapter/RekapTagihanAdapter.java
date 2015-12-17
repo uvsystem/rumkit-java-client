@@ -107,12 +107,6 @@ public class RekapTagihanAdapter {
     
     public Long getTagihan() {
         /**
-         * Jika penanggung adalah BPJS, maka tagihan tidak dihitung.
-         */
-        if (Penanggung.BPJS.equals(penanggung))
-            return 0L;
-        
-        /**
          * Jika tindakan dilakukan di ICU, maka biaya tindakan dikali 2.
          */
         if (TipeUnit.ICU.equals(tipe))

@@ -59,6 +59,11 @@ public class FrameUtama extends javax.swing.JFrame {
                 txtKeywordFocusLost(evt);
             }
         });
+        txtKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKeywordKeyPressed(evt);
+            }
+        });
         pnlUtama.add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 900, 25));
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,6 +134,11 @@ public class FrameUtama extends javax.swing.JFrame {
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnLogin.requestFocus();
+    }//GEN-LAST:event_txtKeywordKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKeluar;

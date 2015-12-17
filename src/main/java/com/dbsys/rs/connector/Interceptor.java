@@ -12,9 +12,9 @@ import org.aspectj.lang.annotation.Around;
  */
 public class Interceptor {
 
-    @Around("execution(public * com.dbsys.rs.connector.service.*.*(..) throws com.dbsys.rs.connector.ServiceException)")
+    @Around("execution(public void com.dbsys.rs.client.Rumkit.testCall())")
     public void process(ProceedingJoinPoint jointPoint) {
-        System.out.println("Hell");
+        System.out.println("BEFORE CALL");
         
         Progress progress = new Progress(null, false);
         progress.setVisible(true);
@@ -26,5 +26,7 @@ public class Interceptor {
         } finally {
             progress.setVisible(false);
         }
+        
+        System.out.println("AFTER CALL");
     }
 }

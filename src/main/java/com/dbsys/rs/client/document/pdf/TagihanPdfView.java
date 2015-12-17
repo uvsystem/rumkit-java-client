@@ -2,6 +2,7 @@ package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -18,12 +19,16 @@ import java.util.Map;
  * @author Deddy Christoper Kakunsi
  */
 public class TagihanPdfView extends  AbstractPdfView {
+    
+    private Penanggung penanggungPasien;
 
     @Override
     public Document create(Map<String, Object> model, Document doc) throws DocumentException {
         doc.newPage();
 
         Pasien pasien = (Pasien) model.get("pasien");
+        penanggungPasien = pasien.getPenanggung();
+        
         List<RekapTagihanAdapter> list = (List<RekapTagihanAdapter>) model.get("listTagihan");
 
         Paragraph paragraph = new Paragraph();
@@ -99,13 +104,20 @@ public class TagihanPdfView extends  AbstractPdfView {
 
         Float total = 0F;
         for (RekapTagihanAdapter tagihan : list) {
+            Penanggung tanggungan = Penanggung.BPJS;
+            Long jumlahTagihan = 0L;
+            if (Penanggung.UMUM.equals(penanggungPasien) || Penanggung.UMUM.equals(tagihan.getPenanggung())) {
+                tanggungan = Penanggung.UMUM;
+                jumlahTagihan = tagihan.getTagihan();
+            }
+
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getUnit(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getPenanggung().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, jumlahTagihan.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, tanggungan.toString(), align, 1, fontContent, Rectangle.BOX);
             
-            total += tagihan.getTagihan();
+            total += jumlahTagihan;
         }
 
         insertCell(table, "Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);

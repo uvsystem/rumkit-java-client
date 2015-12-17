@@ -68,10 +68,11 @@
             <Component class="javax.swing.JTextField" name="txtEksternalKeyword">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEksternalKeywordFocusLost"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEksternalKeywordKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="120" y="10" width="280" height="25"/>
+                  <AbsoluteConstraints x="120" y="10" width="820" height="25"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -328,7 +329,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="960" y="470" width="80" height="30"/>
+                  <AbsoluteConstraints x="960" y="10" width="80" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -343,7 +344,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1140" y="470" width="80" height="30"/>
+                  <AbsoluteConstraints x="1140" y="10" width="80" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -358,7 +359,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1050" y="470" width="80" height="30"/>
+                  <AbsoluteConstraints x="1050" y="10" width="80" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -390,10 +391,11 @@
             <Component class="javax.swing.JTextField" name="txtInternalKeyword">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtInternalKeywordFocusLost"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInternalKeywordKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="120" y="10" width="280" height="25"/>
+                  <AbsoluteConstraints x="120" y="10" width="910" height="25"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -670,7 +672,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1140" y="490" width="80" height="30"/>
+                  <AbsoluteConstraints x="1140" y="10" width="80" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -685,7 +687,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1050" y="490" width="80" height="30"/>
+                  <AbsoluteConstraints x="1050" y="10" width="80" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -979,6 +981,7 @@
             <Component class="javax.swing.JTextField" name="txtNomorPasienKembali">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomorPasienKembaliFocusLost"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomorPasienKembaliKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1029,6 +1032,7 @@
             <Component class="javax.swing.JTextField" name="txtNomorKembali">
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomorKembaliFocusLost"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomorKembaliKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

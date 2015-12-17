@@ -39,10 +39,8 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
         
-        if (Unit.TipeUnit.POLIKLINIK.equals(unit.getTipe())) {
-            // TODO ubah background
-        } else if (Unit.TipeUnit.PENUNJANG_MEDIK.equals(unit.getTipe())) {
-            // TODO ubah background
+        if (Unit.TipeUnit.PENUNJANG_MEDIK.equals(unit.getTipe())) {
+            jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_penunjang.png")));
         }
     }
     
@@ -211,6 +209,11 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         txtPasienKode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtPasienKodeFocusLost(evt);
+            }
+        });
+        txtPasienKode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasienKodeKeyPressed(evt);
             }
         });
         pnlCari.add(txtPasienKode);
@@ -458,6 +461,11 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
             tblTindakan.setModel(tableModel);
         }
     }//GEN-LAST:event_txtPasienKodeFocusLost
+
+    private void txtPasienKodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasienKodeKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnTindakanTambah.requestFocus();
+    }//GEN-LAST:event_txtPasienKodeKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;

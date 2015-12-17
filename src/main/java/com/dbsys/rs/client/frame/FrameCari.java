@@ -114,6 +114,11 @@ public class FrameCari extends JFrame {
                 txtKeywordFocusLost(evt);
             }
         });
+        txtKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKeywordKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 200, 25));
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
@@ -250,6 +255,11 @@ public class FrameCari extends JFrame {
             loadTablePerawat(keyword);
         }
     }//GEN-LAST:event_txtKeywordFocusLost
+
+    private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPilih.requestFocus();
+    }//GEN-LAST:event_txtKeywordKeyPressed
  
     private void enableTambah() {
         btnPilih.setEnabled(false);

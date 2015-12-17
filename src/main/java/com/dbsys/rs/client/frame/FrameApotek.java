@@ -202,6 +202,11 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
                 txtPasienKodeFocusLost(evt);
             }
         });
+        txtPasienKode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasienKodeKeyPressed(evt);
+            }
+        });
         pnlCari.add(txtPasienKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 250, 25));
 
         jLabel2.setText("No. Pasien");
@@ -302,6 +307,11 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         txtResepNomor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtResepNomorFocusLost(evt);
+            }
+        });
+        txtResepNomor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtResepNomorKeyPressed(evt);
             }
         });
         pnlResep.add(txtResepNomor);
@@ -476,6 +486,16 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void txtPasienKodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasienKodeKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnCetakPemakaian.requestFocus();
+    }//GEN-LAST:event_txtPasienKodeKeyPressed
+
+    private void txtResepNomorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResepNomorKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnCetakPemakaian.requestFocus();
+    }//GEN-LAST:event_txtResepNomorKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

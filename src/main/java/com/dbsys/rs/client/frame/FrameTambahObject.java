@@ -171,16 +171,19 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
         return tableModel.getBarang(index);
     }
     
-    private Pemakaian getPemakaian() {
+    private Pemakaian getPemakaian() throws ServiceException {
+        String jumlah = txtPemakaianJumlah.getText();
+        if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
+            throw new ServiceException("Jumlah tidak boleh kosong");
+
+        String tanggal = txtPemakaianTanggal.getText();
+        
         if (pemakaian == null)
             pemakaian = new Pemakaian();
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
             biayaTambahan = "0";
-        
-        String jumlah = txtPemakaianJumlah.getText();
-        String tanggal = txtPemakaianTanggal.getText();
         
         pemakaian.setBarang(barang);
         pemakaian.setBiayaTambahan(Long.valueOf(biayaTambahan));
@@ -295,6 +298,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtKeywordFocusLost(evt);
+            }
+        });
+        txtKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKeywordKeyPressed(evt);
             }
         });
         getContentPane().add(txtKeyword);
@@ -519,6 +527,11 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
         FrameCari cari = new FrameCari(this,Unit.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txtPelayananUnitMouseClicked
+
+    private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnSimpan.requestFocus();
+    }//GEN-LAST:event_txtKeywordKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSimpan;

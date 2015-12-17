@@ -256,6 +256,11 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
                 txtKeywordFocusLost(evt);
             }
         });
+        txtKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKeywordKeyPressed(evt);
+            }
+        });
         pnlCari.add(txtKeyword);
         txtKeyword.setBounds(130, 25, 250, 25);
 
@@ -301,7 +306,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         pnlPendaftaran.add(txtPasienTujuan);
         txtPasienTujuan.setBounds(130, 90, 250, 25);
 
-        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
+        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
         pnlPendaftaran.add(cbPasienKelas);
         cbPasienKelas.setBounds(130, 120, 250, 25);
 
@@ -455,6 +460,11 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         FrameCari frameCari = new FrameCari(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtPasienTujuanMouseClicked
+
+    private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPendudukClean.requestFocus();
+    }//GEN-LAST:event_txtKeywordKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;

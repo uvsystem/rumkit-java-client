@@ -236,8 +236,8 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlPembayaran = new javax.swing.JPanel();
         lblTagihan = new javax.swing.JLabel();
         btnBayar = new javax.swing.JButton();
-        btnCetakTagihan = new javax.swing.JButton();
         btnCetakPembayaran = new javax.swing.JButton();
+        btnCetakTagihan = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -256,6 +256,11 @@ public class FramePembayaran extends javax.swing.JFrame {
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtKeywordFocusLost(evt);
+            }
+        });
+        txtKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKeywordKeyPressed(evt);
             }
         });
         pnlPencarian.add(txtKeyword);
@@ -609,9 +614,9 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlKeluar.add(btnPasienKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 80, 30));
 
         getContentPane().add(pnlKeluar);
-        pnlKeluar.setBounds(860, 610, 400, 90);
+        pnlKeluar.setBounds(860, 630, 400, 90);
 
-        pnlPembayaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "TOTAL PEMBAYARAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pnlPembayaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPembayaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTagihan.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -624,10 +629,18 @@ public class FramePembayaran extends javax.swing.JFrame {
                 btnBayarActionPerformed(evt);
             }
         });
-        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 80, 30));
+        pnlPembayaran.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 80, 30));
+
+        btnCetakPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak_pembayaran.png"))); // NOI18N
+        btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPembayaranActionPerformed(evt);
+            }
+        });
+        pnlPembayaran.add(btnCetakPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 80, 30));
 
         getContentPane().add(pnlPembayaran);
-        pnlPembayaran.setBounds(860, 500, 400, 100);
+        pnlPembayaran.setBounds(860, 510, 400, 110);
 
         btnCetakTagihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak_tagihan.png"))); // NOI18N
         btnCetakTagihan.addActionListener(new java.awt.event.ActionListener() {
@@ -636,16 +649,7 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCetakTagihan);
-        btnCetakTagihan.setBounds(1180, 710, 80, 30);
-
-        btnCetakPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak_pembayaran.png"))); // NOI18N
-        btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakPembayaranActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCetakPembayaran);
-        btnCetakPembayaran.setBounds(1090, 710, 80, 30);
+        btnCetakTagihan.setBounds(1160, 730, 80, 30);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_pembayaran.png"))); // NOI18N
         getContentPane().add(lblBackground);
@@ -880,6 +884,11 @@ public class FramePembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnRekapPelayananActionPerformed
+
+    private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnCetakTagihan.requestFocus();
+    }//GEN-LAST:event_txtKeywordKeyPressed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;

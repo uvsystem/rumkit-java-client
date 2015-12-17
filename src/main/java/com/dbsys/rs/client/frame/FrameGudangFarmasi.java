@@ -657,8 +657,13 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
                 txtEksternalKeywordFocusLost(evt);
             }
         });
+        txtEksternalKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEksternalKeywordKeyPressed(evt);
+            }
+        });
         pnlStokEksternal.add(txtEksternalKeyword);
-        txtEksternalKeyword.setBounds(120, 10, 280, 25);
+        txtEksternalKeyword.setBounds(120, 10, 820, 25);
 
         pnlEksternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlEksternalDetail.setLayout(null);
@@ -768,7 +773,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokEksternal.add(btnEksternalStokMasuk);
-        btnEksternalStokMasuk.setBounds(960, 470, 80, 30);
+        btnEksternalStokMasuk.setBounds(960, 10, 80, 30);
 
         btnEksternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnEksternalStokReset.addActionListener(new java.awt.event.ActionListener() {
@@ -777,7 +782,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokEksternal.add(btnEksternalStokReset);
-        btnEksternalStokReset.setBounds(1140, 470, 80, 30);
+        btnEksternalStokReset.setBounds(1140, 10, 80, 30);
 
         btnEksternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnEksternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -786,7 +791,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokEksternal.add(btnEksternalStokKeluar);
-        btnEksternalStokKeluar.setBounds(1050, 470, 80, 30);
+        btnEksternalStokKeluar.setBounds(1050, 10, 80, 30);
 
         paneBarang.addTab("STOK KELUAR / MASUK", pnlStokEksternal);
 
@@ -801,8 +806,13 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
                 txtInternalKeywordFocusLost(evt);
             }
         });
+        txtInternalKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtInternalKeywordKeyPressed(evt);
+            }
+        });
         pnlStokInternal.add(txtInternalKeyword);
-        txtInternalKeyword.setBounds(120, 10, 280, 25);
+        txtInternalKeyword.setBounds(120, 10, 910, 25);
 
         pnlInternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalDetail.setLayout(null);
@@ -924,7 +934,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokInternal.add(btnInternalStokReset);
-        btnInternalStokReset.setBounds(1140, 490, 80, 30);
+        btnInternalStokReset.setBounds(1140, 10, 80, 30);
 
         btnInternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnInternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -933,7 +943,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         pnlStokInternal.add(btnInternalStokKeluar);
-        btnInternalStokKeluar.setBounds(1050, 490, 80, 30);
+        btnInternalStokKeluar.setBounds(1050, 10, 80, 30);
 
         paneBarang.addTab("STOK KE UNIT", pnlStokInternal);
 
@@ -1061,6 +1071,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
                 txtNomorPasienKembaliFocusLost(evt);
             }
         });
+        txtNomorPasienKembali.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomorPasienKembaliKeyPressed(evt);
+            }
+        });
         pnlStokKembali.add(txtNomorPasienKembali);
         txtNomorPasienKembali.setBounds(120, 10, 390, 25);
 
@@ -1089,6 +1104,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         txtNomorKembali.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNomorKembaliFocusLost(evt);
+            }
+        });
+        txtNomorKembali.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomorKembaliKeyPressed(evt);
             }
         });
         pnlStokKembali.add(txtNomorKembali);
@@ -1591,10 +1611,8 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }//GEN-LAST:event_txtObatKeywordFocusLost
 
     private void txtObatKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObatKeywordKeyPressed
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtObatKode.requestFocus();
-        }
+        if (evt.getKeyCode() == 10)
+            btnClearObat.requestFocus();
     }//GEN-LAST:event_txtObatKeywordKeyPressed
 
     private void btnTambahObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahObatActionPerformed
@@ -1631,10 +1649,8 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }//GEN-LAST:event_txtBhpKeywordFocusLost
 
     private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtBhpKode.requestFocus();
-        }
+        if (evt.getKeyCode() == 10)
+            btnClearBhp.requestFocus();
     }//GEN-LAST:event_txtBhpKeywordKeyPressed
 
     private void btnTambahBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahBhpActionPerformed
@@ -1669,6 +1685,26 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnRekapBarangActionPerformed
+
+    private void txtEksternalKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEksternalKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnEksternalStokReset.requestFocus();
+    }//GEN-LAST:event_txtEksternalKeywordKeyPressed
+
+    private void txtInternalKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInternalKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnInternalStokReset.requestFocus();
+    }//GEN-LAST:event_txtInternalKeywordKeyPressed
+
+    private void txtNomorPasienKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnKembaliStokReset.requestFocus();
+    }//GEN-LAST:event_txtNomorPasienKembaliKeyPressed
+
+    private void txtNomorKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorKembaliKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnKembaliStokReset.requestFocus();
+    }//GEN-LAST:event_txtNomorKembaliKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

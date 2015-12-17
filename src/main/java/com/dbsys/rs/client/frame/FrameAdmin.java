@@ -1795,6 +1795,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtNomorPasienPemakaianFocusLost(evt);
             }
         });
+        txtNomorPasienPemakaian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomorPasienPemakaianKeyPressed(evt);
+            }
+        });
         jPanel12.add(txtNomorPasienPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 430, 25));
 
         txtPemakaianNamaPasien.setEditable(false);
@@ -1858,6 +1863,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         txtNomorPasienPelayanan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNomorPasienPelayananFocusLost(evt);
+            }
+        });
+        txtNomorPasienPelayanan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomorPasienPelayananKeyPressed(evt);
             }
         });
         jPanel5.add(txtNomorPasienPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 430, 25));
@@ -2018,7 +2028,12 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtPasienKeywordFocusLost(evt);
             }
         });
-        jPanel24.add(txtPasienKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 520, 25));
+        txtPasienKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasienKeywordKeyPressed(evt);
+            }
+        });
+        jPanel24.add(txtPasienKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 490, 25));
 
         pnlPasien.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 670, 60));
 
@@ -2140,7 +2155,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
                 txtPendudukKeywordKeyPressed(evt);
             }
         });
-        jPanel4.add(txtPendudukKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 510, 25));
+        jPanel4.add(txtPendudukKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 480, 25));
 
         pnlPenduduk.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 660, 60));
 
@@ -2267,11 +2282,11 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             }
         });
         txtTindakanKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTindakanKeywordKeyTyped(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTindakanKeywordKeyPressed(evt);
             }
         });
-        jPanel7.add(txtTindakanKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 510, 25));
+        jPanel7.add(txtTindakanKeyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 490, 25));
 
         pnlTindakan.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 670, 60));
 
@@ -3579,24 +3594,18 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }//GEN-LAST:event_tabBarangMouseClicked
 
     private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtBhpKode.requestFocus();
-        }
+        if (evt.getKeyCode() == 10)
+            btnBarang.requestFocus();
     }//GEN-LAST:event_txtBhpKeywordKeyPressed
 
     private void txtObatKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObatKeywordKeyPressed
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtObatKode.requestFocus();
-        }
+        if (evt.getKeyCode() == 10)
+            btnBarang.requestFocus();
     }//GEN-LAST:event_txtObatKeywordKeyPressed
 
     private void txtPendudukKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPendudukKeywordKeyPressed
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtPendudukKode.requestFocus();
-        }
+        if (evt.getKeyCode() == 10)
+            btnPenduduk.requestFocus();
     }//GEN-LAST:event_txtPendudukKeywordKeyPressed
 
     private void btnTindakanSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTindakanSimpanMouseClicked
@@ -3616,13 +3625,6 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             tblTindakan.setModel(tableModel);
         }
     }//GEN-LAST:event_txtTindakanKeywordFocusLost
-
-    private void txtTindakanKeywordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTindakanKeywordKeyTyped
-        int i = evt.getKeyCode();
-        if (i == 10) {
-            txtTindakanKode.requestFocus();
-        }
-    }//GEN-LAST:event_txtTindakanKeywordKeyTyped
 
     private void tblTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTindakanMouseClicked
         try {
@@ -3915,6 +3917,26 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnRekapPerawatActionPerformed
+
+    private void txtNomorPasienPemakaianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorPasienPemakaianKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPemakaian.requestFocus();
+    }//GEN-LAST:event_txtNomorPasienPemakaianKeyPressed
+
+    private void txtNomorPasienPelayananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorPasienPelayananKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPelayanan.requestFocus();
+    }//GEN-LAST:event_txtNomorPasienPelayananKeyPressed
+
+    private void txtPasienKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasienKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnPasien.requestFocus();
+    }//GEN-LAST:event_txtPasienKeywordKeyPressed
+
+    private void txtTindakanKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTindakanKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+            btnTindakan.requestFocus();
+    }//GEN-LAST:event_txtTindakanKeywordKeyPressed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApotekerHapus;

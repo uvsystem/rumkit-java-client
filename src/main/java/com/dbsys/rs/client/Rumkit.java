@@ -22,6 +22,9 @@ public class Rumkit {
         setLookAndFeel();
         run();
         // testPdf();
+        
+        // Rumkit rumkit = new Rumkit();
+        // rumkit.testCall();
     }
     
     private static void setLookAndFeel() {
@@ -57,5 +60,9 @@ public class Rumkit {
     
     private static void littleTest() {
         System.out.println(Dokter.class.getSimpleName().equals("Dokter"));
+    }
+    
+    public void testCall() {
+        System.out.println("METHOD CALL");
     }
 }
