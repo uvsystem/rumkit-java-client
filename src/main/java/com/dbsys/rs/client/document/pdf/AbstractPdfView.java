@@ -11,6 +11,7 @@ import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.awt.Color;
@@ -73,12 +74,12 @@ public abstract class AbstractPdfView implements DocumentView {
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
         cell.setBorder(border);
-        cell.setBackgroundColor(backgroundColor);
 
         if("".equals(text))
             cell.setMinimumHeight(minimumCellHeight);
 
         table.addCell(cell);
+        cell.setBackgroundColor(backgroundColor);
     }
     
     protected void insertCell(PdfPTable table, String text, int align, int colspan, Font font, int border, float minimumCellHeight){
@@ -94,6 +95,27 @@ public abstract class AbstractPdfView implements DocumentView {
     protected String createTanggal(Date tanggal) {
         return DateUtil.toFormattedStringDate(tanggal, "-");
     }	
+    
+    protected void createFooter(Paragraph paragraph) {
+        addEmptyLine(paragraph, 1);
+
+        float columnWidths[] = {2f, 2f};
+        PdfPTable table = new PdfPTable(columnWidths);
+        table.setWidthPercentage(tablePercentage);
+
+        insertCell(table, "Petugas", Element.ALIGN_CENTER, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Pasien", Element.ALIGN_CENTER, 1, fontHeader, Rectangle.NO_BORDER);
+        
+        for (int i = 0; i < 3; i++) {
+            insertCell(table, "", align, 1, fontHeader, Rectangle.NO_BORDER);
+            insertCell(table, "", align, 1, fontContent, Rectangle.NO_BORDER);
+        }
+
+        insertCell(table, "( ........................... )", Element.ALIGN_CENTER, 1, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, "( ........................... )", Element.ALIGN_CENTER, 1, fontContent, Rectangle.NO_BORDER);
+
+        paragraph.add(table);
+    }
 
     public Document newDocument() {
         return new Document(PageSize.A4);

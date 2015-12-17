@@ -1,5 +1,6 @@
 package com.dbsys.rs.client.document.pdf;
 
+import static com.dbsys.rs.client.document.pdf.AbstractPdfView.addEmptyLine;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -47,10 +48,15 @@ public class RekapUnitPdfView extends  AbstractPdfView {
     }
     
     private void createSubTitle(Paragraph paragraph, Date awal, Date akhir) {
-        Paragraph innerParagraph = new Paragraph(String.format("Periode : %s s/d %s", awal, akhir), fontHeader);
-        innerParagraph.setAlignment(Element.ALIGN_LEFT);
+        float columnWidths[] = {4f, 6f, 4f, 6f};
+        PdfPTable table = new PdfPTable(columnWidths);
+        table.setWidthPercentage(tablePercentage);
+
+        insertCell(table, "Periode", align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": %s s/d %s", awal, akhir), align, 3, fontContent, Rectangle.NO_BORDER);
         
-        paragraph.add(innerParagraph);
+        paragraph.add(table);
+        addEmptyLine(paragraph, 1);
     }
 
     @Override

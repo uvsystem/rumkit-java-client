@@ -38,6 +38,7 @@ public class PembayaranPdfView extends  AbstractPdfView {
         createTitle(paragraph);
         createContent(paragraph, pembayaran);
         createContent(paragraph, list);
+        createFooter(paragraph);
 
         doc.add(paragraph);
         

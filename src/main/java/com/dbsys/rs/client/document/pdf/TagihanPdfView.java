@@ -35,6 +35,7 @@ public class TagihanPdfView extends  AbstractPdfView {
         createTitle(paragraph);
         createContent(paragraph, pasien);
         createContent(paragraph, list);
+        createFooter(paragraph);
 
         doc.add(paragraph);
 
