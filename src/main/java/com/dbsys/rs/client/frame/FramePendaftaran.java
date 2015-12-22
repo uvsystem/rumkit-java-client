@@ -390,7 +390,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         String tanggalLahir = txtPendudukTanggalLahir.getText();
         
         penduduk.setKode(txtPendudukKode.getText());
-        penduduk.setNik(txtPendudukNik.getText());
+        penduduk.setNik(txtPendudukNik.getText().equals("") ? null : txtPendudukNik.getText());
         penduduk.setNama(txtPendudukNama.getText());
         penduduk.setKelamin(Penduduk.Kelamin.valueOf(kelamin));
         penduduk.setTanggalLahir(DateUtil.getDate(tanggalLahir));

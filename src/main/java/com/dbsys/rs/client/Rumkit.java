@@ -3,6 +3,7 @@ package com.dbsys.rs.client;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PemakaianPdfView;
+import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
 import com.dbsys.rs.client.frame.FrameUtama;
 import com.dbsys.rs.lib.entity.Dokter;
 import java.util.HashMap;
@@ -63,6 +64,7 @@ public class Rumkit {
     }
     
     public void testCall() {
-        System.out.println("METHOD CALL");
+        PembayaranPdfView pdfView = new PembayaranPdfView();
+        System.out.println(pdfView.getLocation());
     }
 }

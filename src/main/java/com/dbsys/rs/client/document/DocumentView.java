@@ -11,5 +11,7 @@ import java.util.Map;
 public interface DocumentView {
 
     Document create(Map<String, Object> model, Document doc) throws DocumentException;
+
+    String getLocation();
     
 }

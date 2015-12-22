@@ -20,8 +20,10 @@ public class PdfProcessor implements DocumentProcessor {
 
     @Override
     public void process(DocumentView view, Map<String, Object> model, String url) throws DocumentException {
-        generate(view, model, url);
-        print(url);
+        String newUrl = String.format("%s//%s", view.getLocation(), url);
+
+        generate(view, model, newUrl);
+        print(newUrl);
     }
 
     @Override

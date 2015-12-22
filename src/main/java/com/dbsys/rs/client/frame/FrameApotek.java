@@ -130,7 +130,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         model.put("list", listPemakaian);
         
         try {
-            pdfProcessor.process(pdfView, model, String.format("E://print//pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
+            pdfProcessor.process(pdfView, model, String.format("pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

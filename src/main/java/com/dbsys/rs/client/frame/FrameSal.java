@@ -50,6 +50,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
 
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKelas1.setVisible(false);
 
         try {
             List<Pasien> list = loadPasienPerawatan();
@@ -225,6 +226,10 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         lblUnit = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        pnlKelas1 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        cbPasienKelas1 = new javax.swing.JComboBox();
+        btnSimpanKelas1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -624,6 +629,26 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
+        pnlKelas1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pnlKelas1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setText("KELAS");
+        pnlKelas1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+
+        cbPasienKelas1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
+        pnlKelas1.add(cbPasienKelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 140, 25));
+
+        btnSimpanKelas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
+        btnSimpanKelas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanKelas1ActionPerformed(evt);
+            }
+        });
+        pnlKelas1.add(btnSimpanKelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 80, 30));
+
+        getContentPane().add(pnlKelas1);
+        pnlKelas1.setBounds(860, 680, 400, 60);
+
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_sal.png"))); // NOI18N
         getContentPane().add(jLabel19);
         jLabel19.setBounds(0, 0, 1280, 800);
@@ -637,6 +662,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
 
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKelas1.setVisible(false);
 
         reloadTablePasien();
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -649,6 +675,9 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
                 throw new ComponentSelectionException("Silahkan masukan nomor pasien");
             
             Pasien p = pasienService.get(kode);
+            if (Kelas.NONE.equals(p.getKelas()))
+                throw new ServiceException("Silahkan menentukan kelas pasien pada halaman pasien");
+            
             Tindakan tindakan = tindakanService.get("Rawat Inap", p.getKelas());
 
             PelayananTemporal pelayanan = new PelayananTemporal();
@@ -685,6 +714,23 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
 
         pnlTindakan.setVisible(true);
         pnlPasienDetail.setVisible(true);
+        pnlKelas1.setVisible(true);
+        
+        txtPasienKode.setText(null);
+        txtPasienNik.setText(null);
+        txtPasienNama.setText(null);
+        txtPasienKelamin.setText(null);
+        txtPasienTanggalLahir.setText(null);
+        txtPasienDarah.setText(null);
+        txtPasienAgama.setText(null);
+        txtPasienTelepon.setText(null);
+        txtPasienTanggungan.setText(null);
+        txtPasienStatus.setText(null);
+        txtPasienTanggalMasuk.setText(null);
+        txtPasienKelas.setText(null);
+        
+        PelayananTableModel tableModel = new PelayananTableModel(null);
+        tblTindakan.setModel(tableModel);
     }//GEN-LAST:event_btnPasienActionPerformed
 
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
@@ -830,6 +876,24 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             btnPasien.requestFocus();
     }//GEN-LAST:event_txtPasienKodeKeyPressed
 
+    private void btnSimpanKelas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanKelas1ActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan memilih pasien dari tabel");
+            return;
+        }
+        
+        String kelas = (String) cbPasienKelas1.getSelectedItem();
+        if (kelas.equals("- Pilih -"))
+            return;
+
+        try {
+            pasienService.ubahKelas(pasien, Kelas.valueOf(kelas));
+            JOptionPane.showMessageDialog(this, "Berhasil");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanKelas1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnKeluar;
@@ -837,11 +901,13 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JButton btnMasuk;
     private javax.swing.JButton btnPasien;
     private javax.swing.JButton btnSimpanKelas;
+    private javax.swing.JButton btnSimpanKelas1;
     private javax.swing.JButton btnSimpanPenanggung;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanTambah;
     private javax.swing.JButton btnTindakanUpdate;
     private javax.swing.JComboBox cbPasienKelas;
+    private javax.swing.JComboBox cbPasienKelas1;
     private javax.swing.JComboBox cbPasienPenanggung;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -856,6 +922,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -878,6 +945,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlHomeDetail;
     private javax.swing.JPanel pnlKelas;
+    private javax.swing.JPanel pnlKelas1;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMasuk;
     private javax.swing.JPanel pnlPasienDetail;

@@ -120,4 +120,12 @@ public abstract class AbstractPdfView implements DocumentView {
     public Document newDocument() {
         return new Document(PageSize.A4);
     }
+
+    @Override
+    public String getLocation() {
+        String os = System.getProperty("os.name");
+        if (os.toLowerCase().contains("windows"))
+            return "C:/print-billing-system";
+        return "~/Documents/";
+    }
 }

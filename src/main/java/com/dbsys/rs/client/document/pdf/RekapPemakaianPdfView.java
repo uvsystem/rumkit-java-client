@@ -41,7 +41,7 @@ public class RekapPemakaianPdfView extends  AbstractPdfView {
     @Override
     protected void createTitle(Paragraph paragraph) throws DocumentException {
         paragraph.add(new Paragraph("Rumah Sakit Umum Daerah Liun Kendage", fontTitle));
-        paragraph.add(new Paragraph("REKAP PEMAKAIAN", fontSubTitle));
+        paragraph.add(new Paragraph("REKAP PEMAKAIAN OBAT/BHP", fontSubTitle));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         addEmptyLine(paragraph, 1);
     }
@@ -77,8 +77,8 @@ public class RekapPemakaianPdfView extends  AbstractPdfView {
             total += tagihan.getTagihan();
         }
 
-        insertCell(table, "Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, "Total", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

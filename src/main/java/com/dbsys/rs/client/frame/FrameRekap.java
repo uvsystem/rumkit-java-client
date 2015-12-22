@@ -73,7 +73,7 @@ public class FrameRekap extends JFrame {
         model.put("awal", awal);
         model.put("akhir", akhir);
 
-        pdfProcessor.process(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
     }
 
     private void rekapStok(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -84,7 +84,7 @@ public class FrameRekap extends JFrame {
         model.put("awal", awal);
         model.put("akhir", akhir);
 
-        pdfProcessor.process(documentView, model, String.format("E://print//rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-unit-%s.pdf", DateUtil.getTime().hashCode()));
     }
 
     private void rekapPemakaian(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -95,7 +95,7 @@ public class FrameRekap extends JFrame {
         model.put("akhir", akhir);
         model.put("list", list);
 
-        pdfProcessor.process(documentView, model, String.format("E://print//rekap-pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-pemakaian-%s.pdf", DateUtil.getTime().hashCode()));
     }
 
     private void rekapDokter(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -106,7 +106,7 @@ public class FrameRekap extends JFrame {
         model.put("akhir", akhir);
         model.put("list", list);
 
-        pdfProcessor.process(documentView, model, String.format("E://print//rekap-dokter-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-dokter-%s.pdf", DateUtil.getTime().hashCode()));
     }
 
     private void rekapPerawat(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -117,7 +117,7 @@ public class FrameRekap extends JFrame {
         model.put("akhir", akhir);
         model.put("list", list);
 
-        pdfProcessor.process(documentView, model, String.format("E://print//rekap-perawat-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-perawat-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
     /**

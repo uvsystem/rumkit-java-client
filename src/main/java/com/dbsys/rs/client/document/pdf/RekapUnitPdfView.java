@@ -84,7 +84,7 @@ public class RekapUnitPdfView extends  AbstractPdfView {
         }
 
         insertCell(table, "Total Tagihan", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

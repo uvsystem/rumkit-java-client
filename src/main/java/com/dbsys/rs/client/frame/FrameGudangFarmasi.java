@@ -1680,7 +1680,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             Map<String, Object> model = new HashMap<>();
             model.put("list", list);
 
-            pdfProcessor.process(pdfView, model, String.format("E://print//rekap-barang-%s-%s.pdf", DateUtil.getDate().hashCode(), DateUtil.getTime().hashCode()));
+            pdfProcessor.process(pdfView, model, String.format("rekap-barang-%s-%s.pdf", DateUtil.getDate().hashCode(), DateUtil.getTime().hashCode()));
         } catch (DocumentException | ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
