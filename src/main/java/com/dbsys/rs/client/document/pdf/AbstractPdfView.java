@@ -126,6 +126,6 @@ public abstract class AbstractPdfView implements DocumentView {
         String os = System.getProperty("os.name");
         if (os.toLowerCase().contains("windows"))
             return "C:/print-billing-system";
-        return "~/Documents/";
+        return "~/print-billing-system";
     }
 }
