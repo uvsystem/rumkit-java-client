@@ -401,7 +401,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnTindakanTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanTambahActionPerformed
-        new FrameTambahObject(this, Tindakan.class, pasien).setVisible(true);
+        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanTambahActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -415,7 +415,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
                 return;
             }
             
-            new FrameTambahObject(this, pasien, pelayanan).setVisible(true);
+            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

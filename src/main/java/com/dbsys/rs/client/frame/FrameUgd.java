@@ -1092,7 +1092,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     }//GEN-LAST:event_btnTindakanHapusActionPerformed
 
     private void btnTindakanSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanSimpanActionPerformed
-        new FrameTambahObject(this, Tindakan.class, pasien).setVisible(true);
+        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanSimpanActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -1106,7 +1106,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
                 return;
             }
 
-            new FrameTambahObject(this, pasien, pelayanan).setVisible(true);
+            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

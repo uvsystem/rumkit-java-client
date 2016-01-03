@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author Acer One 10
  */
-public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFrame {
+public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
 
     private final JFrame frame;
     private final Class<?> clsDomain;
@@ -60,7 +60,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
      * @param clsDomain
      * @param pasien
      */
-    public FrameTambahObject(JFrame frame, Class<?> clsDomain, Pasien pasien) {
+    public FrameTambahTagihan(JFrame frame, Class<?> clsDomain, Pasien pasien) {
         initComponents();
         this.clsDomain = clsDomain;
         this.frame = frame;
@@ -90,7 +90,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
      * @param pasien
      * @param pemakaian 
      */
-    FrameTambahObject(JFrame frame, Pasien pasien, Pemakaian pemakaian) {
+    FrameTambahTagihan(JFrame frame, Pasien pasien, Pemakaian pemakaian) {
         this(frame, Barang.class, pasien);
         this.pemakaian = pemakaian;
         this.barang = pemakaian.getBarang();
@@ -110,7 +110,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
      * @param pasien
      * @param pelayanan 
      */
-    FrameTambahObject(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
+    FrameTambahTagihan(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
         this(frame, Tindakan.class, pasien);
         this.pelayanan = pelayanan;
         this.tindakan = pelayanan.getTindakan();
@@ -141,7 +141,7 @@ public class FrameTambahObject extends JFrame implements  TindakanFrame, UnitFra
      * @param pasien
      * @param nomorResep 
      */
-    FrameTambahObject(JFrame frame, Pasien pasien, String nomorResep) {
+    FrameTambahTagihan(JFrame frame, Pasien pasien, String nomorResep) {
         this(frame, Barang.class, pasien);
         this.nomorResep = nomorResep;
     }

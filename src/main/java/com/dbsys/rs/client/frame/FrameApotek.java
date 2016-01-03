@@ -436,7 +436,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             return;
         }
         
-        new FrameTambahObject(this, pasien, nomorResep).setVisible(true);
+        new FrameTambahTagihan(this, pasien, nomorResep).setVisible(true);
     }//GEN-LAST:event_btnObatTambahActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
