@@ -24,6 +24,8 @@ import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -69,17 +71,20 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         pnlPemakaian.setVisible(false);
         pnlPelayanan.setVisible(false);
         
+        Calendar now = Calendar.getInstance();
+        now.setTime(DateUtil.getDate());
+        
         if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class) || clsDomain.equals(Barang.class)) {
-            setSize(500, 580);
+            setSize(900, 580);
             pnlPemakaian.setVisible(true);
-            txtPemakaianTanggal.setText(DateUtil.getDate().toString());
+            txtPemakaianTanggal.setSelectedDate(now);
         } else if (clsDomain.equals(Tindakan.class)) {
-            setSize(500, 750);
+            setSize(900, 750);
             this.unit = TokenHolder.getUnit();
 
             pnlPelayanan.setVisible(true);
             txtPelayananUnit.setText(unit.getNama());
-            txtPelayananTanggal.setText(DateUtil.getDate().toString());
+            txtPelayananTanggal.setSelectedDate(now);
         }
     }
 
@@ -175,8 +180,6 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         String jumlah = txtPemakaianJumlah.getText();
         if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
             throw new ServiceException("Jumlah tidak boleh kosong");
-
-        String tanggal = txtPemakaianTanggal.getText();
         
         if (pemakaian == null)
             pemakaian = new Pemakaian();
@@ -189,10 +192,13 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         pemakaian.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pemakaian.setJumlah(Integer.valueOf(jumlah));
         pemakaian.setKeterangan(txtPemakaianKeterangan.getText());
-        pemakaian.setTanggal(DateUtil.getDate(tanggal));
         pemakaian.setPasien(pasien);
         pemakaian.setUnit(TokenHolder.getToken().getOperator().getUnit());
         pemakaian.setNomorResep(nomorResep);
+
+        Calendar tanggal = txtPemakaianTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+        pemakaian.setTanggal(new Date(lTime));
         
         return pemakaian;
     }
@@ -218,16 +224,18 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
             biayaTambahan = "0";
         
         String jumlah = txtPelayananJumlah.getText();
-        String tanggal = txtPelayananTanggal.getText();
         
         pelayanan.setTindakan(tindakan);
         pelayanan.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pelayanan.setJumlah(Integer.valueOf(jumlah));
         pelayanan.setKeterangan(txtPemakaianKeterangan.getText());
-        pelayanan.setTanggal(DateUtil.getDate(tanggal));
         pelayanan.setPasien(pasien);
         pelayanan.setUnit(this.unit);
         pelayanan.setPelaksana(pelaksana);
+
+        Calendar tanggal = txtPelayananTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+        pelayanan.setTanggal(new Date(lTime));
         
         return pelayanan;
     }
@@ -245,6 +253,19 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         txtKeyword = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCari = new javax.swing.JTable();
+        pnlPemakaian = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtPemakaianBarang = new javax.swing.JTextField();
+        txtPemakaianJumlah = new javax.swing.JTextField();
+        txtPemakaianBiayaTambahan = new javax.swing.JTextField();
+        txtPemakaianKeterangan = new javax.swing.JTextField();
+        txtPemakaianSatuan = new javax.swing.JTextField();
+        txtPemakaianTanggal = new datechooser.beans.DateChooserCombo();
         pnlPelayanan = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -262,30 +283,16 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         txtPelayananJumlah = new javax.swing.JTextField();
         txtPelayananBiayaTambahan = new javax.swing.JTextField();
         txtPelayananKeterangan = new javax.swing.JTextField();
-        txtPelayananTanggal = new javax.swing.JTextField();
         cbPelayananTipePelaksana = new javax.swing.JComboBox();
         txtPelayananPelaksana = new javax.swing.JTextField();
         txtPelayananSatuan = new javax.swing.JTextField();
         txtPelayananUnit = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        pnlPemakaian = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtPemakaianBarang = new javax.swing.JTextField();
-        txtPemakaianJumlah = new javax.swing.JTextField();
-        txtPemakaianBiayaTambahan = new javax.swing.JTextField();
-        txtPemakaianKeterangan = new javax.swing.JTextField();
-        txtPemakaianTanggal = new javax.swing.JTextField();
-        txtPemakaianSatuan = new javax.swing.JTextField();
+        txtPelayananTanggal = new datechooser.beans.DateChooserCombo();
         btnSimpan = new javax.swing.JButton();
-        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("PENAMBAHAN");
+        setTitle("TAMBAH TAGIHAN");
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -306,7 +313,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 90, 280, 25);
+        txtKeyword.setBounds(110, 90, 670, 25);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,7 +334,41 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         jScrollPane1.setViewportView(tblCari);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 130, 460, 154);
+        jScrollPane1.setBounds(20, 130, 860, 154);
+
+        pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Satuan");
+        pnlPemakaian.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 90, 25));
+
+        jLabel3.setText("Jumlah");
+        pnlPemakaian.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 25));
+
+        jLabel4.setText("Biaya Tambahan");
+        pnlPemakaian.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 25));
+
+        jLabel5.setText("Keterangan");
+        pnlPemakaian.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 90, 25));
+
+        jLabel6.setText("Tanggal");
+        pnlPemakaian.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 25));
+
+        jLabel8.setText("Nama Barang");
+        pnlPemakaian.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, 25));
+
+        txtPemakaianBarang.setEditable(false);
+        pnlPemakaian.add(txtPemakaianBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 270, 25));
+        pnlPemakaian.add(txtPemakaianJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 270, 25));
+        pnlPemakaian.add(txtPemakaianBiayaTambahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 270, 25));
+        pnlPemakaian.add(txtPemakaianKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 25));
+
+        txtPemakaianSatuan.setEditable(false);
+        pnlPemakaian.add(txtPemakaianSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 270, 25));
+        pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 270, 25));
+
+        getContentPane().add(pnlPemakaian);
+        pnlPemakaian.setBounds(20, 290, 860, 240);
 
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PELAYANAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPelayanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -358,8 +399,8 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
 
         jLabel17.setText("Kelas Tindakan");
         pnlPelayanan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 25));
-        pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 460, 10));
-        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 460, 10));
+        pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 860, 10));
+        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 10));
 
         txtPelayananTindakanNama.setEditable(false);
         pnlPelayanan.add(txtPelayananTindakanNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 270, 25));
@@ -369,7 +410,6 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
         pnlPelayanan.add(txtPelayananJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 270, 25));
         pnlPelayanan.add(txtPelayananBiayaTambahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 270, 25));
         pnlPelayanan.add(txtPelayananKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 270, 25));
-        pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         cbPelayananTipePelaksana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "DOKTER", "PERAWAT" }));
         pnlPelayanan.add(cbPelayananTipePelaksana, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 270, 25));
@@ -394,43 +434,10 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
 
         jLabel19.setText("Tanggal");
         pnlPelayanan.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 90, 25));
+        pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 460, 390);
-
-        pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
-        pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setText("Satuan");
-        pnlPemakaian.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 90, 25));
-
-        jLabel3.setText("Jumlah");
-        pnlPemakaian.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 25));
-
-        jLabel4.setText("Biaya Tambahan");
-        pnlPemakaian.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 25));
-
-        jLabel5.setText("Keterangan");
-        pnlPemakaian.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 90, 25));
-
-        jLabel6.setText("Tanggal");
-        pnlPemakaian.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 25));
-
-        jLabel8.setText("Nama Barang");
-        pnlPemakaian.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, 25));
-
-        txtPemakaianBarang.setEditable(false);
-        pnlPemakaian.add(txtPemakaianBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 270, 25));
-        pnlPemakaian.add(txtPemakaianJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 270, 25));
-        pnlPemakaian.add(txtPemakaianBiayaTambahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 270, 25));
-        pnlPemakaian.add(txtPemakaianKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 25));
-        pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 270, 25));
-
-        txtPemakaianSatuan.setEditable(false);
-        pnlPemakaian.add(txtPemakaianSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 270, 25));
-
-        getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 290, 460, 240);
+        pnlPelayanan.setBounds(20, 290, 860, 390);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -439,12 +446,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(400, 90, 80, 25);
-
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/Pencarian.jpg"))); // NOI18N
-        lblBackground.setText("jLabel8");
-        getContentPane().add(lblBackground);
-        lblBackground.setBounds(0, 0, 500, 430);
+        btnSimpan.setBounds(800, 90, 80, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -556,7 +558,6 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JLabel lblBackground;
     private javax.swing.JPanel pnlPelayanan;
     private javax.swing.JPanel pnlPemakaian;
     private javax.swing.JTable tblCari;
@@ -566,7 +567,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
     private javax.swing.JTextField txtPelayananKeterangan;
     private javax.swing.JTextField txtPelayananPelaksana;
     private javax.swing.JTextField txtPelayananSatuan;
-    private javax.swing.JTextField txtPelayananTanggal;
+    private datechooser.beans.DateChooserCombo txtPelayananTanggal;
     private javax.swing.JTextField txtPelayananTindakanKelas;
     private javax.swing.JTextField txtPelayananTindakanNama;
     private javax.swing.JTextField txtPelayananUnit;
@@ -575,6 +576,6 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
     private javax.swing.JTextField txtPemakaianJumlah;
     private javax.swing.JTextField txtPemakaianKeterangan;
     private javax.swing.JTextField txtPemakaianSatuan;
-    private javax.swing.JTextField txtPemakaianTanggal;
+    private datechooser.beans.DateChooserCombo txtPemakaianTanggal;
     // End of variables declaration//GEN-END:variables
 }
