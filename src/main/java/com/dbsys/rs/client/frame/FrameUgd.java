@@ -24,7 +24,9 @@ import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
 import java.awt.Color;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -53,7 +55,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
-        txtPasienTanggalMasuk.setText(DateUtil.getDate().toString());
         
         showPendaftaran();
     }
@@ -73,6 +74,10 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         
         txtPendudukKode.setText(Penduduk.createKode());
         txtPasienNomor.setText(Pasien.createKode());
+        
+        Calendar now = Calendar.getInstance();
+        now.setTime(DateUtil.getDate());
+        txtPasienTanggalMasuk.setSelectedDate(now);
     }
     
     @Override
@@ -219,12 +224,12 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         txtPendudukNik = new javax.swing.JTextField();
         txtPendudukNama = new javax.swing.JTextField();
         cbPendudukKelamin = new javax.swing.JComboBox();
-        txtPendudukTanggalLahir = new javax.swing.JTextField();
         txtPendudukDarah = new javax.swing.JTextField();
         txtPendudukAgama = new javax.swing.JTextField();
         txtPendudukTelepon = new javax.swing.JTextField();
         btnPendudukSimpan = new javax.swing.JButton();
         btnPendudukClean = new javax.swing.JButton();
+        txtPendudukTanggalLahir = new datechooser.beans.DateChooserCombo();
         pnlPendaftaranDetail = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -232,11 +237,11 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtPasienNomor = new javax.swing.JTextField();
-        txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTujuan = new javax.swing.JTextField();
         cbPasienKelas = new javax.swing.JComboBox();
         cbPasienTanggungan = new javax.swing.JComboBox();
         btnPasienTambah = new javax.swing.JButton();
+        txtPasienTanggalMasuk = new datechooser.beans.DateChooserCombo();
         pnlPasienDetail = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -546,10 +551,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPendaftaranDetailPenduduk.add(cbPendudukKelamin);
         cbPendudukKelamin.setBounds(130, 120, 250, 25);
 
-        txtPendudukTanggalLahir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetailPenduduk.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(130, 150, 250, 25);
-
         txtPendudukDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlPendaftaranDetailPenduduk.add(txtPendudukDarah);
         txtPendudukDarah.setBounds(130, 180, 250, 25);
@@ -579,6 +580,8 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         });
         pnlPendaftaranDetailPenduduk.add(btnPendudukClean);
         btnPendudukClean.setBounds(300, 270, 80, 30);
+        pnlPendaftaranDetailPenduduk.add(txtPendudukTanggalLahir);
+        txtPendudukTanggalLahir.setBounds(130, 150, 250, 25);
 
         getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 310));
 
@@ -610,10 +613,6 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPendaftaranDetail.add(txtPasienNomor);
         txtPasienNomor.setBounds(130, 30, 250, 25);
 
-        txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlPendaftaranDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(130, 60, 250, 25);
-
         txtPasienTujuan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPasienTujuanMouseClicked(evt);
@@ -639,6 +638,8 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         });
         pnlPendaftaranDetail.add(btnPasienTambah);
         btnPasienTambah.setBounds(300, 190, 80, 30);
+        pnlPendaftaranDetail.add(txtPasienTanggalMasuk);
+        txtPasienTanggalMasuk.setBounds(130, 60, 250, 25);
 
         getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 400, 240));
 
@@ -919,10 +920,13 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         txtPendudukNik.setText(penduduk.getNik());
         txtPendudukNama.setText(penduduk.getNama());
         cbPendudukKelamin.setSelectedItem(penduduk.getKelamin().toString());
-        txtPendudukTanggalLahir.setText(penduduk.getTanggalLahir().toString());
         txtPendudukDarah.setText(penduduk.getDarah());
         txtPendudukAgama.setText(penduduk.getAgama());
         txtPendudukTelepon.setText(penduduk.getTelepon());
+
+        Calendar tanggalLahir = Calendar.getInstance();
+        tanggalLahir.setTime(penduduk.getTanggalLahir());
+        txtPendudukTanggalLahir.setSelectedDate(tanggalLahir);
         
         txtPasienNomor.setText(Pasien.createKode());
     }//GEN-LAST:event_tblPendudukMouseClicked
@@ -935,16 +939,19 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         txtPendudukNik.setText(null);
         txtPendudukNama.setText(null);
         cbPendudukKelamin.setSelectedIndex(0);
-        txtPendudukTanggalLahir.setText(null);
+        txtPendudukTanggalLahir.setSelectedDate(null);
         txtPendudukDarah.setText(null);
         txtPendudukAgama.setText(null);
         txtPendudukTelepon.setText(null);
         
         txtPasienNomor.setText(null);
-        txtPasienTanggalMasuk.setText(null);
         txtPasienTujuan.setText(null);
         cbPasienKelas.setSelectedIndex(0);
         cbPasienTanggungan.setSelectedIndex(0);
+
+        Calendar now = Calendar.getInstance();
+        now.setTime(penduduk.getTanggalLahir());
+        txtPasienTanggalMasuk.setSelectedDate(now);
     }//GEN-LAST:event_btnPendudukCleanActionPerformed
 
     private void btnPendudukSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukSimpanActionPerformed
@@ -952,13 +959,15 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             penduduk = new Penduduk();
 
         String kelamin = cbPendudukKelamin.getSelectedItem().toString();
-        String tanggalLahir = txtPendudukTanggalLahir.getText();
+        
+        Calendar tanggalLahir = txtPendudukTanggalLahir.getSelectedDate();
+        long lTime = tanggalLahir.getTimeInMillis();
         
         penduduk.setKode(txtPendudukKode.getText());
         penduduk.setNik(txtPendudukNik.getText().equals("") ? null : txtPendudukNik.getText());
         penduduk.setNama(txtPendudukNama.getText());
         penduduk.setKelamin(Penduduk.Kelamin.valueOf(kelamin));
-        penduduk.setTanggalLahir(DateUtil.getDate(tanggalLahir));
+        penduduk.setTanggalLahir(new Date(lTime));
         penduduk.setDarah(txtPendudukDarah.getText());
         penduduk.setAgama(txtPendudukAgama.getText());
         penduduk.setTelepon(txtPendudukTelepon.getText());
@@ -973,9 +982,11 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
 
     private void btnPasienTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienTambahActionPerformed
         String kode = txtPasienNomor.getText();
-        String tanggalMasuk = txtPasienTanggalMasuk.getText();
         String tanggungan = cbPasienTanggungan.getSelectedItem().toString();
         String kelas = cbPasienKelas.getSelectedItem().toString();
+
+        Calendar tanggalMasuk = txtPasienTanggalMasuk.getSelectedDate();
+        long lTime = tanggalMasuk.getTimeInMillis();
         
         try {
             if (tanggungan == null || tanggungan.equals("- Pilih -"))
@@ -985,7 +996,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
             if (tujuan == null)
                 throw new ServiceException("Silahkan masukan unit tujuan");
             
-            Pasien pasienValue = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), DateUtil.getDate(tanggalMasuk), kode, Pasien.Pendaftaran.UGD, Kelas.valueOf(kelas), tujuan);
+            Pasien pasienValue = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), new Date(lTime), kode, Pasien.Pendaftaran.UGD, Kelas.valueOf(kelas), tujuan);
             JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
             
             txtPasienNomor.setText(pasienValue.getKode());
@@ -1359,7 +1370,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JTextField txtPasienNomor;
     private javax.swing.JTextField txtPasienStatus;
     private javax.swing.JTextField txtPasienTanggalLahir;
-    private javax.swing.JTextField txtPasienTanggalMasuk;
+    private datechooser.beans.DateChooserCombo txtPasienTanggalMasuk;
     private javax.swing.JTextField txtPasienTanggalMasukDetail;
     private javax.swing.JTextField txtPasienTanggungan;
     private javax.swing.JTextField txtPasienTelepon;
@@ -1369,7 +1380,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     private javax.swing.JTextField txtPendudukKode;
     private javax.swing.JTextField txtPendudukNama;
     private javax.swing.JTextField txtPendudukNik;
-    private javax.swing.JTextField txtPendudukTanggalLahir;
+    private datechooser.beans.DateChooserCombo txtPendudukTanggalLahir;
     private javax.swing.JTextField txtPendudukTelepon;
     // End of variables declaration//GEN-END:variables
 }
