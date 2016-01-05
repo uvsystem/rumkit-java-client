@@ -25,7 +25,9 @@ import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.StokKembali;
 import com.dbsys.rs.lib.entity.Unit;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,8 +96,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         this.txtEksternalSatuan.setText(barang.getSatuan());
 
         this.txtEksternalStokJumlah.setText("0");
-        this.txtEksternalStokTanggal.setText(DateUtil.getDate().toString());
         this.txtEksternalStokJam.setText(DateUtil.getTime().toString());
+
+        Calendar now = Calendar.getInstance();
+        now.setTime(DateUtil.getDate());
+        this.txtEksternalStokTanggal.setSelectedDate(now);
         
         tblEksternal.removeAll();
         
@@ -120,8 +125,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         this.txtInternalSatuan.setText(barang.getSatuan());
 
         this.txtInternalStokJumlah.setText("0");
-        this.txtInternalStokTanggal.setText(DateUtil.getDate().toString());
         this.txtInternalStokJam.setText(DateUtil.getTime().toString());
+
+        Calendar now = Calendar.getInstance();
+        now.setTime(DateUtil.getDate());
+        this.txtInternalStokTanggal.setSelectedDate(now);
         
         tblInternal.removeAll();
         
@@ -146,8 +154,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         this.txtKembaliSatuan.setText(barang.getSatuan());
 
         this.txtKembaliStokJumlah.setText("0");
-        this.txtKembaliStokTanggal.setText(DateUtil.getDate().toString());
         this.txtKembaliStokJam.setText(DateUtil.getTime().toString());
+
+        Calendar now = Calendar.getInstance();
+        now.setTime(DateUtil.getDate());
+        this.txtKembaliStokTanggal.setSelectedDate(now);
         
         this.barang = barang;
     }
@@ -509,9 +520,9 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        txtEksternalStokTanggal = new javax.swing.JTextField();
         txtEksternalStokJam = new javax.swing.JTextField();
         txtEksternalStokJumlah = new javax.swing.JTextField();
+        txtEksternalStokTanggal = new datechooser.beans.DateChooserCombo();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEksternal = new javax.swing.JTable();
         btnEksternalStokMasuk = new javax.swing.JButton();
@@ -537,11 +548,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        txtInternalStokTanggal = new javax.swing.JTextField();
         txtInternalStokJam = new javax.swing.JTextField();
         txtInternalStokJumlah = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtInternalStokUnit = new javax.swing.JTextField();
+        txtInternalStokTanggal = new datechooser.beans.DateChooserCombo();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblInternal = new javax.swing.JTable();
         btnInternalStokReset = new javax.swing.JButton();
@@ -564,9 +575,9 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        txtKembaliStokTanggal = new javax.swing.JTextField();
         txtKembaliStokJam = new javax.swing.JTextField();
         txtKembaliStokJumlah = new javax.swing.JTextField();
+        txtKembaliStokTanggal = new datechooser.beans.DateChooserCombo();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblKembali = new javax.swing.JTable();
         txtKembaliKeyword = new javax.swing.JTextField();
@@ -735,12 +746,12 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel21.setText("Jumlah");
         pnlEksternalStok.add(jLabel21);
         jLabel21.setBounds(30, 90, 90, 14);
-        pnlEksternalStok.add(txtEksternalStokTanggal);
-        txtEksternalStokTanggal.setBounds(140, 30, 420, 25);
         pnlEksternalStok.add(txtEksternalStokJam);
         txtEksternalStokJam.setBounds(140, 60, 420, 25);
         pnlEksternalStok.add(txtEksternalStokJumlah);
         txtEksternalStokJumlah.setBounds(140, 90, 420, 25);
+        pnlEksternalStok.add(txtEksternalStokTanggal);
+        txtEksternalStokTanggal.setBounds(140, 30, 420, 25);
 
         pnlStokEksternal.add(pnlEksternalStok);
         pnlEksternalStok.setBounds(630, 310, 590, 140);
@@ -884,8 +895,6 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel30.setText("Jumlah");
         pnlInternalStok.add(jLabel30);
         jLabel30.setBounds(20, 70, 90, 25);
-        pnlInternalStok.add(txtInternalStokTanggal);
-        txtInternalStokTanggal.setBounds(130, 10, 430, 25);
         pnlInternalStok.add(txtInternalStokJam);
         txtInternalStokJam.setBounds(130, 40, 430, 25);
         pnlInternalStok.add(txtInternalStokJumlah);
@@ -902,6 +911,8 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         });
         pnlInternalStok.add(txtInternalStokUnit);
         txtInternalStokUnit.setBounds(130, 100, 430, 25);
+        pnlInternalStok.add(txtInternalStokTanggal);
+        txtInternalStokTanggal.setBounds(130, 10, 430, 25);
 
         pnlStokInternal.add(pnlInternalStok);
         pnlInternalStok.setBounds(630, 330, 590, 140);
@@ -1019,12 +1030,12 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jLabel43.setText("Jumlah");
         pnlInternalStok1.add(jLabel43);
         jLabel43.setBounds(20, 70, 90, 25);
-        pnlInternalStok1.add(txtKembaliStokTanggal);
-        txtKembaliStokTanggal.setBounds(130, 10, 430, 25);
         pnlInternalStok1.add(txtKembaliStokJam);
         txtKembaliStokJam.setBounds(130, 40, 430, 25);
         pnlInternalStok1.add(txtKembaliStokJumlah);
         txtKembaliStokJumlah.setBounds(130, 70, 430, 25);
+        pnlInternalStok1.add(txtKembaliStokTanggal);
+        txtKembaliStokTanggal.setBounds(130, 10, 430, 25);
 
         pnlStokKembali.add(pnlInternalStok1);
         pnlInternalStok1.setBounds(630, 330, 590, 110);
@@ -1417,12 +1428,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             return;
         }
         
-        String tanggal = txtEksternalStokTanggal.getText();
+        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+        
         String jam = txtEksternalStokJam.getText();
         String jumlah = txtEksternalStokJumlah.getText();
         
         try {
-            stokService.masuk(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
+            stokService.masuk(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
             
             setDetailBarangEksternal(null);
             reloadTableEksternal();
@@ -1439,12 +1452,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             return;
         }
         
-        String tanggal = txtEksternalStokTanggal.getText();
+        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+        
         String jam = txtEksternalStokJam.getText();
         String jumlah = txtEksternalStokJumlah.getText();
         
         try {
-            stokService.keluar(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam));
+            stokService.keluar(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
             
             setDetailBarangEksternal(null);
             reloadTableEksternal();
@@ -1483,12 +1498,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             return;
         }
         
-        String tanggal = txtInternalStokTanggal.getText();
+        Calendar tanggal = txtInternalStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+
         String jam = txtInternalStokJam.getText();
         String jumlah = txtInternalStokJumlah.getText();
         
         try {
-            stokService.supply(barang, new Long(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam), unit); // TODO null ganti dengan unit.
+            stokService.supply(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam), unit);
             
             setDetailBarangInternal(null);
             reloadTableInternal();
@@ -1537,12 +1554,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
 
     private void btnKembaliStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokMasukActionPerformed
         String jumlah = txtKembaliStokJumlah.getText();
-        String tanggal = txtKembaliStokTanggal.getText();
         String jam = txtKembaliStokJam.getText();
         String nomorKembali = txtNomorKembali.getText();
+
+        Calendar tanggal = txtKembaliStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
         
         try {
-            stokService.kembali(barang, Long.valueOf(jumlah), DateUtil.getDate(tanggal), DateUtil.getTime(jam), pasien, nomorKembali);
+            stokService.kembali(barang, Long.valueOf(jumlah), new Date(lTime), DateUtil.getTime(jam), pasien, nomorKembali);
             JOptionPane.showMessageDialog(this, "Berhasil");
             
             setDetailBarangKembali((Barang) null);
@@ -1819,7 +1838,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JTextField txtEksternalSatuan;
     private javax.swing.JTextField txtEksternalStokJam;
     private javax.swing.JTextField txtEksternalStokJumlah;
-    private javax.swing.JTextField txtEksternalStokTanggal;
+    private datechooser.beans.DateChooserCombo txtEksternalStokTanggal;
     private javax.swing.JTextField txtEksternalTanggungan;
     private javax.swing.JTextField txtInternalHarga;
     private javax.swing.JTextField txtInternalJumlah;
@@ -1829,7 +1848,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JTextField txtInternalSatuan;
     private javax.swing.JTextField txtInternalStokJam;
     private javax.swing.JTextField txtInternalStokJumlah;
-    private javax.swing.JTextField txtInternalStokTanggal;
+    private datechooser.beans.DateChooserCombo txtInternalStokTanggal;
     private javax.swing.JTextField txtInternalStokUnit;
     private javax.swing.JTextField txtInternalTanggungan;
     private javax.swing.JTextField txtKembaliHarga;
@@ -1840,7 +1859,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     private javax.swing.JTextField txtKembaliSatuan;
     private javax.swing.JTextField txtKembaliStokJam;
     private javax.swing.JTextField txtKembaliStokJumlah;
-    private javax.swing.JTextField txtKembaliStokTanggal;
+    private datechooser.beans.DateChooserCombo txtKembaliStokTanggal;
     private javax.swing.JTextField txtKembaliTanggungan;
     private javax.swing.JTextField txtNamaPasienKembali;
     private javax.swing.JTextField txtNomorKembali;
