@@ -454,11 +454,15 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
             pasien = pasienService.get(keyword);
             setDetailPasien(pasien);
 
-            loadTabelTindakan(pasien);
+            try {
+                loadTabelTindakan(pasien);
+            } catch (ServiceException e) {
+                PelayananTableModel tableModel = new PelayananTableModel(null);
+                tblTindakan.setModel(tableModel);
+            }
+            
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
-            PelayananTableModel tableModel = new PelayananTableModel(null);
-            tblTindakan.setModel(tableModel);
         }
     }//GEN-LAST:event_txtPasienKodeFocusLost
 
