@@ -70,7 +70,7 @@ public class RekapUnitPdfView extends  AbstractPdfView {
         table.setWidthPercentage(tablePercentage);
 
         insertCell(table, "Nama Unit", align, 1, fontHeader, Rectangle.BOX);
-        insertCell(table, "Jumlah Pasien", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Jumlah Pelayanan", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Total Tagihan", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
@@ -78,7 +78,12 @@ public class RekapUnitPdfView extends  AbstractPdfView {
         for (RekapUnitAdapter rekap : list) {
             insertCell(table, rekap.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, rekap.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, rekap.getTotal().toString(), align, 1, fontContent, Rectangle.BOX);
+            
+            Long t = rekap.getTotal();
+            if (rekap.getNama().equals("Intensive Care Unit"))
+                t *= 2;
+            
+            insertCell(table, t.toString(), align, 1, fontContent, Rectangle.BOX);
             
             total += rekap.getTotal();
         }

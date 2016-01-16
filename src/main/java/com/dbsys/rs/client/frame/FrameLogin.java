@@ -140,7 +140,7 @@ public class FrameLogin extends javax.swing.JFrame {
             this.dispose();
             frameUtama.dispose();
         } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Username dan/atau passwword salah");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

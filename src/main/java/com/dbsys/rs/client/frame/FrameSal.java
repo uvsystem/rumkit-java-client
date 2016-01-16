@@ -52,10 +52,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         pnlPasienDetail.setVisible(false);
         pnlKelas1.setVisible(false);
 
-        try {
-            List<Pasien> list = loadPasienPerawatan();
-            loadDetailRuangan(list);
-        } catch (ServiceException ex) { }
+        reloadTablePasien();
     }
 
     @Override
@@ -64,7 +61,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
         try {
             list = loadPasienPerawatan();
         } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            // JOptionPane.showMessageDialog(this, ex.getMessage());
             tblPasien.setModel(new PasienTableModel(list));
         } finally {
             loadDetailRuangan(list);
@@ -753,11 +750,15 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             txtPasienStatus.setText(pasien.getStatus().toString());
             txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
             txtPasienKelas.setText(pasien.getKelas().toString());
+
+            try {
+                loadTindakan(pasien);
+            } catch (ServiceException e) {
+                PelayananTableModel tableModel = new PelayananTableModel(null);
+                tblTindakan.setModel(tableModel);
+            }
             
-            loadTindakan(pasien);
         } catch (ServiceException ex) {
-            PelayananTableModel tableModel = new PelayananTableModel(null);
-            tblTindakan.setModel(tableModel);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtPasienKodeFocusLost
@@ -767,7 +768,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
             JOptionPane.showMessageDialog(this, "Silahkan mencari pasien dahulu");
             return;
         }
-        new FrameTambahObject(this, Tindakan.class, pasien).setVisible(true);
+        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanTambahActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -781,7 +782,7 @@ public class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, 
                 return;
             }
             
-            new FrameTambahObject(this, pasien, pelayanan).setVisible(true);
+            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

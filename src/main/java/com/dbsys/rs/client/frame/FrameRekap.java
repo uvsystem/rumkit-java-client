@@ -20,6 +20,7 @@ import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Stok;
 import com.dbsys.rs.lib.entity.Unit;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,10 +132,10 @@ public class FrameRekap extends JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtTanggalAwal = new javax.swing.JTextField();
-        txtTanggalAkhir = new javax.swing.JTextField();
         btnOk = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        txtTanggalAwal = new datechooser.beans.DateChooserCombo();
+        txtTanggalAkhir = new datechooser.beans.DateChooserCombo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -145,8 +146,6 @@ public class FrameRekap extends JFrame {
 
         jLabel14.setText("Tanggal Akhir");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 25));
-        getContentPane().add(txtTanggalAwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 160, 25));
-        getContentPane().add(txtTanggalAkhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 160, 25));
 
         btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak.png"))); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -158,23 +157,27 @@ public class FrameRekap extends JFrame {
 
         jLabel4.setText("Tanggal Awal");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 25));
+        getContentPane().add(txtTanggalAwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 160, 25));
+        getContentPane().add(txtTanggalAkhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 160, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        String awalStr = txtTanggalAwal.getText();
-        if (awalStr == null || awalStr.equals("")) {
+        Calendar awalCalendar = txtTanggalAwal.getSelectedDate();
+        if (awalCalendar == null) {
             JOptionPane.showMessageDialog(this, "Silahkan masukan tanggal awal");
+            return;
         }
         
-        String akhirStr = txtTanggalAkhir.getText();
-        if (akhirStr == null || akhirStr.equals("")) {
+        Calendar akhirCalendar = txtTanggalAkhir.getSelectedDate();
+        if (akhirCalendar == null) {
             JOptionPane.showMessageDialog(this, "Silahkan masukan tanggal akhir");
+            return;
         }
         
-        Date awal = DateUtil.getDate(awalStr);
-        Date akhir = DateUtil.getDate(akhirStr);
+        Date awal = new Date(awalCalendar.getTimeInMillis());
+        Date akhir = new Date(akhirCalendar.getTimeInMillis());
 
         try {
             
@@ -202,7 +205,7 @@ public class FrameRekap extends JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtTanggalAkhir;
-    private javax.swing.JTextField txtTanggalAwal;
+    private datechooser.beans.DateChooserCombo txtTanggalAkhir;
+    private datechooser.beans.DateChooserCombo txtTanggalAwal;
     // End of variables declaration//GEN-END:variables
 }
