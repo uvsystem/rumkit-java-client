@@ -141,11 +141,11 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         pnlDetail.setBackground(new Color(0,0,0,20));
         pnlDetail.setLayout(null);
 
-        jLabel4.setText("NOMOR");
+        jLabel4.setText("NO. MEDREK");
         pnlDetail.add(jLabel4);
         jLabel4.setBounds(20, 30, 100, 25);
 
-        jLabel5.setText("NIK");
+        jLabel5.setText("NO. JAMINAN");
         pnlDetail.add(jLabel5);
         jLabel5.setBounds(20, 60, 100, 25);
 
@@ -281,7 +281,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         pnlPendaftaran.add(jLabel12);
         jLabel12.setBounds(20, 90, 100, 25);
 
-        jLabel16.setText("NOMOR PASIEN");
+        jLabel16.setText("NO. PASIEN");
         pnlPendaftaran.add(jLabel16);
         jLabel16.setBounds(20, 30, 100, 25);
 

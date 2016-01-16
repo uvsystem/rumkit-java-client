@@ -465,7 +465,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         pnlDetail.add(jLabel6);
         jLabel6.setBounds(20, 60, 90, 25);
 
-        jLabel7.setText("NIK");
+        jLabel7.setText("No. Jaminan");
         pnlDetail.add(jLabel7);
         jLabel7.setBounds(20, 90, 90, 25);
 

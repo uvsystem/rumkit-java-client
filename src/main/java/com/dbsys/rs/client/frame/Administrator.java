@@ -1783,7 +1783,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel11.setText("NO. MEDREK");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
-        jLabel12.setText("NIK");
+        jLabel12.setText("NO. JAMINAN");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 25));
 
         jLabel13.setText("NAMA");
@@ -1994,7 +1994,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel43.setText("No. Rekam Medik");
         jPanel19.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, -1));
 
-        jLabel44.setText("Nik");
+        jLabel44.setText("No. Jaminan");
         jPanel19.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
         jLabel45.setText("Nama");
@@ -2229,7 +2229,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel53.setText("KODE");
         jPanel21.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
-        jLabel54.setText("NIK");
+        jLabel54.setText("NO. JAMINAN");
         jPanel21.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel56.setText("TGL. LAHIR");
@@ -2296,7 +2296,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel35.setText("NAMA");
         jPanel15.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, 25));
 
-        jLabel46.setText("NIK");
+        jLabel46.setText("NO. JAMINAN");
         jPanel15.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel61.setText("TGL. LAHIR");
@@ -2445,7 +2445,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel67.setText("NAMA");
         jPanel22.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, 25));
 
-        jLabel68.setText("NIK");
+        jLabel68.setText("NO. JAMINAN");
         jPanel22.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel69.setText("KELAMIN");
@@ -2549,7 +2549,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         jLabel75.setText("NIP");
         jPanel23.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 25));
 
-        jLabel77.setText("NIK");
+        jLabel77.setText("NO. JAMINAN");
         jPanel23.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel79.setText("TGL. LAHIR");

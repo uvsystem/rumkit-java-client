@@ -218,7 +218,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
 
-        jLabel3.setText("NIK");
+        jLabel3.setText("No. Jaminan");
         pnlPasien.add(jLabel3);
         jLabel3.setBounds(20, 30, 90, 25);
 

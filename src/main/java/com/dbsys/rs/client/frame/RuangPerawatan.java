@@ -359,7 +359,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         pnlPasienDetail.add(jLabel4);
         jLabel4.setBounds(20, 30, 100, 25);
 
-        jLabel5.setText("NIK");
+        jLabel5.setText("NO. JAMINAN");
         pnlPasienDetail.add(jLabel5);
         jLabel5.setBounds(20, 70, 100, 25);
 
