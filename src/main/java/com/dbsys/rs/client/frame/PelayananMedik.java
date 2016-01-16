@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public class FramePoliklinik extends javax.swing.JFrame implements TindakanTableFrame {
+public class PelayananMedik extends javax.swing.JFrame implements TindakanTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
@@ -32,7 +32,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
      * Creates new form Poliklinik
      * @param unit
      */
-    public FramePoliklinik(Unit unit) {
+    public PelayananMedik(Unit unit) {
         super();
         initComponents();
         
@@ -393,7 +393,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -401,7 +401,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnTindakanTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanTambahActionPerformed
-        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
+        new TambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanTambahActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -415,7 +415,7 @@ public class FramePoliklinik extends javax.swing.JFrame implements TindakanTable
                 return;
             }
             
-            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
+            new TambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

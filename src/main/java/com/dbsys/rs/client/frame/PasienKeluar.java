@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FramePasienKeluar extends javax.swing.JFrame {
+public class PasienKeluar extends javax.swing.JFrame {
 
     private final PelayananService pelayananService = PelayananService.getInstance();
     private Pasien pasien;
@@ -26,7 +26,7 @@ public class FramePasienKeluar extends javax.swing.JFrame {
      * 
      * @throws com.dbsys.rs.connector.ServiceException pasien atau frame null.
      */
-    public FramePasienKeluar(Pasien pasien, PasienTableFrame frame) throws ServiceException {
+    public PasienKeluar(Pasien pasien, PasienTableFrame frame) throws ServiceException {
         initComponents();
         setSize(330, 220);
         

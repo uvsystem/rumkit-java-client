@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public class FrameLogin extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
-    private FrameUtama frameUtama;
+    private Utama frameUtama;
     
     /**
      * Creates new form login
      * @param frameUtama
      */
-    public FrameLogin(FrameUtama frameUtama) {
+    public Login(Utama frameUtama) {
         initComponents();
         this.setSize(250, 160);
         this.setLocationRelativeTo(null);
@@ -95,7 +95,7 @@ public class FrameLogin extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
         if (frameUtama == null)
-            frameUtama = new FrameUtama();
+            frameUtama = new Utama();
         frameUtama.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -114,25 +114,25 @@ public class FrameLogin extends javax.swing.JFrame {
             TokenHolder.token = token;
 
             if(token.getRole().equals(Role.ADMIN)) {
-                new FrameAdmin().setVisible(true);
+                new Administrator().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.LOKET_PENDAFTARAN)) {
-                new FramePendaftaran().setVisible(true);
+                new LoketPendaftaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.LOKET_PEMBAYARAN)) {
-                new FramePembayaran().setVisible(true);
+                new LoketPembayaran().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.APOTEK_FARMASI)) {
-                new FrameApotek().setVisible(true);
+                new Apotek().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
-                new FrameGudangFarmasi().setVisible(true);
+                new GudangFarmasi().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
-                new FrameSal().setVisible(true);
+                new RuangPerawatan().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.ICU)) {
-                new FrameSal().setVisible(true);
+                new RuangPerawatan().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {
-                new FrameUgd().setVisible(true);
+                new Ugd().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.POLIKLINIK)) {
-                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+                new PelayananMedik(token.getOperator().getUnit()).setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.PENUNJANG_MEDIK)) {
-                new FramePoliklinik(token.getOperator().getUnit()).setVisible(true);
+                new PelayananMedik(token.getOperator().getUnit()).setVisible(true);
             } else {
                 throw new ServiceException("Anda tidak terdaftar pada unit apapun");
             }

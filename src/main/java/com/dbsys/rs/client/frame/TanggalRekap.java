@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameRekap extends JFrame {
+public class TanggalRekap extends JFrame {
 
     private final ReportService reportService = ReportService.getInstance();
     
@@ -50,7 +50,7 @@ public class FrameRekap extends JFrame {
      * 
      * @throws com.dbsys.rs.connector.ServiceException pasien atau frame null.
      */
-    public FrameRekap(JFrame frame, Class<?> cls) throws ServiceException {
+    public TanggalRekap(JFrame frame, Class<?> cls) throws ServiceException {
         initComponents();
         setSize(330, 220);
         

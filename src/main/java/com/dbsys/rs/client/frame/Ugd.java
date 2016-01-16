@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, PasienTableFrame, UnitFrame {
+public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, PasienTableFrame, UnitFrame {
 
     private final PendudukService pendudukService = PendudukService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
@@ -50,7 +50,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     /**
      * Creates new form Pendaftaran
      */
-    public FrameUgd() {
+    public Ugd() {
         initComponents();
         
         lblOperator.setText(TokenHolder.getNamaOperator());
@@ -972,7 +972,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -1055,7 +1055,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     }//GEN-LAST:event_btnTindakanHapusActionPerformed
 
     private void btnTindakanSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanSimpanActionPerformed
-        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
+        new TambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanSimpanActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -1069,7 +1069,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
                 return;
             }
 
-            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
+            new TambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -1146,7 +1146,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
     }//GEN-LAST:event_btnPasienMasukActionPerformed
 
     private void txtPasienTujuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasienTujuanMouseClicked
-        FrameCari frameCari = new FrameCari(this, Unit.class);
+        Pencarian frameCari = new Pencarian(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtPasienTujuanMouseClicked
 
@@ -1157,7 +1157,7 @@ public class FrameUgd extends javax.swing.JFrame implements TindakanTableFrame, 
         }
 
         try {
-            FramePasienKeluar frame = new FramePasienKeluar(pasien, this);
+            PasienKeluar frame = new PasienKeluar(pasien, this);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

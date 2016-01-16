@@ -38,7 +38,7 @@ import javax.swing.JTable;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FramePembayaran extends javax.swing.JFrame {
+public class LoketPembayaran extends javax.swing.JFrame {
 
     private final PasienService pasienService = PasienService.getInstance();
     private final PelayananService pelayananService = PelayananService.getInstance();
@@ -59,7 +59,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     /**
      * Creates new form FramePembayaran
      */
-    public FramePembayaran() {
+    public LoketPembayaran() {
         initComponents();
         setSize(1280, 800);
         
@@ -727,7 +727,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -869,7 +869,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnRekapPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPemakaianActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Pemakaian.class);
+            TanggalRekap frame = new TanggalRekap(this, Pemakaian.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -878,7 +878,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPelayananActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Unit.class);
+            TanggalRekap frame = new TanggalRekap(this, Unit.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

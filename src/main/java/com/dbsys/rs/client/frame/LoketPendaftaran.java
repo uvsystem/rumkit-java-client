@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public final class FramePendaftaran extends javax.swing.JFrame implements UnitFrame {
+public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFrame {
 
     private final PendudukService pendudukService = PendudukService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
@@ -37,7 +37,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
     /**
      * Creates new form Pendaftaran
      */
-    public FramePendaftaran() {
+    public LoketPendaftaran() {
         initComponents();
         
         lblOperator.setText(TokenHolder.getNamaOperator());
@@ -460,7 +460,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -484,7 +484,7 @@ public final class FramePendaftaran extends javax.swing.JFrame implements UnitFr
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void txtPasienTujuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasienTujuanMouseClicked
-        FrameCari frameCari = new FrameCari(this, Unit.class);
+        Pencarian frameCari = new Pencarian(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtPasienTujuanMouseClicked
 

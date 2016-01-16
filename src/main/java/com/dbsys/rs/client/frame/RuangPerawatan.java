@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  *
  * @author Bramwell Kasaedja
  */
-public final class FrameSal extends javax.swing.JFrame implements TindakanTableFrame, PasienTableFrame {
+public final class RuangPerawatan extends javax.swing.JFrame implements TindakanTableFrame, PasienTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
@@ -38,7 +38,7 @@ public final class FrameSal extends javax.swing.JFrame implements TindakanTableF
     /**
      * Creates new form SAL
      */
-    public FrameSal() {
+    public RuangPerawatan() {
         initComponents();
 
         lblOperator.setText(TokenHolder.getNamaOperator());
@@ -728,7 +728,7 @@ public final class FrameSal extends javax.swing.JFrame implements TindakanTableF
             JOptionPane.showMessageDialog(this, "Silahkan mencari pasien dahulu");
             return;
         }
-        new FrameTambahTagihan(this, Tindakan.class, pasien).setVisible(true);
+        new TambahTagihan(this, Tindakan.class, pasien).setVisible(true);
     }//GEN-LAST:event_btnTindakanTambahActionPerformed
 
     private void btnTindakanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTindakanUpdateActionPerformed
@@ -742,7 +742,7 @@ public final class FrameSal extends javax.swing.JFrame implements TindakanTableF
                 return;
             }
             
-            new FrameTambahTagihan(this, pasien, pelayanan).setVisible(true);
+            new TambahTagihan(this, pasien, pelayanan).setVisible(true);
         } catch (ComponentSelectionException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -775,7 +775,7 @@ public final class FrameSal extends javax.swing.JFrame implements TindakanTableF
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -789,7 +789,7 @@ public final class FrameSal extends javax.swing.JFrame implements TindakanTableF
         }
         
         try {
-            FramePasienKeluar frame = new FramePasienKeluar(pasien, this);
+            PasienKeluar frame = new PasienKeluar(pasien, this);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

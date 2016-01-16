@@ -57,7 +57,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
+public class Administrator extends javax.swing.JFrame implements  UnitFrame {
     private final UnitEventController unitEventController;
     private final OperatorEventController operatorEventController;
     private final DokterEventController dokterEventController;
@@ -77,7 +77,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     /**
      * Creates new form admin
      */
-    public FrameAdmin() {
+    public Administrator() {
         initComponents();
         resetPanelVisibility();
         
@@ -3393,7 +3393,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }//GEN-LAST:event_btnOperatorResetActionPerformed
 
     private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
-        FrameCari cari = new FrameCari(this,Unit.class);
+        Pencarian cari = new Pencarian(this,Unit.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
 
@@ -3648,7 +3648,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }//GEN-LAST:event_tblTindakanMouseClicked
 
     private void txtTindakanKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTindakanKategoriMouseClicked
-        FrameCari cari = new FrameCari(this,KategoriTindakan.class);
+        Pencarian cari = new Pencarian(this,KategoriTindakan.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txtTindakanKategoriMouseClicked
 
@@ -3664,7 +3664,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3915,7 +3915,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapDokterActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Dokter.class);
+            TanggalRekap frame = new TanggalRekap(this, Dokter.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3924,7 +3924,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapPerawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPerawatActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Perawat.class);
+            TanggalRekap frame = new TanggalRekap(this, Perawat.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

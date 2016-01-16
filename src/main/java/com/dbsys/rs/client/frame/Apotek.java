@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame {
+public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final PemakaianService pemakaianService = PemakaianService.getInstance();
@@ -40,7 +40,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     /**
      * Creates new FrameFarmasi
      */
-    public FrameApotek() {
+    public Apotek() {
         initComponents();
         setSize(1280, 800);
         
@@ -436,14 +436,14 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             return;
         }
         
-        new FrameTambahTagihan(this, pasien, nomorResep).setVisible(true);
+        new TambahTagihan(this, pasien, nomorResep).setVisible(true);
     }//GEN-LAST:event_btnObatTambahActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

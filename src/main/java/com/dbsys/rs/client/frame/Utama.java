@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameUtama extends javax.swing.JFrame {
+public class Utama extends javax.swing.JFrame {
 
     private final PasienService pasienService = PasienService.getInstance();
     
     /**
      * Creates new form FrameUtama
      */
-    public FrameUtama() {
+    public Utama() {
         initComponents();
         setSize(1280, 800);
     }
@@ -127,7 +127,7 @@ public class FrameUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        FrameLogin frameLogin = new FrameLogin(this);
+        Login frameLogin = new Login(this);
         frameLogin.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 

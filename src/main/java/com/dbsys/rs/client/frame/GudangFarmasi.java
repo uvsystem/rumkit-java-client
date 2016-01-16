@@ -38,7 +38,7 @@ import javax.swing.table.TableModel;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame {
+public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final BarangService barangService = BarangService.getInstance();
@@ -61,7 +61,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     /**
      * Creates new FrameFarmasi
      */
-    public FrameGudangFarmasi() {
+    public GudangFarmasi() {
         initComponents();
         setSize(1280, 800);
         
@@ -1524,7 +1524,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -1584,7 +1584,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }//GEN-LAST:event_btnKembaliStokResetActionPerformed
 
     private void txtInternalStokUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInternalStokUnitMouseClicked
-        FrameCari frameCari = new FrameCari(this, Unit.class);
+        Pencarian frameCari = new Pencarian(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtInternalStokUnitMouseClicked
 

@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
  *
  * @author Acer One 10
  */
-public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
+public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
 
     private final JFrame frame;
     private final Class<?> clsDomain;
@@ -62,7 +62,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
      * @param clsDomain
      * @param pasien
      */
-    public FrameTambahTagihan(JFrame frame, Class<?> clsDomain, Pasien pasien) {
+    public TambahTagihan(JFrame frame, Class<?> clsDomain, Pasien pasien) {
         initComponents();
         this.clsDomain = clsDomain;
         this.frame = frame;
@@ -95,7 +95,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
      * @param pasien
      * @param pemakaian 
      */
-    FrameTambahTagihan(JFrame frame, Pasien pasien, Pemakaian pemakaian) {
+    TambahTagihan(JFrame frame, Pasien pasien, Pemakaian pemakaian) {
         this(frame, Barang.class, pasien);
         this.pemakaian = pemakaian;
         this.barang = pemakaian.getBarang();
@@ -115,7 +115,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
      * @param pasien
      * @param pelayanan 
      */
-    FrameTambahTagihan(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
+    TambahTagihan(JFrame frame, Pasien pasien, Pelayanan pelayanan) {
         this(frame, Tindakan.class, pasien);
         this.pelayanan = pelayanan;
         this.tindakan = pelayanan.getTindakan();
@@ -146,7 +146,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
      * @param pasien
      * @param nomorResep 
      */
-    FrameTambahTagihan(JFrame frame, Pasien pasien, String nomorResep) {
+    TambahTagihan(JFrame frame, Pasien pasien, String nomorResep) {
         this(frame, Barang.class, pasien);
         this.nomorResep = nomorResep;
     }
@@ -505,7 +505,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
             default: return;
         }
         
-        new FrameCari(this, pegawai).setVisible(true);
+        new Pencarian(this, pegawai).setVisible(true);
     }//GEN-LAST:event_txtPelayananPelaksanaMouseClicked
 
     private void txtKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeywordFocusLost
@@ -526,7 +526,7 @@ public class FrameTambahTagihan extends JFrame implements  TindakanFrame, UnitFr
     }//GEN-LAST:event_txtKeywordFocusLost
 
     private void txtPelayananUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPelayananUnitMouseClicked
-        FrameCari cari = new FrameCari(this,Unit.class);
+        Pencarian cari = new Pencarian(this,Unit.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txtPelayananUnitMouseClicked
 
