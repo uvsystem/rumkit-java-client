@@ -78,11 +78,11 @@ public final class DetailPasien extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel104 = new javax.swing.JLabel();
         cbPasienKelas = new javax.swing.JComboBox();
-        btnSimpanTanggungan = new javax.swing.JButton();
+        btnSimpanKelas = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel103 = new javax.swing.JLabel();
         cbPasienTanggungan = new javax.swing.JComboBox();
-        btnSimpanKelas = new javax.swing.JButton();
+        btnSimpanTanggungan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DATA PASIEN");
@@ -183,7 +183,7 @@ public final class DetailPasien extends javax.swing.JFrame {
         });
         getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, 100, 25));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH TANGGUNGAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel104.setText("Kelas");
@@ -192,17 +192,17 @@ public final class DetailPasien extends javax.swing.JFrame {
         cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
         jPanel2.add(cbPasienKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 410, 25));
 
-        btnSimpanTanggungan.setText("SIMPAN");
-        btnSimpanTanggungan.addActionListener(new java.awt.event.ActionListener() {
+        btnSimpanKelas.setText("SIMPAN");
+        btnSimpanKelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanTanggunganActionPerformed(evt);
+                btnSimpanKelasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSimpanTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
+        jPanel2.add(btnSimpanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 660, 60));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH TANGGUNGAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel103.setText("Tanggungan");
@@ -211,32 +211,32 @@ public final class DetailPasien extends javax.swing.JFrame {
         cbPasienTanggungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "BPJS", "UMUM" }));
         jPanel3.add(cbPasienTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 410, 25));
 
-        btnSimpanKelas.setText("SIMPAN");
-        btnSimpanKelas.addActionListener(new java.awt.event.ActionListener() {
+        btnSimpanTanggungan.setText("SIMPAN");
+        btnSimpanTanggungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanKelasActionPerformed(evt);
+                btnSimpanTanggunganActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSimpanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
+        jPanel3.add(btnSimpanTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 660, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSimpanTanggunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanTanggunganActionPerformed
+    private void btnSimpanKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanKelasActionPerformed
         try {
-            if (cbPasienTanggungan.getSelectedIndex() == 0)
-                throw new ServiceException("Silahkan memilih tanggungan pasien!");
+            if (cbPasienKelas.getSelectedIndex() == 0)
+                throw new ServiceException("Silahkan memilih kelas pasien!");
             
-            Penanggung penanggung = Penanggung.valueOf(cbPasienTanggungan.getSelectedItem().toString());
-            pasienService.ubahPenanggung(pasien, penanggung);
+            Kelas kelas = Kelas.valueOf(cbPasienKelas.getSelectedItem().toString());
+            pasienService.ubahKelas(pasien, kelas);
             
             JOptionPane.showMessageDialog(this, "Berhasil");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btnSimpanTanggunganActionPerformed
+    }//GEN-LAST:event_btnSimpanKelasActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
         dispose();
@@ -273,19 +273,19 @@ public final class DetailPasien extends javax.swing.JFrame {
             btnKeluar.requestFocus();
     }//GEN-LAST:event_txtPasienKodeKeyPressed
 
-    private void btnSimpanKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanKelasActionPerformed
+    private void btnSimpanTanggunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanTanggunganActionPerformed
         try {
-            if (cbPasienKelas.getSelectedIndex() == 0)
-                throw new ServiceException("Silahkan memilih kelas pasien!");
+            if (cbPasienTanggungan.getSelectedIndex() == 0)
+                throw new ServiceException("Silahkan memilih tanggungan pasien!");
             
-            Kelas kelas = Kelas.valueOf(cbPasienKelas.getSelectedItem().toString());
-            pasienService.ubahKelas(pasien, kelas);
+            Penanggung penanggung = Penanggung.valueOf(cbPasienTanggungan.getSelectedItem().toString());
+            pasienService.ubahPenanggung(pasien, penanggung);
             
             JOptionPane.showMessageDialog(this, "Berhasil");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btnSimpanKelasActionPerformed
+    }//GEN-LAST:event_btnSimpanTanggunganActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKeluar;

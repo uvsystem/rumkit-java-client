@@ -18,7 +18,7 @@ public final class TindakanTableModel extends DefaultTableModel {
     
     @Override
     public int getColumnCount(){
-        return 5;
+        return 6;
     }
     
     @Override
@@ -31,11 +31,12 @@ public final class TindakanTableModel extends DefaultTableModel {
     @Override
     public String getColumnName(int column){
         switch(column){
-            case 0:return "KODE";
-            case 1:return "NAMA";
-            case 2:return "KATEGORI";
-            case 3:return "KELAS";
-            case 4:return "TANGGUNGAN";
+            case 0: return "KODE";
+            case 1: return "NAMA";
+            case 2: return "KATEGORI";
+            case 3: return "KELAS";
+            case 4: return "TANGGUNGAN";
+            case 5: return "BIAYA";
             default: return "";
         }
     }
@@ -45,11 +46,12 @@ public final class TindakanTableModel extends DefaultTableModel {
         Tindakan tindakan = getTindakan(row);
         
         switch(column){
-            case 0:return tindakan.getKode();
-            case 1:return tindakan.getNama();
-            case 2:return tindakan.getKategori().getNama();
-            case 3:return tindakan.getKelas();
-            case 4:return tindakan.getPenanggung();
+            case 0: return tindakan.getKode();
+            case 1: return tindakan.getNama();
+            case 2: return tindakan.getKategori().getNama();
+            case 3: return tindakan.getKelas();
+            case 4: return tindakan.getPenanggung();
+            case 5: return tindakan.getTarif();
             default: return "";
         }
     }
