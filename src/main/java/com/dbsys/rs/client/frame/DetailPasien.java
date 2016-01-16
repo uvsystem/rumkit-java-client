@@ -2,6 +2,7 @@ package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
+import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.Pasien;
 import javax.swing.JOptionPane;
@@ -211,6 +212,11 @@ public final class DetailPasien extends javax.swing.JFrame {
         jPanel3.add(cbPasienTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 410, 25));
 
         btnSimpanKelas.setText("SIMPAN");
+        btnSimpanKelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanKelasActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnSimpanKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 660, 60));
@@ -227,7 +233,6 @@ public final class DetailPasien extends javax.swing.JFrame {
             pasienService.ubahPenanggung(pasien, penanggung);
             
             JOptionPane.showMessageDialog(this, "Berhasil");
-            dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -246,8 +251,8 @@ public final class DetailPasien extends javax.swing.JFrame {
             pasien = pasienService.get(keyword);
             
             txtPasienAgama.setText(pasien.getAgama());
-            txtPasienDarah.setText(pasien.getNama());
-            txtPasienKelamin.setText(pasien.getDarah());
+            txtPasienDarah.setText(pasien.getDarah());
+            txtPasienKelamin.setText(pasien.getKelamin().toString());
             txtPasienKodePenduduk.setText(pasien.getKodePenduduk());
             txtPasienLahir.setText(pasien.getTanggalLahir().toString());
             txtPasienNama.setText(pasien.getNama());
@@ -256,8 +261,8 @@ public final class DetailPasien extends javax.swing.JFrame {
             txtPasienTelepon.setText(pasien.getTelepon());
             txtPasienTipe.setText(pasien.getTipePerawatan().toString());
             
-            cbPasienKelas.setSelectedItem(pasien.getKelas());
-            cbPasienTanggungan.setSelectedItem(pasien.getPenanggung());
+            cbPasienKelas.setSelectedItem(pasien.getKelas().toString());
+            cbPasienTanggungan.setSelectedItem(pasien.getPenanggung().toString());
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -267,6 +272,20 @@ public final class DetailPasien extends javax.swing.JFrame {
         if (evt.getKeyCode() == 10)
             btnKeluar.requestFocus();
     }//GEN-LAST:event_txtPasienKodeKeyPressed
+
+    private void btnSimpanKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanKelasActionPerformed
+        try {
+            if (cbPasienKelas.getSelectedIndex() == 0)
+                throw new ServiceException("Silahkan memilih kelas pasien!");
+            
+            Kelas kelas = Kelas.valueOf(cbPasienKelas.getSelectedItem().toString());
+            pasienService.ubahKelas(pasien, kelas);
+            
+            JOptionPane.showMessageDialog(this, "Berhasil");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanKelasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKeluar;
