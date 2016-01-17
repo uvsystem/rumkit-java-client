@@ -21,6 +21,8 @@ public final class DetailPasien extends javax.swing.JFrame {
      */
     public DetailPasien() {
         initComponents();
+        
+        setSize(700, 680);
     }
     
     /**
@@ -189,7 +191,7 @@ public final class DetailPasien extends javax.swing.JFrame {
         jLabel104.setText("Kelas");
         jPanel2.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
-        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III" }));
+        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
         jPanel2.add(cbPasienKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 410, 25));
 
         btnSimpanKelas.setText("SIMPAN");

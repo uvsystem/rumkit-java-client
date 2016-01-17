@@ -229,6 +229,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
+        btnUbahPasien = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -593,6 +594,18 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnRekapPelayanan);
 
+        btnUbahPasien.setText("UBAH DATA PASIEN");
+        btnUbahPasien.setFocusable(false);
+        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnUbahPasien);
+
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
@@ -889,6 +902,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         if (evt.getKeyCode() == 10)
             btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_txtKeywordKeyPressed
+
+    private void btnUbahPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPasienActionPerformed
+        new DetailPasien().setVisible(true);
+    }//GEN-LAST:event_btnUbahPasienActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -902,6 +919,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;
     private javax.swing.JButton btnRekapPemakaian;
+    private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
