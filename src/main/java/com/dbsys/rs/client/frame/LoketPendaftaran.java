@@ -4,11 +4,9 @@ import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.KartuPasienPdfView;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
-import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
-import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TokenService;
@@ -25,8 +23,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -140,6 +136,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         btnLogout = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
         btnCetakKartuTagihan = new javax.swing.JButton();
+        btnCetakPasien = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -401,6 +398,18 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         });
         jToolBar1.add(btnCetakKartuTagihan);
 
+        btnCetakPasien.setText("DAFTAR PASIEN");
+        btnCetakPasien.setFocusable(false);
+        btnCetakPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnCetakPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakPasien);
+
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 1280, 30));
 
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_pendaftaran.png"))); // NOI18N
@@ -568,10 +577,20 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         }
     }//GEN-LAST:event_btnCetakKartuTagihanActionPerformed
 
+    private void btnCetakPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Pasien.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCetakPasienActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JButton btnCetakKartu;
     private javax.swing.JButton btnCetakKartuTagihan;
+    private javax.swing.JButton btnCetakPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendudukClean;

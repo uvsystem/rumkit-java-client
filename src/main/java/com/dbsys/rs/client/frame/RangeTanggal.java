@@ -3,6 +3,7 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.RekapPasienPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPegawaiPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.RekapStokPdfView;
@@ -12,9 +13,11 @@ import com.dbsys.rs.connector.adapter.RekapPegawaiAdapter;
 import com.dbsys.rs.connector.adapter.RekapStokBarangAdapter;
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
+import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pemakaian;
 import com.dbsys.rs.lib.entity.Perawat;
 import com.dbsys.rs.lib.entity.Stok;
@@ -31,7 +34,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class TanggalRekap extends JFrame {
+public class RangeTanggal extends JFrame {
 
     private final ReportService reportService = ReportService.getInstance();
     
@@ -50,7 +53,7 @@ public class TanggalRekap extends JFrame {
      * 
      * @throws com.dbsys.rs.connector.ServiceException pasien atau frame null.
      */
-    public TanggalRekap(JFrame frame, Class<?> cls) throws ServiceException {
+    public RangeTanggal(JFrame frame, Class<?> cls) throws ServiceException {
         initComponents();
         setSize(330, 220);
         
@@ -119,6 +122,19 @@ public class TanggalRekap extends JFrame {
         model.put("list", list);
 
         pdfProcessor.process(documentView, model, String.format("rekap-perawat-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+    
+    private void rekapPasien(Date awal, Date akhir) throws ServiceException, DocumentException {
+        PasienService service = PasienService.getInstance();
+
+        documentView = new RekapPasienPdfView();
+        
+        List<Pasien> list = service.get(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("rekap-pasien-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
     /**
@@ -191,6 +207,8 @@ public class TanggalRekap extends JFrame {
                 rekapDokter(awal, akhir);
             } else if (Perawat.class.equals(cls)) {
                 rekapPerawat(awal, akhir);
+            } else if (Pasien.class.equals(cls)) {
+                rekapPasien(awal, akhir);
             }
             
             this.dispose();

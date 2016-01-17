@@ -3,6 +3,7 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
+import com.dbsys.rs.client.document.pdf.RekapPasienPdfView;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.StokKembaliTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
@@ -230,6 +231,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
+        btnCetakPasienByMedrek = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -606,6 +608,18 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnUbahPasien);
 
+        btnCetakPasienByMedrek.setText("DAFTAR PASIEN");
+        btnCetakPasienByMedrek.setFocusable(false);
+        btnCetakPasienByMedrek.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakPasienByMedrek.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnCetakPasienByMedrek.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakPasienByMedrek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPasienByMedrekActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakPasienByMedrek);
+
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
@@ -882,7 +896,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
     private void btnRekapPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPemakaianActionPerformed
         try {
-            TanggalRekap frame = new TanggalRekap(this, Pemakaian.class);
+            RangeTanggal frame = new RangeTanggal(this, Pemakaian.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -891,7 +905,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
     private void btnRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPelayananActionPerformed
         try {
-            TanggalRekap frame = new TanggalRekap(this, Unit.class);
+            RangeTanggal frame = new RangeTanggal(this, Unit.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -906,6 +920,30 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private void btnUbahPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPasienActionPerformed
         new DetailPasien().setVisible(true);
     }//GEN-LAST:event_btnUbahPasienActionPerformed
+
+    private void btnCetakPasienByMedrekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienByMedrekActionPerformed
+        String nomorMedrek = JOptionPane.showInputDialog(this, "Masukan Nomor Rekam Medik");
+        if (nomorMedrek == null || nomorMedrek.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan memasukan nomor rekam medik pasien");
+            return;
+        }
+        
+        try {
+            List<Pasien> list = pasienService.getByMedrek(nomorMedrek);
+
+            PdfProcessor pdfProcessor = new PdfProcessor();
+            RekapPasienPdfView pdfView = new RekapPasienPdfView();
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("nomor", nomorMedrek);
+            model.put("list", list);
+
+            pdfProcessor.process(pdfView, model, String.format("rekap-pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        } catch (ServiceException | DocumentException  ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btnCetakPasienByMedrekActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -913,6 +951,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnBayar;
     private javax.swing.JButton btnBayarSemuaTagihan;
     private javax.swing.JButton btnBayarTagihan;
+    private javax.swing.JButton btnCetakPasienByMedrek;
     private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnCetakTagihan;
     private javax.swing.JButton btnLogout;

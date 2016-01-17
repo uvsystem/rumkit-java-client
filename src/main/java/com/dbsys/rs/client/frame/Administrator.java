@@ -3915,7 +3915,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapDokterActionPerformed
         try {
-            TanggalRekap frame = new TanggalRekap(this, Dokter.class);
+            RangeTanggal frame = new RangeTanggal(this, Dokter.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3924,7 +3924,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapPerawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPerawatActionPerformed
         try {
-            TanggalRekap frame = new TanggalRekap(this, Perawat.class);
+            RangeTanggal frame = new RangeTanggal(this, Perawat.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
