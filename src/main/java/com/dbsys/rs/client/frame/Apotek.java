@@ -184,6 +184,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnGudang = new javax.swing.JButton();
         btnCetakPemakaian = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
@@ -393,6 +394,19 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         });
         jToolBar1.add(btnLogout);
 
+        btnGudang.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnGudang.setText("GUDANG");
+        btnGudang.setFocusable(false);
+        btnGudang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGudang.setMaximumSize(new java.awt.Dimension(80, 19));
+        btnGudang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGudang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGudangActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnGudang);
+
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
@@ -497,9 +511,15 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
             btnCetakPemakaian.requestFocus();
     }//GEN-LAST:event_txtResepNomorKeyPressed
 
+    private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGudangActionPerformed
+        new GudangFarmasi().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGudangActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnCetakPemakaian;
+    private javax.swing.JButton btnGudang;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;
