@@ -88,7 +88,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="NIK"/>
+                <Property name="text" type="java.lang.String" value="NO. JAMINAN"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -615,7 +615,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel44">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nik"/>
+                <Property name="text" type="java.lang.String" value="No. Jaminan"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1261,7 +1261,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel54">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="NIK"/>
+                        <Property name="text" type="java.lang.String" value="NO. JAMINAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1487,7 +1487,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel46">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="NIK"/>
+                        <Property name="text" type="java.lang.String" value="NO. JAMINAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1886,7 +1886,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel68">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="NIK"/>
+                        <Property name="text" type="java.lang.String" value="NO. JAMINAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2192,7 +2192,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel77">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="NIK"/>
+                        <Property name="text" type="java.lang.String" value="NO. JAMINAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameCari extends JFrame {
+public class Pencarian extends JFrame {
     private final JFrame frame;
     private final Class<?> cls;
     
@@ -43,7 +43,7 @@ public class FrameCari extends JFrame {
      * @param frame frame yang memanggil formCari.
      * @param cls class sebagai pembeda fungsi cari.
      */
-    public FrameCari(JFrame frame, Class<?> cls) {
+    public Pencarian(JFrame frame, Class<?> cls) {
         initComponents();
 
         this.setLocationRelativeTo(null);
@@ -216,7 +216,7 @@ public class FrameCari extends JFrame {
         
         try {
             kategori = kategoriService.simpan(kategori);
-            ((FrameAdmin)frame).setKategoriForTindakan(kategori);
+            ((Administrator)frame).setKategoriForTindakan(kategori);
             
             this.dispose();
         } catch (ServiceException ex) {
@@ -300,7 +300,7 @@ public class FrameCari extends JFrame {
     
     private void pilihKategori(){
         KategoriTindakan kategori = getKategori();
-        ((FrameAdmin)frame).setKategoriForTindakan(kategori);
+        ((Administrator)frame).setKategoriForTindakan(kategori);
     }
     
     private void pilihPegawai() {

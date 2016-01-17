@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame {
+public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final PemakaianService pemakaianService = PemakaianService.getInstance();
@@ -40,7 +40,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
     /**
      * Creates new FrameFarmasi
      */
-    public FrameApotek() {
+    public Apotek() {
         initComponents();
         setSize(1280, 800);
         
@@ -184,6 +184,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnGudang = new javax.swing.JButton();
         btnCetakPemakaian = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
@@ -218,7 +219,7 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
 
-        jLabel3.setText("NIK");
+        jLabel3.setText("No. Jaminan");
         pnlPasien.add(jLabel3);
         jLabel3.setBounds(20, 30, 90, 25);
 
@@ -393,6 +394,19 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
         });
         jToolBar1.add(btnLogout);
 
+        btnGudang.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnGudang.setText("GUDANG");
+        btnGudang.setFocusable(false);
+        btnGudang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGudang.setMaximumSize(new java.awt.Dimension(80, 19));
+        btnGudang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGudang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGudangActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnGudang);
+
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
@@ -436,14 +450,14 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             return;
         }
         
-        new FrameTambahTagihan(this, pasien, nomorResep).setVisible(true);
+        new TambahTagihan(this, pasien, nomorResep).setVisible(true);
     }//GEN-LAST:event_btnObatTambahActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -497,9 +511,15 @@ public class FrameApotek extends javax.swing.JFrame implements BarangTableFrame 
             btnCetakPemakaian.requestFocus();
     }//GEN-LAST:event_txtResepNomorKeyPressed
 
+    private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGudangActionPerformed
+        new GudangFarmasi().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGudangActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnCetakPemakaian;
+    private javax.swing.JButton btnGudang;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnObatTambah;

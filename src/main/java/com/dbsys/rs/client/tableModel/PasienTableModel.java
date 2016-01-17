@@ -35,10 +35,10 @@ public class PasienTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column){
         switch(column){
-            case 0:return "KODE";
-            case 1:return "NAMA";
-            case 2:return "KELAS";
-            case 3:return "TANGGUNGAN";
+            case 0: return "KODE";
+            case 1: return "NAMA";
+            case 2: return "KELAS";
+            case 3: return "TANGGUNGAN";
             default: return "";
         }
     }

@@ -3,6 +3,7 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
+import com.dbsys.rs.client.document.pdf.RekapPasienPdfView;
 import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.StokKembaliTableModel;
 import com.dbsys.rs.client.tableModel.TagihanTableModel;
@@ -38,7 +39,7 @@ import javax.swing.JTable;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FramePembayaran extends javax.swing.JFrame {
+public class LoketPembayaran extends javax.swing.JFrame {
 
     private final PasienService pasienService = PasienService.getInstance();
     private final PelayananService pelayananService = PelayananService.getInstance();
@@ -59,7 +60,7 @@ public class FramePembayaran extends javax.swing.JFrame {
     /**
      * Creates new form FramePembayaran
      */
-    public FramePembayaran() {
+    public LoketPembayaran() {
         initComponents();
         setSize(1280, 800);
         
@@ -229,6 +230,8 @@ public class FramePembayaran extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
+        btnUbahPasien = new javax.swing.JButton();
+        btnCetakPasienByMedrek = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -465,7 +468,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         pnlDetail.add(jLabel6);
         jLabel6.setBounds(20, 60, 90, 25);
 
-        jLabel7.setText("NIK");
+        jLabel7.setText("No. Jaminan");
         pnlDetail.add(jLabel7);
         jLabel7.setBounds(20, 90, 90, 25);
 
@@ -592,6 +595,30 @@ public class FramePembayaran extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnRekapPelayanan);
+
+        btnUbahPasien.setText("UBAH DATA PASIEN");
+        btnUbahPasien.setFocusable(false);
+        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnUbahPasien);
+
+        btnCetakPasienByMedrek.setText("DAFTAR PASIEN");
+        btnCetakPasienByMedrek.setFocusable(false);
+        btnCetakPasienByMedrek.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakPasienByMedrek.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnCetakPasienByMedrek.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakPasienByMedrek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPasienByMedrekActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakPasienByMedrek);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
@@ -727,7 +754,7 @@ public class FramePembayaran extends javax.swing.JFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -869,7 +896,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnRekapPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPemakaianActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Pemakaian.class);
+            RangeTanggal frame = new RangeTanggal(this, Pemakaian.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -878,7 +905,7 @@ public class FramePembayaran extends javax.swing.JFrame {
 
     private void btnRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPelayananActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Unit.class);
+            RangeTanggal frame = new RangeTanggal(this, Unit.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -889,6 +916,34 @@ public class FramePembayaran extends javax.swing.JFrame {
         if (evt.getKeyCode() == 10)
             btnCetakTagihan.requestFocus();
     }//GEN-LAST:event_txtKeywordKeyPressed
+
+    private void btnUbahPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPasienActionPerformed
+        new DetailPasien().setVisible(true);
+    }//GEN-LAST:event_btnUbahPasienActionPerformed
+
+    private void btnCetakPasienByMedrekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienByMedrekActionPerformed
+        String nomorMedrek = JOptionPane.showInputDialog(this, "Masukan Nomor Rekam Medik");
+        if (nomorMedrek == null || nomorMedrek.equals("")) {
+            JOptionPane.showMessageDialog(this, "Silahkan memasukan nomor rekam medik pasien");
+            return;
+        }
+        
+        try {
+            List<Pasien> list = pasienService.getByMedrek(nomorMedrek);
+
+            PdfProcessor pdfProcessor = new PdfProcessor();
+            RekapPasienPdfView pdfView = new RekapPasienPdfView();
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("nomor", nomorMedrek);
+            model.put("list", list);
+
+            pdfProcessor.process(pdfView, model, String.format("rekap-pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        } catch (ServiceException | DocumentException  ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btnCetakPasienByMedrekActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -896,12 +951,14 @@ public class FramePembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnBayar;
     private javax.swing.JButton btnBayarSemuaTagihan;
     private javax.swing.JButton btnBayarTagihan;
+    private javax.swing.JButton btnCetakPasienByMedrek;
     private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnCetakTagihan;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;
     private javax.swing.JButton btnRekapPemakaian;
+    private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

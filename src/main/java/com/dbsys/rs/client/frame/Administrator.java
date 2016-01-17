@@ -57,7 +57,7 @@ import javax.swing.JOptionPane;
  * @author Bramwell Kasaedja
  * @author Deddy Christoper Kakunsi
  */
-public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
+public class Administrator extends javax.swing.JFrame implements  UnitFrame {
     private final UnitEventController unitEventController;
     private final OperatorEventController operatorEventController;
     private final DokterEventController dokterEventController;
@@ -77,7 +77,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     /**
      * Creates new form admin
      */
-    public FrameAdmin() {
+    public Administrator() {
         initComponents();
         resetPanelVisibility();
         
@@ -1783,7 +1783,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel11.setText("NO. MEDREK");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 25));
 
-        jLabel12.setText("NIK");
+        jLabel12.setText("NO. JAMINAN");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 25));
 
         jLabel13.setText("NAMA");
@@ -1994,7 +1994,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel43.setText("No. Rekam Medik");
         jPanel19.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, -1));
 
-        jLabel44.setText("Nik");
+        jLabel44.setText("No. Jaminan");
         jPanel19.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
         jLabel45.setText("Nama");
@@ -2229,7 +2229,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel53.setText("KODE");
         jPanel21.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
 
-        jLabel54.setText("NIK");
+        jLabel54.setText("NO. JAMINAN");
         jPanel21.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel56.setText("TGL. LAHIR");
@@ -2296,7 +2296,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel35.setText("NAMA");
         jPanel15.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, 25));
 
-        jLabel46.setText("NIK");
+        jLabel46.setText("NO. JAMINAN");
         jPanel15.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel61.setText("TGL. LAHIR");
@@ -2445,7 +2445,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel67.setText("NAMA");
         jPanel22.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, 25));
 
-        jLabel68.setText("NIK");
+        jLabel68.setText("NO. JAMINAN");
         jPanel22.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel69.setText("KELAMIN");
@@ -2549,7 +2549,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         jLabel75.setText("NIP");
         jPanel23.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 25));
 
-        jLabel77.setText("NIK");
+        jLabel77.setText("NO. JAMINAN");
         jPanel23.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 25));
 
         jLabel79.setText("TGL. LAHIR");
@@ -3393,7 +3393,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }//GEN-LAST:event_btnOperatorResetActionPerformed
 
     private void txt_admin_operator_unitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_admin_operator_unitMouseClicked
-        FrameCari cari = new FrameCari(this,Unit.class);
+        Pencarian cari = new Pencarian(this,Unit.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txt_admin_operator_unitMouseClicked
 
@@ -3648,7 +3648,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
     }//GEN-LAST:event_tblTindakanMouseClicked
 
     private void txtTindakanKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTindakanKategoriMouseClicked
-        FrameCari cari = new FrameCari(this,KategoriTindakan.class);
+        Pencarian cari = new Pencarian(this,KategoriTindakan.class);
         cari.setVisible(true);
     }//GEN-LAST:event_txtTindakanKategoriMouseClicked
 
@@ -3664,7 +3664,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3915,7 +3915,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapDokterActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Dokter.class);
+            RangeTanggal frame = new RangeTanggal(this, Dokter.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -3924,7 +3924,7 @@ public class FrameAdmin extends javax.swing.JFrame implements  UnitFrame {
 
     private void btnRekapPerawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPerawatActionPerformed
         try {
-            FrameRekap frame = new FrameRekap(this, Perawat.class);
+            RangeTanggal frame = new RangeTanggal(this, Perawat.class);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

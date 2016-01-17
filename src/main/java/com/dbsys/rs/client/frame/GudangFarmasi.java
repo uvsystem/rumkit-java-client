@@ -38,7 +38,7 @@ import javax.swing.table.TableModel;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame {
+public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final BarangService barangService = BarangService.getInstance();
@@ -61,7 +61,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     /**
      * Creates new FrameFarmasi
      */
-    public FrameGudangFarmasi() {
+    public GudangFarmasi() {
         initComponents();
         setSize(1280, 800);
         
@@ -643,6 +643,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         btnRekapBarang = new javax.swing.JButton();
+        btnApotek = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -1363,6 +1364,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
+        btnLogout.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1376,10 +1378,11 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         });
         jToolBar1.add(btnLogout);
 
+        btnRekapBarang.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnRekapBarang.setText("REKAP OBAT/BHP");
         btnRekapBarang.setFocusable(false);
         btnRekapBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRekapBarang.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapBarang.setMaximumSize(new java.awt.Dimension(120, 21));
         btnRekapBarang.setMinimumSize(new java.awt.Dimension(100, 21));
         btnRekapBarang.setPreferredSize(new java.awt.Dimension(100, 21));
         btnRekapBarang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1389,6 +1392,19 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             }
         });
         jToolBar1.add(btnRekapBarang);
+
+        btnApotek.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnApotek.setText("APOTEK");
+        btnApotek.setFocusable(false);
+        btnApotek.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnApotek.setMaximumSize(new java.awt.Dimension(80, 21));
+        btnApotek.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnApotek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApotekActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnApotek);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
@@ -1524,7 +1540,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
         try {
             tokenService.lock(TokenHolder.getKode());
             
-            new FrameUtama().setVisible(true);
+            new Utama().setVisible(true);
             this.dispose();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -1584,7 +1600,7 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
     }//GEN-LAST:event_btnKembaliStokResetActionPerformed
 
     private void txtInternalStokUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInternalStokUnitMouseClicked
-        FrameCari frameCari = new FrameCari(this, Unit.class);
+        Pencarian frameCari = new Pencarian(this, Unit.class);
         frameCari.setVisible(true);
     }//GEN-LAST:event_txtInternalStokUnitMouseClicked
 
@@ -1725,8 +1741,14 @@ public class FrameGudangFarmasi extends javax.swing.JFrame implements UnitFrame 
             btnKembaliStokReset.requestFocus();
     }//GEN-LAST:event_txtNomorKembaliKeyPressed
 
+    private void btnApotekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApotekActionPerformed
+        new Apotek().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnApotekActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnApotek;
     private javax.swing.JButton btnCetakNomor;
     private javax.swing.JButton btnClearBhp;
     private javax.swing.JButton btnClearObat;

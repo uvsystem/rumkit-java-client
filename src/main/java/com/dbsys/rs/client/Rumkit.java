@@ -4,7 +4,7 @@ import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
-import com.dbsys.rs.client.frame.FrameUtama;
+import com.dbsys.rs.client.frame.Utama;
 import com.dbsys.rs.lib.entity.Dokter;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class Rumkit {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
@@ -40,7 +40,7 @@ public class Rumkit {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                FrameUtama frm = new FrameUtama();
+                Utama frm = new Utama();
                 frm.setVisible(true);
             }
         });
