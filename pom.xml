@@ -86,23 +86,25 @@
         </dependency>
 
         <dependency>
-		<groupId>org.aspectj</groupId>
-		<artifactId>aspectjweaver</artifactId>
-		<version>${aspectj.version}</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
 	</dependency>
 
         <!--
         <dependency>
-                <groupId>net.sourceforge.jdatepicker</groupId>
-                <artifactId>jdatepicker</artifactId>
-                <version>${jdatepicker.version}</version>
+            <groupId>net.sourceforge.jdatepicker</groupId>
+            <artifactId>jdatepicker</artifactId>
+            <version>${jdatepicker.version}</version>
         </dependency>
         -->
+        
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>DateChooser</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
+
     </dependencies>
     
     <properties>

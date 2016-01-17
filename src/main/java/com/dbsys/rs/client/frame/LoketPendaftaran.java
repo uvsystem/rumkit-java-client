@@ -1,9 +1,14 @@
 package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.UnitFrame;
+import com.dbsys.rs.client.document.DocumentException;
+import com.dbsys.rs.client.document.pdf.KartuPasienPdfView;
+import com.dbsys.rs.client.document.pdf.PdfProcessor;
+import com.dbsys.rs.client.document.pdf.TagihanPdfView;
 import com.dbsys.rs.client.tableModel.PendudukTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
+import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TokenService;
@@ -17,7 +22,11 @@ import com.dbsys.rs.lib.entity.Unit;
 import java.awt.Color;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +42,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
 
     private Penduduk penduduk;
     private Unit tujuan;
+    private Pasien pasien;
     
     /**
      * Creates new form Pendaftaran
@@ -122,12 +132,14 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         cbPasienTanggungan = new javax.swing.JComboBox();
         btnPasienTambah = new javax.swing.JButton();
         txtPasienTanggalMasuk = new datechooser.beans.DateChooserCombo();
+        btnCetakKartu = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
+        btnCetakKartuTagihan = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -325,9 +337,18 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         pnlPendaftaran.add(btnPasienTambah);
-        btnPasienTambah.setBounds(300, 180, 80, 30);
+        btnPasienTambah.setBounds(210, 180, 80, 30);
         pnlPendaftaran.add(txtPasienTanggalMasuk);
         txtPasienTanggalMasuk.setBounds(130, 60, 250, 25);
+
+        btnCetakKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_cetak.png"))); // NOI18N
+        btnCetakKartu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakKartuActionPerformed(evt);
+            }
+        });
+        pnlPendaftaran.add(btnCetakKartu);
+        btnCetakKartu.setBounds(300, 180, 80, 30);
 
         getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, 400, 220));
 
@@ -344,7 +365,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
+        btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setMaximumSize(new java.awt.Dimension(80, 20));
@@ -367,6 +388,18 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         jToolBar1.add(btnUbahPasien);
+
+        btnCetakKartuTagihan.setText("CETAK KARTU TAGIHAN");
+        btnCetakKartuTagihan.setFocusable(false);
+        btnCetakKartuTagihan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakKartuTagihan.setMaximumSize(new java.awt.Dimension(123, 20));
+        btnCetakKartuTagihan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakKartuTagihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakKartuTagihanActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakKartuTagihan);
 
         getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 1280, 30));
 
@@ -403,6 +436,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
 
     private void btnPendudukCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukCleanActionPerformed
         resetForm();
+        pasien = null;
     }//GEN-LAST:event_btnPendudukCleanActionPerformed
 
     private void btnPendudukSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukSimpanActionPerformed
@@ -447,7 +481,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
             if (tujuan == null)
                 throw new ServiceException("Silahkan masukan unit tujuan");
             
-            Pasien pasien = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), new Date(lTime), kode, Pendaftaran.LOKET, Kelas.valueOf(kelas), tujuan);
+            pasien = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), new Date(lTime), kode, Pendaftaran.LOKET, Kelas.valueOf(kelas), tujuan);
             JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
             
             txtPasienNomor.setText(pasien.getKode());
@@ -497,8 +531,47 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         new DetailPasien().setVisible(true);
     }//GEN-LAST:event_btnUbahPasienActionPerformed
 
+    private void btnCetakKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakKartuActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan mengisi data pasien terlebih dahulu");
+            return;
+        }
+        
+        PdfProcessor pdfProcessor = new PdfProcessor();
+        KartuPasienPdfView pdfView = new KartuPasienPdfView();
+        
+        try {
+            Map<String, Object> model = new HashMap<>();
+            model.put("pasien", pasien);
+
+            pdfProcessor.process(pdfView, model, String.format("pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCetakKartuActionPerformed
+
+    private void btnCetakKartuTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakKartuTagihanActionPerformed
+        String kodePasien = JOptionPane.showInputDialog(this, "Masukan Nomor Pasien");
+        
+        try {
+            Pasien lPasien = pasienService.get(kodePasien);
+            
+            PdfProcessor pdfProcessor = new PdfProcessor();
+            KartuPasienPdfView pdfView = new KartuPasienPdfView();
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("pasien", lPasien);
+
+            pdfProcessor.process(pdfView, model, String.format("pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        } catch (ServiceException | DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCetakKartuTagihanActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
+    private javax.swing.JButton btnCetakKartu;
+    private javax.swing.JButton btnCetakKartuTagihan;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendudukClean;
