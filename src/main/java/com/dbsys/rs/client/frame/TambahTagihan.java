@@ -313,7 +313,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 90, 670, 25);
+        txtKeyword.setBounds(110, 90, 770, 25);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -437,7 +437,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 860, 390);
+        pnlPelayanan.setBounds(20, 290, 860, 300);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -446,7 +446,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(800, 90, 80, 25);
+        btnSimpan.setBounds(790, 600, 80, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
