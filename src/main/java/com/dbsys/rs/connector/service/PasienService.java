@@ -251,4 +251,28 @@ public class PasienService extends AbstractService {
             throw new ServiceException(message.getMessage());
         return message.getList();
     }
+
+    public void masuk(String kode, Long idUnit) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{service}/pasien/{kode}/unit/{unit}", HttpMethod.PUT, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, kode, idUnit);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+    }
+
+    public void keluar(String kode) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{service}/pasien/{kode}/unit", HttpMethod.PUT, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, kode);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+    }
 }

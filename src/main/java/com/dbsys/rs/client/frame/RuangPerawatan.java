@@ -9,13 +9,10 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
 import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.PelayananTemporal;
 import com.dbsys.rs.lib.entity.Tindakan;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -31,7 +28,6 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
     private final TokenService tokenService = TokenService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
     private final PelayananService pelayananService = PelayananService.getInstance();
-    private final TindakanService tindakanService = TindakanService.getInstance();
 
     private Pasien pasien;
     
@@ -606,24 +602,8 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         try {
             if (kode.equals(""))
                 throw new ComponentSelectionException("Silahkan masukan nomor pasien");
-            
-            Pasien p = pasienService.get(kode);
-            if (Kelas.NONE.equals(p.getKelas()))
-                throw new ServiceException("Silahkan menentukan kelas pasien pada form ubah data pasien");
-            
-            Tindakan tindakan = tindakanService.get("Rawat Inap", p.getKelas());
 
-            PelayananTemporal pelayanan = new PelayananTemporal();
-            pelayanan.setPasien(p);
-            pelayanan.setUnit(TokenHolder.getToken().getOperator().getUnit());
-            pelayanan.setTanggalMulai(DateUtil.getDate());
-            pelayanan.setJamMasuk(DateUtil.getTime());
-            pelayanan.setTindakan(tindakan);
-            pelayanan.setBiayaTambahan(new Long(0));
-            pelayanan.setJumlah(0);
-            pelayanan.setKeterangan("");
-            
-            pelayananService.masukSal(pelayanan);
+            pasienService.masuk(kode, TokenHolder.getIdUnit());
 
             JOptionPane.showMessageDialog(this, "Berhasil!");
             reloadTablePasien();
@@ -762,8 +742,9 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         }
         
         try {
-            PasienKeluar frame = new PasienKeluar(pasien, this);
-            frame.setVisible(true);
+            pasienService.keluar(pasien.getKode());
+            JOptionPane.showMessageDialog(this, "Berhasil");
+            reloadTablePasien();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

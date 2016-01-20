@@ -179,15 +179,17 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
     private Pemakaian getPemakaian() throws ServiceException {
         String jumlah = txtPemakaianJumlah.getText();
         if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
-            throw new ServiceException("Jumlah tidak boleh kosong");
-        
-        if (pemakaian == null)
-            pemakaian = new Pemakaian();
+            throw new ServiceException("Silahkan mengisi jumlah obat/bhp");
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
             biayaTambahan = "0";
+
+        Calendar tanggal = txtPemakaianTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
         
+        if (pemakaian == null)
+            pemakaian = new Pemakaian();
         pemakaian.setBarang(barang);
         pemakaian.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pemakaian.setJumlah(Integer.valueOf(jumlah));
@@ -195,9 +197,6 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pemakaian.setPasien(pasien);
         pemakaian.setUnit(TokenHolder.getToken().getOperator().getUnit());
         pemakaian.setNomorResep(nomorResep);
-
-        Calendar tanggal = txtPemakaianTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
         pemakaian.setTanggal(new Date(lTime));
         
         return pemakaian;
@@ -215,16 +214,20 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         return tableModel.getTindakan(index);
     }
     
-    private Pelayanan getPelayanan() {
-        if (pelayanan == null)
-            pelayanan = new Pelayanan();
+    private Pelayanan getPelayanan() throws ServiceException {
+        String jumlah = txtPelayananJumlah.getText();
+        if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
+            throw new ServiceException("Silahkan megisi jumlah tindakan");
         
         String biayaTambahan = txtPelayananBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
             biayaTambahan = "0";
+
+        Calendar tanggal = txtPelayananTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
         
-        String jumlah = txtPelayananJumlah.getText();
-        
+        if (pelayanan == null)
+            pelayanan = new Pelayanan();
         pelayanan.setTindakan(tindakan);
         pelayanan.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pelayanan.setJumlah(Integer.valueOf(jumlah));
@@ -232,9 +235,6 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pelayanan.setPasien(pasien);
         pelayanan.setUnit(this.unit);
         pelayanan.setPelaksana(pelaksana);
-
-        Calendar tanggal = txtPelayananTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
         pelayanan.setTanggal(new Date(lTime));
         
         return pelayanan;
@@ -468,6 +468,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         try {
+            if (pasien == null)
+                throw new ServiceException("Tidak bisa menambah tagihan. Silahkan memilih pasien terlebih dahulu.");
+            
             if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class) || clsDomain.equals(Barang.class)) {
                 pemakaian = getPemakaian();
                 pemakaianService.simpan(pemakaian);

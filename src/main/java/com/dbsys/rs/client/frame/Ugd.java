@@ -19,7 +19,6 @@ import com.dbsys.rs.lib.Kelas;
 import com.dbsys.rs.lib.Penanggung;
 import com.dbsys.rs.lib.entity.Pasien;
 import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.PelayananTemporal;
 import com.dbsys.rs.lib.entity.Penduduk;
 import com.dbsys.rs.lib.entity.Tindakan;
 import com.dbsys.rs.lib.entity.Unit;
@@ -67,7 +66,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
-        pnlKelas1.setVisible(false);
         
         pnlHome.setVisible(false);
         pnlHomeDetail.setVisible(false);
@@ -116,7 +114,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         try {
             list = loadPasienPerawatan();
         } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            // JOptionPane.showMessageDialog(this, ex.getMessage());
             tblPasien.setModel(new PasienTableModel(list));
         } finally {
             loadDetailRuangan(list);
@@ -284,10 +282,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         btnPendaftaran = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
         btnRuangan = new javax.swing.JButton();
-        pnlKelas1 = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        cbPasienKelas2 = new javax.swing.JComboBox();
-        btnSimpanKelas1 = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -848,25 +842,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         });
         getContentPane().add(btnRuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 150, 50));
 
-        pnlKelas1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pnlKelas1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel40.setText("KELAS");
-        pnlKelas1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
-
-        cbPasienKelas2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
-        pnlKelas1.add(cbPasienKelas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 140, 25));
-
-        btnSimpanKelas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
-        btnSimpanKelas1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanKelas1ActionPerformed(evt);
-            }
-        });
-        pnlKelas1.add(btnSimpanKelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 80, 30));
-
-        getContentPane().add(pnlKelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 680, 400, 60));
-
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_ugd.png"))); // NOI18N
         getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
@@ -1009,7 +984,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(true);
         pnlPasienDetail.setVisible(true);
-        pnlKelas1.setVisible(true);
         
         pnlHome.setVisible(false);
         pnlHomeDetail.setVisible(false);
@@ -1023,7 +997,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
-        pnlKelas1.setVisible(false);
         
         pnlHome.setVisible(true);
         pnlHomeDetail.setVisible(true);
@@ -1115,28 +1088,12 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
     private void btnPasienMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienMasukActionPerformed
         String kode = txtPasienMasuk.getText();
-
+        
         try {
             if (kode.equals(""))
                 throw new ComponentSelectionException("Silahkan masukan nomor pasien");
 
-            Pasien p = pasienService.get(kode);
-            Kelas kelas = Kelas.II;
-            if (Penanggung.BPJS.equals(p.getPenanggung()))
-                kelas = Kelas.III;
-            Tindakan tindakan = tindakanService.get("Rawat Inap", kelas);
-
-            PelayananTemporal pelayanan = new PelayananTemporal();
-            pelayanan.setPasien(p);
-            pelayanan.setUnit(TokenHolder.getToken().getOperator().getUnit());
-            pelayanan.setTanggalMulai(DateUtil.getDate());
-            pelayanan.setJamMasuk(DateUtil.getTime());
-            pelayanan.setTindakan(tindakan);
-            pelayanan.setBiayaTambahan(new Long(0));
-            pelayanan.setJumlah(0);
-            pelayanan.setKeterangan("");
-
-            pelayananService.masukSal(pelayanan);
+            pasienService.masuk(kode, TokenHolder.getIdUnit());
 
             JOptionPane.showMessageDialog(this, "Berhasil!");
             reloadTablePasien();
@@ -1155,10 +1112,11 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
             JOptionPane.showMessageDialog(this, "Silahkan memilih pasien dari tabel");
             return;
         }
-
+        
         try {
-            PasienKeluar frame = new PasienKeluar(pasien, this);
-            frame.setVisible(true);
+            pasienService.keluar(pasien.getKode());
+            JOptionPane.showMessageDialog(this, "Berhasil");
+            reloadTablePasien();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -1173,24 +1131,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         if (evt.getKeyCode() == 10)
             btnPasien.requestFocus();
     }//GEN-LAST:event_txtPasienKodeKeyPressed
-
-    private void btnSimpanKelas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanKelas1ActionPerformed
-        if (pasien == null) {
-            JOptionPane.showMessageDialog(this, "Silahkan memilih pasien dari tabel");
-            return;
-        }
-
-        String kelas = (String) cbPasienKelas2.getSelectedItem();
-        if (kelas.equals("- Pilih -"))
-            return;
-
-        try {
-            pasienService.ubahKelas(pasien, Kelas.valueOf(kelas));
-            JOptionPane.showMessageDialog(this, "Berhasil");
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnSimpanKelas1ActionPerformed
 
     private void btnUbahPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPasienActionPerformed
         new DetailPasien().setVisible(true);
@@ -1207,13 +1147,11 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JButton btnPendudukClean;
     private javax.swing.JButton btnPendudukSimpan;
     private javax.swing.JButton btnRuangan;
-    private javax.swing.JButton btnSimpanKelas1;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanSimpan;
     private javax.swing.JButton btnTindakanUpdate;
     private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKelas;
-    private javax.swing.JComboBox cbPasienKelas2;
     private javax.swing.JComboBox cbPasienTanggungan;
     private javax.swing.JComboBox cbPendudukKelamin;
     private javax.swing.JLabel jLabel1;
@@ -1247,7 +1185,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1262,7 +1199,6 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JLabel lblUnit;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlHomeDetail;
-    private javax.swing.JPanel pnlKelas1;
     private javax.swing.JPanel pnlMasuk;
     private javax.swing.JPanel pnlPasienDetail;
     private javax.swing.JPanel pnlPendaftaranCari;
