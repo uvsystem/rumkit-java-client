@@ -149,6 +149,7 @@ public class Pencarian extends JFrame {
         });
         getContentPane().add(btnPilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 80, 25));
 
+        pnlKategori.setBackground(Utama.colorTransparentPanel);
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "TAMBAH KATEGORI"));
         pnlKategori.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -176,6 +177,7 @@ public class Pencarian extends JFrame {
 
         getContentPane().add(pnlKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 460, 109));
 
+        chkTambah.setBackground(Utama.colorTransparentPanel);
         chkTambah.setText("Tambah");
         chkTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -652,12 +652,14 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        paneBarang.setBackground(Utama.colorTransparentPanel);
         paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paneBarangMouseClicked(evt);
             }
         });
 
+        pnlStokEksternal.setBackground(Utama.colorTransparentPanel);
         pnlStokEksternal.setLayout(null);
 
         jLabel6.setText("NAMA");
@@ -677,6 +679,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokEksternal.add(txtEksternalKeyword);
         txtEksternalKeyword.setBounds(120, 10, 820, 25);
 
+        pnlEksternalDetail.setBackground(Utama.colorTransparentPanel);
         pnlEksternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlEksternalDetail.setLayout(null);
 
@@ -733,6 +736,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokEksternal.add(pnlEksternalDetail);
         pnlEksternalDetail.setBounds(20, 310, 590, 220);
 
+        pnlEksternalStok.setBackground(Utama.colorTransparentPanel);
         pnlEksternalStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlEksternalStok.setLayout(null);
 
@@ -807,6 +811,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("STOK KELUAR / MASUK", pnlStokEksternal);
 
+        pnlStokInternal.setBackground(Utama.colorTransparentPanel);
         pnlStokInternal.setLayout(null);
 
         jLabel22.setText("NAMA");
@@ -826,6 +831,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokInternal.add(txtInternalKeyword);
         txtInternalKeyword.setBounds(120, 10, 910, 25);
 
+        pnlInternalDetail.setBackground(Utama.colorTransparentPanel);
         pnlInternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalDetail.setLayout(null);
 
@@ -882,6 +888,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokInternal.add(pnlInternalDetail);
         pnlInternalDetail.setBounds(20, 330, 590, 200);
 
+        pnlInternalStok.setBackground(Utama.colorTransparentPanel);
         pnlInternalStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalStok.setLayout(null);
 
@@ -959,8 +966,10 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("STOK KE UNIT", pnlStokInternal);
 
+        pnlStokKembali.setBackground(Utama.colorTransparentPanel);
         pnlStokKembali.setLayout(null);
 
+        pnlInternalDetail1.setBackground(Utama.colorTransparentPanel);
         pnlInternalDetail1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalDetail1.setLayout(null);
 
@@ -1017,6 +1026,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokKembali.add(pnlInternalDetail1);
         pnlInternalDetail1.setBounds(20, 330, 590, 200);
 
+        pnlInternalStok1.setBackground(Utama.colorTransparentPanel);
         pnlInternalStok1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalStok1.setLayout(null);
 
@@ -1141,6 +1151,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("STOK KEMBALI DARI PASIEN", pnlStokKembali);
 
+        pnlObat.setBackground(Utama.colorTransparentPanel);
         pnlObat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblObat.setModel(new javax.swing.table.DefaultTableModel(
@@ -1163,6 +1174,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlObat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 300));
 
+        jPanel1.setBackground(Utama.colorTransparentPanel);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA OBAT", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(txtObatKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 460, 25));
@@ -1204,6 +1216,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 1200, 143));
 
+        jPanel2.setBackground(Utama.colorTransparentPanel);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1242,6 +1255,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("DATA OBAT", pnlObat);
 
+        pnlBhp.setBackground(Utama.colorTransparentPanel);
         pnlBhp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblBhp.setModel(new javax.swing.table.DefaultTableModel(
@@ -1264,6 +1278,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlBhp.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 310));
 
+        jPanel13.setBackground(Utama.colorTransparentPanel);
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA BAHAN HABIS PAKAI", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1299,6 +1314,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlBhp.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1200, 120));
 
+        jPanel17.setBackground(Utama.colorTransparentPanel);
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

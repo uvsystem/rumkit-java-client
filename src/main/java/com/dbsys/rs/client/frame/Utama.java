@@ -4,6 +4,7 @@ import com.dbsys.rs.client.tableModel.PasienCariTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.lib.entity.Pasien;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -13,6 +14,8 @@ import javax.swing.JOptionPane;
  * @author Deddy Christoper Kakunsi
  */
 public class Utama extends javax.swing.JFrame {
+    
+    public static Color colorTransparentPanel = new Color(255, 255, 255, 75);
 
     private final PasienService pasienService = PasienService.getInstance();
     
@@ -47,6 +50,7 @@ public class Utama extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlUtama.setBackground(colorTransparentPanel);
         pnlUtama.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
         pnlUtama.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

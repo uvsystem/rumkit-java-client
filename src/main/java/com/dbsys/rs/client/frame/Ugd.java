@@ -291,8 +291,11 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlHome.setBackground(Utama.colorTransparentPanel);
         pnlHome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHome.setLayout(null);
+
+        scrollPasien.setBackground(Utama.colorTransparentPanel);
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -315,6 +318,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         pnlHome.add(scrollPasien);
         scrollPasien.setBounds(20, 90, 770, 450);
 
+        pnlMasuk.setBackground(Utama.colorTransparentPanel);
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN MASUK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlMasuk.setLayout(null);
 
@@ -347,8 +351,11 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
+        pnlTindakan.setBackground(Utama.colorTransparentPanel);
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN YANG SUDAH DIBERIKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlTindakan.setLayout(null);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -400,6 +407,8 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
+        scrollPenduduk.setBackground(Utama.colorTransparentPanel);
+
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -420,6 +429,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(scrollPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 810, 560));
 
+        pnlPendaftaranCari.setBackground(Utama.colorTransparentPanel);
         pnlPendaftaranCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPendaftaranCari.setLayout(null);
         pnlPendaftaranCari.setBackground(new Color(0, 0, 0, 20));
@@ -443,6 +453,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlPendaftaranCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 400, 60));
 
+        pnlPendaftaranDetailPenduduk.setBackground(Utama.colorTransparentPanel);
         pnlPendaftaranDetailPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPendaftaranDetailPenduduk.setBackground(new Color(0,0,0,20));
         pnlPendaftaranDetailPenduduk.setLayout(null);
@@ -530,6 +541,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlPendaftaranDetailPenduduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 310));
 
+        pnlPendaftaranDetail.setBackground(Utama.colorTransparentPanel);
         pnlPendaftaranDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPendaftaranDetail.setLayout(null);
         pnlPendaftaranDetail.setBackground(new Color(0,0,0,20));
@@ -588,6 +600,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlPendaftaranDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 400, 240));
 
+        pnlPasienDetail.setBackground(Utama.colorTransparentPanel);
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
@@ -712,6 +725,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
 
         getContentPane().add(pnlPasienDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, 400, 430));
 
+        pnlHomeDetail.setBackground(Utama.colorTransparentPanel);
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA RUUANGAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlHomeDetail.setLayout(null);

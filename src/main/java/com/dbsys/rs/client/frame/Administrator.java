@@ -74,6 +74,8 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     
+    private final Color colorTransparentPanel = new Color(255, 255, 255, 50);
+    
     /**
      * Creates new form admin
      */
@@ -1773,8 +1775,9 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlPenduduk.setBackground(colorTransparentPanel);
         pnlPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PENDUDUK / REKAM MEDIK", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlPenduduk.setBackground(new Color(0,0,0,20));
+        pnlPenduduk.setBackground(colorTransparentPanel);
         pnlPenduduk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1837,6 +1840,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
         pnlPenduduk.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 310));
 
+        jPanel4.setBackground(colorTransparentPanel);
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2141,7 +2145,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         getContentPane().add(pnlPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
         pnlPegawai.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEGAWAI", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlPegawai.setBackground(new Color(0,0,0,20));
+        pnlPegawai.setBackground(colorTransparentPanel);
         pnlPegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tab_pane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2657,7 +2661,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         getContentPane().add(pnlPelayanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlTindakan.setBackground(new Color(0,0,0,20));
+        pnlTindakan.setBackground(colorTransparentPanel);
         pnlTindakan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
@@ -2794,7 +2798,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         getContentPane().add(pnlTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
         pnlBarang.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA OBAT & BHP", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlBarang.setBackground(new Color(0,0,0,20));
+        pnlBarang.setBackground(colorTransparentPanel);
         pnlBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabBarang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3039,7 +3043,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         getContentPane().add(pnlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
         pnlOperator.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA OPERATOR", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlOperator.setBackground(new Color(0,0,0,20));
+        pnlOperator.setBackground(colorTransparentPanel);
         pnlOperator.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbl_op.setModel(new javax.swing.table.DefaultTableModel(
@@ -3136,7 +3140,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         getContentPane().add(pnlOperator, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1090, 580));
 
         pnlUnit.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA UNIT", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
-        pnlUnit.setBackground(new Color(0,0,0,20));
+        pnlUnit.setBackground(colorTransparentPanel);
         pnlUnit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbl_unit.setModel(new javax.swing.table.DefaultTableModel(

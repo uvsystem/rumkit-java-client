@@ -195,6 +195,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlCari.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -216,6 +217,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         getContentPane().add(pnlCari);
         pnlCari.setBounds(860, 180, 400, 60);
 
+        pnlPasien.setBackground(Utama.colorTransparentPanel);
         pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
 
@@ -302,6 +304,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         getContentPane().add(pnlPasien);
         pnlPasien.setBounds(860, 250, 400, 340);
 
+        pnlResep.setBackground(Utama.colorTransparentPanel);
         pnlResep.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR OBAT PASIEN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlResep.setLayout(null);
 

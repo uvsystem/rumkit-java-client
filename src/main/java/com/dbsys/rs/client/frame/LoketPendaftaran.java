@@ -146,6 +146,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setBackground(new Color(0,0,0,20));
         pnlDetail.setLayout(null);
@@ -235,6 +236,8 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
 
         getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 400, 310));
 
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
+
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -259,6 +262,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         jLabel2.setText("DAFTAR PASIEN / REKAM MEDIK");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 190, -1));
 
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlCari.setLayout(null);
         pnlCari.setBackground(new Color(0, 0, 0, 20));
@@ -282,6 +286,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
 
         getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, 400, 60));
 
+        pnlPendaftaran.setBackground(Utama.colorTransparentPanel);
         pnlPendaftaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPendaftaran.setLayout(null);
         pnlPendaftaran.setBackground(new Color(0,0,0,20));

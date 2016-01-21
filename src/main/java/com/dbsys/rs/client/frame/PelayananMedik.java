@@ -150,8 +150,11 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlTindakan.setBackground(Utama.colorTransparentPanel);
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PELAYANAN TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlTindakan.setLayout(null);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,6 +202,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         getContentPane().add(pnlTindakan);
         pnlTindakan.setBounds(20, 180, 810, 580);
 
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlCari.setLayout(null);
 
@@ -222,6 +226,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         getContentPane().add(pnlCari);
         pnlCari.setBounds(850, 180, 400, 45);
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setBackground(new Color(0,0,0,20));
         pnlDetail.setLayout(null);

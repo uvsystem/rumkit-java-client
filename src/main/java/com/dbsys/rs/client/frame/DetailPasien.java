@@ -85,12 +85,14 @@ public final class DetailPasien extends javax.swing.JFrame {
         jLabel103 = new javax.swing.JLabel();
         cbPasienTanggungan = new javax.swing.JComboBox();
         btnSimpanTanggungan = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DATA PASIEN");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel19.setBackground(Utama.colorTransparentPanel);
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DETAIL PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -157,6 +159,7 @@ public final class DetailPasien extends javax.swing.JFrame {
 
         getContentPane().add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 660, 340));
 
+        jPanel1.setBackground(Utama.colorTransparentPanel);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "CARI DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -185,6 +188,7 @@ public final class DetailPasien extends javax.swing.JFrame {
         });
         getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, 100, 25));
 
+        jPanel2.setBackground(Utama.colorTransparentPanel);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH KELAS PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -204,6 +208,7 @@ public final class DetailPasien extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 660, 60));
 
+        jPanel3.setBackground(Utama.colorTransparentPanel);
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "UBAH TANGGUNGAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -222,6 +227,9 @@ public final class DetailPasien extends javax.swing.JFrame {
         jPanel3.add(btnSimpanTanggungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 100, 25));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 660, 60));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_tagihan.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -295,6 +303,7 @@ public final class DetailPasien extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpanTanggungan;
     private javax.swing.JComboBox cbPasienKelas;
     private javax.swing.JComboBox cbPasienTanggungan;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel102;
     private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;

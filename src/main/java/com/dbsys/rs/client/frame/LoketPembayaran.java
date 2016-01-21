@@ -249,6 +249,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlPencarian.setBackground(Utama.colorTransparentPanel);
         pnlPencarian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "CARI PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPencarian.setLayout(null);
 
@@ -272,13 +273,17 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(pnlPencarian);
         pnlPencarian.setBounds(860, 110, 400, 60);
 
+        tabData.setBackground(Utama.colorTransparentPanel);
         tabData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabDataMouseClicked(evt);
             }
         });
 
+        pnlMenunggak.setBackground(Utama.colorTransparentPanel);
         pnlMenunggak.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setBackground(Utama.colorTransparentPanel);
 
         tblMenunggak.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,6 +305,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, 800, 450));
 
+        jPanel1.setBackground(Utama.colorTransparentPanel);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -329,7 +335,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         tabData.addTab("TAGIHAN MENUNGGAK", pnlMenunggak);
 
+        pnlBayar.setBackground(Utama.colorTransparentPanel);
         pnlBayar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setBackground(Utama.colorTransparentPanel);
 
         tblBayar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -351,6 +360,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         pnlBayar.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 450));
 
+        jPanel2.setBackground(Utama.colorTransparentPanel);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBATALAN MEMBAYAR TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -379,6 +389,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         pnlBayar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
         tabData.addTab("BAYAR SEKARANG", pnlBayar);
+
+        pnlSemua.setBackground(Utama.colorTransparentPanel);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblSemua.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -416,6 +430,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         );
 
         tabData.addTab("SEMUA TAGIHAN", pnlSemua);
+
+        pnlStok.setBackground(Utama.colorTransparentPanel);
+
+        scrollObat.setBackground(Utama.colorTransparentPanel);
 
         tblStokKembali.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -457,6 +475,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(tabData);
         tabData.setBounds(10, 180, 840, 580);
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setLayout(null);
 
@@ -623,6 +642,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
+        pnlKeluar.setBackground(Utama.colorTransparentPanel);
         pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN KELUAR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlKeluar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -643,6 +663,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(pnlKeluar);
         pnlKeluar.setBounds(860, 630, 400, 90);
 
+        pnlPembayaran.setBackground(Utama.colorTransparentPanel);
         pnlPembayaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPembayaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

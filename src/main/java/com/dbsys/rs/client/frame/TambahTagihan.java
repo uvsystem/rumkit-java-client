@@ -290,6 +290,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel19 = new javax.swing.JLabel();
         txtPelayananTanggal = new datechooser.beans.DateChooserCombo();
         btnSimpan = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TAMBAH TAGIHAN");
@@ -315,6 +316,8 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         getContentPane().add(txtKeyword);
         txtKeyword.setBounds(110, 90, 770, 25);
 
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
+
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -336,6 +339,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 130, 860, 154);
 
+        pnlPemakaian.setBackground(Utama.colorTransparentPanel);
         pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -368,8 +372,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 270, 25));
 
         getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 290, 860, 240);
+        pnlPemakaian.setBounds(20, 290, 450, 240);
 
+        pnlPelayanan.setBackground(Utama.colorTransparentPanel);
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PELAYANAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPelayanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -400,7 +405,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel17.setText("Kelas Tindakan");
         pnlPelayanan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 25));
         pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 860, 10));
-        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 10));
+        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 450, 10));
 
         txtPelayananTindakanNama.setEditable(false);
         pnlPelayanan.add(txtPelayananTindakanNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 270, 25));
@@ -437,7 +442,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 860, 300);
+        pnlPelayanan.setBounds(20, 290, 450, 300);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -446,7 +451,12 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(790, 600, 80, 25);
+        btnSimpan.setBounds(480, 300, 80, 25);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_tagihan.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(0, 0, 900, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -558,6 +568,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;

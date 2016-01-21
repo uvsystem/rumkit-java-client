@@ -216,6 +216,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlMain.setBackground(Utama.colorTransparentPanel);
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlMain.setLayout(null);
 
@@ -241,8 +242,11 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         getContentPane().add(pnlMain);
         pnlMain.setBounds(860, 180, 400, 70);
 
+        pnlHome.setBackground(Utama.colorTransparentPanel);
         pnlHome.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PASIEN YANG DIRAWAT", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlHome.setLayout(null);
+
+        scrollPasien.setBackground(Utama.colorTransparentPanel);
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -265,6 +269,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         pnlHome.add(scrollPasien);
         scrollPasien.setBounds(20, 100, 770, 460);
 
+        pnlMasuk.setBackground(Utama.colorTransparentPanel);
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN MASUK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlMasuk.setLayout(null);
 
@@ -298,8 +303,11 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         getContentPane().add(pnlHome);
         pnlHome.setBounds(20, 180, 810, 580);
 
+        pnlTindakan.setBackground(Utama.colorTransparentPanel);
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PELAYANAN TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlTindakan.setLayout(null);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -347,6 +355,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         getContentPane().add(pnlTindakan);
         pnlTindakan.setBounds(20, 180, 810, 580);
 
+        pnlPasienDetail.setBackground(Utama.colorTransparentPanel);
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
@@ -472,6 +481,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         getContentPane().add(pnlPasienDetail);
         pnlPasienDetail.setBounds(860, 260, 400, 410);
 
+        pnlHomeDetail.setBackground(Utama.colorTransparentPanel);
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Ruangan"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlHomeDetail.setLayout(null);
