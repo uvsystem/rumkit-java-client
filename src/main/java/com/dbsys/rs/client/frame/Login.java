@@ -124,7 +124,11 @@ public class Login extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
                 new GudangFarmasi().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
-                new RuangPerawatan().setVisible(true);
+                if (token.getNamaUnit().equals("NICU")) {
+                    new Ugd("/com/dbsys/rs/client/images/bg_icu.png").setVisible(true);
+                } else {
+                    new RuangPerawatan().setVisible(true);
+                }
             } else if (token.getTipe().equals(Unit.TipeUnit.ICU)) {
                 new RuangPerawatan().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {

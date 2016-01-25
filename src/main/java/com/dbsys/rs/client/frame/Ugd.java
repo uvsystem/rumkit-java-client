@@ -58,6 +58,15 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         showPendaftaran();
     }
     
+    /**
+     * Creates new form Pendaftaran
+     * @param image
+     */
+    public Ugd(String image) {
+        this();
+        Image.setIcon(new javax.swing.ImageIcon(getClass().getResource(image)));
+    }
+    
     private void showPendaftaran() {
         pnlPendaftaranCari.setVisible(true);
         pnlPendaftaranDetail.setVisible(true);
