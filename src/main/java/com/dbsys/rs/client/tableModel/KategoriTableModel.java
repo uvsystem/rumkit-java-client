@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.KategoriTindakan;
+import com.dbsys.rs.client.entity.KategoriTindakan;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,7 +10,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class KategoriTableModel extends DefaultTableModel {
-    private List<KategoriTindakan> list;
+    
+    private final List<KategoriTindakan> list;
     
     public KategoriTableModel(List<KategoriTindakan> list){
         super();

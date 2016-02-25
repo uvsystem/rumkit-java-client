@@ -1,7 +1,8 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapPegawaiAdapter;
-import com.dbsys.rs.lib.DateUtil;
+
+import com.dbsys.rs.client.DateUtil;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;

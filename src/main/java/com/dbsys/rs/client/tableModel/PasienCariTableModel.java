@@ -1,7 +1,8 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

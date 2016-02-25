@@ -1,7 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Stok;
-import com.dbsys.rs.lib.entity.StokKembali;
+import com.dbsys.rs.client.entity.StokKembali;
+
 import java.util.List;
 
 /**
@@ -9,10 +9,12 @@ import java.util.List;
  * @author Deddy Christoper Kakunsi
  */
 public class StokKembaliTableModel extends  StokTableModel {
+
+    private List<StokKembali> list;
     
-    public StokKembaliTableModel(List<Stok> list) {
+    public StokKembaliTableModel(List<StokKembali> list) {
         super();
-        for (Stok stok : list)
+        for (StokKembali stok : list)
             this.list.add(stok);
     }
 

@@ -1,7 +1,8 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
+import com.dbsys.rs.client.entity.Barang;
+import com.dbsys.rs.client.entity.ObatFarmasi;
+
 import java.util.List;
 
 /**

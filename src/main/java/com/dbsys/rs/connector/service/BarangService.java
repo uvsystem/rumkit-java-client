@@ -9,17 +9,11 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.connector.adapter.BahanHabisPakaiAdapter;
-import com.dbsys.rs.connector.adapter.BarangAdapter;
-import com.dbsys.rs.connector.adapter.ObatAdapter;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
-import java.util.ArrayList;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Barang;
 
 public class BarangService extends AbstractService {
 
@@ -50,82 +44,72 @@ public class BarangService extends AbstractService {
     }
 
     public Barang simpan(Barang barang) throws ServiceException {
-        BarangAdapter barangAdapter;
-        
-        if (barang instanceof BahanHabisPakai) {
-            barangAdapter = new BahanHabisPakaiAdapter((BahanHabisPakai) barang);
-        } else if (barang instanceof ObatFarmasi) {
-            barangAdapter = new ObatAdapter((ObatFarmasi) barang);
-        } else {
-            barangAdapter = new BarangAdapter(barang);
-        }
-        HttpEntity<BarangAdapter> entity = new HttpEntity<>(barangAdapter, getHeaders());
+        HttpEntity<Barang> entity = new HttpEntity<>(barang, getHeaders());
 
-        ResponseEntity<EntityRestMessage<BarangAdapter>> response;
+        ResponseEntity<EntityRestMessage<Barang>> response;
         response = restTemplate.exchange("{service}/barang", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<BarangAdapter>>() {}, 
+                new ParameterizedTypeReference<EntityRestMessage<Barang>>() {}, 
                 service);
 
-        EntityRestMessage<BarangAdapter> message = response.getBody();
+        EntityRestMessage<Barang> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return message.getModel().getBarang();
+        return message.getModel();
     }
 
     public List<Barang> getAll() throws ServiceException {
-        HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<BarangAdapter>> response;
+        ResponseEntity<ListEntityRestMessage<Barang>> response;
         response = restTemplate.exchange("{service}/barang", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
-                service);
+            new ParameterizedTypeReference<ListEntityRestMessage<Barang>>() {}, service);
 
-        ListEntityRestMessage<BarangAdapter> message = response.getBody();
+        ListEntityRestMessage<Barang> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return getList(message.getList());
+        return message.getList();
     }
 
     public List<Barang> getAll(Class cls) throws ServiceException {
-        HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<BarangAdapter>> response;
+        ResponseEntity<ListEntityRestMessage<Barang>> response;
         response = restTemplate.exchange("{service}/barang/class/{class}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Barang>>() {}, 
                 service, cls.getSimpleName());
 
-        ListEntityRestMessage<BarangAdapter> message = response.getBody();
+        ListEntityRestMessage<Barang> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return getList(message.getList());
+        return message.getList();
     }
 
     public List<Barang> cari(String keyword) throws ServiceException {
-        HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<BarangAdapter>> resposen;
+        ResponseEntity<ListEntityRestMessage<Barang>> resposen;
         resposen = restTemplate.exchange("{service}/barang/keyword/{keyword}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Barang>>() {}, 
                 service, keyword);
 
-        ListEntityRestMessage<BarangAdapter> message = resposen.getBody();
+        ListEntityRestMessage<Barang> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return getList(message.getList());
+        return message.getList();
     }
 
     public List<Barang> cari(String keyword, Class cls) throws ServiceException {
-        HttpEntity<BarangAdapter> entity = new HttpEntity<>(getHeaders());
+        HttpEntity<Barang> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<ListEntityRestMessage<BarangAdapter>> resposen;
+        ResponseEntity<ListEntityRestMessage<Barang>> resposen;
         resposen = restTemplate.exchange("{service}/barang/keyword/{keyword}/class/{class}", HttpMethod.GET, entity, 
-                new ParameterizedTypeReference<ListEntityRestMessage<BarangAdapter>>() {}, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Barang>>() {}, 
                 service, keyword, cls.getSimpleName());
 
-        ListEntityRestMessage<BarangAdapter> message = resposen.getBody();
+        ListEntityRestMessage<Barang> message = resposen.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
-        return getList(message.getList());
+        return message.getList();
     }
 
     public void hapus(Barang barang) throws ServiceException {
@@ -139,11 +123,5 @@ public class BarangService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
     }
-    
-    private List<Barang> getList(List<BarangAdapter> listAdapter) {
-        List<Barang> list = new ArrayList<>();
-        for (BarangAdapter barangAdapter : listAdapter)
-            list.add(barangAdapter.getBarang());
-        return list;
-    }
+
 }

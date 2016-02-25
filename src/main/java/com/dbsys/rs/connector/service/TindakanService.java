@@ -9,12 +9,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Tindakan;
 
 public class TindakanService extends AbstractService {
 

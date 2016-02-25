@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Barang;
+import com.dbsys.rs.client.entity.Barang;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -10,6 +11,7 @@ import javax.swing.table.AbstractTableModel;
  * @author Deddy Christoper Kakunsi
  */
 public class BarangTableModel extends AbstractTableModel {
+
     protected List<Barang> list;
 
     public BarangTableModel() {
@@ -59,4 +61,5 @@ public class BarangTableModel extends AbstractTableModel {
     public Barang getBarang(int row) {
         return list.get(row);
     }
+
 }

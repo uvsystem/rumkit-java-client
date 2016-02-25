@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.client.entity.Operator;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,7 +10,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class OperatorTableModel extends DefaultTableModel {
-    private List<Operator> listOperator;
+
+    private final List<Operator> listOperator;
     
     public OperatorTableModel(List<Operator> list){
         super();

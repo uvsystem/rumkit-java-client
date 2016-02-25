@@ -2,9 +2,10 @@ package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Pasien;
+
 import javax.swing.JOptionPane;
 
 /**

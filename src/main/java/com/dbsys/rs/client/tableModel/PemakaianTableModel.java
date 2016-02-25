@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Pemakaian;
+
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;

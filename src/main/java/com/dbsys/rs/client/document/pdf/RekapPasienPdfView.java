@@ -1,8 +1,9 @@
 package com.dbsys.rs.client.document.pdf;
 
 import static com.dbsys.rs.client.document.pdf.AbstractPdfView.addEmptyLine;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.Pasien;
+
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.entity.Pasien;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;

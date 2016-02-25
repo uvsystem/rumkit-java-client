@@ -1,13 +1,15 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
-import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.client.DateUtil;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPTable;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;

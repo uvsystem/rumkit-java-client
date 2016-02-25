@@ -11,18 +11,18 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pasien.KeadaanPasien;
-import com.dbsys.rs.lib.entity.Pasien.Pendaftaran;
-import com.dbsys.rs.lib.entity.Penduduk;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pasien.KeadaanPasien;
+import com.dbsys.rs.client.entity.Pasien.Pendaftaran;
+import com.dbsys.rs.client.entity.Penduduk;
+import com.dbsys.rs.client.entity.Unit;
 
 public class PasienService extends AbstractService {
 
@@ -30,12 +30,12 @@ public class PasienService extends AbstractService {
 
     private PasienService() {
         super();
-        service = String.format("%s/rumkit-patient-service", getHost());
+        service = String.format("%s/rumkit-patient-service-2", getHost());
     }
 
     private PasienService(String host) {
         super(host);
-        service = String.format("%s/rumkit-patient-service", getHost());
+        service = String.format("%s/rumkit-patient-service-2", getHost());
     }
 
     public static PasienService getInstance() {

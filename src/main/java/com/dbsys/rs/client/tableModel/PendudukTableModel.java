@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Penduduk;
+import com.dbsys.rs.client.entity.Penduduk;
+
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

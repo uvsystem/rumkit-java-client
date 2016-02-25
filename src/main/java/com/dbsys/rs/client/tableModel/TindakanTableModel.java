@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.client.entity.Tindakan;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

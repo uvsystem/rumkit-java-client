@@ -10,11 +10,12 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.KategoriService;
 import com.dbsys.rs.connector.service.PegawaiServices;
 import com.dbsys.rs.connector.service.UnitService;
-import com.dbsys.rs.lib.entity.Dokter;
-import com.dbsys.rs.lib.entity.KategoriTindakan;
-import com.dbsys.rs.lib.entity.Pegawai;
-import com.dbsys.rs.lib.entity.Perawat;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Dokter;
+import com.dbsys.rs.client.entity.KategoriTindakan;
+import com.dbsys.rs.client.entity.Pegawai;
+import com.dbsys.rs.client.entity.Perawat;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;

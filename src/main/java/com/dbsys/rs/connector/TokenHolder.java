@@ -1,8 +1,8 @@
 package com.dbsys.rs.connector;
 
-import com.dbsys.rs.lib.entity.Operator;
-import com.dbsys.rs.lib.entity.Token;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Operator;
+import com.dbsys.rs.client.entity.Token;
+import com.dbsys.rs.client.entity.Unit;
 
 /**
  *

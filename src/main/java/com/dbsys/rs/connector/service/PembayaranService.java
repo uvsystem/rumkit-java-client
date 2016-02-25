@@ -10,11 +10,11 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pembayaran;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pembayaran;
 
 public class PembayaranService extends AbstractService {
 
@@ -22,12 +22,12 @@ public class PembayaranService extends AbstractService {
 
     private PembayaranService() {
         super();
-        service = String.format("%s/rumkit-payment-service", getHost());
+        service = String.format("%s/rumkit-serve-service", getHost());
     }
 
     private PembayaranService(String host) {
         super(host);
-        service = String.format("%s/rumkit-payment-service", getHost());
+        service = String.format("%s/rumkit-serve-service", getHost());
     }
 
     public static PembayaranService getInstance() {

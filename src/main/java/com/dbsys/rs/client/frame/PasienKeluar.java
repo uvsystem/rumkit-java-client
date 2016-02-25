@@ -3,8 +3,9 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.PasienTableFrame;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.entity.Pasien;
+
 import javax.swing.JOptionPane;
 
 /**

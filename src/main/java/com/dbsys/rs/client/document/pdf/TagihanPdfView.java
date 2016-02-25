@@ -1,9 +1,9 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Pasien;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;

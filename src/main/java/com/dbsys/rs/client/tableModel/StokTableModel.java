@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Stok;
+import com.dbsys.rs.client.entity.Stok;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -10,7 +11,8 @@ import javax.swing.table.AbstractTableModel;
  * @author Deddy Christoper Kakunsi
  */
 public class StokTableModel extends  AbstractTableModel {
-    protected List<Stok> list;
+
+    private List<Stok> list;
 
     public StokTableModel() {
         super();

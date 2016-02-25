@@ -10,10 +10,11 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Tindakan;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;

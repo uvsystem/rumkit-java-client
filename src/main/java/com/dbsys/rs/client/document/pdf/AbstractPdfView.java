@@ -1,7 +1,7 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.client.document.DocumentView;
-import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.client.DateUtil;
 import java.sql.Date;
 
 import com.lowagie.text.Document;

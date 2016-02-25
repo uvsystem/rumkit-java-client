@@ -3,7 +3,8 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.tableModel.PasienCariTableModel;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.PasienService;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.entity.Pasien;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
