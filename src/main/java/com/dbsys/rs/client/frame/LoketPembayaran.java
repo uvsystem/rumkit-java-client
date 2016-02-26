@@ -23,7 +23,7 @@ import com.dbsys.rs.client.entity.Pasien;
 import com.dbsys.rs.client.entity.Pelayanan;
 import com.dbsys.rs.client.entity.Pemakaian;
 import com.dbsys.rs.client.entity.Pembayaran;
-import com.dbsys.rs.client.entity.Stok;
+import com.dbsys.rs.client.entity.StokKembali;
 import com.dbsys.rs.client.entity.Tagihan;
 import com.dbsys.rs.client.entity.Unit;
 
@@ -55,7 +55,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private boolean isPrintPembayaranAvailable;
     private Long total;
 
-    private List<Stok> listStokKembali;
+    private List<StokKembali> listStokKembali;
     private List<Tagihan> listTagihan;
 
     /**

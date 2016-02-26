@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "tipePelayanan"
+    property = "tipe"
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Pelayanan.class, name = "PELAYANAN"),
@@ -31,11 +31,11 @@ public class Pelayanan extends Tagihan {
         this.tipePelayanan = name;
     }
 
-    public String getTipe() {
+    public String getTipePelayanan() {
         return tipePelayanan;
     }
 
-    public void setTipe(String tipePelayanan) {
+    public void setTipePelayanan(String tipePelayanan) {
         this.tipePelayanan = tipePelayanan;
     }
 

@@ -16,6 +16,7 @@ import com.dbsys.rs.client.ListEntityRestMessage;
 import com.dbsys.rs.client.RestMessage.Type;
 import com.dbsys.rs.client.entity.Barang;
 import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Stok;
 import com.dbsys.rs.client.entity.StokKembali;
 import com.dbsys.rs.client.entity.Unit;
 
@@ -47,48 +48,59 @@ public class StokService extends AbstractService {
         return instance;
     }
 
-    public StokKembali simpan(StokKembali StokKembali) throws ServiceException {
-        
-        HttpEntity<StokKembali> entity = new HttpEntity<>(StokKembali, getHeaders());
+    public Stok simpan(Stok stok) throws ServiceException {
+        HttpEntity<Stok> entity = new HttpEntity<>(stok, getHeaders());
 
-        ResponseEntity<EntityRestMessage<StokKembali>> response;
-        response = restTemplate.exchange("{service}/StokKembali", HttpMethod.POST, entity, 
-                new ParameterizedTypeReference<EntityRestMessage<StokKembali>>() {}, service);
+        ResponseEntity<EntityRestMessage<Stok>> response;
+        response = restTemplate.exchange("{service}/stok", HttpMethod.POST, entity, 
+                new ParameterizedTypeReference<EntityRestMessage<Stok>>() {}, service);
 
-        EntityRestMessage<StokKembali> message = response.getBody();
+        EntityRestMessage<Stok> message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getModel();
     }
     
     public void masuk(Barang barang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
-        StokEksternal StokKembali = new StokEksternal();
-        StokKembali.setBarang(barang);
-        StokKembali.setTanggal(tanggal);
-        StokKembali.setJam(jam);
-        StokKembali.setJumlah(jumlah);
-        StokKembali.setJenis(StokKembali.JenisStok.MASUK);
+        Stok stok = new Stok();
+        stok.setBarang(barang);
+        stok.setTanggal(tanggal);
+        stok.setJam(jam);
+        stok.setJumlah(jumlah);
+        stok.setJenis(Stok.JenisStok.MASUK);
         
-        simpan(StokKembali);
+        simpan(stok);
+    }
+    
+    public void keluar(Barang barang, Long jumlah, Date tanggal, Time jam) throws ServiceException {
+        Stok stok = new Stok();
+        stok.setBarang(barang);
+        stok.setTanggal(tanggal);
+        stok.setJam(jam);
+        stok.setJumlah(jumlah);
+        stok.setJenis(Stok.JenisStok.KELUAR);
+        
+        simpan(stok);
     }
     
     public void kembali(Barang barang, Long jumlah, Date tanggal, Time jam, Pasien pasien, String nomor) throws ServiceException {
-        StokKembali StokKembali = new StokKembali();
-        StokKembali.setBarang(barang);
-        StokKembali.setTanggal(tanggal);
-        StokKembali.setJam(jam);
-        StokKembali.setJumlah(jumlah);
-        StokKembali.setPasien(pasien);
-        StokKembali.setNomor(nomor);
+        StokKembali stokKembali = new StokKembali();
+        stokKembali.setBarang(barang);
+        stokKembali.setTanggal(tanggal);
+        stokKembali.setJam(jam);
+        stokKembali.setJumlah(jumlah);
+        stokKembali.setPasien(pasien);
+        stokKembali.setNomor(nomor);
+        stokKembali.setJenis(Stok.JenisStok.MASUK);
 
-        simpan(StokKembali);
+        simpan(stokKembali);
     }
 
     public List<StokKembali> stokMasuk(Date awal, Date akhir) throws ServiceException {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/masuk/{awal}/to/{akhir}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/masuk/{awal}/to/{akhir}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();
@@ -101,7 +113,7 @@ public class StokService extends AbstractService {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/pasien/{pasien}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/pasien/{pasien}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, pasien.getId());
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();
@@ -114,7 +126,7 @@ public class StokService extends AbstractService {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/nomor/{nomor}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/nomor/{nomor}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, nomor);
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();
@@ -127,7 +139,7 @@ public class StokService extends AbstractService {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/{awal}/to/{akhir}/pasien", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/pasien", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();
@@ -140,7 +152,7 @@ public class StokService extends AbstractService {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/{awal}/to/{akhir}/unit/{unit}", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/unit/{unit}", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, awal, akhir, unit.getId());
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();
@@ -153,7 +165,7 @@ public class StokService extends AbstractService {
         HttpEntity<StokKembali> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<StokKembali>> resposen;
-        resposen = restTemplate.exchange("{service}/StokKembali/{awal}/to/{akhir}/unit", HttpMethod.GET, entity,
+        resposen = restTemplate.exchange("{service}/stok/{awal}/to/{akhir}/unit", HttpMethod.GET, entity,
                 new ParameterizedTypeReference<ListEntityRestMessage<StokKembali>>() {}, service, awal, akhir);
 
         ListEntityRestMessage<StokKembali> message = resposen.getBody();

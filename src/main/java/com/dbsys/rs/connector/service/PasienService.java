@@ -30,12 +30,12 @@ public class PasienService extends AbstractService {
 
     private PasienService() {
         super();
-        service = String.format("%s/rumkit-patient-service-2", getHost());
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     private PasienService(String host) {
         super(host);
-        service = String.format("%s/rumkit-patient-service-2", getHost());
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     public static PasienService getInstance() {

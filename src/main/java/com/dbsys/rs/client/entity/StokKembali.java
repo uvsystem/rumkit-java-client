@@ -1,65 +1,16 @@
 package com.dbsys.rs.client.entity;
 
-import java.sql.Date;
-import java.sql.Time;
-
 import com.dbsys.rs.client.CodedEntity;
 import com.dbsys.rs.client.DateUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class StokKembali implements CodedEntity {
-
-    private Long id;
-    private Long jumlah;
-    private Date tanggal;
-    private Time jam;
-    private Barang barang;
+public class StokKembali extends Stok implements CodedEntity {
 
     private Pasien pasien;
     private String nomor;
 
     public StokKembali() {
         super();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getJumlah() {
-        return jumlah;
-    }
-
-    public void setJumlah(Long jumlah) {
-        this.jumlah = jumlah;
-    }
-
-    public Barang getBarang() {
-        return barang;
-    }
-
-    public void setBarang(Barang barang) {
-        this.barang = barang;
-    }
-
-    public Date getTanggal() {
-        return tanggal;
-    }
-
-    public void setTanggal(Date tanggal) {
-        this.tanggal = tanggal;
-    }
-
-    public Time getJam() {
-        return jam;
-    }
-
-    public void setJam(Time jam) {
-        this.jam = jam;
     }
 
     public Pasien getPasien() {
@@ -84,7 +35,8 @@ public class StokKembali implements CodedEntity {
 
     @Override
     public String generateKode() {
-        return createKode();
+        nomor = createKode();
+        return nomor;
     }
 
     public static String createKode() {

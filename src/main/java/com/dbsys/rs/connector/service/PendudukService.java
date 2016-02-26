@@ -21,12 +21,12 @@ public class PendudukService extends AbstractService {
 
     private PendudukService() {
         super();
-        service = String.format("%s/rumkit-patient-service-2", getHost());
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     private PendudukService(String host) {
         super(host);
-        service = String.format("%s/rumkit-patient-service-2", getHost());
+        service = String.format("%s/rumkit-patient-service", getHost());
     }
 
     public static PendudukService getInstance() {

@@ -133,7 +133,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         
         if (pelaksana != null) {
             txtPelayananPelaksana.setText(pelaksana.getNama());
-            cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipe());
+            // cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipePegawai());
         }
         
         if (unit != null)
@@ -302,7 +302,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel1.setLabelFor(txtKeyword);
         jLabel1.setText("KATA KUNCI");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 90, 80, 25);
+        jLabel1.setBounds(20, 110, 80, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -315,7 +315,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 90, 770, 25);
+        txtKeyword.setBounds(110, 110, 770, 25);
 
         jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
@@ -338,7 +338,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jScrollPane1.setViewportView(tblCari);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 130, 860, 154);
+        jScrollPane1.setBounds(20, 150, 860, 154);
 
         pnlPemakaian.setBackground(Utama.colorTransparentPanel);
         pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
@@ -373,7 +373,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 270, 25));
 
         getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 290, 450, 240);
+        pnlPemakaian.setBounds(20, 310, 450, 240);
 
         pnlPelayanan.setBackground(Utama.colorTransparentPanel);
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PELAYANAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
@@ -443,7 +443,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 450, 300);
+        pnlPelayanan.setBounds(20, 310, 450, 300);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -452,7 +452,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(480, 300, 80, 25);
+        btnSimpan.setBounds(480, 320, 80, 25);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_tagihan.png"))); // NOI18N
         jLabel9.setText("jLabel9");

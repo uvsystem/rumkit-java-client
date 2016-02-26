@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "tipePegawai"
+    property = "tipe"
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Dokter.class, name = "DOKTER"),
@@ -24,26 +24,13 @@ public class Pegawai {
     protected String nip;
     protected Penduduk penduduk;
 
-    // Untuk JSON buka JPA
-    private String tipePegawai;
-
     public Pegawai() {
         super();
-        this.tipePegawai = "PEGAWAI";
         this.penduduk = new Penduduk();
     }
 
     public Pegawai(String name) {
         this();
-        this.tipePegawai = name;
-    }
-
-    public String getTipe() {
-        return tipePegawai;
-    }
-
-    public void setTipe(String tipePegawai) {
-        this.tipePegawai = tipePegawai;
     }
 
     public Long getId() {

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "tipeBarang"
+    property = "tipe"
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = BahanHabisPakai.class, name = "BHP"),
@@ -41,11 +41,11 @@ public class Barang implements Tanggungan, CodedEntity {
         this.tipeBarang = name;
     }
 
-    public String getTipe() {
+    public String getTipeBarang() {
         return tipeBarang;
     }
 
-    public void setTipe(String tipeBarang) {
+    public void setTipeBarang(String tipeBarang) {
         this.tipeBarang = tipeBarang;
     }
 
@@ -57,10 +57,12 @@ public class Barang implements Tanggungan, CodedEntity {
         this.id = id;
     }
 
+    @Override
     public String getKode() {
         return kode;
     }
 
+    @Override
     public void setKode(String kode) {
         this.kode = kode;
     }
