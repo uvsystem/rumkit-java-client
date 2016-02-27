@@ -330,9 +330,7 @@ public class DateUtil {
 			return false;
 		if (getMonthInt(date1) != getMonthInt(date2))
 			return false;
-		if (getDay(date1) != getDay(date2))
-			return false;
-		return true;
+		return getDay(date1) == getDay(date2);
 	}
 
 	public static Date add(Date awal, int i) {
@@ -424,9 +422,7 @@ public class DateUtil {
 		// bulan-tanggal-tahun
 		String arrStr[] = dateString.split(DEFAULT_DELIMETER);
 		
-		if ( arrStr[0].length() < 4)
-			return false;
-		return true;
+		return arrStr[0].length() >= 4;
 	}
 
 	/**
@@ -500,7 +496,7 @@ public class DateUtil {
 	
 	/**
 	 * Code the time.
-	 * @param date
+	 * @param time
 	 * @return
 	 */
 	public static String codedTime(Time time) {

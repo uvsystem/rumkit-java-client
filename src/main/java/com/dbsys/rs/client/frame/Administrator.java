@@ -25,7 +25,6 @@ import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.connector.service.UnitService;
-import com.dbsys.rs.client.DateUtil;
 import com.dbsys.rs.client.Kelas;
 import com.dbsys.rs.client.Penanggung;
 import com.dbsys.rs.client.entity.Apoteker;

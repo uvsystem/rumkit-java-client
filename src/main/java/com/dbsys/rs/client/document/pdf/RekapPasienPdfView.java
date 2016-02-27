@@ -102,8 +102,16 @@ public class RekapPasienPdfView extends AbstractPdfView {
             insertCell(table, pasien.getKodePenduduk(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getTanggalMasuk().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pasien.getTotalTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pasien.getCicilan().toString(), align, 1, fontContent, Rectangle.BOX);
+            
+            Long totalTagihan = 0L;
+            if ( pasien.getTotalTagihan() != null)
+                totalTagihan = pasien.getTotalTagihan();
+            insertCell(table, totalTagihan.toString(), align, 1, fontContent, Rectangle.BOX);
+
+            Long cicilan = 0L;
+            if ( pasien.getCicilan() != null)
+                cicilan = pasien.getCicilan();
+            insertCell(table, cicilan.toString(), align, 1, fontContent, Rectangle.BOX);
         }
 
         paragraph.add(table);
