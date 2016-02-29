@@ -1190,7 +1190,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_gudang.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_apotek.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 1280, 800);
 

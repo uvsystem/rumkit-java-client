@@ -387,7 +387,8 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
@@ -400,7 +401,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         jToolBar1.add(btnLogout);
 
         btnGudang.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        btnGudang.setText("GUDANG");
+        btnGudang.setText("STOK");
         btnGudang.setFocusable(false);
         btnGudang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGudang.setMaximumSize(new java.awt.Dimension(80, 19));

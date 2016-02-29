@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "tipeStok"
+    property = "tipe"
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = StokKembali.class, name = "KEMBALI"),
@@ -42,11 +42,11 @@ public class Stok {
         this.tipeStok = name;
     }
 
-    public String getTipe() {
+    public String getTipeStok() {
         return tipeStok;
     }
 
-    public void setTipe(String tipeStok) {
+    public void setTipeStok(String tipeStok) {
         this.tipeStok = tipeStok;
     }
 

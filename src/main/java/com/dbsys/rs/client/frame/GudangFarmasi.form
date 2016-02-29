@@ -1451,7 +1451,7 @@
     <Component class="javax.swing.JLabel" name="background">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/dbsys/rs/client/images/bg_gudang.png"/>
+          <Image iconType="3" name="/com/dbsys/rs/client/images/bg_apotek.png"/>
         </Property>
       </Properties>
       <Constraints>
