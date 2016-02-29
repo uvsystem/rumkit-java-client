@@ -26,7 +26,7 @@ public class Pasien implements Tanggungan, CodedEntity {
     }
 
     public enum Pendaftaran {
-        LOKET, UGD
+        LOKET, UGD, NICU
     }
 
     private Long id;

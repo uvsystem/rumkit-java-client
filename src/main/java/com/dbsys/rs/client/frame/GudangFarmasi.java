@@ -597,7 +597,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
             }
         });
         pnlStokEksternal.add(txtEksternalKeyword);
-        txtEksternalKeyword.setBounds(120, 10, 820, 25);
+        txtEksternalKeyword.setBounds(120, 10, 540, 25);
 
         pnlEksternalDetail.setBackground(Utama.colorTransparentPanel);
         pnlEksternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -605,56 +605,56 @@ public class GudangFarmasi extends javax.swing.JFrame {
 
         txtEksternalKode.setEditable(false);
         pnlEksternalDetail.add(txtEksternalKode);
-        txtEksternalKode.setBounds(140, 30, 420, 25);
+        txtEksternalKode.setBounds(130, 20, 390, 25);
 
         txtEksternalNama.setEditable(false);
         pnlEksternalDetail.add(txtEksternalNama);
-        txtEksternalNama.setBounds(140, 60, 420, 25);
+        txtEksternalNama.setBounds(130, 50, 390, 25);
 
         txtEksternalHarga.setEditable(false);
         txtEksternalHarga.setToolTipText("");
         pnlEksternalDetail.add(txtEksternalHarga);
-        txtEksternalHarga.setBounds(140, 90, 420, 25);
+        txtEksternalHarga.setBounds(130, 80, 390, 25);
 
         txtEksternalTanggungan.setEditable(false);
         txtEksternalTanggungan.setToolTipText("");
         pnlEksternalDetail.add(txtEksternalTanggungan);
-        txtEksternalTanggungan.setBounds(140, 120, 420, 25);
+        txtEksternalTanggungan.setBounds(130, 110, 390, 25);
 
         txtEksternalSatuan.setEditable(false);
         pnlEksternalDetail.add(txtEksternalSatuan);
-        txtEksternalSatuan.setBounds(140, 180, 420, 25);
+        txtEksternalSatuan.setBounds(130, 170, 390, 25);
 
         txtEksternalJumlah.setEditable(false);
         pnlEksternalDetail.add(txtEksternalJumlah);
-        txtEksternalJumlah.setBounds(140, 150, 420, 25);
+        txtEksternalJumlah.setBounds(130, 140, 390, 25);
 
         jLabel14.setText("Kode");
         pnlEksternalDetail.add(jLabel14);
-        jLabel14.setBounds(30, 30, 90, 14);
+        jLabel14.setBounds(20, 20, 90, 25);
 
         jLabel15.setText("Nama");
         pnlEksternalDetail.add(jLabel15);
-        jLabel15.setBounds(30, 60, 90, 14);
+        jLabel15.setBounds(20, 50, 90, 25);
 
         jLabel16.setText("Harga");
         pnlEksternalDetail.add(jLabel16);
-        jLabel16.setBounds(30, 90, 90, 14);
+        jLabel16.setBounds(20, 80, 90, 25);
 
         jLabel84.setText("Tanggungan");
         pnlEksternalDetail.add(jLabel84);
-        jLabel84.setBounds(30, 120, 90, 14);
+        jLabel84.setBounds(20, 110, 90, 25);
 
         jLabel17.setText("Jumlah");
         pnlEksternalDetail.add(jLabel17);
-        jLabel17.setBounds(30, 150, 90, 14);
+        jLabel17.setBounds(20, 140, 90, 25);
 
         jLabel18.setText("Satuan");
         pnlEksternalDetail.add(jLabel18);
-        jLabel18.setBounds(30, 180, 90, 14);
+        jLabel18.setBounds(20, 170, 90, 25);
 
         pnlStokEksternal.add(pnlEksternalDetail);
-        pnlEksternalDetail.setBounds(20, 310, 590, 220);
+        pnlEksternalDetail.setBounds(680, 50, 540, 220);
 
         pnlEksternalStok.setBackground(Utama.colorTransparentPanel);
         pnlEksternalStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -662,24 +662,24 @@ public class GudangFarmasi extends javax.swing.JFrame {
 
         jLabel19.setText("Tanggal");
         pnlEksternalStok.add(jLabel19);
-        jLabel19.setBounds(30, 30, 90, 14);
+        jLabel19.setBounds(20, 20, 90, 25);
 
         jLabel20.setText("Jam");
         pnlEksternalStok.add(jLabel20);
-        jLabel20.setBounds(30, 60, 90, 14);
+        jLabel20.setBounds(20, 50, 90, 25);
 
         jLabel21.setText("Jumlah");
         pnlEksternalStok.add(jLabel21);
-        jLabel21.setBounds(30, 90, 90, 14);
+        jLabel21.setBounds(20, 80, 90, 25);
         pnlEksternalStok.add(txtEksternalStokJam);
-        txtEksternalStokJam.setBounds(140, 60, 420, 25);
+        txtEksternalStokJam.setBounds(130, 50, 390, 25);
         pnlEksternalStok.add(txtEksternalStokJumlah);
-        txtEksternalStokJumlah.setBounds(140, 90, 420, 25);
+        txtEksternalStokJumlah.setBounds(130, 80, 390, 25);
         pnlEksternalStok.add(txtEksternalStokTanggal);
-        txtEksternalStokTanggal.setBounds(140, 30, 420, 25);
+        txtEksternalStokTanggal.setBounds(130, 20, 390, 25);
 
         pnlStokEksternal.add(pnlEksternalStok);
-        pnlEksternalStok.setBounds(630, 310, 590, 140);
+        pnlEksternalStok.setBounds(680, 280, 540, 130);
 
         tblEksternal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -700,7 +700,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblEksternal);
 
         pnlStokEksternal.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 50, 1200, 240);
+        jScrollPane2.setBounds(20, 50, 640, 470);
 
         btnEksternalStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_masuk.png"))); // NOI18N
         btnEksternalStokMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +709,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokMasuk);
-        btnEksternalStokMasuk.setBounds(960, 10, 80, 30);
+        btnEksternalStokMasuk.setBounds(960, 490, 80, 30);
 
         btnEksternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnEksternalStokReset.addActionListener(new java.awt.event.ActionListener() {
@@ -718,7 +718,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokReset);
-        btnEksternalStokReset.setBounds(1140, 10, 80, 30);
+        btnEksternalStokReset.setBounds(1140, 490, 80, 30);
 
         btnEksternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnEksternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -727,7 +727,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokKeluar);
-        btnEksternalStokKeluar.setBounds(1050, 10, 80, 30);
+        btnEksternalStokKeluar.setBounds(1050, 490, 80, 30);
 
         paneBarang.addTab("STOK  MASUK", pnlStokEksternal);
 
