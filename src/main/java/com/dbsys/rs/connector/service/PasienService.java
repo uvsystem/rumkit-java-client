@@ -165,6 +165,20 @@ public class PasienService extends AbstractService {
         return message.getList();
     }
     
+    public List<Pasien> get(Date awal, Date akhir, Pasien.Pendaftaran pendaftaran) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<Pasien>> response;
+        response = restTemplate.exchange("{service}/pasien/{awal}/to/{akhir}/pendaftaran/{pendaftaran}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pasien>>() {}, 
+                service, awal, akhir, pendaftaran);
+
+        ListEntityRestMessage<Pasien> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+    
     public List<Pasien> getByMedrek(String nomorMedrek) throws ServiceException {
         HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
 

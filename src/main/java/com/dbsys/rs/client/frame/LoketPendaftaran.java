@@ -526,6 +526,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
     private void btnCetakPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienActionPerformed
         try {
             RangeTanggal frame = new RangeTanggal(this, Pasien.class);
+            frame.setPendaftaran(Pasien.Pendaftaran.LOKET);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

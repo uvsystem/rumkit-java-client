@@ -259,7 +259,7 @@ public final class TambahPasien extends javax.swing.JFrame {
         Calendar calendarTanggalLahir = txtPendudukTanggalLahir.getSelectedDate();
         long lTimeTanggalLahir = calendarTanggalLahir.getTimeInMillis();
 
-        Calendar calendarTanggalDaftar = txtPendudukTanggalLahir.getSelectedDate();
+        Calendar calendarTanggalDaftar = txtPendudukTanggalDaftar.getSelectedDate();
         long lTimeTanggalDaftar = calendarTanggalDaftar.getTimeInMillis();
 
         penduduk.setKode(txtPendudukKode.getText());

@@ -3,7 +3,6 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
-import com.dbsys.rs.client.document.pdf.RekapPasienPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPegawaiPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.RekapStokPdfView;
@@ -16,6 +15,7 @@ import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.document.pdf.RekapPendaftaranPdfView;
 import com.dbsys.rs.client.entity.Dokter;
 import com.dbsys.rs.client.entity.Pasien;
 import com.dbsys.rs.client.entity.Pemakaian;
@@ -46,6 +46,8 @@ public class RangeTanggal extends JFrame {
     private final Map<String, Object> model;
     private DocumentView documentView;
     
+    private Pasien.Pendaftaran pendaftaran;
+    
     /**
      * Creates new form FramePasienKeluar
      * 
@@ -68,6 +70,10 @@ public class RangeTanggal extends JFrame {
         
         this.pdfProcessor = new PdfProcessor();
         this.model = new HashMap<>();
+    }
+    
+    public void setPendaftaran(Pasien.Pendaftaran pendaftaran) {
+        this.pendaftaran = pendaftaran;
     }
 
     private void rekapUnit(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -128,14 +134,14 @@ public class RangeTanggal extends JFrame {
     private void rekapPasien(Date awal, Date akhir) throws ServiceException, DocumentException {
         PasienService service = PasienService.getInstance();
 
-        documentView = new RekapPasienPdfView();
+        documentView = new RekapPendaftaranPdfView();
         
-        List<Pasien> list = service.get(awal, akhir);
+        List<Pasien> list = service.get(awal, akhir, pendaftaran);
         model.put("awal", awal);
         model.put("akhir", akhir);
         model.put("list", list);
 
-        pdfProcessor.process(documentView, model, String.format("rekap-pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-pendaftaran-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
     /**
@@ -193,8 +199,8 @@ public class RangeTanggal extends JFrame {
             return;
         }
         
-        Date awal = new Date(awalCalendar.getTimeInMillis());
-        Date akhir = new Date(akhirCalendar.getTimeInMillis());
+        Date awal = DateUtil.getDate(awalCalendar);
+        Date akhir = DateUtil.getDate(akhirCalendar);
 
         try {
             
