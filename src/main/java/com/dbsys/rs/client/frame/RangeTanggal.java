@@ -16,15 +16,18 @@ import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.client.DateUtil;
 import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.document.pdf.RekapPembayaranPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPendaftaranPdfView;
 import com.dbsys.rs.client.document.pdf.RekapTagihanPdfView;
 import com.dbsys.rs.client.entity.Dokter;
 import com.dbsys.rs.client.entity.Pasien;
 import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Pembayaran;
 import com.dbsys.rs.client.entity.Perawat;
 import com.dbsys.rs.client.entity.Stok;
 import com.dbsys.rs.client.entity.Tagihan;
 import com.dbsys.rs.client.entity.Unit;
+import com.dbsys.rs.connector.service.PembayaranService;
 import com.dbsys.rs.connector.service.TagihanService;
 
 import java.sql.Date;
@@ -168,6 +171,19 @@ public class RangeTanggal extends JFrame {
         pdfProcessor.process(documentView, model, String.format("rekap-tagihan-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
+    private void rekapPembayaran(Date awal, Date akhir) throws ServiceException, DocumentException {
+        PembayaranService service = PembayaranService.getInstance();
+
+        documentView = new RekapPembayaranPdfView();
+        
+        List<Pembayaran> list = service.get(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("rekap-pembayaran-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -242,6 +258,8 @@ public class RangeTanggal extends JFrame {
                 rekapPasien(awal, akhir);
             } else if (Tagihan.class.equals(cls)) {
                 rekapTagihan(awal, akhir);
+            } else if (Pembayaran.class.equals(cls)) {
+                rekapPembayaran(awal, akhir);
             }
             
             this.dispose();

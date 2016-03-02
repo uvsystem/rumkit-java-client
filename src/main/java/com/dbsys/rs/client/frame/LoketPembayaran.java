@@ -229,12 +229,13 @@ public class LoketPembayaran extends javax.swing.JFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
-        btnRekapPemakaian = new javax.swing.JButton();
-        btnRekapPelayanan = new javax.swing.JButton();
         btnRekapTagihanUmum = new javax.swing.JButton();
         btnRekapTagihanBpjs = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
         btnCetakPasienByMedrek = new javax.swing.JButton();
+        btnRekapPembayaran = new javax.swing.JButton();
+        btnRekapPemakaian = new javax.swing.JButton();
+        btnRekapPelayanan = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -590,34 +591,6 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnLogout);
 
-        btnRekapPemakaian.setText("REKAP PEMAKAIAN");
-        btnRekapPemakaian.setFocusable(false);
-        btnRekapPemakaian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRekapPemakaian.setMaximumSize(new java.awt.Dimension(100, 21));
-        btnRekapPemakaian.setMinimumSize(new java.awt.Dimension(100, 21));
-        btnRekapPemakaian.setPreferredSize(new java.awt.Dimension(100, 21));
-        btnRekapPemakaian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnRekapPemakaian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRekapPemakaianActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnRekapPemakaian);
-
-        btnRekapPelayanan.setText("REKAP PELAYANAN");
-        btnRekapPelayanan.setFocusable(false);
-        btnRekapPelayanan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRekapPelayanan.setMaximumSize(new java.awt.Dimension(100, 21));
-        btnRekapPelayanan.setMinimumSize(new java.awt.Dimension(100, 21));
-        btnRekapPelayanan.setPreferredSize(new java.awt.Dimension(100, 21));
-        btnRekapPelayanan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnRekapPelayanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRekapPelayananActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnRekapPelayanan);
-
         btnRekapTagihanUmum.setText("REKAP TAGIHAN UMUM");
         btnRekapTagihanUmum.setFocusable(false);
         btnRekapTagihanUmum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -669,6 +642,48 @@ public class LoketPembayaran extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnCetakPasienByMedrek);
+
+        btnRekapPembayaran.setText("REKAP PEMBAYARAN");
+        btnRekapPembayaran.setFocusable(false);
+        btnRekapPembayaran.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPembayaran.setMaximumSize(new java.awt.Dimension(110, 21));
+        btnRekapPembayaran.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPembayaran.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPembayaran.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPembayaranActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPembayaran);
+
+        btnRekapPemakaian.setText("REKAP PEMAKAIAN");
+        btnRekapPemakaian.setFocusable(false);
+        btnRekapPemakaian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPemakaian.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPemakaian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPemakaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPemakaianActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPemakaian);
+
+        btnRekapPelayanan.setText("REKAP PELAYANAN");
+        btnRekapPelayanan.setFocusable(false);
+        btnRekapPelayanan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPelayanan.setMaximumSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPelayanan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPelayanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPelayananActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPelayanan);
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
@@ -1014,6 +1029,15 @@ public class LoketPembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnRekapTagihanBpjsActionPerformed
+
+    private void btnRekapPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPembayaranActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Pembayaran.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapPembayaranActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -1028,6 +1052,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;
     private javax.swing.JButton btnRekapPemakaian;
+    private javax.swing.JButton btnRekapPembayaran;
     private javax.swing.JButton btnRekapTagihanBpjs;
     private javax.swing.JButton btnRekapTagihanUmum;
     private javax.swing.JButton btnUbahPasien;
