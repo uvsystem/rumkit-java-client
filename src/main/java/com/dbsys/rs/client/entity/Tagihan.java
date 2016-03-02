@@ -4,8 +4,19 @@ import com.dbsys.rs.client.Penanggung;
 import com.dbsys.rs.client.Tanggungan;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.sql.Date;
 
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "tipeTagihan"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Pelayanan.class, name = "PELAYANAN"),
+    @JsonSubTypes.Type(value = Pemakaian.class, name = "PEMAKAIAN")
+})
 public abstract class Tagihan {
 
     public enum StatusTagihan {
@@ -26,9 +37,24 @@ public abstract class Tagihan {
     protected StatusTagihan status;
     protected Tanggungan tanggungan;
 
+    private String tipeTagihan;
+    
     protected Tagihan() {
         super();
         this.status = StatusTagihan.MENUNGGAK;
+    }
+    
+    protected Tagihan(String tipeTagihan) {
+        super();
+        this.tipeTagihan = tipeTagihan;
+    }
+    
+    public String getTipeTagihan() {
+        return tipeTagihan;
+    }
+    
+    public void setTipeTagihan(String tipeTagihan) {
+        this.tipeTagihan = tipeTagihan;
     }
 
     public Long getId() {

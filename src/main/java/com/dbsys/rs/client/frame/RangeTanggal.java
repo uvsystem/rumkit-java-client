@@ -15,13 +15,17 @@ import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
 import com.dbsys.rs.client.document.pdf.RekapPendaftaranPdfView;
+import com.dbsys.rs.client.document.pdf.RekapTagihanPdfView;
 import com.dbsys.rs.client.entity.Dokter;
 import com.dbsys.rs.client.entity.Pasien;
 import com.dbsys.rs.client.entity.Pemakaian;
 import com.dbsys.rs.client.entity.Perawat;
 import com.dbsys.rs.client.entity.Stok;
+import com.dbsys.rs.client.entity.Tagihan;
 import com.dbsys.rs.client.entity.Unit;
+import com.dbsys.rs.connector.service.TagihanService;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -47,6 +51,7 @@ public class RangeTanggal extends JFrame {
     private DocumentView documentView;
     
     private Pasien.Pendaftaran pendaftaran;
+    private Penanggung penanggung;
     
     /**
      * Creates new form FramePasienKeluar
@@ -70,6 +75,11 @@ public class RangeTanggal extends JFrame {
         
         this.pdfProcessor = new PdfProcessor();
         this.model = new HashMap<>();
+    }
+
+    public RangeTanggal(JFrame frame, Class<?> cls, Penanggung penanggung) throws ServiceException {
+        this(frame, cls);
+        this.penanggung = penanggung;
     }
     
     public void setPendaftaran(Pasien.Pendaftaran pendaftaran) {
@@ -144,6 +154,20 @@ public class RangeTanggal extends JFrame {
         pdfProcessor.process(documentView, model, String.format("rekap-pendaftaran-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
+    private void rekapTagihan(Date awal, Date akhir) throws ServiceException, DocumentException {
+        TagihanService service = TagihanService.getInstance();
+
+        documentView = new RekapTagihanPdfView();
+        
+        List<Tagihan> list = service.get(awal, akhir, penanggung);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("penanggung", penanggung);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("rekap-tagihan-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,6 +240,8 @@ public class RangeTanggal extends JFrame {
                 rekapPerawat(awal, akhir);
             } else if (Pasien.class.equals(cls)) {
                 rekapPasien(awal, akhir);
+            } else if (Tagihan.class.equals(cls)) {
+                rekapTagihan(awal, akhir);
             }
             
             this.dispose();

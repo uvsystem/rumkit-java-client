@@ -231,6 +231,8 @@ public class LoketPembayaran extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
+        btnRekapTagihanUmum = new javax.swing.JButton();
+        btnRekapTagihanBpjs = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
         btnCetakPasienByMedrek = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
@@ -616,6 +618,34 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnRekapPelayanan);
 
+        btnRekapTagihanUmum.setText("REKAP TAGIHAN UMUM");
+        btnRekapTagihanUmum.setFocusable(false);
+        btnRekapTagihanUmum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapTagihanUmum.setMaximumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanUmum.setMinimumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanUmum.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapTagihanUmum.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapTagihanUmum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapTagihanUmumActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapTagihanUmum);
+
+        btnRekapTagihanBpjs.setText("REKAP TAGIHAN BPJS");
+        btnRekapTagihanBpjs.setFocusable(false);
+        btnRekapTagihanBpjs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapTagihanBpjs.setMaximumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanBpjs.setMinimumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanBpjs.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapTagihanBpjs.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapTagihanBpjs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapTagihanBpjsActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapTagihanBpjs);
+
         btnUbahPasien.setText("UBAH DATA PASIEN");
         btnUbahPasien.setFocusable(false);
         btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -966,6 +996,24 @@ public class LoketPembayaran extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCetakPasienByMedrekActionPerformed
+
+    private void btnRekapTagihanUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapTagihanUmumActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Tagihan.class, Penanggung.UMUM);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapTagihanUmumActionPerformed
+
+    private void btnRekapTagihanBpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapTagihanBpjsActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Tagihan.class, Penanggung.BPJS);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapTagihanBpjsActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -980,6 +1028,8 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;
     private javax.swing.JButton btnRekapPemakaian;
+    private javax.swing.JButton btnRekapTagihanBpjs;
+    private javax.swing.JButton btnRekapTagihanUmum;
     private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;

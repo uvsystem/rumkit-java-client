@@ -9,6 +9,10 @@ public class Pemakaian extends Tagihan implements CodedEntity {
     private Barang barang;
     private String nomorResep;
 
+    public Pemakaian() {
+        super("PEMAKAIAN");
+    }
+    
     public Barang getBarang() {
         return barang;
     }
