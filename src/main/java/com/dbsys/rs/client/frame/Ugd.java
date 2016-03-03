@@ -588,7 +588,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         pnlPasienDetail.add(jLabel14);
         jLabel14.setBounds(20, 30, 100, 25);
 
-        jLabel17.setText("NIK");
+        jLabel17.setText("NO. JAMINAN");
         pnlPasienDetail.add(jLabel17);
         jLabel17.setBounds(20, 90, 100, 25);
 
@@ -863,7 +863,11 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         txtPendudukNik.setText(penduduk.getNik());
         txtPendudukNama.setText(penduduk.getNama());
         cbPendudukKelamin.setSelectedItem(penduduk.getKelamin().toString());
-        txtPendudukUmur.setText(penduduk.getTelepon());
+
+        Date hariIni = DateUtil.getDate();
+        Date lahir = penduduk.getTanggalLahir();
+        int umur = DateUtil.calculate(lahir, hariIni) / 365;
+        txtPendudukUmur.setText(Integer.toString(umur));
 
         Calendar tanggalLahir = Calendar.getInstance();
         tanggalLahir.setTime(penduduk.getTanggalLahir());

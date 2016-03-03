@@ -73,7 +73,7 @@ public class RekapPembayaranPdfView extends AbstractPdfView {
     }
     
     private void createContent(Paragraph paragraph, List<Pembayaran> list) throws DocumentException {
-        float columnWidths[] = {5f, 5f, 5f, 5f, 5f};
+        float columnWidths[] = {6f, 4f, 5f, 5f, 5f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 

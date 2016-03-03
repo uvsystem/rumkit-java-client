@@ -23,7 +23,7 @@ public final class DetailPasien extends javax.swing.JFrame {
     public DetailPasien() {
         initComponents();
         
-        setSize(700, 680);
+        setSize(700, 740);
     }
     
     /**

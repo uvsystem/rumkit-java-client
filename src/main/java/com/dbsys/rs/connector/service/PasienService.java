@@ -183,7 +183,7 @@ public class PasienService extends AbstractService {
         HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pasien>> response;
-        response = restTemplate.exchange("{service}/pasien/medrek/{medrek}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/pasien/medrek/{medrek}/tunggakan", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<Pasien>>() {}, 
                 service, nomorMedrek);
 

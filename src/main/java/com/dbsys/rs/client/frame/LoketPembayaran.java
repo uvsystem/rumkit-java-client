@@ -67,6 +67,9 @@ public class LoketPembayaran extends javax.swing.JFrame {
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
+        
+        btnRekapPelayanan.setVisible(false);
+        btnRekapPemakaian.setVisible(false);
     }
     
     private Tagihan getTagihan(JTable table) {
@@ -231,9 +234,9 @@ public class LoketPembayaran extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnRekapTagihanUmum = new javax.swing.JButton();
         btnRekapTagihanBpjs = new javax.swing.JButton();
-        btnUbahPasien = new javax.swing.JButton();
-        btnCetakPasienByMedrek = new javax.swing.JButton();
         btnRekapPembayaran = new javax.swing.JButton();
+        btnUbahPasien = new javax.swing.JButton();
+        btnCetakTunggakanPasien = new javax.swing.JButton();
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
@@ -619,30 +622,6 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnRekapTagihanBpjs);
 
-        btnUbahPasien.setText("UBAH DATA PASIEN");
-        btnUbahPasien.setFocusable(false);
-        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
-        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahPasienActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnUbahPasien);
-
-        btnCetakPasienByMedrek.setText("DAFTAR PASIEN");
-        btnCetakPasienByMedrek.setFocusable(false);
-        btnCetakPasienByMedrek.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCetakPasienByMedrek.setMaximumSize(new java.awt.Dimension(120, 20));
-        btnCetakPasienByMedrek.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCetakPasienByMedrek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakPasienByMedrekActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCetakPasienByMedrek);
-
         btnRekapPembayaran.setText("REKAP PEMBAYARAN");
         btnRekapPembayaran.setFocusable(false);
         btnRekapPembayaran.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -656,6 +635,30 @@ public class LoketPembayaran extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnRekapPembayaran);
+
+        btnUbahPasien.setText("UBAH DATA PASIEN");
+        btnUbahPasien.setFocusable(false);
+        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnUbahPasien);
+
+        btnCetakTunggakanPasien.setText("TUNGGAKAN PASIEN");
+        btnCetakTunggakanPasien.setFocusable(false);
+        btnCetakTunggakanPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakTunggakanPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnCetakTunggakanPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakTunggakanPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakTunggakanPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakTunggakanPasien);
 
         btnRekapPemakaian.setText("REKAP PEMAKAIAN");
         btnRekapPemakaian.setFocusable(false);
@@ -988,7 +991,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         new DetailPasien().setVisible(true);
     }//GEN-LAST:event_btnUbahPasienActionPerformed
 
-    private void btnCetakPasienByMedrekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienByMedrekActionPerformed
+    private void btnCetakTunggakanPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakTunggakanPasienActionPerformed
         String nomorMedrek = JOptionPane.showInputDialog(this, "Masukan Nomor Rekam Medik");
         if (nomorMedrek == null || nomorMedrek.equals("")) {
             JOptionPane.showMessageDialog(this, "Silahkan memasukan nomor rekam medik pasien");
@@ -1010,7 +1013,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
-    }//GEN-LAST:event_btnCetakPasienByMedrekActionPerformed
+    }//GEN-LAST:event_btnCetakTunggakanPasienActionPerformed
 
     private void btnRekapTagihanUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapTagihanUmumActionPerformed
         try {
@@ -1045,9 +1048,9 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnBayar;
     private javax.swing.JButton btnBayarSemuaTagihan;
     private javax.swing.JButton btnBayarTagihan;
-    private javax.swing.JButton btnCetakPasienByMedrek;
     private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnCetakTagihan;
+    private javax.swing.JButton btnCetakTunggakanPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;

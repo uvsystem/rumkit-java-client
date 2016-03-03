@@ -120,6 +120,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         btnPasienTambah = new javax.swing.JButton();
         txtPasienTanggalMasuk = new datechooser.beans.DateChooserCombo();
         btnCetakKartu = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -318,6 +319,14 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         btnCetakKartu.setBounds(300, 180, 80, 30);
 
         getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 400, 220));
+
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 720, 80, 30));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
@@ -538,6 +547,10 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         tambahPasien.setVisible(true);
     }//GEN-LAST:event_btnPendudukUpdateActionPerformed
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        resetForm();
+    }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JButton btnCetakKartu;
@@ -547,6 +560,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendudukTambah;
     private javax.swing.JButton btnPendudukUpdate;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKelas;
     private javax.swing.JComboBox cbPasienTanggungan;

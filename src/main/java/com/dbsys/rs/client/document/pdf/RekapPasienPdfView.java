@@ -85,7 +85,7 @@ public class RekapPasienPdfView extends AbstractPdfView {
     }
     
     private void createContent(Paragraph paragraph, List<Pasien> list) throws DocumentException {
-        float columnWidths[] = {5f, 5f, 10f, 5f, 5f, 5f};
+        float columnWidths[] = {5f, 5f, 10f, 5f, 5f, 5f, 5f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
@@ -95,8 +95,10 @@ public class RekapPasienPdfView extends AbstractPdfView {
         insertCell(table, "Tanggal", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Tagihan", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Pembayaran", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Tunggakan", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
+        Long totalTunggakan = 0L;
         for (Pasien pasien : list) {
             insertCell(table, pasien.getKode(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getKodePenduduk(), align, 1, fontContent, Rectangle.BOX);
@@ -112,7 +114,15 @@ public class RekapPasienPdfView extends AbstractPdfView {
             if ( pasien.getCicilan() != null)
                 cicilan = pasien.getCicilan();
             insertCell(table, cicilan.toString(), align, 1, fontContent, Rectangle.BOX);
+
+            Long tunggakan = totalTagihan - cicilan;
+            insertCell(table, tunggakan.toString(), align, 1, fontContent, Rectangle.BOX);
+            
+            totalTunggakan += tunggakan;
         }
+
+        insertCell(table, "Total Tunggakan : ", align, 6, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, totalTunggakan.toString(), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }
