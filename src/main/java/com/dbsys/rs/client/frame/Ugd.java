@@ -75,6 +75,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKeluar.setVisible(false);
         
         pnlHome.setVisible(false);
         pnlHomeDetail.setVisible(false);
@@ -286,6 +287,10 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         btnPendaftaran = new javax.swing.JButton();
         btnPasien = new javax.swing.JButton();
         btnRuangan = new javax.swing.JButton();
+        pnlKeluar = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        cbPasienKeadaan = new javax.swing.JComboBox();
+        btnPasienKeluar1 = new javax.swing.JButton();
         Image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -847,6 +852,26 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         });
         getContentPane().add(btnRuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, 190, 50));
 
+        pnlKeluar.setBackground(Utama.colorTransparentPanel);
+        pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN KELUAR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pnlKeluar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setText("Keadaan Pasien");
+        pnlKeluar.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+
+        cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI" }));
+        pnlKeluar.add(cbPasienKeadaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 250, 25));
+
+        btnPasienKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
+        btnPasienKeluar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienKeluar1ActionPerformed(evt);
+            }
+        });
+        pnlKeluar.add(btnPasienKeluar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 80, 30));
+
+        getContentPane().add(pnlKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 620, 400, 90));
+
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_ugd.png"))); // NOI18N
         getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
@@ -953,6 +978,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(true);
         pnlPasienDetail.setVisible(true);
+        pnlKeluar.setVisible(true);
         
         pnlHome.setVisible(false);
         pnlHomeDetail.setVisible(false);
@@ -965,6 +991,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKeluar.setVisible(false);
         
         pnlHome.setVisible(true);
         pnlHomeDetail.setVisible(true);
@@ -1118,12 +1145,33 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
         }
     }//GEN-LAST:event_btnCetakPasienActionPerformed
 
+    private void btnPasienKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienKeluar1ActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari pasien terlebih dulu.");
+            return;
+        }
+
+        String keadaan = (String) cbPasienKeadaan.getSelectedItem();
+        if (keadaan.equals("- Pilih -")) {
+            JOptionPane.showMessageDialog(this, "Silahkan pilih keadaan pasien.");
+            return;
+        }
+
+        try {
+            pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.KELUAR);
+            JOptionPane.showMessageDialog(this, "Berhasil!");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPasienKeluar1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JButton btnCetakPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasien;
     private javax.swing.JButton btnPasienKeluar;
+    private javax.swing.JButton btnPasienKeluar1;
     private javax.swing.JButton btnPasienMasuk;
     private javax.swing.JButton btnPasienTambah;
     private javax.swing.JButton btnPendaftaran;
@@ -1134,6 +1182,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JButton btnTindakanSimpan;
     private javax.swing.JButton btnTindakanUpdate;
     private javax.swing.JButton btnUbahPasien;
+    private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JComboBox cbPasienKelas;
     private javax.swing.JComboBox cbPasienTanggungan;
     private javax.swing.JComboBox cbPendudukKelamin;
@@ -1155,6 +1204,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -1179,6 +1229,7 @@ public class Ugd extends javax.swing.JFrame implements TindakanTableFrame, Pasie
     private javax.swing.JLabel lblUnit;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlHomeDetail;
+    private javax.swing.JPanel pnlKeluar;
     private javax.swing.JPanel pnlMasuk;
     private javax.swing.JPanel pnlPasienDetail;
     private javax.swing.JPanel pnlPendaftaranDetail;
