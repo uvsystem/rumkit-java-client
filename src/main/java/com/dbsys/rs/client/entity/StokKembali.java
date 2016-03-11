@@ -10,7 +10,7 @@ public class StokKembali extends Stok implements CodedEntity {
     private String nomor;
 
     public StokKembali() {
-        super();
+        super("KEMBALI");
     }
 
     public Pasien getPasien() {

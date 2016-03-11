@@ -15,8 +15,12 @@ import com.dbsys.rs.client.Kelas;
 import com.dbsys.rs.client.Penanggung;
 import com.dbsys.rs.client.entity.Pasien;
 import com.dbsys.rs.client.entity.Pasien.Pendaftaran;
+import com.dbsys.rs.client.entity.Pelayanan;
 import com.dbsys.rs.client.entity.Penduduk;
+import com.dbsys.rs.client.entity.Tindakan;
 import com.dbsys.rs.client.entity.Unit;
+import com.dbsys.rs.connector.service.PelayananService;
+import com.dbsys.rs.connector.service.TindakanService;
 
 import java.awt.Color;
 import java.sql.Date;
@@ -77,6 +81,24 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         Calendar now = Calendar.getInstance();
         now.setTime(DateUtil.getDate());
         txtPasienTanggalMasuk.setSelectedDate(now);
+    }
+    
+    private void tambahTagihanKarcis(Pasien pasien) throws ServiceException {
+        final PelayananService pelayananService = PelayananService.getInstance();
+        final TindakanService tindakanService = TindakanService.getInstance();
+        
+        Tindakan tindakan = tindakanService.get("Karcis Rawat Jalan", Kelas.NONE);
+        
+        Pelayanan pelayanan = new Pelayanan();
+        pelayanan.setTindakan(tindakan);
+        pelayanan.setBiayaTambahan(0L);
+        pelayanan.setJumlah(1);
+        pelayanan.setKeterangan(null);
+        pelayanan.setPasien(pasien);
+        pelayanan.setUnit(TokenHolder.getUnit());
+        pelayanan.setTanggal(DateUtil.getDate());
+        
+        pelayananService.simpan(pelayanan);
     }
 
     /**
@@ -164,23 +186,28 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         jLabel9.setBounds(20, 150, 100, 25);
 
         txtPendudukKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukKode.setEnabled(false);
         pnlDetail.add(txtPendudukKode);
         txtPendudukKode.setBounds(130, 30, 250, 25);
 
         txtPendudukNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukNik.setEnabled(false);
         pnlDetail.add(txtPendudukNik);
         txtPendudukNik.setBounds(130, 60, 250, 25);
 
         txtPendudukNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukNama.setEnabled(false);
         pnlDetail.add(txtPendudukNama);
         txtPendudukNama.setBounds(130, 90, 250, 25);
 
         cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
         cbPendudukKelamin.setBorder(null);
+        cbPendudukKelamin.setEnabled(false);
         pnlDetail.add(cbPendudukKelamin);
         cbPendudukKelamin.setBounds(130, 120, 250, 25);
 
         txtPendudukUmur.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukUmur.setEnabled(false);
         pnlDetail.add(txtPendudukUmur);
         txtPendudukUmur.setBounds(130, 150, 250, 25);
 
@@ -446,9 +473,12 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
                 throw new ServiceException("Silahkan masukan unit tujuan");
             
             pasien = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), new Date(lTime), kode, Pendaftaran.LOKET, Kelas.valueOf(kelas), tujuan);
-            JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
-            
             txtPasienNomor.setText(pasien.getKode());
+
+            // Otomatis tambah tagihan karcis pasien rawat jalan
+            tambahTagihanKarcis(pasien);
+
+            JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

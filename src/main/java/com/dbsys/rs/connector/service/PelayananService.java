@@ -104,9 +104,9 @@ public class PelayananService extends AbstractService {
     public void hapus(Pelayanan pelayanan) throws ServiceException {
         HttpEntity<Pelayanan> entity = new HttpEntity<>(getHeaders());
 
-        ResponseEntity<RestMessage> response;
+        ResponseEntity<EntityRestMessage> response;
         response = restTemplate.exchange("{service}/pelayanan/{id}", HttpMethod.DELETE, entity, 
-                new ParameterizedTypeReference<RestMessage>() {}, service, pelayanan.getId());
+                new ParameterizedTypeReference<EntityRestMessage>() {}, service, pelayanan.getId());
 
         RestMessage message = response.getBody();
         if (message.getTipe().equals(Type.ERROR))

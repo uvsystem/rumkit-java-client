@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
 import com.dbsys.rs.client.entity.StokKembali;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class StokKembaliTableModel extends  StokTableModel {
 
-    private List<StokKembali> list;
+    private final List<StokKembali> list = new ArrayList<>();
     
     public StokKembaliTableModel(List<StokKembali> list) {
         super();

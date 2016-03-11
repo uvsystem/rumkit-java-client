@@ -325,7 +325,7 @@ public class Pasien implements Tanggungan, CodedEntity {
         Integer d = Math.abs(DateUtil.getDate().hashCode());
         Integer t = Math.abs(DateUtil.getTime().hashCode());
 
-        return String.format("10%s00%s", d, t);
+        return String.format("10%s", (d + t));
     }
 
     public void bayar(Long jumlah) {
