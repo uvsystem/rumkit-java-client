@@ -250,7 +250,7 @@ public class GudangFarmasi extends javax.swing.JFrame {
         model.put("listKembali", list);
         
         try {
-            pdfProcessor.process(pdfView, model, String.format("E://print//pengembalian-%s.pdf", DateUtil.getTime().hashCode()));
+            pdfProcessor.process(pdfView, model, String.format("pengembalian-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
