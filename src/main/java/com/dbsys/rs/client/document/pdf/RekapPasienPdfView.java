@@ -51,7 +51,7 @@ public class RekapPasienPdfView extends AbstractPdfView {
 
         doc.add(paragraph);
 
-        name = String.format("rekap-barang-%s-%s", DateUtil.getDate(), DateUtil.getTime());
+        name = String.format("rekap-pasien-%s-%s", DateUtil.getDate(), DateUtil.getTime());
         
         return doc;
     }
@@ -108,21 +108,21 @@ public class RekapPasienPdfView extends AbstractPdfView {
             Long totalTagihan = 0L;
             if ( pasien.getTotalTagihan() != null)
                 totalTagihan = pasien.getTotalTagihan();
-            insertCell(table, totalTagihan.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(totalTagihan), align, 1, fontContent, Rectangle.BOX);
 
             Long cicilan = 0L;
             if ( pasien.getCicilan() != null)
                 cicilan = pasien.getCicilan();
-            insertCell(table, cicilan.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(cicilan), align, 1, fontContent, Rectangle.BOX);
 
             Long tunggakan = totalTagihan - cicilan;
-            insertCell(table, tunggakan.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(tunggakan), align, 1, fontContent, Rectangle.BOX);
             
             totalTunggakan += tunggakan;
         }
 
         insertCell(table, "Total Tunggakan : ", align, 6, fontContent, Rectangle.NO_BORDER);
-        insertCell(table, totalTunggakan.toString(), align, 1, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, numberFormat.format(totalTunggakan), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

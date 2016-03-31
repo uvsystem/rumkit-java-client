@@ -92,11 +92,11 @@ public class RekapPembayaranPdfView extends AbstractPdfView {
             insertCell(table, pembayaran.getTanggal().toString(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pembayaran.getPasien().getKode(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pembayaran.getPasien().getNama(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pembayaran.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(pembayaran.getJumlah()), align, 1, fontContent, Rectangle.BOX);
         }
 
         insertCell(table, "Total : ", Element.ALIGN_RIGHT, 4, fontContent, Rectangle.NO_BORDER);
-        insertCell(table, total.toString(), align, 1, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, numberFormat.format(total), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

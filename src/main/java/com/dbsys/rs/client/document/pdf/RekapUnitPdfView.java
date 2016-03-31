@@ -83,13 +83,13 @@ public class RekapUnitPdfView extends  AbstractPdfView {
             if (rekap.getNama().equals("Intensive Care Unit"))
                 t *= 2;
             
-            insertCell(table, t.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(t), align, 1, fontContent, Rectangle.BOX);
             
             total += rekap.getTotal();
         }
 
         insertCell(table, "Total Tagihan", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": Rp %s", numberFormat.format(total)), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

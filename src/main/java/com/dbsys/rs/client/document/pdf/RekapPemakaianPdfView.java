@@ -74,13 +74,13 @@ public class RekapPemakaianPdfView extends  AbstractPdfView {
         for (RekapTagihanAdapter tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(tagihan.getTagihan()), align, 1, fontContent, Rectangle.BOX);
             
             total += tagihan.getTagihan();
         }
 
         insertCell(table, "Total", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": Rp %s", numberFormat.format(total)), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

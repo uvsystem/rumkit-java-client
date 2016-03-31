@@ -98,11 +98,11 @@ public class RekapTagihanPdfView extends AbstractPdfView {
             insertCell(table, tagihan.getPasien().getKodePenduduk(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getPasien().getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(tagihan.getTagihan()), align, 1, fontContent, Rectangle.BOX);
         }
 
         insertCell(table, "Total Tagihan : ", Element.ALIGN_RIGHT, 5, fontContent, Rectangle.NO_BORDER);
-        insertCell(table, totalTagihan.toString(), align, 1, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, numberFormat.format(totalTagihan), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }
