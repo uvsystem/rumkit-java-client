@@ -1,13 +1,15 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
-import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.client.DateUtil;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPTable;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -72,13 +74,13 @@ public class RekapPemakaianPdfView extends  AbstractPdfView {
         for (RekapTagihanAdapter tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(tagihan.getTagihan()), align, 1, fontContent, Rectangle.BOX);
             
             total += tagihan.getTagihan();
         }
 
         insertCell(table, "Total", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": Rp %s", numberFormat.format(total)), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

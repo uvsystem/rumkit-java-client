@@ -6,11 +6,13 @@ import com.dbsys.rs.connector.adapter.RekapPegawaiAdapter;
 import com.dbsys.rs.connector.adapter.RekapStokBarangAdapter;
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Pasien;
+
 import java.sql.Date;
 import java.util.List;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

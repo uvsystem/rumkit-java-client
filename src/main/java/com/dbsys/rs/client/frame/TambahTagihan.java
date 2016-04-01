@@ -12,18 +12,19 @@ import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TindakanService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.Dokter;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pegawai;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Perawat;
-import com.dbsys.rs.lib.entity.Tindakan;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.entity.BahanHabisPakai;
+import com.dbsys.rs.client.entity.Barang;
+import com.dbsys.rs.client.entity.Dokter;
+import com.dbsys.rs.client.entity.ObatFarmasi;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pegawai;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Perawat;
+import com.dbsys.rs.client.entity.Tindakan;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -132,7 +133,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         
         if (pelaksana != null) {
             txtPelayananPelaksana.setText(pelaksana.getNama());
-            cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipe());
+            // cbPelayananTipePelaksana.setSelectedItem(pelaksana.getTipePegawai());
         }
         
         if (unit != null)
@@ -179,15 +180,17 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
     private Pemakaian getPemakaian() throws ServiceException {
         String jumlah = txtPemakaianJumlah.getText();
         if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
-            throw new ServiceException("Jumlah tidak boleh kosong");
-        
-        if (pemakaian == null)
-            pemakaian = new Pemakaian();
+            throw new ServiceException("Silahkan mengisi jumlah obat/bhp");
         
         String biayaTambahan = txtPemakaianBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
             biayaTambahan = "0";
+
+        Calendar tanggal = txtPemakaianTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
         
+        if (pemakaian == null)
+            pemakaian = new Pemakaian();
         pemakaian.setBarang(barang);
         pemakaian.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pemakaian.setJumlah(Integer.valueOf(jumlah));
@@ -195,9 +198,6 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pemakaian.setPasien(pasien);
         pemakaian.setUnit(TokenHolder.getToken().getOperator().getUnit());
         pemakaian.setNomorResep(nomorResep);
-
-        Calendar tanggal = txtPemakaianTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
         pemakaian.setTanggal(new Date(lTime));
         
         return pemakaian;
@@ -215,16 +215,20 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         return tableModel.getTindakan(index);
     }
     
-    private Pelayanan getPelayanan() {
-        if (pelayanan == null)
-            pelayanan = new Pelayanan();
+    private Pelayanan getPelayanan() throws ServiceException {
+        String jumlah = txtPelayananJumlah.getText();
+        if (jumlah == null || jumlah.equals("") || jumlah.equals("0"))
+            throw new ServiceException("Silahkan megisi jumlah tindakan");
         
         String biayaTambahan = txtPelayananBiayaTambahan.getText();
         if (biayaTambahan == null || biayaTambahan.equals(""))
             biayaTambahan = "0";
+
+        Calendar tanggal = txtPelayananTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
         
-        String jumlah = txtPelayananJumlah.getText();
-        
+        if (pelayanan == null)
+            pelayanan = new Pelayanan();
         pelayanan.setTindakan(tindakan);
         pelayanan.setBiayaTambahan(Long.valueOf(biayaTambahan));
         pelayanan.setJumlah(Integer.valueOf(jumlah));
@@ -232,9 +236,6 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pelayanan.setPasien(pasien);
         pelayanan.setUnit(this.unit);
         pelayanan.setPelaksana(pelaksana);
-
-        Calendar tanggal = txtPelayananTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
         pelayanan.setTanggal(new Date(lTime));
         
         return pelayanan;
@@ -290,6 +291,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel19 = new javax.swing.JLabel();
         txtPelayananTanggal = new datechooser.beans.DateChooserCombo();
         btnSimpan = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TAMBAH TAGIHAN");
@@ -300,7 +302,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel1.setLabelFor(txtKeyword);
         jLabel1.setText("KATA KUNCI");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 90, 80, 25);
+        jLabel1.setBounds(20, 110, 80, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -313,7 +315,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(txtKeyword);
-        txtKeyword.setBounds(110, 90, 770, 25);
+        txtKeyword.setBounds(110, 110, 770, 25);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -334,8 +338,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jScrollPane1.setViewportView(tblCari);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 130, 860, 154);
+        jScrollPane1.setBounds(20, 150, 860, 154);
 
+        pnlPemakaian.setBackground(Utama.colorTransparentPanel);
         pnlPemakaian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PEMAKAIAN OBAT/BHP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPemakaian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -368,8 +373,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPemakaian.add(txtPemakaianTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 270, 25));
 
         getContentPane().add(pnlPemakaian);
-        pnlPemakaian.setBounds(20, 290, 860, 240);
+        pnlPemakaian.setBounds(20, 310, 450, 240);
 
+        pnlPelayanan.setBackground(Utama.colorTransparentPanel);
         pnlPelayanan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PELAYANAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPelayanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -400,7 +406,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         jLabel17.setText("Kelas Tindakan");
         pnlPelayanan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 25));
         pnlPelayanan.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 860, 10));
-        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 860, 10));
+        pnlPelayanan.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 450, 10));
 
         txtPelayananTindakanNama.setEditable(false);
         pnlPelayanan.add(txtPelayananTindakanNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 270, 25));
@@ -437,7 +443,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
         pnlPelayanan.add(txtPelayananTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 25));
 
         getContentPane().add(pnlPelayanan);
-        pnlPelayanan.setBounds(20, 290, 860, 300);
+        pnlPelayanan.setBounds(20, 310, 450, 300);
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -446,7 +452,12 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
             }
         });
         getContentPane().add(btnSimpan);
-        btnSimpan.setBounds(790, 600, 80, 25);
+        btnSimpan.setBounds(480, 320, 80, 25);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_tagihan.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(0, 0, 900, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -468,6 +479,9 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         try {
+            if (pasien == null)
+                throw new ServiceException("Tidak bisa menambah tagihan. Silahkan memilih pasien terlebih dahulu.");
+            
             if (clsDomain.equals(BahanHabisPakai.class) || clsDomain.equals(ObatFarmasi.class) || clsDomain.equals(Barang.class)) {
                 pemakaian = getPemakaian();
                 pemakaianService.simpan(pemakaian);
@@ -555,6 +569,7 @@ public class TambahTagihan extends JFrame implements  TindakanFrame, UnitFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;

@@ -10,11 +10,12 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.KategoriService;
 import com.dbsys.rs.connector.service.PegawaiServices;
 import com.dbsys.rs.connector.service.UnitService;
-import com.dbsys.rs.lib.entity.Dokter;
-import com.dbsys.rs.lib.entity.KategoriTindakan;
-import com.dbsys.rs.lib.entity.Pegawai;
-import com.dbsys.rs.lib.entity.Perawat;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Dokter;
+import com.dbsys.rs.client.entity.KategoriTindakan;
+import com.dbsys.rs.client.entity.Pegawai;
+import com.dbsys.rs.client.entity.Perawat;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -149,6 +150,7 @@ public class Pencarian extends JFrame {
         });
         getContentPane().add(btnPilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 80, 25));
 
+        pnlKategori.setBackground(Utama.colorTransparentPanel);
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "TAMBAH KATEGORI"));
         pnlKategori.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -176,6 +178,7 @@ public class Pencarian extends JFrame {
 
         getContentPane().add(pnlKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 460, 109));
 
+        chkTambah.setBackground(Utama.colorTransparentPanel);
         chkTambah.setText("Tambah");
         chkTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

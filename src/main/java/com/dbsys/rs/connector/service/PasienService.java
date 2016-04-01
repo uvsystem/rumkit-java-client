@@ -11,18 +11,18 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pasien.KeadaanPasien;
-import com.dbsys.rs.lib.entity.Pasien.Pendaftaran;
-import com.dbsys.rs.lib.entity.Penduduk;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pasien.KeadaanPasien;
+import com.dbsys.rs.client.entity.Pasien.Pendaftaran;
+import com.dbsys.rs.client.entity.Penduduk;
+import com.dbsys.rs.client.entity.Unit;
 
 public class PasienService extends AbstractService {
 
@@ -165,11 +165,25 @@ public class PasienService extends AbstractService {
         return message.getList();
     }
     
+    public List<Pasien> get(Date awal, Date akhir, Pasien.Pendaftaran pendaftaran) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<ListEntityRestMessage<Pasien>> response;
+        response = restTemplate.exchange("{service}/pasien/{awal}/to/{akhir}/pendaftaran/{pendaftaran}", HttpMethod.GET, entity, 
+                new ParameterizedTypeReference<ListEntityRestMessage<Pasien>>() {}, 
+                service, awal, akhir, pendaftaran);
+
+        ListEntityRestMessage<Pasien> message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+        return message.getList();
+    }
+    
     public List<Pasien> getByMedrek(String nomorMedrek) throws ServiceException {
         HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
 
         ResponseEntity<ListEntityRestMessage<Pasien>> response;
-        response = restTemplate.exchange("{service}/pasien/medrek/{medrek}", HttpMethod.GET, entity, 
+        response = restTemplate.exchange("{service}/pasien/medrek/{medrek}/tunggakan", HttpMethod.GET, entity, 
                 new ParameterizedTypeReference<ListEntityRestMessage<Pasien>>() {}, 
                 service, nomorMedrek);
 
@@ -250,5 +264,29 @@ public class PasienService extends AbstractService {
         if (message.getTipe().equals(Type.ERROR))
             throw new ServiceException(message.getMessage());
         return message.getList();
+    }
+
+    public void masuk(String kode, Long idUnit) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{service}/pasien/{kode}/unit/{unit}", HttpMethod.PUT, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, kode, idUnit);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
+    }
+
+    public void keluar(String kode) throws ServiceException {
+        HttpEntity<Pasien> entity = new HttpEntity<>(getHeaders());
+
+        ResponseEntity<RestMessage> response;
+        response = restTemplate.exchange("{service}/pasien/{kode}/unit", HttpMethod.PUT, entity, 
+                new ParameterizedTypeReference<RestMessage>() {}, service, kode);
+
+        RestMessage message = response.getBody();
+        if (message.getTipe().equals(Type.ERROR))
+            throw new ServiceException(message.getMessage());
     }
 }

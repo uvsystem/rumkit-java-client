@@ -25,27 +25,27 @@ import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
 import com.dbsys.rs.connector.service.UnitService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Apoteker;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.Dokter;
-import com.dbsys.rs.lib.entity.KategoriTindakan;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
-import com.dbsys.rs.lib.entity.Operator;
-import com.dbsys.rs.lib.entity.Operator.Role;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pegawai;
-import com.dbsys.rs.lib.entity.Pekerja;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Penduduk;
-import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
-import com.dbsys.rs.lib.entity.Perawat;
-import com.dbsys.rs.lib.entity.Tindakan;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Apoteker;
+import com.dbsys.rs.client.entity.BahanHabisPakai;
+import com.dbsys.rs.client.entity.Barang;
+import com.dbsys.rs.client.entity.Dokter;
+import com.dbsys.rs.client.entity.KategoriTindakan;
+import com.dbsys.rs.client.entity.ObatFarmasi;
+import com.dbsys.rs.client.entity.Operator;
+import com.dbsys.rs.client.entity.Operator.Role;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pegawai;
+import com.dbsys.rs.client.entity.Pekerja;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Penduduk;
+import com.dbsys.rs.client.entity.Penduduk.Kelamin;
+import com.dbsys.rs.client.entity.Perawat;
+import com.dbsys.rs.client.entity.Tindakan;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.awt.Color;
 import java.sql.Date;
 import java.util.Calendar;
@@ -73,6 +73,8 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
     private final PemakaianEventController pemakaianEventController;
 
     private final TokenService tokenService = TokenService.getInstance();
+    
+    private final Color colorTransparentPanel = new Color(255, 255, 255, 50);
     
     /**
      * Creates new form admin
@@ -1351,7 +1353,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void setComponentEnabled(boolean enabled) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
     
@@ -1422,7 +1424,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
         @Override
         public void setComponentEnabled(boolean enabled) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
     
@@ -1773,6 +1775,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlPenduduk.setBackground(colorTransparentPanel);
         pnlPenduduk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PENDUDUK / REKAM MEDIK", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlPenduduk.setBackground(new Color(0,0,0,20));
         pnlPenduduk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1837,6 +1840,7 @@ public class Administrator extends javax.swing.JFrame implements  UnitFrame {
 
         pnlPenduduk.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 1050, 310));
 
+        jPanel4.setBackground(colorTransparentPanel);
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pencarian"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

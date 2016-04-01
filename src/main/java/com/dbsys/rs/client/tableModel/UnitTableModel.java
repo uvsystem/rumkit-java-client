@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,7 +10,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Bramwell Kasaedja
  */
 public class UnitTableModel extends DefaultTableModel {
-    private List<Unit> listUnit;
+
+    private final List<Unit> listUnit;
     
     public UnitTableModel(List<Unit> list){
         super();

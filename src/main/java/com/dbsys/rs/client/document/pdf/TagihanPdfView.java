@@ -1,9 +1,9 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Pasien;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Pasien;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -115,14 +115,14 @@ public class TagihanPdfView extends  AbstractPdfView {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getUnit(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, jumlahTagihan.toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(jumlahTagihan), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tanggungan.toString(), align, 1, fontContent, Rectangle.BOX);
             
             total += jumlahTagihan;
         }
 
         insertCell(table, "Total", Element.ALIGN_RIGHT, 4, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format( ": Rp %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format( ": Rp %s", numberFormat.format(total)), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

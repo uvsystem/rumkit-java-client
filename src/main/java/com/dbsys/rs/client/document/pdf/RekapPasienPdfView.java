@@ -1,8 +1,9 @@
 package com.dbsys.rs.client.document.pdf;
 
 import static com.dbsys.rs.client.document.pdf.AbstractPdfView.addEmptyLine;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.Pasien;
+
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.entity.Pasien;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -50,7 +51,7 @@ public class RekapPasienPdfView extends AbstractPdfView {
 
         doc.add(paragraph);
 
-        name = String.format("rekap-barang-%s-%s", DateUtil.getDate(), DateUtil.getTime());
+        name = String.format("rekap-pasien-%s-%s", DateUtil.getDate(), DateUtil.getTime());
         
         return doc;
     }
@@ -84,7 +85,7 @@ public class RekapPasienPdfView extends AbstractPdfView {
     }
     
     private void createContent(Paragraph paragraph, List<Pasien> list) throws DocumentException {
-        float columnWidths[] = {5f, 5f, 10f, 5f, 5f, 5f};
+        float columnWidths[] = {5f, 5f, 10f, 5f, 5f, 5f, 5f};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(tablePercentage);
 
@@ -94,16 +95,34 @@ public class RekapPasienPdfView extends AbstractPdfView {
         insertCell(table, "Tanggal", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Tagihan", align, 1, fontHeader, Rectangle.BOX);
         insertCell(table, "Pembayaran", align, 1, fontHeader, Rectangle.BOX);
+        insertCell(table, "Tunggakan", align, 1, fontHeader, Rectangle.BOX);
         table.setHeaderRows(1);
 
+        Long totalTunggakan = 0L;
         for (Pasien pasien : list) {
             insertCell(table, pasien.getKode(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getKodePenduduk(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, pasien.getTanggalMasuk().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pasien.getTotalTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, pasien.getCicilan().toString(), align, 1, fontContent, Rectangle.BOX);
+            
+            Long totalTagihan = 0L;
+            if ( pasien.getTotalTagihan() != null)
+                totalTagihan = pasien.getTotalTagihan();
+            insertCell(table, numberFormat.format(totalTagihan), align, 1, fontContent, Rectangle.BOX);
+
+            Long cicilan = 0L;
+            if ( pasien.getCicilan() != null)
+                cicilan = pasien.getCicilan();
+            insertCell(table, numberFormat.format(cicilan), align, 1, fontContent, Rectangle.BOX);
+
+            Long tunggakan = totalTagihan - cicilan;
+            insertCell(table, numberFormat.format(tunggakan), align, 1, fontContent, Rectangle.BOX);
+            
+            totalTunggakan += tunggakan;
         }
+
+        insertCell(table, "Total Tunggakan : ", align, 6, fontContent, Rectangle.NO_BORDER);
+        insertCell(table, numberFormat.format(totalTunggakan), align, 1, fontContent, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

@@ -8,10 +8,11 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Tindakan;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Tindakan;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -45,19 +46,35 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
     }
     
     private void setDetailPasien(final Pasien pasien) {
-        txtPasienKodePenduduk.setText(pasien.getKodePenduduk());
-        txtPasienNik.setText(pasien.getNik());
-        txtPasienNama.setText(pasien.getNama());
-        txtPasienKelamin.setText(pasien.getKelamin().toString());
-        txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
-        txtPasienDarah.setText(pasien.getDarah());
-        txtPasienAgama.setText(pasien.getAgama());
-        txtPasienTelepon.setText(pasien.getTelepon());
-        txtPasienTanggungan.setText(pasien.getPenanggung().toString());
-        txtPasienStatus.setText(pasien.getStatus().toString());
-        txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
-        txtPasienTipe.setText(pasien.getTipePerawatan().toString());
-        txtPasienKelas.setText(pasien.getKelas().toString());
+        if (pasien != null) {
+            txtPasienKodePenduduk.setText(pasien.getKodePenduduk());
+            txtPasienNik.setText(pasien.getNik());
+            txtPasienNama.setText(pasien.getNama());
+            txtPasienKelamin.setText(pasien.getKelamin().toString());
+            txtPasienTanggalLahir.setText(pasien.getTanggalLahir().toString());
+            txtPasienDarah.setText(pasien.getDarah());
+            txtPasienAgama.setText(pasien.getAgama());
+            txtPasienTelepon.setText(pasien.getTelepon());
+            txtPasienTanggungan.setText(pasien.getPenanggung().toString());
+            txtPasienTanggalMasuk.setText(pasien.getTanggalMasuk().toString());
+            txtPasienTipe.setText(pasien.getTipePerawatan().toString());
+            txtPasienKelas.setText(pasien.getKelas().toString());
+        } else {
+            txtPasienKodePenduduk.setText(null);
+            txtPasienNik.setText(null);
+            txtPasienNama.setText(null);
+            txtPasienKelamin.setText(null);
+            txtPasienTanggalLahir.setText(null);
+            txtPasienDarah.setText(null);
+            txtPasienAgama.setText(null);
+            txtPasienTelepon.setText(null);
+            txtPasienTanggungan.setText(null);
+            txtPasienTanggalMasuk.setText(null);
+            txtPasienTipe.setText(null);
+            txtPasienKelas.setText(null);
+        }
+        
+        this.pasien = pasien;
     }
     
     private void loadTabelTindakan(final Pasien pasien) throws ServiceException {
@@ -117,7 +134,6 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -129,7 +145,6 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         txtPasienAgama = new javax.swing.JTextField();
         txtPasienTelepon = new javax.swing.JTextField();
         txtPasienKelamin = new javax.swing.JTextField();
-        txtPasienStatus = new javax.swing.JTextField();
         txtPasienTanggalMasuk = new javax.swing.JTextField();
         txtPasienTanggungan = new javax.swing.JTextField();
         txtPasienTipe = new javax.swing.JTextField();
@@ -142,6 +157,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,8 +166,11 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlTindakan.setBackground(Utama.colorTransparentPanel);
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PELAYANAN TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlTindakan.setLayout(null);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,6 +218,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         getContentPane().add(pnlTindakan);
         pnlTindakan.setBounds(20, 180, 810, 580);
 
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlCari.setLayout(null);
 
@@ -222,6 +242,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         getContentPane().add(pnlCari);
         pnlCari.setBounds(850, 180, 400, 45);
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setBackground(new Color(0,0,0,20));
         pnlDetail.setLayout(null);
@@ -230,7 +251,7 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         pnlDetail.add(jLabel4);
         jLabel4.setBounds(20, 30, 110, 25);
 
-        jLabel5.setText("NIK");
+        jLabel5.setText("NO. JAMINAN");
         pnlDetail.add(jLabel5);
         jLabel5.setBounds(20, 60, 110, 25);
 
@@ -262,21 +283,17 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         pnlDetail.add(jLabel12);
         jLabel12.setBounds(20, 270, 110, 25);
 
-        jLabel16.setText("STATUS");
-        pnlDetail.add(jLabel16);
-        jLabel16.setBounds(20, 300, 110, 25);
-
         jLabel15.setText("TANGGAL MASUK");
         pnlDetail.add(jLabel15);
-        jLabel15.setBounds(20, 330, 110, 25);
+        jLabel15.setBounds(20, 300, 110, 25);
 
         jLabel14.setText("KELAS");
         pnlDetail.add(jLabel14);
-        jLabel14.setBounds(20, 390, 110, 25);
+        jLabel14.setBounds(20, 360, 110, 25);
 
         jLabel17.setText("PERAWATAN");
         pnlDetail.add(jLabel17);
-        jLabel17.setBounds(20, 360, 110, 25);
+        jLabel17.setBounds(20, 330, 110, 25);
 
         txtPasienKodePenduduk.setEditable(false);
         txtPasienKodePenduduk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -318,15 +335,10 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
         pnlDetail.add(txtPasienKelamin);
         txtPasienKelamin.setBounds(140, 120, 240, 25);
 
-        txtPasienStatus.setEditable(false);
-        txtPasienStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlDetail.add(txtPasienStatus);
-        txtPasienStatus.setBounds(140, 300, 240, 25);
-
         txtPasienTanggalMasuk.setEditable(false);
         txtPasienTanggalMasuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDetail.add(txtPasienTanggalMasuk);
-        txtPasienTanggalMasuk.setBounds(140, 330, 240, 25);
+        txtPasienTanggalMasuk.setBounds(140, 300, 240, 25);
 
         txtPasienTanggungan.setEditable(false);
         txtPasienTanggungan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -335,14 +347,14 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
 
         txtPasienTipe.setEditable(false);
         pnlDetail.add(txtPasienTipe);
-        txtPasienTipe.setBounds(140, 360, 240, 25);
+        txtPasienTipe.setBounds(140, 330, 240, 25);
 
         txtPasienKelas.setEditable(false);
         pnlDetail.add(txtPasienKelas);
-        txtPasienKelas.setBounds(140, 390, 240, 25);
+        txtPasienKelas.setBounds(140, 360, 240, 25);
 
         getContentPane().add(pnlDetail);
-        pnlDetail.setBounds(850, 230, 400, 440);
+        pnlDetail.setBounds(850, 230, 400, 410);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -381,6 +393,15 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
 
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1270, 30);
+
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReset);
+        btnReset.setBounds(1170, 650, 80, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_poliklinik.png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -447,8 +468,10 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
     private void txtPasienKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasienKodeFocusLost
         String keyword = txtPasienKode.getText();
         
-        if (keyword.equals(""))
+        if (keyword.equals("")) {
+            setDetailPasien(null); // reset form
             return;
+        }
         
         try {
             pasien = pasienService.get(keyword);
@@ -471,8 +494,13 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
             btnTindakanTambah.requestFocus();
     }//GEN-LAST:event_txtPasienKodeKeyPressed
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        setDetailPasien(null);
+    }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanTambah;
     private javax.swing.JButton btnTindakanUpdate;
@@ -483,7 +511,6 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -511,7 +538,6 @@ public class PelayananMedik extends javax.swing.JFrame implements TindakanTableF
     private javax.swing.JTextField txtPasienKodePenduduk;
     private javax.swing.JTextField txtPasienNama;
     private javax.swing.JTextField txtPasienNik;
-    private javax.swing.JTextField txtPasienStatus;
     private javax.swing.JTextField txtPasienTanggalLahir;
     private javax.swing.JTextField txtPasienTanggalMasuk;
     private javax.swing.JTextField txtPasienTanggungan;

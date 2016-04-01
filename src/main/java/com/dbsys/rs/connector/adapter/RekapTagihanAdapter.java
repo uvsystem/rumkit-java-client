@@ -1,7 +1,7 @@
 package com.dbsys.rs.connector.adapter;
 
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Unit.TipeUnit;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Unit.TipeUnit;
 
 /**
  *
@@ -18,6 +18,7 @@ public class RekapTagihanAdapter {
     private String unit;
     private Penanggung penanggung;
     private TipeUnit tipe;
+    private Long total;
     
     private String tipeTagihan;
 
@@ -103,6 +104,14 @@ public class RekapTagihanAdapter {
 
     public void setTipeTagihan(String tipeTagihan) {
         this.tipeTagihan = tipeTagihan;
+    }
+    
+    public Long getTotal() {
+        return total;
+    }
+    
+    public void setTotal(Long total) {
+        this.total = total;
     }
     
     public Long getTagihan() {

@@ -1,6 +1,7 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Penduduk;
+import com.dbsys.rs.client.entity.Penduduk;
+
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -36,8 +37,8 @@ public class PendudukTableModel extends AbstractTableModel {
     public String getColumnName(int column){
         switch(column){
             case 0:return "NAMA";
-            case 1:return "NIK";
-            case 2:return "KODE";
+            case 1:return "NOMOR JAMINAN";
+            case 2:return "NOMOR REKAM MEDIK";
             default: return "";
         }
     }

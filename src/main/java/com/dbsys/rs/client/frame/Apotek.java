@@ -11,13 +11,15 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PemakaianService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pemakaian;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pemakaian;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -195,6 +197,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlCari.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -216,6 +219,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         getContentPane().add(pnlCari);
         pnlCari.setBounds(860, 180, 400, 60);
 
+        pnlPasien.setBackground(Utama.colorTransparentPanel);
         pnlPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlPasien.setLayout(null);
 
@@ -302,6 +306,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         getContentPane().add(pnlPasien);
         pnlPasien.setBounds(860, 250, 400, 340);
 
+        pnlResep.setBackground(Utama.colorTransparentPanel);
         pnlResep.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR OBAT PASIEN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlResep.setLayout(null);
 
@@ -382,7 +387,8 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_logout.png"))); // NOI18N
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnLogout.setText("LOGOUT");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setMaximumSize(new java.awt.Dimension(80, 21));
@@ -395,7 +401,7 @@ public class Apotek extends javax.swing.JFrame implements BarangTableFrame {
         jToolBar1.add(btnLogout);
 
         btnGudang.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        btnGudang.setText("GUDANG");
+        btnGudang.setText("STOK");
         btnGudang.setFocusable(false);
         btnGudang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGudang.setMaximumSize(new java.awt.Dimension(80, 19));

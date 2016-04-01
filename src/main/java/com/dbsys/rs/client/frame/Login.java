@@ -3,10 +3,11 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.Credential;
-import com.dbsys.rs.lib.entity.Operator.Role;
-import com.dbsys.rs.lib.entity.Token;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.Credential;
+import com.dbsys.rs.client.entity.Operator.Role;
+import com.dbsys.rs.client.entity.Token;
+import com.dbsys.rs.client.entity.Unit;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -124,7 +125,11 @@ public class Login extends javax.swing.JFrame {
             } else if (token.getTipe().equals(Unit.TipeUnit.GUDANG_FARMASI)) {
                 new GudangFarmasi().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.RUANG_PERAWATAN)) {
-                new RuangPerawatan().setVisible(true);
+                if (token.getNamaUnit().equals("NICU")) {
+                    new Ugd("/com/dbsys/rs/client/images/bg_icu.png").setVisible(true);
+                } else {
+                    new RuangPerawatan().setVisible(true);
+                }
             } else if (token.getTipe().equals(Unit.TipeUnit.ICU)) {
                 new RuangPerawatan().setVisible(true);
             } else if (token.getTipe().equals(Unit.TipeUnit.UGD)) {

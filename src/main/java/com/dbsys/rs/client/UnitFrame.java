@@ -1,6 +1,6 @@
 package com.dbsys.rs.client;
 
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.entity.Unit;
 
 /**
  *

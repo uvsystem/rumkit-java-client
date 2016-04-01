@@ -1,7 +1,7 @@
 package com.dbsys.rs.client.document.pdf;
 
 import com.dbsys.rs.client.document.DocumentView;
-import com.dbsys.rs.lib.DateUtil;
+import com.dbsys.rs.client.DateUtil;
 import java.sql.Date;
 
 import com.lowagie.text.Document;
@@ -15,6 +15,8 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.awt.Color;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public abstract class AbstractPdfView implements DocumentView {
     protected int fontTitleSize = 14;
@@ -41,6 +43,11 @@ public abstract class AbstractPdfView implements DocumentView {
     protected float minimumCellHeight = 10f;
     
     protected String name;
+
+    /**
+     * Untuk format angka.
+     */
+    protected NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
 
     protected abstract void createTitle(Paragraph paragraph) throws DocumentException;
 

@@ -17,15 +17,16 @@ import com.dbsys.rs.connector.service.PembayaranService;
 import com.dbsys.rs.connector.service.ReportService;
 import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Pembayaran;
-import com.dbsys.rs.lib.entity.Stok;
-import com.dbsys.rs.lib.entity.Tagihan;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Pembayaran;
+import com.dbsys.rs.client.entity.StokKembali;
+import com.dbsys.rs.client.entity.Tagihan;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private boolean isPrintPembayaranAvailable;
     private Long total;
 
-    private List<Stok> listStokKembali;
+    private List<StokKembali> listStokKembali;
     private List<Tagihan> listTagihan;
 
     /**
@@ -66,6 +67,9 @@ public class LoketPembayaran extends javax.swing.JFrame {
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
+        
+        btnRekapPelayanan.setVisible(false);
+        btnRekapPemakaian.setVisible(false);
     }
     
     private Tagihan getTagihan(JTable table) {
@@ -228,10 +232,13 @@ public class LoketPembayaran extends javax.swing.JFrame {
         lblUnit = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
+        btnRekapTagihanUmum = new javax.swing.JButton();
+        btnRekapTagihanBpjs = new javax.swing.JButton();
+        btnRekapPembayaran = new javax.swing.JButton();
+        btnUbahPasien = new javax.swing.JButton();
+        btnCetakTunggakanPasien = new javax.swing.JButton();
         btnRekapPemakaian = new javax.swing.JButton();
         btnRekapPelayanan = new javax.swing.JButton();
-        btnUbahPasien = new javax.swing.JButton();
-        btnCetakPasienByMedrek = new javax.swing.JButton();
         pnlKeluar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbPasienKeadaan = new javax.swing.JComboBox();
@@ -249,6 +256,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlPencarian.setBackground(Utama.colorTransparentPanel);
         pnlPencarian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "CARI PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPencarian.setLayout(null);
 
@@ -272,13 +280,17 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(pnlPencarian);
         pnlPencarian.setBounds(860, 110, 400, 60);
 
+        tabData.setBackground(Utama.colorTransparentPanel);
         tabData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabDataMouseClicked(evt);
             }
         });
 
+        pnlMenunggak.setBackground(Utama.colorTransparentPanel);
         pnlMenunggak.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setBackground(Utama.colorTransparentPanel);
 
         tblMenunggak.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,6 +312,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         pnlMenunggak.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, 800, 450));
 
+        jPanel1.setBackground(Utama.colorTransparentPanel);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -329,7 +342,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         tabData.addTab("TAGIHAN MENUNGGAK", pnlMenunggak);
 
+        pnlBayar.setBackground(Utama.colorTransparentPanel);
         pnlBayar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setBackground(Utama.colorTransparentPanel);
 
         tblBayar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -351,6 +367,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
 
         pnlBayar.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 815, 450));
 
+        jPanel2.setBackground(Utama.colorTransparentPanel);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBATALAN MEMBAYAR TAGIHAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -379,6 +396,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         pnlBayar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 810, 60));
 
         tabData.addTab("BAYAR SEKARANG", pnlBayar);
+
+        pnlSemua.setBackground(Utama.colorTransparentPanel);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblSemua.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -416,6 +437,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         );
 
         tabData.addTab("SEMUA TAGIHAN", pnlSemua);
+
+        pnlStok.setBackground(Utama.colorTransparentPanel);
+
+        scrollObat.setBackground(Utama.colorTransparentPanel);
 
         tblStokKembali.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -457,6 +482,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(tabData);
         tabData.setBounds(10, 180, 840, 580);
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setLayout(null);
 
@@ -568,6 +594,72 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnLogout);
 
+        btnRekapTagihanUmum.setText("REKAP TAGIHAN UMUM");
+        btnRekapTagihanUmum.setFocusable(false);
+        btnRekapTagihanUmum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapTagihanUmum.setMaximumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanUmum.setMinimumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanUmum.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapTagihanUmum.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapTagihanUmum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapTagihanUmumActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapTagihanUmum);
+
+        btnRekapTagihanBpjs.setText("REKAP TAGIHAN BPJS");
+        btnRekapTagihanBpjs.setFocusable(false);
+        btnRekapTagihanBpjs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapTagihanBpjs.setMaximumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanBpjs.setMinimumSize(new java.awt.Dimension(120, 21));
+        btnRekapTagihanBpjs.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapTagihanBpjs.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapTagihanBpjs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapTagihanBpjsActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapTagihanBpjs);
+
+        btnRekapPembayaran.setText("REKAP PEMBAYARAN");
+        btnRekapPembayaran.setFocusable(false);
+        btnRekapPembayaran.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRekapPembayaran.setMaximumSize(new java.awt.Dimension(110, 21));
+        btnRekapPembayaran.setMinimumSize(new java.awt.Dimension(100, 21));
+        btnRekapPembayaran.setPreferredSize(new java.awt.Dimension(100, 21));
+        btnRekapPembayaran.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRekapPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRekapPembayaranActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRekapPembayaran);
+
+        btnUbahPasien.setText("UBAH DATA PASIEN");
+        btnUbahPasien.setFocusable(false);
+        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnUbahPasien);
+
+        btnCetakTunggakanPasien.setText("TUNGGAKAN PASIEN");
+        btnCetakTunggakanPasien.setFocusable(false);
+        btnCetakTunggakanPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetakTunggakanPasien.setMaximumSize(new java.awt.Dimension(120, 20));
+        btnCetakTunggakanPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetakTunggakanPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakTunggakanPasienActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetakTunggakanPasien);
+
         btnRekapPemakaian.setText("REKAP PEMAKAIAN");
         btnRekapPemakaian.setFocusable(false);
         btnRekapPemakaian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -596,33 +688,10 @@ public class LoketPembayaran extends javax.swing.JFrame {
         });
         jToolBar1.add(btnRekapPelayanan);
 
-        btnUbahPasien.setText("UBAH DATA PASIEN");
-        btnUbahPasien.setFocusable(false);
-        btnUbahPasien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnUbahPasien.setMaximumSize(new java.awt.Dimension(120, 20));
-        btnUbahPasien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnUbahPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahPasienActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnUbahPasien);
-
-        btnCetakPasienByMedrek.setText("DAFTAR PASIEN");
-        btnCetakPasienByMedrek.setFocusable(false);
-        btnCetakPasienByMedrek.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCetakPasienByMedrek.setMaximumSize(new java.awt.Dimension(120, 20));
-        btnCetakPasienByMedrek.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCetakPasienByMedrek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakPasienByMedrekActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCetakPasienByMedrek);
-
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
+        pnlKeluar.setBackground(Utama.colorTransparentPanel);
         pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN KELUAR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlKeluar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -643,6 +712,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         getContentPane().add(pnlKeluar);
         pnlKeluar.setBounds(860, 630, 400, 90);
 
+        pnlPembayaran.setBackground(Utama.colorTransparentPanel);
         pnlPembayaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PEMBAYARAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPembayaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -921,7 +991,7 @@ public class LoketPembayaran extends javax.swing.JFrame {
         new DetailPasien().setVisible(true);
     }//GEN-LAST:event_btnUbahPasienActionPerformed
 
-    private void btnCetakPasienByMedrekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienByMedrekActionPerformed
+    private void btnCetakTunggakanPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakTunggakanPasienActionPerformed
         String nomorMedrek = JOptionPane.showInputDialog(this, "Masukan Nomor Rekam Medik");
         if (nomorMedrek == null || nomorMedrek.equals("")) {
             JOptionPane.showMessageDialog(this, "Silahkan memasukan nomor rekam medik pasien");
@@ -943,7 +1013,34 @@ public class LoketPembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
-    }//GEN-LAST:event_btnCetakPasienByMedrekActionPerformed
+    }//GEN-LAST:event_btnCetakTunggakanPasienActionPerformed
+
+    private void btnRekapTagihanUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapTagihanUmumActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Tagihan.class, Penanggung.UMUM);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapTagihanUmumActionPerformed
+
+    private void btnRekapTagihanBpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapTagihanBpjsActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Tagihan.class, Penanggung.BPJS);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapTagihanBpjsActionPerformed
+
+    private void btnRekapPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapPembayaranActionPerformed
+        try {
+            RangeTanggal frame = new RangeTanggal(this, Pembayaran.class);
+            frame.setVisible(true);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRekapPembayaranActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalSemuaTagihan;
@@ -951,13 +1048,16 @@ public class LoketPembayaran extends javax.swing.JFrame {
     private javax.swing.JButton btnBayar;
     private javax.swing.JButton btnBayarSemuaTagihan;
     private javax.swing.JButton btnBayarTagihan;
-    private javax.swing.JButton btnCetakPasienByMedrek;
     private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnCetakTagihan;
+    private javax.swing.JButton btnCetakTunggakanPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienKeluar;
     private javax.swing.JButton btnRekapPelayanan;
     private javax.swing.JButton btnRekapPemakaian;
+    private javax.swing.JButton btnRekapPembayaran;
+    private javax.swing.JButton btnRekapTagihanBpjs;
+    private javax.swing.JButton btnRekapTagihanUmum;
     private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;

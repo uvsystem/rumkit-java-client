@@ -1,8 +1,9 @@
 package com.dbsys.rs.client.tableModel;
 
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Tagihan;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Tagihan;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

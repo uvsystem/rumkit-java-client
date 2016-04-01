@@ -1,67 +1,36 @@
-package com.dbsys.rs.connector.adapter;
+package com.dbsys.rs.client.entity;
 
-import com.dbsys.rs.lib.entity.Pegawai;
-import com.dbsys.rs.lib.entity.Penduduk;
-import com.dbsys.rs.lib.entity.Penduduk.Kelamin;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.dbsys.rs.client.entity.Penduduk.Kelamin;
 import java.sql.Date;
 
-/**
- *
- * @author Deddy Christoper Kakunsi
- */
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "tipe"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = DokterAdapter.class, name = "DOKTER"),
-    @JsonSubTypes.Type(value = PerawatAdapter.class, name = "PERAWAT"),
-    @JsonSubTypes.Type(value = ApotekerAdapter.class, name = "APOTEKER"),
-    @JsonSubTypes.Type(value = PekerjaAdapter.class, name = "PEKERJA"),
-    @JsonSubTypes.Type(value = PegawaiAdapter.class, name = "PEGAWAI")
+    @JsonSubTypes.Type(value = Dokter.class, name = "DOKTER"),
+    @JsonSubTypes.Type(value = Perawat.class, name = "PERAWAT"),
+    @JsonSubTypes.Type(value = Apoteker.class, name = "APOTEKER"),
+    @JsonSubTypes.Type(value = Pekerja.class, name = "PEKERJA"),
+    @JsonSubTypes.Type(value = Pegawai.class, name = "PEGAWAI")
 })
-public class PegawaiAdapter {
+public class Pegawai {
 
     protected Long id;
     protected String nip;
     protected Penduduk penduduk;
 
-    // Untuk JSON buka JPA
-    private String tipePegawai;
-
-    public PegawaiAdapter() {
+    public Pegawai() {
         super();
-        setTipePegawai("PEGAWAI");
+        this.penduduk = new Penduduk();
     }
 
-    public PegawaiAdapter(Pegawai pegawai) {
+    public Pegawai(String name) {
         this();
-        setPegawai(pegawai);
-    }
-    
-    public PegawaiAdapter(String tipePegawai) {
-        super();
-        setTipePegawai(tipePegawai);
-    }
-
-    public String getTipe() {
-        return tipePegawai;
-    }
-
-    public void setTipe(String tipe) {
-        this.tipePegawai = tipe;
-    }
-
-    public String getTipePegawai() {
-        return tipePegawai;
-    }
-
-    public final void setTipePegawai(String tipePegawai) {
-        this.tipePegawai = tipePegawai;
     }
 
     public Long getId() {
@@ -159,20 +128,42 @@ public class PegawaiAdapter {
     public void setTelepon(String telepon) {
         penduduk.setTelepon(telepon);
     }
-    
-    @JsonIgnore
-    public Pegawai getPegawai() {
-        Pegawai pegawai = new Pegawai();
-        pegawai.setId(id);
-        pegawai.setNip(nip);
-        pegawai.setPenduduk(penduduk);
-        
-        return pegawai;
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((nip == null) ? 0 : nip.hashCode());
+        result = prime * result
+                + ((penduduk == null) ? 0 : penduduk.hashCode());
+        return result;
     }
-    
-    public void setPegawai(Pegawai pegawai) {
-        setId(pegawai.getId());
-        setNip(pegawai.getNip());
-        setPenduduk(pegawai.getPenduduk());
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+                return true;
+        if (obj == null)
+                return false;
+        if (getClass() != obj.getClass())
+                return false;
+        Pegawai other = (Pegawai) obj;
+        if (id == null) {
+                if (other.id != null)
+                        return false;
+        } else if (!id.equals(other.id))
+                return false;
+        if (nip == null) {
+                if (other.nip != null)
+                        return false;
+        } else if (!nip.equals(other.nip))
+                return false;
+        if (penduduk == null) {
+                if (other.penduduk != null)
+                        return false;
+        } else if (!penduduk.equals(other.penduduk))
+                return false;
+        return true;
     }
 }

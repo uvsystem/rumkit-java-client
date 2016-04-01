@@ -3,7 +3,6 @@ package com.dbsys.rs.client.frame;
 import com.dbsys.rs.client.document.DocumentView;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
-import com.dbsys.rs.client.document.pdf.RekapPasienPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPegawaiPdfView;
 import com.dbsys.rs.client.document.pdf.RekapPemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.RekapStokPdfView;
@@ -15,13 +14,22 @@ import com.dbsys.rs.connector.adapter.RekapTagihanAdapter;
 import com.dbsys.rs.connector.adapter.RekapUnitAdapter;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.ReportService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.entity.Dokter;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Perawat;
-import com.dbsys.rs.lib.entity.Stok;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.document.pdf.RekapPembayaranPdfView;
+import com.dbsys.rs.client.document.pdf.RekapPendaftaranPdfView;
+import com.dbsys.rs.client.document.pdf.RekapTagihanPdfView;
+import com.dbsys.rs.client.entity.Dokter;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Pembayaran;
+import com.dbsys.rs.client.entity.Perawat;
+import com.dbsys.rs.client.entity.Stok;
+import com.dbsys.rs.client.entity.Tagihan;
+import com.dbsys.rs.client.entity.Unit;
+import com.dbsys.rs.connector.service.PembayaranService;
+import com.dbsys.rs.connector.service.TagihanService;
+
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -45,6 +53,9 @@ public class RangeTanggal extends JFrame {
     private final Map<String, Object> model;
     private DocumentView documentView;
     
+    private Pasien.Pendaftaran pendaftaran;
+    private Penanggung penanggung;
+    
     /**
      * Creates new form FramePasienKeluar
      * 
@@ -67,6 +78,15 @@ public class RangeTanggal extends JFrame {
         
         this.pdfProcessor = new PdfProcessor();
         this.model = new HashMap<>();
+    }
+
+    public RangeTanggal(JFrame frame, Class<?> cls, Penanggung penanggung) throws ServiceException {
+        this(frame, cls);
+        this.penanggung = penanggung;
+    }
+    
+    public void setPendaftaran(Pasien.Pendaftaran pendaftaran) {
+        this.pendaftaran = pendaftaran;
     }
 
     private void rekapUnit(Date awal, Date akhir) throws ServiceException, DocumentException {
@@ -127,14 +147,41 @@ public class RangeTanggal extends JFrame {
     private void rekapPasien(Date awal, Date akhir) throws ServiceException, DocumentException {
         PasienService service = PasienService.getInstance();
 
-        documentView = new RekapPasienPdfView();
+        documentView = new RekapPendaftaranPdfView();
         
-        List<Pasien> list = service.get(awal, akhir);
+        List<Pasien> list = service.get(awal, akhir, pendaftaran);
         model.put("awal", awal);
         model.put("akhir", akhir);
         model.put("list", list);
 
-        pdfProcessor.process(documentView, model, String.format("rekap-pasien-%s.pdf", DateUtil.getTime().hashCode()));
+        pdfProcessor.process(documentView, model, String.format("rekap-pendaftaran-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+    
+    private void rekapTagihan(Date awal, Date akhir) throws ServiceException, DocumentException {
+        TagihanService service = TagihanService.getInstance();
+
+        documentView = new RekapTagihanPdfView();
+        
+        List<Tagihan> list = service.get(awal, akhir, penanggung);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("penanggung", penanggung);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("rekap-tagihan-%s.pdf", DateUtil.getTime().hashCode()));
+    }
+    
+    private void rekapPembayaran(Date awal, Date akhir) throws ServiceException, DocumentException {
+        PembayaranService service = PembayaranService.getInstance();
+
+        documentView = new RekapPembayaranPdfView();
+        
+        List<Pembayaran> list = service.get(awal, akhir);
+        model.put("awal", awal);
+        model.put("akhir", akhir);
+        model.put("list", list);
+
+        pdfProcessor.process(documentView, model, String.format("rekap-pembayaran-%s.pdf", DateUtil.getTime().hashCode()));
     }
     
     /**
@@ -192,8 +239,8 @@ public class RangeTanggal extends JFrame {
             return;
         }
         
-        Date awal = new Date(awalCalendar.getTimeInMillis());
-        Date akhir = new Date(akhirCalendar.getTimeInMillis());
+        Date awal = DateUtil.getDate(awalCalendar);
+        Date akhir = DateUtil.getDate(akhirCalendar);
 
         try {
             
@@ -209,6 +256,10 @@ public class RangeTanggal extends JFrame {
                 rekapPerawat(awal, akhir);
             } else if (Pasien.class.equals(cls)) {
                 rekapPasien(awal, akhir);
+            } else if (Tagihan.class.equals(cls)) {
+                rekapTagihan(awal, akhir);
+            } else if (Pembayaran.class.equals(cls)) {
+                rekapPembayaran(awal, akhir);
             }
             
             this.dispose();

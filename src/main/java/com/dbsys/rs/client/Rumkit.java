@@ -5,7 +5,7 @@ import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.PemakaianPdfView;
 import com.dbsys.rs.client.document.pdf.PembayaranPdfView;
 import com.dbsys.rs.client.frame.Utama;
-import com.dbsys.rs.lib.entity.Dokter;
+import com.dbsys.rs.client.entity.Dokter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.UIManager;

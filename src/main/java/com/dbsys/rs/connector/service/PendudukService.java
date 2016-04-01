@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.RestMessage.Type;
-import com.dbsys.rs.lib.entity.Penduduk;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.RestMessage.Type;
+import com.dbsys.rs.client.entity.Penduduk;
 
 public class PendudukService extends AbstractService {
 

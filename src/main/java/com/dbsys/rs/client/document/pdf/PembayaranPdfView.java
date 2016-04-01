@@ -1,10 +1,10 @@
 package com.dbsys.rs.client.document.pdf;
 
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.Pemakaian;
-import com.dbsys.rs.lib.entity.Pembayaran;
-import com.dbsys.rs.lib.entity.Tagihan;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Pemakaian;
+import com.dbsys.rs.client.entity.Pembayaran;
+import com.dbsys.rs.client.entity.Tagihan;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -100,21 +100,16 @@ public class PembayaranPdfView extends  AbstractPdfView {
         table.setHeaderRows(1);
 
         Float total = 0F;
-        Float totalTagihan = 0F;
         for (Tagihan tagihan : list) {
             insertCell(table, tagihan.getNama(), align, 1, fontContent, Rectangle.BOX);
             insertCell(table, tagihan.getJumlah().toString(), align, 1, fontContent, Rectangle.BOX);
-            insertCell(table, tagihan.getTagihan().toString(), align, 1, fontContent, Rectangle.BOX);
+            insertCell(table, numberFormat.format(tagihan.getTagihan()), align, 1, fontContent, Rectangle.BOX);
             
             total += tagihan.getTagihanCounted();
-            totalTagihan += tagihan.getTagihan();
         }
 
         insertCell(table, "Total Tagihan Pasien", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", total.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
-
-        insertCell(table, "Total Tagihan UMUM + BPJS", Element.ALIGN_RIGHT, 2, fontHeader, Rectangle.NO_BORDER);
-        insertCell(table, String.format(": %s", totalTagihan.toString()), align, 1, fontHeader, Rectangle.NO_BORDER);
+        insertCell(table, String.format(": %s", numberFormat.format(total)), align, 1, fontHeader, Rectangle.NO_BORDER);
 
         paragraph.add(table);
     }

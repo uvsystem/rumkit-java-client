@@ -1,7 +1,6 @@
 package com.dbsys.rs.client.frame;
 
 import com.dbsys.rs.client.EventController;
-import com.dbsys.rs.client.UnitFrame;
 import com.dbsys.rs.client.document.DocumentException;
 import com.dbsys.rs.client.document.pdf.PdfProcessor;
 import com.dbsys.rs.client.document.pdf.RekapBarangPdfView;
@@ -16,15 +15,16 @@ import com.dbsys.rs.connector.service.BarangService;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.StokService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.BahanHabisPakai;
-import com.dbsys.rs.lib.entity.Barang;
-import com.dbsys.rs.lib.entity.ObatFarmasi;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Stok;
-import com.dbsys.rs.lib.entity.StokKembali;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.BahanHabisPakai;
+import com.dbsys.rs.client.entity.Barang;
+import com.dbsys.rs.client.entity.ObatFarmasi;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Stok;
+import com.dbsys.rs.client.entity.StokKembali;
+import com.dbsys.rs.client.entity.Unit;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +38,7 @@ import javax.swing.table.TableModel;
  *
  * @author Deddy Christoper Kakunsi
  */
-public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
+public class GudangFarmasi extends javax.swing.JFrame {
 
     private final TokenService tokenService = TokenService.getInstance();
     private final BarangService barangService = BarangService.getInstance();
@@ -56,7 +56,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private Unit unit;
     
     // Digunakan oleh StokKembali
-    private List<Stok> listKembali;
+    private List<StokKembali> listKembali;
 
     /**
      * Creates new FrameFarmasi
@@ -69,13 +69,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         
         lblOperator.setText(TokenHolder.getNamaOperator());
         lblUnit.setText(TokenHolder.getNamaUnit());
-    }
-    
-    @Override
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-        
-        txtInternalStokUnit.setText(unit.getNama());
     }
 
     private void setDetailBarangEksternal(Barang barang) {
@@ -103,35 +96,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         this.txtEksternalStokTanggal.setSelectedDate(now);
         
         tblEksternal.removeAll();
-        
-        this.barang = barang;
-    }
-
-    private void setDetailBarangInternal(Barang barang) {
-        if (barang == null) {
-            barang = new Barang();
-
-            this.txtInternalHarga.setText(null);
-            this.txtInternalTanggungan.setText(null);
-            this.txtInternalJumlah.setText(null);
-        } else {
-            this.txtInternalHarga.setText(barang.getHarga().toString());
-            this.txtInternalTanggungan.setText(barang.getPenanggung().toString());
-            this.txtInternalJumlah.setText(barang.getJumlah().toString());
-        }
-        
-        this.txtInternalKode.setText(barang.getKode());
-        this.txtInternalNama.setText(barang.getNama());
-        this.txtInternalSatuan.setText(barang.getSatuan());
-
-        this.txtInternalStokJumlah.setText("0");
-        this.txtInternalStokJam.setText(DateUtil.getTime().toString());
-
-        Calendar now = Calendar.getInstance();
-        now.setTime(DateUtil.getDate());
-        this.txtInternalStokTanggal.setSelectedDate(now);
-        
-        tblInternal.removeAll();
         
         this.barang = barang;
     }
@@ -209,25 +173,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         }
     }
     
-    private void reloadTableInternal() {
-        String keyword = txtInternalKeyword.getText();
-        
-        if (keyword.equals(""))
-            return;
-        
-        List<Barang> list = null;
-        try {
-            list = barangService.cari(keyword);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-            BarangTableModel tableModel = new BarangTableModel(list);
-            tblInternal.setModel(tableModel);
-            
-            setDetailBarangInternal(null);
-        }        
-    }
-    
     /**
      * Cari barang.
      * 
@@ -277,7 +222,11 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
             listKembali = new ArrayList<>();
         } finally {
-            StokTableModel tableModel = new StokTableModel(listKembali);
+            List<Stok> list = new ArrayList<>();
+            for (StokKembali sk : listKembali)
+                list.add(sk);
+            
+            StokTableModel tableModel = new StokTableModel(list);
             tblKembali.setModel(tableModel);
             
             setDetailBarangKembali((Barang) null);
@@ -301,7 +250,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         model.put("listKembali", list);
         
         try {
-            pdfProcessor.process(pdfView, model, String.format("E://print//pengembalian-%s.pdf", DateUtil.getTime().hashCode()));
+            pdfProcessor.process(pdfView, model, String.format("pengembalian-%s.pdf", DateUtil.getTime().hashCode()));
         } catch (DocumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -528,35 +477,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         btnEksternalStokMasuk = new javax.swing.JButton();
         btnEksternalStokReset = new javax.swing.JButton();
         btnEksternalStokKeluar = new javax.swing.JButton();
-        pnlStokInternal = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        txtInternalKeyword = new javax.swing.JTextField();
-        pnlInternalDetail = new javax.swing.JPanel();
-        txtInternalKode = new javax.swing.JTextField();
-        txtInternalNama = new javax.swing.JTextField();
-        txtInternalHarga = new javax.swing.JTextField();
-        txtInternalTanggungan = new javax.swing.JTextField();
-        txtInternalSatuan = new javax.swing.JTextField();
-        txtInternalJumlah = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        pnlInternalStok = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        txtInternalStokJam = new javax.swing.JTextField();
-        txtInternalStokJumlah = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtInternalStokUnit = new javax.swing.JTextField();
-        txtInternalStokTanggal = new datechooser.beans.DateChooserCombo();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblInternal = new javax.swing.JTable();
-        btnInternalStokReset = new javax.swing.JButton();
-        btnInternalStokKeluar = new javax.swing.JButton();
         pnlStokKembali = new javax.swing.JPanel();
         pnlInternalDetail1 = new javax.swing.JPanel();
         txtKembaliKode = new javax.swing.JTextField();
@@ -652,12 +572,14 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        paneBarang.setBackground(Utama.colorTransparentPanel);
         paneBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paneBarangMouseClicked(evt);
             }
         });
 
+        pnlStokEksternal.setBackground(Utama.colorTransparentPanel);
         pnlStokEksternal.setLayout(null);
 
         jLabel6.setText("NAMA");
@@ -675,87 +597,89 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             }
         });
         pnlStokEksternal.add(txtEksternalKeyword);
-        txtEksternalKeyword.setBounds(120, 10, 820, 25);
+        txtEksternalKeyword.setBounds(120, 10, 540, 25);
 
+        pnlEksternalDetail.setBackground(Utama.colorTransparentPanel);
         pnlEksternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlEksternalDetail.setLayout(null);
 
         txtEksternalKode.setEditable(false);
         pnlEksternalDetail.add(txtEksternalKode);
-        txtEksternalKode.setBounds(140, 30, 420, 25);
+        txtEksternalKode.setBounds(130, 20, 390, 25);
 
         txtEksternalNama.setEditable(false);
         pnlEksternalDetail.add(txtEksternalNama);
-        txtEksternalNama.setBounds(140, 60, 420, 25);
+        txtEksternalNama.setBounds(130, 50, 390, 25);
 
         txtEksternalHarga.setEditable(false);
         txtEksternalHarga.setToolTipText("");
         pnlEksternalDetail.add(txtEksternalHarga);
-        txtEksternalHarga.setBounds(140, 90, 420, 25);
+        txtEksternalHarga.setBounds(130, 80, 390, 25);
 
         txtEksternalTanggungan.setEditable(false);
         txtEksternalTanggungan.setToolTipText("");
         pnlEksternalDetail.add(txtEksternalTanggungan);
-        txtEksternalTanggungan.setBounds(140, 120, 420, 25);
+        txtEksternalTanggungan.setBounds(130, 110, 390, 25);
 
         txtEksternalSatuan.setEditable(false);
         pnlEksternalDetail.add(txtEksternalSatuan);
-        txtEksternalSatuan.setBounds(140, 180, 420, 25);
+        txtEksternalSatuan.setBounds(130, 170, 390, 25);
 
         txtEksternalJumlah.setEditable(false);
         pnlEksternalDetail.add(txtEksternalJumlah);
-        txtEksternalJumlah.setBounds(140, 150, 420, 25);
+        txtEksternalJumlah.setBounds(130, 140, 390, 25);
 
         jLabel14.setText("Kode");
         pnlEksternalDetail.add(jLabel14);
-        jLabel14.setBounds(30, 30, 90, 14);
+        jLabel14.setBounds(20, 20, 90, 25);
 
         jLabel15.setText("Nama");
         pnlEksternalDetail.add(jLabel15);
-        jLabel15.setBounds(30, 60, 90, 14);
+        jLabel15.setBounds(20, 50, 90, 25);
 
         jLabel16.setText("Harga");
         pnlEksternalDetail.add(jLabel16);
-        jLabel16.setBounds(30, 90, 90, 14);
+        jLabel16.setBounds(20, 80, 90, 25);
 
         jLabel84.setText("Tanggungan");
         pnlEksternalDetail.add(jLabel84);
-        jLabel84.setBounds(30, 120, 90, 14);
+        jLabel84.setBounds(20, 110, 90, 25);
 
         jLabel17.setText("Jumlah");
         pnlEksternalDetail.add(jLabel17);
-        jLabel17.setBounds(30, 150, 90, 14);
+        jLabel17.setBounds(20, 140, 90, 25);
 
         jLabel18.setText("Satuan");
         pnlEksternalDetail.add(jLabel18);
-        jLabel18.setBounds(30, 180, 90, 14);
+        jLabel18.setBounds(20, 170, 90, 25);
 
         pnlStokEksternal.add(pnlEksternalDetail);
-        pnlEksternalDetail.setBounds(20, 310, 590, 220);
+        pnlEksternalDetail.setBounds(680, 50, 540, 220);
 
+        pnlEksternalStok.setBackground(Utama.colorTransparentPanel);
         pnlEksternalStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlEksternalStok.setLayout(null);
 
         jLabel19.setText("Tanggal");
         pnlEksternalStok.add(jLabel19);
-        jLabel19.setBounds(30, 30, 90, 14);
+        jLabel19.setBounds(20, 20, 90, 25);
 
         jLabel20.setText("Jam");
         pnlEksternalStok.add(jLabel20);
-        jLabel20.setBounds(30, 60, 90, 14);
+        jLabel20.setBounds(20, 50, 90, 25);
 
         jLabel21.setText("Jumlah");
         pnlEksternalStok.add(jLabel21);
-        jLabel21.setBounds(30, 90, 90, 14);
+        jLabel21.setBounds(20, 80, 90, 25);
         pnlEksternalStok.add(txtEksternalStokJam);
-        txtEksternalStokJam.setBounds(140, 60, 420, 25);
+        txtEksternalStokJam.setBounds(130, 50, 390, 25);
         pnlEksternalStok.add(txtEksternalStokJumlah);
-        txtEksternalStokJumlah.setBounds(140, 90, 420, 25);
+        txtEksternalStokJumlah.setBounds(130, 80, 390, 25);
         pnlEksternalStok.add(txtEksternalStokTanggal);
-        txtEksternalStokTanggal.setBounds(140, 30, 420, 25);
+        txtEksternalStokTanggal.setBounds(130, 20, 390, 25);
 
         pnlStokEksternal.add(pnlEksternalStok);
-        pnlEksternalStok.setBounds(630, 310, 590, 140);
+        pnlEksternalStok.setBounds(680, 280, 540, 130);
 
         tblEksternal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -776,7 +700,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         jScrollPane2.setViewportView(tblEksternal);
 
         pnlStokEksternal.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 50, 1200, 240);
+        jScrollPane2.setBounds(20, 50, 640, 470);
 
         btnEksternalStokMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_masuk.png"))); // NOI18N
         btnEksternalStokMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -785,7 +709,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokMasuk);
-        btnEksternalStokMasuk.setBounds(960, 10, 80, 30);
+        btnEksternalStokMasuk.setBounds(960, 490, 80, 30);
 
         btnEksternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
         btnEksternalStokReset.addActionListener(new java.awt.event.ActionListener() {
@@ -794,7 +718,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokReset);
-        btnEksternalStokReset.setBounds(1140, 10, 80, 30);
+        btnEksternalStokReset.setBounds(1140, 490, 80, 30);
 
         btnEksternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
         btnEksternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -803,164 +727,14 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             }
         });
         pnlStokEksternal.add(btnEksternalStokKeluar);
-        btnEksternalStokKeluar.setBounds(1050, 10, 80, 30);
+        btnEksternalStokKeluar.setBounds(1050, 490, 80, 30);
 
-        paneBarang.addTab("STOK KELUAR / MASUK", pnlStokEksternal);
+        paneBarang.addTab("STOK  MASUK", pnlStokEksternal);
 
-        pnlStokInternal.setLayout(null);
-
-        jLabel22.setText("NAMA");
-        pnlStokInternal.add(jLabel22);
-        jLabel22.setBounds(20, 10, 90, 25);
-
-        txtInternalKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtInternalKeywordFocusLost(evt);
-            }
-        });
-        txtInternalKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtInternalKeywordKeyPressed(evt);
-            }
-        });
-        pnlStokInternal.add(txtInternalKeyword);
-        txtInternalKeyword.setBounds(120, 10, 910, 25);
-
-        pnlInternalDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlInternalDetail.setLayout(null);
-
-        txtInternalKode.setEditable(false);
-        pnlInternalDetail.add(txtInternalKode);
-        txtInternalKode.setBounds(130, 10, 430, 25);
-
-        txtInternalNama.setEditable(false);
-        pnlInternalDetail.add(txtInternalNama);
-        txtInternalNama.setBounds(130, 40, 430, 25);
-
-        txtInternalHarga.setEditable(false);
-        txtInternalHarga.setToolTipText("");
-        pnlInternalDetail.add(txtInternalHarga);
-        txtInternalHarga.setBounds(130, 70, 430, 25);
-
-        txtInternalTanggungan.setEditable(false);
-        txtInternalTanggungan.setToolTipText("");
-        pnlInternalDetail.add(txtInternalTanggungan);
-        txtInternalTanggungan.setBounds(130, 100, 430, 25);
-
-        txtInternalSatuan.setEditable(false);
-        pnlInternalDetail.add(txtInternalSatuan);
-        txtInternalSatuan.setBounds(130, 160, 430, 25);
-
-        txtInternalJumlah.setEditable(false);
-        pnlInternalDetail.add(txtInternalJumlah);
-        txtInternalJumlah.setBounds(130, 130, 430, 25);
-
-        jLabel23.setText("Kode");
-        pnlInternalDetail.add(jLabel23);
-        jLabel23.setBounds(20, 10, 90, 25);
-
-        jLabel24.setText("Nama");
-        pnlInternalDetail.add(jLabel24);
-        jLabel24.setBounds(20, 40, 90, 25);
-
-        jLabel25.setText("Harga");
-        pnlInternalDetail.add(jLabel25);
-        jLabel25.setBounds(20, 70, 90, 25);
-
-        jLabel85.setText("Tanggungan");
-        pnlInternalDetail.add(jLabel85);
-        jLabel85.setBounds(20, 100, 90, 25);
-
-        jLabel26.setText("Jumlah");
-        pnlInternalDetail.add(jLabel26);
-        jLabel26.setBounds(20, 130, 90, 25);
-
-        jLabel27.setText("Satuan");
-        pnlInternalDetail.add(jLabel27);
-        jLabel27.setBounds(20, 160, 90, 25);
-
-        pnlStokInternal.add(pnlInternalDetail);
-        pnlInternalDetail.setBounds(20, 330, 590, 200);
-
-        pnlInternalStok.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlInternalStok.setLayout(null);
-
-        jLabel28.setText("Tanggal");
-        pnlInternalStok.add(jLabel28);
-        jLabel28.setBounds(20, 10, 90, 25);
-
-        jLabel29.setText("Jam");
-        pnlInternalStok.add(jLabel29);
-        jLabel29.setBounds(20, 40, 90, 25);
-
-        jLabel30.setText("Jumlah");
-        pnlInternalStok.add(jLabel30);
-        jLabel30.setBounds(20, 70, 90, 25);
-        pnlInternalStok.add(txtInternalStokJam);
-        txtInternalStokJam.setBounds(130, 40, 430, 25);
-        pnlInternalStok.add(txtInternalStokJumlah);
-        txtInternalStokJumlah.setBounds(130, 70, 430, 25);
-
-        jLabel3.setText("Unit");
-        pnlInternalStok.add(jLabel3);
-        jLabel3.setBounds(20, 100, 90, 25);
-
-        txtInternalStokUnit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtInternalStokUnitMouseClicked(evt);
-            }
-        });
-        pnlInternalStok.add(txtInternalStokUnit);
-        txtInternalStokUnit.setBounds(130, 100, 430, 25);
-        pnlInternalStok.add(txtInternalStokTanggal);
-        txtInternalStokTanggal.setBounds(130, 10, 430, 25);
-
-        pnlStokInternal.add(pnlInternalStok);
-        pnlInternalStok.setBounds(630, 330, 590, 140);
-
-        tblInternal.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblInternal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblInternalMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblInternal);
-
-        pnlStokInternal.add(jScrollPane3);
-        jScrollPane3.setBounds(20, 50, 1200, 270);
-
-        btnInternalStokReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
-        btnInternalStokReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInternalStokResetActionPerformed(evt);
-            }
-        });
-        pnlStokInternal.add(btnInternalStokReset);
-        btnInternalStokReset.setBounds(1140, 10, 80, 30);
-
-        btnInternalStokKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
-        btnInternalStokKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInternalStokKeluarActionPerformed(evt);
-            }
-        });
-        pnlStokInternal.add(btnInternalStokKeluar);
-        btnInternalStokKeluar.setBounds(1050, 10, 80, 30);
-
-        paneBarang.addTab("STOK KE UNIT", pnlStokInternal);
-
+        pnlStokKembali.setBackground(Utama.colorTransparentPanel);
         pnlStokKembali.setLayout(null);
 
+        pnlInternalDetail1.setBackground(Utama.colorTransparentPanel);
         pnlInternalDetail1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalDetail1.setLayout(null);
 
@@ -1017,6 +791,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         pnlStokKembali.add(pnlInternalDetail1);
         pnlInternalDetail1.setBounds(20, 330, 590, 200);
 
+        pnlInternalStok1.setBackground(Utama.colorTransparentPanel);
         pnlInternalStok1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlInternalStok1.setLayout(null);
 
@@ -1141,6 +916,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("STOK KEMBALI DARI PASIEN", pnlStokKembali);
 
+        pnlObat.setBackground(Utama.colorTransparentPanel);
         pnlObat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblObat.setModel(new javax.swing.table.DefaultTableModel(
@@ -1163,6 +939,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlObat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 300));
 
+        jPanel1.setBackground(Utama.colorTransparentPanel);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA OBAT", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(txtObatKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 460, 25));
@@ -1204,6 +981,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 1200, 143));
 
+        jPanel2.setBackground(Utama.colorTransparentPanel);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1242,6 +1020,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         paneBarang.addTab("DATA OBAT", pnlObat);
 
+        pnlBhp.setBackground(Utama.colorTransparentPanel);
         pnlBhp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblBhp.setModel(new javax.swing.table.DefaultTableModel(
@@ -1264,6 +1043,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlBhp.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 310));
 
+        jPanel13.setBackground(Utama.colorTransparentPanel);
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA BAHAN HABIS PAKAI", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1299,6 +1079,7 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
 
         pnlBhp.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1200, 120));
 
+        jPanel17.setBackground(Utama.colorTransparentPanel);
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1409,132 +1190,12 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_gudang.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_apotek.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 1280, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void paneBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paneBarangMouseClicked
-        setDetailBarangEksternal(null);
-        Integer index = paneBarang.getSelectedIndex();
-        setDetailBarangInternal(null);
-        setDetailBarangKembali((Barang) null);
-        obatEventController.onCleanForm();
-        bhpEventController.onCleanForm();
-    }//GEN-LAST:event_paneBarangMouseClicked
-
-    private void txtEksternalKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEksternalKeywordFocusLost
-        reloadTableEksternal();
-    }//GEN-LAST:event_txtEksternalKeywordFocusLost
-
-    private void tblEksternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEksternalMouseClicked
-        Integer index = tblEksternal.getSelectedRow();
-        
-        BarangTableModel tableModel = (BarangTableModel)tblEksternal.getModel();
-        Barang b = (Barang) tableModel.getBarang(index);
-        
-        setDetailBarangEksternal(b);
-    }//GEN-LAST:event_tblEksternalMouseClicked
-
-    private void btnEksternalStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokMasukActionPerformed
-        if (new Long(0).equals(barang.getId())) {
-            JOptionPane.showMessageDialog(this, "Silahkan memilih barang dari tabel");
-            return;
-        }
-        
-        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
-        
-        String jam = txtEksternalStokJam.getText();
-        String jumlah = txtEksternalStokJumlah.getText();
-        
-        try {
-            stokService.masuk(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
-            
-            setDetailBarangEksternal(null);
-            reloadTableEksternal();
-            
-            JOptionPane.showMessageDialog(this, "Berhasil");
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnEksternalStokMasukActionPerformed
-
-    private void btnEksternalStokKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokKeluarActionPerformed
-        if (new Long(0).equals(barang.getId())) {
-            JOptionPane.showMessageDialog(this, "Silahkan memilih barang dari tabel");
-            return;
-        }
-        
-        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
-        
-        String jam = txtEksternalStokJam.getText();
-        String jumlah = txtEksternalStokJumlah.getText();
-        
-        try {
-            stokService.keluar(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
-            
-            setDetailBarangEksternal(null);
-            reloadTableEksternal();
-            
-            JOptionPane.showMessageDialog(this, "Berhasil");
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnEksternalStokKeluarActionPerformed
-
-    private void btnEksternalStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokResetActionPerformed
-        setDetailBarangEksternal(null);
-    }//GEN-LAST:event_btnEksternalStokResetActionPerformed
-
-    private void txtInternalKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInternalKeywordFocusLost
-        reloadTableInternal();
-    }//GEN-LAST:event_txtInternalKeywordFocusLost
-
-    private void tblInternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInternalMouseClicked
-        Integer index = tblInternal.getSelectedRow();
-        
-        BarangTableModel tableModel = (BarangTableModel)tblInternal.getModel();
-        Barang b = tableModel.getBarang(index);
-        
-        setDetailBarangInternal(b);
-    }//GEN-LAST:event_tblInternalMouseClicked
-
-    private void btnInternalStokKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInternalStokKeluarActionPerformed
-        if (new Long(0).equals(barang.getId())) {
-            JOptionPane.showMessageDialog(this, "Silahkan memilih barang dari tabel");
-            return;
-        }
-        
-        if (unit == null) {
-            JOptionPane.showMessageDialog(this, "Silahkan memilih unit");
-            return;
-        }
-        
-        Calendar tanggal = txtInternalStokTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
-
-        String jam = txtInternalStokJam.getText();
-        String jumlah = txtInternalStokJumlah.getText();
-        
-        try {
-            stokService.supply(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam), unit);
-            
-            setDetailBarangInternal(null);
-            reloadTableInternal();
-            
-            JOptionPane.showMessageDialog(this, "Berhasil");
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnInternalStokKeluarActionPerformed
-
-    private void btnInternalStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInternalStokResetActionPerformed
-        setDetailBarangInternal(null);
-    }//GEN-LAST:event_btnInternalStokResetActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         try {
@@ -1546,165 +1207,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void tblKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKembaliMouseClicked
-        Integer index = tblKembali.getSelectedRow();
-        
-        TableModel tableModel = tblKembali.getModel();
-        
-        if (tableModel instanceof BarangTableModel) {
-            BarangTableModel barangTableModel = (BarangTableModel) tableModel;
-            barang = barangTableModel.getBarang(index);
-            setDetailBarangKembali(barang);
-        } else if (tableModel instanceof StokTableModel) {
-            StokTableModel stokTableModel = (StokTableModel) tableModel;
-            Stok stok = stokTableModel.getStok(index);
-            setDetailBarangKembali(stok);
-        }
-    }//GEN-LAST:event_tblKembaliMouseClicked
-
-    private void txtKembaliKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKembaliKeywordFocusLost
-        String keyword = txtKembaliKeyword.getText();
-        reloadTableKembali(keyword);
-    }//GEN-LAST:event_txtKembaliKeywordFocusLost
-
-    private void btnKembaliStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokMasukActionPerformed
-        String jumlah = txtKembaliStokJumlah.getText();
-        String jam = txtKembaliStokJam.getText();
-        String nomorKembali = txtNomorKembali.getText();
-
-        Calendar tanggal = txtKembaliStokTanggal.getSelectedDate();
-        long lTime = tanggal.getTimeInMillis();
-        
-        try {
-            stokService.kembali(barang, Long.valueOf(jumlah), new Date(lTime), DateUtil.getTime(jam), pasien, nomorKembali);
-            JOptionPane.showMessageDialog(this, "Berhasil");
-            
-            setDetailBarangKembali((Barang) null);
-            
-            String nomor = txtNomorKembali.getText();
-            reloadTableKembaliByNomor(nomor);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnKembaliStokMasukActionPerformed
-
-    private void btnKembaliStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokResetActionPerformed
-        setDetailBarangKembali((Barang) null);
-        
-        pasien = null;
-        txtNomorPasienKembali.setText(null);
-        txtNamaPasienKembali.setText(null);
-        txtKembaliKeyword.setText(null);
-        txtNomorKembali.setText(StokKembali.createKode());
-    }//GEN-LAST:event_btnKembaliStokResetActionPerformed
-
-    private void txtInternalStokUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInternalStokUnitMouseClicked
-        Pencarian frameCari = new Pencarian(this, Unit.class);
-        frameCari.setVisible(true);
-    }//GEN-LAST:event_txtInternalStokUnitMouseClicked
-
-    private void txtNomorPasienKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliFocusLost
-        String kode = txtNomorPasienKembali.getText();
-        if (kode == null || kode.equals(""))
-            return;
-        
-        try {
-            pasien = pasienService.get(kode);
-            
-            txtNamaPasienKembali.setText(pasien.getNama());
-            txtNomorKembali.setText(StokKembali.createKode());
-            txtKembaliKeyword.setText(null);
-            
-            reloadTableKembali(pasien);
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_txtNomorPasienKembaliFocusLost
-
-    private void txtNomorKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorKembaliFocusLost
-        String nomor = txtNomorKembali.getText();
-        reloadTableKembaliByNomor(nomor);
-    }//GEN-LAST:event_txtNomorKembaliFocusLost
-
-    private void tblObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblObatMouseClicked
-        try {
-            obatEventController.onTableClick();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_tblObatMouseClicked
-
-    private void txtObatKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObatKeywordFocusLost
-        try {
-            obatEventController.onSearch();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-            BarangTableModel tableModel = new BarangTableModel(null);
-            tblObat.setModel(tableModel);
-        }
-    }//GEN-LAST:event_txtObatKeywordFocusLost
-
-    private void txtObatKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObatKeywordKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnClearObat.requestFocus();
-    }//GEN-LAST:event_txtObatKeywordKeyPressed
-
-    private void btnTambahObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahObatActionPerformed
-        try {
-            obatEventController.onSave();
-            obatEventController.onCleanForm();
-            obatEventController.onLoad();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } finally {
-        }
-    }//GEN-LAST:event_btnTambahObatActionPerformed
-
-    private void btnClearObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearObatActionPerformed
-        obatEventController.onCleanForm();
-    }//GEN-LAST:event_btnClearObatActionPerformed
-
-    private void tblBhpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBhpMouseClicked
-        try {
-            bhpEventController.onTableClick();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_tblBhpMouseClicked
-
-    private void txtBhpKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBhpKeywordFocusLost
-        try {
-            bhpEventController.onSearch();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-            BarangTableModel tableModel = new BarangTableModel(null);
-            tblBhp.setModel(tableModel);
-        }
-    }//GEN-LAST:event_txtBhpKeywordFocusLost
-
-    private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnClearBhp.requestFocus();
-    }//GEN-LAST:event_txtBhpKeywordKeyPressed
-
-    private void btnTambahBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahBhpActionPerformed
-        try {
-            bhpEventController.onSave();
-            bhpEventController.onCleanForm();
-            bhpEventController.onLoad();
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnTambahBhpActionPerformed
-
-    private void btnClearBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearBhpActionPerformed
-        bhpEventController.onCleanForm();
-    }//GEN-LAST:event_btnClearBhpActionPerformed
-
-    private void btnCetakNomorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakNomorActionPerformed
-        printStokKembali();
-    }//GEN-LAST:event_btnCetakNomorActionPerformed
 
     private void btnRekapBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapBarangActionPerformed
         PdfProcessor pdfProcessor = new PdfProcessor();
@@ -1721,30 +1223,254 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
         }
     }//GEN-LAST:event_btnRekapBarangActionPerformed
 
-    private void txtEksternalKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEksternalKeywordKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnEksternalStokReset.requestFocus();
-    }//GEN-LAST:event_txtEksternalKeywordKeyPressed
-
-    private void txtInternalKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInternalKeywordKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnInternalStokReset.requestFocus();
-    }//GEN-LAST:event_txtInternalKeywordKeyPressed
-
-    private void txtNomorPasienKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnKembaliStokReset.requestFocus();
-    }//GEN-LAST:event_txtNomorPasienKembaliKeyPressed
-
-    private void txtNomorKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorKembaliKeyPressed
-        if (evt.getKeyCode() == 10)
-            btnKembaliStokReset.requestFocus();
-    }//GEN-LAST:event_txtNomorKembaliKeyPressed
-
     private void btnApotekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApotekActionPerformed
         new Apotek().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnApotekActionPerformed
+
+    private void paneBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paneBarangMouseClicked
+        setDetailBarangEksternal(null);
+        setDetailBarangKembali((Barang) null);
+
+        Integer index = paneBarang.getSelectedIndex();
+        
+        obatEventController.onCleanForm();
+        bhpEventController.onCleanForm();
+    }//GEN-LAST:event_paneBarangMouseClicked
+
+    private void btnClearBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearBhpActionPerformed
+        bhpEventController.onCleanForm();
+    }//GEN-LAST:event_btnClearBhpActionPerformed
+
+    private void btnTambahBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahBhpActionPerformed
+        try {
+            bhpEventController.onSave();
+            bhpEventController.onCleanForm();
+            bhpEventController.onLoad();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTambahBhpActionPerformed
+
+    private void txtBhpKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBhpKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+        btnClearBhp.requestFocus();
+    }//GEN-LAST:event_txtBhpKeywordKeyPressed
+
+    private void txtBhpKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBhpKeywordFocusLost
+        try {
+            bhpEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            BarangTableModel tableModel = new BarangTableModel(null);
+            tblBhp.setModel(tableModel);
+        }
+    }//GEN-LAST:event_txtBhpKeywordFocusLost
+
+    private void tblBhpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBhpMouseClicked
+        try {
+            bhpEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblBhpMouseClicked
+
+    private void btnClearObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearObatActionPerformed
+        obatEventController.onCleanForm();
+    }//GEN-LAST:event_btnClearObatActionPerformed
+
+    private void btnTambahObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahObatActionPerformed
+        try {
+            obatEventController.onSave();
+            obatEventController.onCleanForm();
+            obatEventController.onLoad();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } finally {
+        }
+    }//GEN-LAST:event_btnTambahObatActionPerformed
+
+    private void txtObatKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObatKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+        btnClearObat.requestFocus();
+    }//GEN-LAST:event_txtObatKeywordKeyPressed
+
+    private void txtObatKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObatKeywordFocusLost
+        try {
+            obatEventController.onSearch();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            BarangTableModel tableModel = new BarangTableModel(null);
+            tblObat.setModel(tableModel);
+        }
+    }//GEN-LAST:event_txtObatKeywordFocusLost
+
+    private void tblObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblObatMouseClicked
+        try {
+            obatEventController.onTableClick();
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_tblObatMouseClicked
+
+    private void btnCetakNomorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakNomorActionPerformed
+        printStokKembali();
+    }//GEN-LAST:event_btnCetakNomorActionPerformed
+
+    private void txtNomorKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorKembaliKeyPressed
+        if (evt.getKeyCode() == 10)
+        btnKembaliStokReset.requestFocus();
+    }//GEN-LAST:event_txtNomorKembaliKeyPressed
+
+    private void txtNomorKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorKembaliFocusLost
+        String nomor = txtNomorKembali.getText();
+        reloadTableKembaliByNomor(nomor);
+    }//GEN-LAST:event_txtNomorKembaliFocusLost
+
+    private void btnKembaliStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokResetActionPerformed
+        setDetailBarangKembali((Barang) null);
+
+        pasien = null;
+        txtNomorPasienKembali.setText(null);
+        txtNamaPasienKembali.setText(null);
+        txtKembaliKeyword.setText(null);
+        txtNomorKembali.setText(StokKembali.createKode());
+    }//GEN-LAST:event_btnKembaliStokResetActionPerformed
+
+    private void btnKembaliStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliStokMasukActionPerformed
+        String jumlah = txtKembaliStokJumlah.getText();
+        String jam = txtKembaliStokJam.getText();
+        String nomorKembali = txtNomorKembali.getText();
+
+        Calendar tanggal = txtKembaliStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+
+        try {
+            stokService.kembali(barang, Long.valueOf(jumlah), new Date(lTime), DateUtil.getTime(jam), pasien, nomorKembali);
+            JOptionPane.showMessageDialog(this, "Berhasil");
+
+            setDetailBarangKembali((Barang) null);
+
+            String nomor = txtNomorKembali.getText();
+            reloadTableKembaliByNomor(nomor);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnKembaliStokMasukActionPerformed
+
+    private void txtNomorPasienKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliKeyPressed
+        if (evt.getKeyCode() == 10)
+        btnKembaliStokReset.requestFocus();
+    }//GEN-LAST:event_txtNomorPasienKembaliKeyPressed
+
+    private void txtNomorPasienKembaliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomorPasienKembaliFocusLost
+        String kode = txtNomorPasienKembali.getText();
+        if (kode == null || kode.equals(""))
+            return;
+
+        try {
+            pasien = pasienService.get(kode);
+
+            txtNamaPasienKembali.setText(pasien.getNama());
+            txtNomorKembali.setText(StokKembali.createKode());
+            txtKembaliKeyword.setText(null);
+
+            reloadTableKembali(pasien);
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtNomorPasienKembaliFocusLost
+
+    private void txtKembaliKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKembaliKeywordFocusLost
+        String keyword = txtKembaliKeyword.getText();
+        reloadTableKembali(keyword);
+    }//GEN-LAST:event_txtKembaliKeywordFocusLost
+
+    private void tblKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKembaliMouseClicked
+        Integer index = tblKembali.getSelectedRow();
+
+        TableModel tableModel = tblKembali.getModel();
+
+        if (tableModel instanceof BarangTableModel) {
+            BarangTableModel barangTableModel = (BarangTableModel) tableModel;
+            barang = barangTableModel.getBarang(index);
+            setDetailBarangKembali(barang);
+        } else if (tableModel instanceof StokTableModel) {
+            StokTableModel stokTableModel = (StokTableModel) tableModel;
+            Stok stok = stokTableModel.getStok(index);
+            setDetailBarangKembali(stok);
+        }
+    }//GEN-LAST:event_tblKembaliMouseClicked
+
+    private void btnEksternalStokKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokKeluarActionPerformed
+        if (new Long(0).equals(barang.getId())) {
+            JOptionPane.showMessageDialog(this, "Silahkan memilih barang dari tabel");
+            return;
+        }
+
+        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+
+        String jam = txtEksternalStokJam.getText();
+        String jumlah = txtEksternalStokJumlah.getText();
+
+        try {
+            stokService.keluar(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
+
+            setDetailBarangEksternal(null);
+            reloadTableEksternal();
+
+            JOptionPane.showMessageDialog(this, "Berhasil");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEksternalStokKeluarActionPerformed
+
+    private void btnEksternalStokResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokResetActionPerformed
+        setDetailBarangEksternal(null);
+    }//GEN-LAST:event_btnEksternalStokResetActionPerformed
+
+    private void btnEksternalStokMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksternalStokMasukActionPerformed
+        if (new Long(0).equals(barang.getId())) {
+            JOptionPane.showMessageDialog(this, "Silahkan memilih barang dari tabel");
+            return;
+        }
+
+        Calendar tanggal = txtEksternalStokTanggal.getSelectedDate();
+        long lTime = tanggal.getTimeInMillis();
+
+        String jam = txtEksternalStokJam.getText();
+        String jumlah = txtEksternalStokJumlah.getText();
+
+        try {
+            stokService.masuk(barang, new Long(jumlah), new Date(lTime), DateUtil.getTime(jam));
+
+            setDetailBarangEksternal(null);
+            reloadTableEksternal();
+
+            JOptionPane.showMessageDialog(this, "Berhasil");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEksternalStokMasukActionPerformed
+
+    private void tblEksternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEksternalMouseClicked
+        Integer index = tblEksternal.getSelectedRow();
+
+        BarangTableModel tableModel = (BarangTableModel)tblEksternal.getModel();
+        Barang b = (Barang) tableModel.getBarang(index);
+
+        setDetailBarangEksternal(b);
+    }//GEN-LAST:event_tblEksternalMouseClicked
+
+    private void txtEksternalKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEksternalKeywordKeyPressed
+        if (evt.getKeyCode() == 10)
+        btnEksternalStokReset.requestFocus();
+    }//GEN-LAST:event_txtEksternalKeywordKeyPressed
+
+    private void txtEksternalKeywordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEksternalKeywordFocusLost
+        reloadTableEksternal();
+    }//GEN-LAST:event_txtEksternalKeywordFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
@@ -1755,8 +1481,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JButton btnEksternalStokKeluar;
     private javax.swing.JButton btnEksternalStokMasuk;
     private javax.swing.JButton btnEksternalStokReset;
-    private javax.swing.JButton btnInternalStokKeluar;
-    private javax.swing.JButton btnInternalStokReset;
     private javax.swing.JButton btnKembaliStokMasuk;
     private javax.swing.JButton btnKembaliStokReset;
     private javax.swing.JButton btnLogout;
@@ -1777,16 +1501,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -1812,7 +1526,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel9;
@@ -1823,7 +1536,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
@@ -1833,17 +1545,13 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JPanel pnlBhp;
     private javax.swing.JPanel pnlEksternalDetail;
     private javax.swing.JPanel pnlEksternalStok;
-    private javax.swing.JPanel pnlInternalDetail;
     private javax.swing.JPanel pnlInternalDetail1;
-    private javax.swing.JPanel pnlInternalStok;
     private javax.swing.JPanel pnlInternalStok1;
     private javax.swing.JPanel pnlObat;
     private javax.swing.JPanel pnlStokEksternal;
-    private javax.swing.JPanel pnlStokInternal;
     private javax.swing.JPanel pnlStokKembali;
     private javax.swing.JTable tblBhp;
     private javax.swing.JTable tblEksternal;
-    private javax.swing.JTable tblInternal;
     private javax.swing.JTable tblKembali;
     private javax.swing.JTable tblObat;
     private javax.swing.JTextField txtBhpHarga;
@@ -1862,17 +1570,6 @@ public class GudangFarmasi extends javax.swing.JFrame implements UnitFrame {
     private javax.swing.JTextField txtEksternalStokJumlah;
     private datechooser.beans.DateChooserCombo txtEksternalStokTanggal;
     private javax.swing.JTextField txtEksternalTanggungan;
-    private javax.swing.JTextField txtInternalHarga;
-    private javax.swing.JTextField txtInternalJumlah;
-    private javax.swing.JTextField txtInternalKeyword;
-    private javax.swing.JTextField txtInternalKode;
-    private javax.swing.JTextField txtInternalNama;
-    private javax.swing.JTextField txtInternalSatuan;
-    private javax.swing.JTextField txtInternalStokJam;
-    private javax.swing.JTextField txtInternalStokJumlah;
-    private datechooser.beans.DateChooserCombo txtInternalStokTanggal;
-    private javax.swing.JTextField txtInternalStokUnit;
-    private javax.swing.JTextField txtInternalTanggungan;
     private javax.swing.JTextField txtKembaliHarga;
     private javax.swing.JTextField txtKembaliJumlah;
     private javax.swing.JTextField txtKembaliKeyword;

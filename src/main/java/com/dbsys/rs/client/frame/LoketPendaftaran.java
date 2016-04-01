@@ -10,13 +10,18 @@ import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PendudukService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.Penanggung;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pasien.Pendaftaran;
-import com.dbsys.rs.lib.entity.Penduduk;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.DateUtil;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.Penanggung;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pasien.Pendaftaran;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Penduduk;
+import com.dbsys.rs.client.entity.Tindakan;
+import com.dbsys.rs.client.entity.Unit;
+import com.dbsys.rs.connector.service.PelayananService;
+import com.dbsys.rs.connector.service.TindakanService;
+
 import java.awt.Color;
 import java.sql.Date;
 import java.util.Calendar;
@@ -66,10 +71,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         txtPendudukNik.setText(null);
         txtPendudukNama.setText(null);
         cbPendudukKelamin.setSelectedIndex(0);
-        txtPendudukTanggalLahir.setSelectedDate(null);
-        txtPendudukDarah.setText(null);
-        txtPendudukAgama.setText(null);
-        txtPendudukTelepon.setText(null);
+        txtPendudukUmur.setText(null);
         
         txtPasienNomor.setText(Pasien.createKode());
         txtPasienTujuan.setText(null);
@@ -79,6 +81,24 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         Calendar now = Calendar.getInstance();
         now.setTime(DateUtil.getDate());
         txtPasienTanggalMasuk.setSelectedDate(now);
+    }
+    
+    private void tambahTagihanKarcis(Pasien pasien) throws ServiceException {
+        final PelayananService pelayananService = PelayananService.getInstance();
+        final TindakanService tindakanService = TindakanService.getInstance();
+        
+        Tindakan tindakan = tindakanService.get("Karcis Rawat Jalan", Kelas.NONE);
+        
+        Pelayanan pelayanan = new Pelayanan();
+        pelayanan.setTindakan(tindakan);
+        pelayanan.setBiayaTambahan(0L);
+        pelayanan.setJumlah(1);
+        pelayanan.setKeterangan(null);
+        pelayanan.setPasien(pasien);
+        pelayanan.setUnit(TokenHolder.getUnit());
+        pelayanan.setTanggal(DateUtil.getDate());
+        
+        pelayananService.simpan(pelayanan);
     }
 
     /**
@@ -95,24 +115,17 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         txtPendudukKode = new javax.swing.JTextField();
         txtPendudukNik = new javax.swing.JTextField();
         txtPendudukNama = new javax.swing.JTextField();
         cbPendudukKelamin = new javax.swing.JComboBox();
-        txtPendudukDarah = new javax.swing.JTextField();
-        txtPendudukAgama = new javax.swing.JTextField();
-        txtPendudukTelepon = new javax.swing.JTextField();
-        btnPendudukSimpan = new javax.swing.JButton();
-        btnPendudukClean = new javax.swing.JButton();
-        txtPendudukTanggalLahir = new datechooser.beans.DateChooserCombo();
+        txtPendudukUmur = new javax.swing.JTextField();
+        btnPendudukUpdate = new javax.swing.JButton();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        btnPendudukTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPenduduk = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         pnlCari = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
@@ -129,6 +142,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         btnPasienTambah = new javax.swing.JButton();
         txtPasienTanggalMasuk = new datechooser.beans.DateChooserCombo();
         btnCetakKartu = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         lblOperator = new javax.swing.JLabel();
@@ -146,6 +160,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlDetail.setBackground(Utama.colorTransparentPanel);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlDetail.setBackground(new Color(0,0,0,20));
         pnlDetail.setLayout(null);
@@ -166,74 +181,59 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         pnlDetail.add(jLabel7);
         jLabel7.setBounds(20, 120, 100, 25);
 
-        jLabel8.setText("TANGGAL LAHIR");
-        pnlDetail.add(jLabel8);
-        jLabel8.setBounds(20, 150, 100, 25);
-
-        jLabel9.setText("GOL. DARAH");
+        jLabel9.setText("UMUR");
         pnlDetail.add(jLabel9);
-        jLabel9.setBounds(20, 180, 100, 25);
-
-        jLabel10.setText("AGAMA");
-        pnlDetail.add(jLabel10);
-        jLabel10.setBounds(20, 210, 100, 25);
-
-        jLabel11.setText("TELEPON");
-        pnlDetail.add(jLabel11);
-        jLabel11.setBounds(20, 240, 100, 25);
+        jLabel9.setBounds(20, 150, 100, 25);
 
         txtPendudukKode.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukKode.setEnabled(false);
         pnlDetail.add(txtPendudukKode);
         txtPendudukKode.setBounds(130, 30, 250, 25);
 
         txtPendudukNik.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukNik.setEnabled(false);
         pnlDetail.add(txtPendudukNik);
         txtPendudukNik.setBounds(130, 60, 250, 25);
 
         txtPendudukNama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukNama.setEnabled(false);
         pnlDetail.add(txtPendudukNama);
         txtPendudukNama.setBounds(130, 90, 250, 25);
 
         cbPendudukKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "PRIA", "WANITA" }));
         cbPendudukKelamin.setBorder(null);
+        cbPendudukKelamin.setEnabled(false);
         pnlDetail.add(cbPendudukKelamin);
         cbPendudukKelamin.setBounds(130, 120, 250, 25);
 
-        txtPendudukDarah.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlDetail.add(txtPendudukDarah);
-        txtPendudukDarah.setBounds(130, 180, 250, 25);
+        txtPendudukUmur.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPendudukUmur.setEnabled(false);
+        pnlDetail.add(txtPendudukUmur);
+        txtPendudukUmur.setBounds(130, 150, 250, 25);
 
-        txtPendudukAgama.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlDetail.add(txtPendudukAgama);
-        txtPendudukAgama.setBounds(130, 210, 250, 25);
-
-        txtPendudukTelepon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlDetail.add(txtPendudukTelepon);
-        txtPendudukTelepon.setBounds(130, 240, 250, 25);
-
-        btnPendudukSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_simpan.png"))); // NOI18N
-        btnPendudukSimpan.addActionListener(new java.awt.event.ActionListener() {
+        btnPendudukUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_update.png"))); // NOI18N
+        btnPendudukUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukSimpanActionPerformed(evt);
+                btnPendudukUpdateActionPerformed(evt);
             }
         });
-        pnlDetail.add(btnPendudukSimpan);
-        btnPendudukSimpan.setBounds(210, 270, 80, 30);
-
-        btnPendudukClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
-        btnPendudukClean.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendudukCleanActionPerformed(evt);
-            }
-        });
-        pnlDetail.add(btnPendudukClean);
-        btnPendudukClean.setBounds(300, 270, 80, 30);
-        pnlDetail.add(txtPendudukTanggalLahir);
-        txtPendudukTanggalLahir.setBounds(130, 150, 250, 25);
+        pnlDetail.add(btnPendudukUpdate);
+        btnPendudukUpdate.setBounds(300, 180, 80, 30);
         pnlDetail.add(dateChooserCombo1);
         dateChooserCombo1.setBounds(70, 380, 155, 20);
 
-        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 400, 310));
+        btnPendudukTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
+        btnPendudukTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendudukTambahActionPerformed(evt);
+            }
+        });
+        pnlDetail.add(btnPendudukTambah);
+        btnPendudukTambah.setBounds(210, 180, 80, 30);
+
+        getContentPane().add(pnlDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 400, 220));
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblPenduduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,19 +253,16 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         });
         jScrollPane1.setViewportView(tblPenduduk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 830, 590));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 830, 520));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("DAFTAR PASIEN / REKAM MEDIK");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 190, -1));
-
+        pnlCari.setBackground(Utama.colorTransparentPanel);
         pnlCari.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PENCARIAN REKAM MEDIK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlCari.setLayout(null);
         pnlCari.setBackground(new Color(0, 0, 0, 20));
 
         jLabel13.setText("NAMA PASIEN");
         pnlCari.add(jLabel13);
-        jLabel13.setBounds(20, 25, 110, 25);
+        jLabel13.setBounds(20, 20, 110, 25);
 
         txtKeyword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -278,10 +275,11 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
             }
         });
         pnlCari.add(txtKeyword);
-        txtKeyword.setBounds(130, 25, 250, 25);
+        txtKeyword.setBounds(140, 20, 670, 25);
 
-        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, 400, 60));
+        getContentPane().add(pnlCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 830, 60));
 
+        pnlPendaftaran.setBackground(Utama.colorTransparentPanel);
         pnlPendaftaran.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPendaftaran.setLayout(null);
         pnlPendaftaran.setBackground(new Color(0,0,0,20));
@@ -318,7 +316,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         pnlPendaftaran.add(txtPasienTujuan);
         txtPasienTujuan.setBounds(130, 90, 250, 25);
 
-        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "VVIP", "VIP", "I", "II", "III", "NONE" }));
+        cbPasienKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "VVIP", "VIP", "I", "II", "III" }));
         pnlPendaftaran.add(cbPasienKelas);
         cbPasienKelas.setBounds(130, 120, 250, 25);
 
@@ -347,7 +345,15 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         pnlPendaftaran.add(btnCetakKartu);
         btnCetakKartu.setBounds(300, 180, 80, 30);
 
-        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, 400, 220));
+        getContentPane().add(pnlPendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 400, 220));
+
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_reset.png"))); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 720, 80, 30));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaptionBorder);
         jToolBar1.setRollover(true);
@@ -428,14 +434,13 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         txtPendudukNik.setText(penduduk.getNik());
         txtPendudukNama.setText(penduduk.getNama());
         cbPendudukKelamin.setSelectedItem(penduduk.getKelamin().toString());
-        txtPendudukDarah.setText(penduduk.getDarah());
-        txtPendudukAgama.setText(penduduk.getAgama());
-        txtPendudukTelepon.setText(penduduk.getTelepon());
+
+        Date hariIni = DateUtil.getDate();
+        Date lahir = penduduk.getTanggalLahir();
+        int umur = DateUtil.calculate(lahir, hariIni) / 365;
+        txtPendudukUmur.setText(Integer.toString(umur));
         
-        Calendar tanggalLahir = Calendar.getInstance();
-        tanggalLahir.setTime(penduduk.getTanggalLahir());
-        txtPendudukTanggalLahir.setSelectedDate(tanggalLahir);
-        
+        // Data Pasien
         txtPasienNomor.setText(Pasien.createKode());
 
         Calendar now = Calendar.getInstance();
@@ -443,36 +448,13 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
         txtPasienTanggalMasuk.setSelectedDate(now);
     }//GEN-LAST:event_tblPendudukMouseClicked
 
-    private void btnPendudukCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukCleanActionPerformed
-        resetForm();
+    private void btnPendudukTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukTambahActionPerformed
         pasien = null;
-    }//GEN-LAST:event_btnPendudukCleanActionPerformed
 
-    private void btnPendudukSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukSimpanActionPerformed
-        if (penduduk == null)
-            penduduk = new Penduduk();
-
-        String kelamin = cbPendudukKelamin.getSelectedItem().toString();
+        TambahPasien tambahPasien = new TambahPasien();
+        tambahPasien.setVisible(true);
         
-        Calendar calendar = txtPendudukTanggalLahir.getSelectedDate();
-        long lTime = calendar.getTimeInMillis();
-        
-        penduduk.setKode(txtPendudukKode.getText());
-        penduduk.setNik(txtPendudukNik.getText().equals("") ? null : txtPendudukNik.getText());
-        penduduk.setNama(txtPendudukNama.getText());
-        penduduk.setKelamin(Penduduk.Kelamin.valueOf(kelamin));
-        penduduk.setTanggalLahir(new Date(lTime));
-        penduduk.setDarah(txtPendudukDarah.getText());
-        penduduk.setAgama(txtPendudukAgama.getText());
-        penduduk.setTelepon(txtPendudukTelepon.getText());
-        
-        try {
-            penduduk = pendudukService.simpan(penduduk);
-            JOptionPane.showMessageDialog(this, "Berhasil menyimpan rekam medik. Silahkan lanjutkan proses pendaftaran pasien!");
-        } catch (ServiceException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnPendudukSimpanActionPerformed
+    }//GEN-LAST:event_btnPendudukTambahActionPerformed
 
     private void btnPasienTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienTambahActionPerformed
         String kode = txtPasienNomor.getText();
@@ -491,9 +473,12 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
                 throw new ServiceException("Silahkan masukan unit tujuan");
             
             pasien = pasienService.daftar(penduduk, Penanggung.valueOf(tanggungan), new Date(lTime), kode, Pendaftaran.LOKET, Kelas.valueOf(kelas), tujuan);
-            JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
-            
             txtPasienNomor.setText(pasien.getKode());
+
+            // Otomatis tambah tagihan karcis pasien rawat jalan
+            tambahTagihanKarcis(pasien);
+
+            JOptionPane.showMessageDialog(this, "Berhasil menyimpan data pasien.");
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -533,7 +518,7 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
 
     private void txtKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeywordKeyPressed
         if (evt.getKeyCode() == 10)
-            btnPendudukClean.requestFocus();
+            btnPendudukTambah.requestFocus();
     }//GEN-LAST:event_txtKeywordKeyPressed
 
     private void btnUbahPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPasienActionPerformed
@@ -580,11 +565,21 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
     private void btnCetakPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPasienActionPerformed
         try {
             RangeTanggal frame = new RangeTanggal(this, Pasien.class);
+            frame.setPendaftaran(Pasien.Pendaftaran.LOKET);
             frame.setVisible(true);
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCetakPasienActionPerformed
+
+    private void btnPendudukUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendudukUpdateActionPerformed
+        TambahPasien tambahPasien = new TambahPasien(penduduk);
+        tambahPasien.setVisible(true);
+    }//GEN-LAST:event_btnPendudukUpdateActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        resetForm();
+    }//GEN-LAST:event_btnResetActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
@@ -593,28 +588,25 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
     private javax.swing.JButton btnCetakPasien;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPasienTambah;
-    private javax.swing.JButton btnPendudukClean;
-    private javax.swing.JButton btnPendudukSimpan;
+    private javax.swing.JButton btnPendudukTambah;
+    private javax.swing.JButton btnPendudukUpdate;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnUbahPasien;
     private javax.swing.JComboBox cbPasienKelas;
     private javax.swing.JComboBox cbPasienTanggungan;
     private javax.swing.JComboBox cbPendudukKelamin;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -628,12 +620,9 @@ public final class LoketPendaftaran extends javax.swing.JFrame implements UnitFr
     private javax.swing.JTextField txtPasienNomor;
     private datechooser.beans.DateChooserCombo txtPasienTanggalMasuk;
     private javax.swing.JTextField txtPasienTujuan;
-    private javax.swing.JTextField txtPendudukAgama;
-    private javax.swing.JTextField txtPendudukDarah;
     private javax.swing.JTextField txtPendudukKode;
     private javax.swing.JTextField txtPendudukNama;
     private javax.swing.JTextField txtPendudukNik;
-    private datechooser.beans.DateChooserCombo txtPendudukTanggalLahir;
-    private javax.swing.JTextField txtPendudukTelepon;
+    private javax.swing.JTextField txtPendudukUmur;
     // End of variables declaration//GEN-END:variables
 }

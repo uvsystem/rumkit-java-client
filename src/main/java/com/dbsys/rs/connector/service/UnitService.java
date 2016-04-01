@@ -2,10 +2,10 @@ package com.dbsys.rs.connector.service;
 
 import com.dbsys.rs.connector.AbstractService;
 import com.dbsys.rs.connector.ServiceException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.client.EntityRestMessage;
+import com.dbsys.rs.client.ListEntityRestMessage;
+import com.dbsys.rs.client.RestMessage;
+import com.dbsys.rs.client.entity.Unit;
 
 import java.util.List;
 

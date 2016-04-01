@@ -9,14 +9,12 @@ import com.dbsys.rs.connector.ServiceException;
 import com.dbsys.rs.connector.TokenHolder;
 import com.dbsys.rs.connector.service.PasienService;
 import com.dbsys.rs.connector.service.PelayananService;
-import com.dbsys.rs.connector.service.TindakanService;
 import com.dbsys.rs.connector.service.TokenService;
-import com.dbsys.rs.lib.DateUtil;
-import com.dbsys.rs.lib.Kelas;
-import com.dbsys.rs.lib.entity.Pasien;
-import com.dbsys.rs.lib.entity.Pelayanan;
-import com.dbsys.rs.lib.entity.PelayananTemporal;
-import com.dbsys.rs.lib.entity.Tindakan;
+import com.dbsys.rs.client.Kelas;
+import com.dbsys.rs.client.entity.Pasien;
+import com.dbsys.rs.client.entity.Pelayanan;
+import com.dbsys.rs.client.entity.Tindakan;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,6 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
     private final TokenService tokenService = TokenService.getInstance();
     private final PasienService pasienService = PasienService.getInstance();
     private final PelayananService pelayananService = PelayananService.getInstance();
-    private final TindakanService tindakanService = TindakanService.getInstance();
 
     private Pasien pasien;
     
@@ -49,6 +46,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
 
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKeluar.setVisible(false);
 
         reloadTablePasien();
     }
@@ -212,6 +210,10 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         btnUbahPasien = new javax.swing.JButton();
+        pnlKeluar = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        cbPasienKeadaan = new javax.swing.JComboBox();
+        btnPasienKeluar1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -220,6 +222,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        pnlMain.setBackground(Utama.colorTransparentPanel);
         pnlMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlMain.setLayout(null);
 
@@ -243,10 +246,13 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         btnPasien.setBounds(220, 10, 150, 44);
 
         getContentPane().add(pnlMain);
-        pnlMain.setBounds(860, 180, 400, 70);
+        pnlMain.setBounds(860, 150, 400, 70);
 
+        pnlHome.setBackground(Utama.colorTransparentPanel);
         pnlHome.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PASIEN YANG DIRAWAT", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
         pnlHome.setLayout(null);
+
+        scrollPasien.setBackground(Utama.colorTransparentPanel);
 
         tblPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -267,8 +273,9 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         scrollPasien.setViewportView(tblPasien);
 
         pnlHome.add(scrollPasien);
-        scrollPasien.setBounds(20, 100, 770, 460);
+        scrollPasien.setBounds(20, 100, 770, 490);
 
+        pnlMasuk.setBackground(Utama.colorTransparentPanel);
         pnlMasuk.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN MASUK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlMasuk.setLayout(null);
 
@@ -300,10 +307,13 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         pnlMasuk.setBounds(20, 30, 770, 60);
 
         getContentPane().add(pnlHome);
-        pnlHome.setBounds(20, 180, 810, 580);
+        pnlHome.setBounds(20, 150, 810, 610);
 
+        pnlTindakan.setBackground(Utama.colorTransparentPanel);
         pnlTindakan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DAFTAR PELAYANAN TINDAKAN", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         pnlTindakan.setLayout(null);
+
+        jScrollPane1.setBackground(Utama.colorTransparentPanel);
 
         tblTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -319,7 +329,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         jScrollPane1.setViewportView(tblTindakan);
 
         pnlTindakan.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 40, 680, 520);
+        jScrollPane1.setBounds(20, 40, 680, 550);
 
         btnTindakanTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_tambah.png"))); // NOI18N
         btnTindakanTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -349,8 +359,9 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         btnTindakanHapus.setBounds(710, 120, 80, 30);
 
         getContentPane().add(pnlTindakan);
-        pnlTindakan.setBounds(20, 180, 810, 580);
+        pnlTindakan.setBounds(20, 150, 810, 610);
 
+        pnlPasienDetail.setBackground(Utama.colorTransparentPanel);
         pnlPasienDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "DATA PASIEN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlPasienDetail.setLayout(null);
@@ -474,8 +485,9 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         txtPasienKelas.setBounds(140, 370, 240, 25);
 
         getContentPane().add(pnlPasienDetail);
-        pnlPasienDetail.setBounds(860, 260, 400, 410);
+        pnlPasienDetail.setBounds(860, 230, 400, 420);
 
+        pnlHomeDetail.setBackground(Utama.colorTransparentPanel);
         pnlHomeDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Ruangan"));
         pnlPasienDetail.setBackground(new Color(0,0,0,20));
         pnlHomeDetail.setLayout(null);
@@ -531,7 +543,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         txtJumlahPasienKelas2.setBounds(120, 210, 260, 25);
 
         getContentPane().add(pnlHomeDetail);
-        pnlHomeDetail.setBounds(860, 260, 400, 290);
+        pnlHomeDetail.setBounds(860, 230, 400, 290);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -583,6 +595,27 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 770, 1280, 30);
 
+        pnlKeluar.setBackground(Utama.colorTransparentPanel);
+        pnlKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "PASIEN KELUAR RS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pnlKeluar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setText("Keadaan Pasien");
+        pnlKeluar.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 25));
+
+        cbPasienKeadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Pilih -", "SEMBUH", "RUJUK", "SAKIT", "MATI" }));
+        pnlKeluar.add(cbPasienKeadaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 250, 25));
+
+        btnPasienKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/btn_keluar.png"))); // NOI18N
+        btnPasienKeluar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienKeluar1ActionPerformed(evt);
+            }
+        });
+        pnlKeluar.add(btnPasienKeluar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 80, 30));
+
+        getContentPane().add(pnlKeluar);
+        pnlKeluar.setBounds(860, 670, 400, 90);
+
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dbsys/rs/client/images/bg_sal.png"))); // NOI18N
         getContentPane().add(jLabel19);
         jLabel19.setBounds(0, 0, 1280, 800);
@@ -596,6 +629,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
 
         pnlTindakan.setVisible(false);
         pnlPasienDetail.setVisible(false);
+        pnlKeluar.setVisible(false);
 
         reloadTablePasien();
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -606,24 +640,8 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         try {
             if (kode.equals(""))
                 throw new ComponentSelectionException("Silahkan masukan nomor pasien");
-            
-            Pasien p = pasienService.get(kode);
-            if (Kelas.NONE.equals(p.getKelas()))
-                throw new ServiceException("Silahkan menentukan kelas pasien pada form ubah data pasien");
-            
-            Tindakan tindakan = tindakanService.get("Rawat Inap", p.getKelas());
 
-            PelayananTemporal pelayanan = new PelayananTemporal();
-            pelayanan.setPasien(p);
-            pelayanan.setUnit(TokenHolder.getToken().getOperator().getUnit());
-            pelayanan.setTanggalMulai(DateUtil.getDate());
-            pelayanan.setJamMasuk(DateUtil.getTime());
-            pelayanan.setTindakan(tindakan);
-            pelayanan.setBiayaTambahan(new Long(0));
-            pelayanan.setJumlah(0);
-            pelayanan.setKeterangan("");
-            
-            pelayananService.masukSal(pelayanan);
+            pasienService.masuk(kode, TokenHolder.getIdUnit());
 
             JOptionPane.showMessageDialog(this, "Berhasil!");
             reloadTablePasien();
@@ -645,6 +663,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
 
         pnlTindakan.setVisible(true);
         pnlPasienDetail.setVisible(true);
+        pnlKeluar.setVisible(true);
         
         txtPasienKode.setText(null);
         txtPasienNik.setText(null);
@@ -762,8 +781,9 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         }
         
         try {
-            PasienKeluar frame = new PasienKeluar(pasien, this);
-            frame.setVisible(true);
+            pasienService.keluar(pasien.getKode());
+            JOptionPane.showMessageDialog(this, "Berhasil");
+            reloadTablePasien();
         } catch (ServiceException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -778,16 +798,38 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
         new DetailPasien().setVisible(true);
     }//GEN-LAST:event_btnUbahPasienActionPerformed
 
+    private void btnPasienKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienKeluar1ActionPerformed
+        if (pasien == null) {
+            JOptionPane.showMessageDialog(this, "Silahkan cari pasien terlebih dulu.");
+            return;
+        }
+
+        String keadaan = (String) cbPasienKeadaan.getSelectedItem();
+        if (keadaan.equals("- Pilih -")) {
+            JOptionPane.showMessageDialog(this, "Silahkan pilih keadaan pasien.");
+            return;
+        }
+
+        try {
+            pasien = pasienService.keluar(pasien, Pasien.KeadaanPasien.valueOf(keadaan), Pasien.StatusPasien.KELUAR);
+            JOptionPane.showMessageDialog(this, "Berhasil!");
+        } catch (ServiceException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPasienKeluar1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMasuk;
     private javax.swing.JButton btnPasien;
+    private javax.swing.JButton btnPasienKeluar1;
     private javax.swing.JButton btnTindakanHapus;
     private javax.swing.JButton btnTindakanTambah;
     private javax.swing.JButton btnTindakanUpdate;
     private javax.swing.JButton btnUbahPasien;
+    private javax.swing.JComboBox cbPasienKeadaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -798,6 +840,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -820,6 +863,7 @@ public final class RuangPerawatan extends javax.swing.JFrame implements Tindakan
     private javax.swing.JLabel lblUnit;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlHomeDetail;
+    private javax.swing.JPanel pnlKeluar;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMasuk;
     private javax.swing.JPanel pnlPasienDetail;
